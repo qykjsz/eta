@@ -121,5 +121,5 @@
     <string name="input_address_mark">请添加地址备注</string>
     <string name="address_manager">地址管理</string>
     <string name="camera_permission_need_open">需要获得照相机权限才能使用此功能</string>
-    <string name="asset">资产</string>
+<!--    <string name="asset">资产</string>-->
 </resources>

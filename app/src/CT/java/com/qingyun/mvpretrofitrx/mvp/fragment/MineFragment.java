@@ -5,6 +5,9 @@ import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.senon.mvpretrofitrx.R;
 
+/**
+ * mine
+ */
 public class MineFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
