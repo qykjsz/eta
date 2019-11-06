@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ezy.ui.layout.LoadingLayout
+
+            android:id="@+id/freash_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:visibility="gone"
+                android:background="@color/color_FFFFFF"
+                android:id="@+id/m_rcy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+            </android.support.v7.widget.RecyclerView>
+        </ezy.ui.layout.LoadingLayout>
+
+
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,6 @@
+include ':app','gallery','lib_ios_dialog',
+        'pager-bottom-tab-strip','xbanner','orcameralib','progress','library_progress','marqueelibrary',
+        'library_imgWatcher',
+        'magicindicator',
+        'indicatorseekbar',
+        'wallet-eth'

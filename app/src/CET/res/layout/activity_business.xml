@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_bg"
+    android:layout_height="match_parent">
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.StickyLayout
+        android:id="@+id/m_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="@dimen/dp_0"
+        android:orientation="vertical"
+        android:layout_height="@dimen/dp_0">
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/m_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_180"
+                android:background="@color/color_text_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_btn_us"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableTop="@mipmap/jy_t_icon"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:gravity="center"
+                    android:text="@string/buy_t"
+                    android:textColor="@color/color_FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+                <TextView
+                    android:id="@+id/tv_btn_sell_s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawableTop="@mipmap/jy_gmt_icon"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="@string/sell_t"
+                    android:textColor="@color/color_FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/guideline8"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/business"
+                    android:textColor="@color/color_FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btn_back" />
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_padding_y_max"
+                    android:padding="@dimen/dp_padding_x_min"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/back" />
+
+                <TextView
+                    android:id="@+id/textView218"
+                    android:layout_width="1px"
+                    android:layout_height="@dimen/dp_30"
+                    android:background="@color/color_FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_btn_sell_s"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_btn_sell_s"
+                    app:layout_constraintStart_toEndOf="@+id/tv_btn_us"
+                    app:layout_constraintTop_toTopOf="@+id/tv_btn_sell_s" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/tv_btn_buy"
+                android:layout_width="@dimen/dp_110"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginTop="@dimen/dp_13"
+                android:background="@drawable/bg_btn_small_check"
+                android:gravity="center"
+                android:text="@string/buy"
+                android:textColor="@color/color_FFFFFF"
+                app:layout_constraintEnd_toStartOf="@+id/tv_btn_sell"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_transfer_scan" />
+
+            <TextView
+                android:id="@+id/tv_btn_sell"
+                android:layout_width="@dimen/dp_110"
+                android:layout_height="@dimen/dp_28"
+                android:background="@drawable/bg_btn_small_uncheck"
+                android:gravity="center"
+                android:text="@string/sell"
+                android:textColor="@color/color_FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_btn_buy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_btn_buy"
+                app:layout_constraintTop_toTopOf="@+id/tv_btn_buy" />
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
+                android:id="@+id/m_sticky"
+                android:layout_marginTop="@dimen/dp_12"
+                app:layout_constraintTop_toBottomOf="@+id/tv_btn_buy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView86"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_item"
+                    android:paddingStart="@dimen/dp_padding_x_min"
+                    android:paddingTop="@dimen/dp_padding_x_min"
+                    android:text="@string/queue_num_"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_queue_num"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:paddingTop="@dimen/dp_padding_x_min"
+                    android:gravity="center_vertical"
+                    android:background="@color/color_item"
+                    android:text="@string/NULL"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView86"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView86"
+                    app:layout_constraintTop_toTopOf="@+id/textView86" />
+
+                <TextView
+                    android:id="@+id/textView88"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_item"
+                    android:paddingStart="@dimen/dp_padding_x_min"
+                    android:paddingTop="@dimen/dp_padding_x_min"
+                    android:paddingBottom="@dimen/dp_padding_x_min"
+                    android:text="@string/current_asset_"
+                    app:layout_constraintStart_toStartOf="@+id/textView86"
+                    app:layout_constraintTop_toBottomOf="@+id/textView86" />
+
+                <TextView
+                    android:id="@+id/tv_asset_all"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/color_item"
+                    android:text="@string/NULL"
+                    android:paddingBottom="@dimen/dp_padding_x_min"
+                    android:paddingTop="@dimen/dp_padding_x_min"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView88"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView88"
+                    app:layout_constraintTop_toTopOf="@+id/textView88" />
+
+
+
+                <net.lucode.hackware.magicindicator.MagicIndicator
+                    android:background="@color/color_item"
+                    android:id="@+id/magic_indicator3"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView88"
+                    />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/color_line"
+            />
+
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/rcy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v4.view.ViewPager>
+
+
+
+    </com.qingyun.mvpretrofitrx.mvp.weight.StickyLayout>
+
+
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="@dimen/dp_0"
+    android:visibility="invisible"
+    android:id="@+id/m_title"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:background="@color/color_bg"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/tv_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/business"
+        android:textSize="@dimen/sp_17"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_back1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_back1" />
+
+    <ImageView
+        android:id="@+id/btn_back1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_padding_y_max"
+        android:padding="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/back" />
+</android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

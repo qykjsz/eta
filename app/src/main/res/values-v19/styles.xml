@@ -1,0 +1,27 @@
+<resources>
+
+    // values-v19。v19 开始有 android:windowTranslucentStatus 这个属性
+    <style name="TranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/color_main_text</item>
+        <item name="styleLoadingLayout">@style/LoadingLayoutStyle</item>
+        <item name="android:editTextColor">@color/color_main_text</item>
+        <item name="android:textColorHint">@color/color_edittext_hint</item>
+    </style>
+    <style name="LoadingLayoutStyle" parent="LoadingLayout.Style">
+        <item name="llEmptyImage">@mipmap/bg_no_data</item>
+        <item name="llErrorImage">@mipmap/bg_no_data</item>
+        <item name="llEmptyText">""</item>
+    </style>
+
+    <style name="SplashTheme" parent="TranslucentTheme">
+        <item name="android:windowBackground">@color/color_bg</item>
+        <!-- 隐藏状态栏 -->
+        <item name="android:windowFullscreen">true</item>
+        <!-- 隐藏标题栏 -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp_265"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_pay">
+
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_padding_x_max"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:text="@string/input_pay_password_"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_pass"
+        android:layout_width="222dp"
+        android:layout_height="@dimen/et_height"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_padding_x_max"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:background="@drawable/bg_dialog_et"
+        android:gravity="center"
+        android:inputType="numberPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/btn_sure"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:layout_marginTop="@dimen/dp_padding_x_max"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:background="@drawable/bg_item"
+        android:textColor="@color/main_blue"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+
+    <TextView
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/color_666666"
+        android:background="@drawable/bg_item"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_sure"
+        app:layout_constraintTop_toTopOf="@+id/btn_sure" />
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/color_line"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sure"
+        />
+    <TextView
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="0dp"
+        android:background="@color/color_line"
+        app:layout_constraintTop_toTopOf="@+id/btn_sure"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sure"
+        app:layout_constraintStart_toEndOf="@id/btn_sure"
+        />
+</android.support.constraint.ConstraintLayout>

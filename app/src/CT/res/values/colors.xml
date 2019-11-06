@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_line">#E6E6E6</color>
+    <color name="color_bg">#F5F5F5</color>
+    <color name="color_main_text">#333333</color>
+    <color name="color_text_1">#98AFD7</color>
+    <color name="color_text_2">#999999</color>
+    <color name="color_bg_title">#262E41</color>
+    <color name="color_edittext_hint">#999999</color>
+    <color name="color_item">#ffffff</color>
+    <color name="color_main_btn">#1D57FF</color>
+    <color name="color_remark">#FFAA14</color>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_bg"
+    android:layout_height="@dimen/dp_64">
+
+    <TextView
+        android:id="@+id/tv_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:text="@string/business_type"
+        app:layout_constraintBottom_toBottomOf="@+id/textView84"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView84"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/NULL"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_"
+        app:layout_constraintStart_toEndOf="@+id/tv_" />
+
+    <TextView
+        android:id="@+id/textView84"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/surplus_quatity_"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_acount"
+        app:layout_constraintEnd_toStartOf="@+id/tv_acount" />
+
+    <TextView
+        android:id="@+id/tv_acount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:text="@string/format_amount"
+        app:layout_constraintBottom_toTopOf="@+id/tv_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="@string/format_time"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_text_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tv_acount"
+        app:layout_constraintTop_toBottomOf="@+id/tv_acount" />
+</android.support.constraint.ConstraintLayout>

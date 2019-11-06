@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_103"
+
+        android:background="@mipmap/zz_top_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="@dimen/dp_padding_x_min"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/back" />
+
+        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_17"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.50"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_back"
+            app:layout_constraintVertical_bias="0.571" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_74"
+        android:background="@drawable/bg_ffffff_top_round_25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/btn_transfer_immediate"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_72"
+            android:background="@color/main_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_transfer_contact"
+            app:layout_constraintEnd_toStartOf="@+id/btn_transfer_contact"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_transfer_contact">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/zz_zhuanzhang"
+
+                android:drawablePadding="@dimen/dp_8"
+                android:text="@string/transfer_zhijie"
+                android:textColor="@color/color_FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.482" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/btn_transfer_scan"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_72"
+            android:background="@color/main_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_transfer_contact"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_transfer_contact"
+            app:layout_constraintTop_toTopOf="@+id/btn_transfer_contact">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/zz_zhuanzhang"
+                android:drawablePadding="@dimen/dp_8"
+                android:text="@string/transfer_scan"
+                android:textColor="@color/color_FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/btn_transfer_contact"
+
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_72"
+            android:layout_marginTop="@dimen/dp_25"
+            android:background="@color/main_blue"
+            app:layout_constraintEnd_toStartOf="@+id/btn_transfer_scan"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_transfer_immediate"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/zz_zhuanzhang"
+                android:drawablePadding="@dimen/dp_8"
+                android:text="@string/transfer_chat_person"
+                android:textColor="@color/color_FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="@dimen/dp_3"
+            android:layout_height="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_30"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dp_padding_x_min"
+            android:background="@color/main_blue"
+            app:layout_constraintTop_toBottomOf="@+id/btn_transfer_immediate"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+
+            android:textSize="@dimen/sp_16"
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:text="@string/transfer_log"
+            app:layout_constraintBottom_toBottomOf="@+id/textView9"
+            app:layout_constraintStart_toEndOf="@+id/textView9"
+            app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreash"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/sp_20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            android:layout_height="0dp">
+
+            <ezy.ui.layout.LoadingLayout
+                android:id="@+id/freash_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+                </android.support.v7.widget.RecyclerView>
+
+            </ezy.ui.layout.LoadingLayout>
+
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+
+    
+    
+
+
+</android.support.constraint.ConstraintLayout>

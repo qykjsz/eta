@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="0dp"
+        android:background="@color/color_FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="@dimen/dp_120"
+        android:gravity="left"
+        android:padding="@dimen/dp_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/input_private_key"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/textView112"
+        android:layout_width="@dimen/dp_120"
+        app:layout_constraintTop_toBottomOf="@+id/et_content"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/wallet_system"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="131dp" />
+
+    <TextView
+        android:id="@+id/textView113"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/wallet_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView112" />
+
+    <TextView
+        android:id="@+id/textView114"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/set_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView113" />
+
+    <TextView
+        android:id="@+id/textView115"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/confirm_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView114" />
+
+    <TextView
+        android:id="@+id/textView116"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/note_massage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView115" />
+
+    <TextView
+        android:id="@+id/et_wallet_system"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/textView112"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView112"
+        app:layout_constraintTop_toTopOf="@+id/textView112" />
+
+    <EditText
+        android:id="@+id/et_wallet_name"
+        android:layout_width="0dp"
+        android:background="@color/color_FFFFFF"
+        android:layout_height="0dp"
+        android:hint="@string/input_your_wallet_name"
+        app:layout_constraintBottom_toBottomOf="@+id/textView113"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView113"
+        app:layout_constraintTop_toTopOf="@+id/textView113" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="0dp"
+        android:background="@color/color_FFFFFF"
+        android:layout_height="0dp"
+        android:hint="@string/input_wallet_password"
+        app:layout_constraintBottom_toBottomOf="@+id/textView114"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView114"
+        app:layout_constraintTop_toTopOf="@+id/textView114" />
+
+    <EditText
+        android:id="@+id/et_password_connfirm"
+        android:layout_width="0dp"
+        android:background="@color/color_FFFFFF"
+        android:layout_height="0dp"
+        android:hint="@string/confirm_wallet_password"
+        app:layout_constraintBottom_toBottomOf="@+id/textView115"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView115"
+        app:layout_constraintTop_toTopOf="@+id/textView115" />
+
+    <EditText
+        android:id="@+id/editText16"
+        android:layout_width="0dp"
+        android:background="@color/color_FFFFFF"
+        android:layout_height="0dp"
+        android:hint="@string/can_empty"
+        app:layout_constraintBottom_toBottomOf="@+id/textView116"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView116"
+        app:layout_constraintTop_toTopOf="@+id/textView116" />
+
+
+    <CheckBox
+        android:id="@+id/cb_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:button="@drawable/my_switch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView116" />
+
+    <TextView
+        android:id="@+id/textView119"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/have_read_agree"
+        android:layout_marginStart="@dimen/dp_5"
+        android:textColor="@color/color_text_2"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/cb_read"
+        app:layout_constraintStart_toEndOf="@+id/cb_read"
+        app:layout_constraintTop_toTopOf="@+id/cb_read" />
+
+    <TextView
+        android:id="@+id/textView120"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/service_note"
+        android:textColor="@color/main_blue"
+        android:layout_marginStart="@dimen/dp_5"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/textView119"
+        app:layout_constraintStart_toEndOf="@+id/textView119"
+        app:layout_constraintTop_toTopOf="@+id/textView119" />
+
+    <TextView
+        android:id="@+id/btn_import"
+        style="@style/main_btn"
+        android:layout_marginBottom="@dimen/dp_70"
+        android:text="@string/start_import"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintTop_toBottomOf="@+id/et_content"
+        style="@style/line"
+        />
+
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintTop_toBottomOf="@+id/textView112"
+        style="@style/line"
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintTop_toBottomOf="@+id/textView113"
+        style="@style/line"
+        />
+
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintTop_toBottomOf="@+id/textView114"
+        style="@style/line"
+        />
+
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintTop_toBottomOf="@+id/textView115"
+        style="@style/line"
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintTop_toBottomOf="@+id/textView116"
+        style="@style/line"
+        />
+
+
+
+</android.support.constraint.ConstraintLayout>

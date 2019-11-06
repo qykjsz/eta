@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+
+
+//提交到仓库中的版本号
+version = "1.6.4"
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+    }
+}
+
+dependencies {
+    //noinspection GradleDynamicVersion
+//    compileOnly 'com.android.support:support-v4:28+'
+    compileOnly 'com.android.support:support-v4:28.0.0'
+}
+///方法1
+def siteUrl = 'https://github.com/xiaohaibin/XBanner'      // 项目的主页   这个是说明，可随便填
+def gitUrl = 'https://github.com/xiaohaibin/XBanner'      // Git仓库的url  这个是说明，可随便填
+group = "com.xhb"    // 这里是groupId ,必须填写  一般填你唯一的包名
+
+
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+//这段代码一会给你们解释哈
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
+}

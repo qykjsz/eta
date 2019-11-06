@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textView39"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:layout_width="@dimen/dp_102"
+        android:background="@color/color_FFFFFF"
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center_vertical"
+        android:text="@string/name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="@dimen/dp_102"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/color_FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/remark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="@dimen/dp_102"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/color_FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/wallet_bottom_level"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="@dimen/dp_102"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/color_FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/wallet_address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        android:background="@color/color_FFFFFF"
+        android:ems="10"
+        android:hint="@string/input_name"
+        app:layout_constraintBottom_toBottomOf="@+id/textView39"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView39"
+        app:layout_constraintTop_toTopOf="@+id/textView39" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_FFFFFF"
+        android:ems="10"
+        android:hint="@string/choose_input"
+        app:layout_constraintBottom_toBottomOf="@+id/textView40"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView40"
+        app:layout_constraintTop_toTopOf="@+id/textView40" />
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/choose_wallet_bottom"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/textView41"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView41"
+        app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/dp_40"
+        android:ems="10"
+        android:hint="@string/input_scan_wallet_address"
+        app:layout_constraintBottom_toBottomOf="@+id/textView42"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView42"
+        app:layout_constraintTop_toTopOf="@+id/textView42" />
+
+    <TextView
+        android:id="@+id/textView45"
+        style="@style/main_btn"
+        android:layout_marginBottom="@dimen/dp_70"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintBottom_toBottomOf="@+id/editText7"
+        app:layout_constraintEnd_toEndOf="@+id/editText7"
+        app:layout_constraintTop_toTopOf="@+id/editText7"
+        app:srcCompat="@mipmap/icon_scan" />
+
+</android.support.constraint.ConstraintLayout>

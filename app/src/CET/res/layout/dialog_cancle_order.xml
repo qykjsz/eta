@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/dp_60"
+    android:layout_marginRight="@dimen/dp_60"
+    android:background="@drawable/bg_dialog"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:text="@string/if_cancel_order"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_sure"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:text="@string/confirm"
+        android:gravity="center"
+        android:textColor="@color/color_text_2"
+        android:background="@drawable/bg_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:textColor="@color/color_text_1"
+        android:background="@drawable/bg_item"
+        android:layout_height="@dimen/setting_item_height"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_sure" />
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/color_line"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sure"
+        />
+
+    <TextView
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="@dimen/dp_0"
+        android:background="@color/color_line"
+        app:layout_constraintTop_toTopOf="@+id/btn_sure"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sure"
+        app:layout_constraintStart_toEndOf="@+id/btn_sure"
+        />
+</android.support.constraint.ConstraintLayout>

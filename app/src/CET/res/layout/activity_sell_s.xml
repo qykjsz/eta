@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_bg"
+    android:layout_height="match_parent">
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:background="@color/color_text_2"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_t_yue" />
+
+            <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                android:id="@+id/tv_s"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_padding_x_min"
+                android:textSize="@dimen/sp_20"
+                android:text="@string/format_amount" />
+
+        </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/et_height"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:background="@color/color_item"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center_vertical"
+        android:text="@string/sell_amount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <EditText
+        android:id="@+id/et_amount"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/et_height"
+        android:paddingStart="@dimen/dp_padding_x_max"
+        android:background="@color/color_item"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/input_sell_amount"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_asset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_asset"
+        app:layout_constraintTop_toTopOf="@+id/tv_asset" />
+
+    <TextView
+        android:id="@+id/textView76"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/et_height"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:background="@color/color_item"
+        android:text="@string/calculate_pay"
+        app:layout_constraintStart_toStartOf="@+id/tv_asset"
+        app:layout_constraintTop_toBottomOf="@+id/tv_asset" />
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/et_height"
+        android:background="@color/color_item"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_max"
+        android:text="@string/format_amount"
+        app:layout_constraintBottom_toBottomOf="@+id/textView76"
+        app:layout_constraintEnd_toEndOf="@+id/et_amount"
+        app:layout_constraintStart_toEndOf="@+id/textView76"
+        app:layout_constraintTop_toBottomOf="@+id/et_amount" />
+
+    <TextView
+        android:id="@+id/textView78"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/et_height"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:background="@color/color_item"
+        android:text="@string/calculate_get"
+        app:layout_constraintStart_toStartOf="@+id/textView76"
+        app:layout_constraintTop_toBottomOf="@+id/textView76" />
+
+    <TextView
+        android:id="@+id/tv_get"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/et_height"
+        android:background="@color/color_item"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_max"
+        android:text="@string/format_amount"
+        app:layout_constraintBottom_toBottomOf="@+id/textView78"
+        app:layout_constraintEnd_toEndOf="@+id/tv_pay"
+        app:layout_constraintStart_toEndOf="@+id/textView78" />
+
+    <TextView
+        android:id="@+id/tv_publish"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/et_height"
+        android:layout_marginBottom="@dimen/dp_90"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:background="@drawable/btn_main_button"
+        android:gravity="center"
+        android:text="@string/pubilsh"
+       android:textSize="@dimen/sp_17"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

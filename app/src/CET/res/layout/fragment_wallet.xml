@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ly_banner"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_160"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <com.stx.xhb.xbanner.XBanner
+        android:id="@+id/banner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        app:AutoPlayTime="3000"
+        app:clipChildrenTopBottomMargin="@dimen/dp_0"
+        app:isAutoPlay="false"
+        app:isClipChildrenModeLessThree="true"
+        app:isHandLoop="true"
+        app:isShowIndicatorOnlyOne="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:pageChangeDuration="800"
+        app:pointNormal="@drawable/shape_noraml"
+        app:pointSelect="@drawable/shape_selected"
+        app:pointsContainerBackground="@android:color/transparent"
+        app:pointsPosition="RIGHT"
+        app:viewpagerMargin="@dimen/dp_1">
+
+    </com.stx.xhb.xbanner.XBanner>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="@string/asset"
+        android:textSize="@dimen/sp_17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ly_banner" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcy"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name">
+
+
+    </android.support.v7.widget.RecyclerView>
+
+</android.support.constraint.ConstraintLayout>

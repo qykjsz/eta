@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_bg"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:text="@string/business_all"
+        app:layout_constraintBottom_toBottomOf="@+id/textView84"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView84"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/format_amount"
+        android:includeFontPadding="false"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_"
+        app:layout_constraintStart_toEndOf="@+id/tv_" />
+
+    <TextView
+        android:id="@+id/textView84"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_text_1"
+        android:text="@string/status_"
+        android:includeFontPadding="false"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_acount"
+        app:layout_constraintEnd_toStartOf="@+id/tv_status"
+        app:layout_constraintTop_toTopOf="@+id/tv_status" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/color_text_1"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:text="@string/status_completed"
+        android:includeFontPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/tv_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_"
+        android:layout_marginTop="@dimen/dp_8"
+        android:includeFontPadding="false"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginBottom="@dimen/dp_padding_x_min"
+        android:text="@string/format_time"
+        android:textColor="@color/color_text_1"
+        android:textSize="@dimen/sp_11"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_status"
+        android:visibility="gone"
+        android:layout_width="@dimen/dp_70"
+        android:gravity="center"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        android:includeFontPadding="false"
+        android:layout_height="@dimen/dp_22"
+        android:text="@string/status_completed"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_time"
+        app:layout_constraintEnd_toEndOf="@+id/tv_status"
+        app:layout_constraintTop_toTopOf="@+id/tv_time" />
+</android.support.constraint.ConstraintLayout>

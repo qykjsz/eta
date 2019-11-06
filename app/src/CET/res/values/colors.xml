@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_line">#364363</color>
+    <color name="color_bg">#1B2234</color>
+    <color name="color_main_text">#FFFFFF</color>
+    <color name="color_text_1">#8F97BD</color>
+    <color name="color_text_2">#00D29C</color>
+    <color name="color_bg_title">#262E41</color>
+    <color name="color_edittext_hint">#8F97BD</color>
+    <color name="color_item">#262E41</color>
+    <color name="color_main_btn">#3A4769</color>
+    <color name="color_remark">#FFAA14</color>
+</resources>
