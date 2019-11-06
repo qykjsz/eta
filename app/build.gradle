@@ -49,7 +49,7 @@ android {
             versionName '1.0.0'
         }
         CT {
-            applicationId 'com.qingyun.ct'
+            applicationId 'com.qingyun.et'
         }
     }
 }
@@ -180,5 +180,8 @@ dependencies {
 
     // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
     implementation project(':wallet-eth')
+
+    implementation 'am.widget:wraplayout:1.2.1'
+
 
 }

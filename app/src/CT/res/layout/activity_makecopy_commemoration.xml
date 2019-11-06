@@ -30,20 +30,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-    <android.support.v7.widget.RecyclerView
+    <am.widget.wraplayout.WrapLayout
+        android:id="@+id/flex"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:layout_marginTop="@dimen/dp_45"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20">
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:wlyHorizontalSpacing="10dp"
+        app:wlyVerticalSpacing="10dp"
+        app:wlyGravity="top"
+
+        >
 
 
-    </android.support.v7.widget.RecyclerView>
+    </am.widget.wraplayout.WrapLayout>
 
     <TextView
         android:id="@+id/btn_next"
         style="@style/main_btn"
+
         android:layout_width="0dp"
         android:layout_marginBottom="@dimen/dp_75"
         android:text="@string/next_step"

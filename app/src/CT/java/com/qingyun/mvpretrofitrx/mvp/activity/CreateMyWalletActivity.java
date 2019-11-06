@@ -120,7 +120,7 @@ public class CreateMyWalletActivity extends BaseActivity implements Observer, Pr
            if ( msg.what == 1){
                LoadingUtils.loadingDismiss();
                ToastUtil.showShortToast(R.string.create_wallet_success);
-
+               startActivity(MakeCopyWalletActivity.class);
            }
             return true;
         }
