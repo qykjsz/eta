@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.allens.lib_ios_dialog.IosDialog;
+import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MainViewPagerAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
@@ -21,6 +22,10 @@ import com.qingyun.mvpretrofitrx.mvp.fragment.MineFragment;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.MyViewPager;
 import com.senon.mvpretrofitrx.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +44,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tab)
     PageNavigationView tab;
     private NavigationController mNavigationController;
+    private ArrayList<BaseFragment> fragments;
+    private MainViewPagerAdapter mainViewPagerAdapter;
 
 //    @BindView(R.id.navigation)
 //    BottomNavigationView navigation;
@@ -77,26 +84,27 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void init() {
+        EventBus.getDefault().register(this);
+
 //        navigation.setItemIconTintList(null);
 //        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
-        refreashUser();
         ViewGroup.LayoutParams lp = vp.getLayoutParams();
         setRootViewFitsSystemWindows(this, false);
         initNavigation();
-        final List<BaseFragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         if (ApplicationUtil.getCurrentWallet()==null){
             fragments.add(new ChooseBottomLevelFragment());
 
-        }
-        else
+        }else {
             fragments.add(new AssetFragment());
+        }
         fragments.add(new InformationFragment());
         fragments.add(new FindFragment());
         fragments.add(new ChatFragment());
         fragments.add(new MineFragment());
 
 
-        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(MainActivity.this, fragments, getSupportFragmentManager());
+        mainViewPagerAdapter = new MainViewPagerAdapter(MainActivity.this, fragments, getSupportFragmentManager());
         vp.setAdapter(mainViewPagerAdapter);
         vp.setOffscreenPageLimit(4);
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -116,6 +124,8 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+
 
     public MyViewPager getVp() {
         return vp;
@@ -152,6 +162,14 @@ public class MainActivity extends BaseActivity {
         refreashUser();
     }
 
+
+    @Override
+    public void refreashUser() {
+
+    }
+
+
+
     private void initNavigation() {
         mNavigationController = tab.material()
                 .setDefaultColor(getResources().getColor(R.color.color_text_1))
@@ -179,5 +197,18 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreashWallet(Wallet wallet) {
+        if (wallet!=null){
+            mainViewPagerAdapter.replaceFragment(0,new AssetFragment());
+//            fragments.add(0,new AssetFragment());
+//            fragments.remove(1);
+//            mainViewPagerAdapter.notifyDataSetChanged(fragments);
+//            vp.invalidate();
+//            getSupportFragmentManager().beginTransaction().replace(0,new AssetFragment()).commit();
+        }
     }
 }

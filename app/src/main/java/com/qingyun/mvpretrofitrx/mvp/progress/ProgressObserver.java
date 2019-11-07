@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ExceptionHandle;
@@ -28,7 +29,7 @@ import retrofit2.HttpException;
 /**
  * 观察者
  */
-public class ProgressObserver implements Observer, ProgressCancelListener {
+public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressCancelListener {
     private static final String TAG = "ProgressObserver____ ";
     private ObserverResponseListener listener;
     private ProgressDialogHandler mProgressDialogHandler;
@@ -64,10 +65,22 @@ public class ProgressObserver implements Observer, ProgressCancelListener {
     }
 
     @Override
-    public void onNext(Object o) {
+    public void onNext(BaseResponse<T> tBaseResponse) {
         dismissProgressDialog();
-        listener.onNext(o);//可定制接口，通过code回调处理不同的业务
+        if (tBaseResponse.getCode()==200){
+            listener.onNext(tBaseResponse.getData());//可定制接口，通过code回调处理不同的业务
+
+        }else {
+
+
+        }
     }
+
+//    @Override
+//    public void onNext(Object o) {
+//        dismissProgressDialog();
+//        listener.onNext(o);//可定制接口，通过code回调处理不同的业务
+//    }
 
 //    @Override
 //    public void onNext(BaseResponse<T> t) {

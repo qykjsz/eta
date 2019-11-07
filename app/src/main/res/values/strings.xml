@@ -172,4 +172,7 @@
     <string name="not_lower_8">密码长度不能小于8位数</string>
     <string name="tow_input_must_same">两次输入的密码必须相同</string>
     <string name="create_wallet_success">钱包创建成功</string>
+    <string name="comme_complete">请先完成助记词顺序记忆</string>
+    <string name="makecopy_success">备份成功</string>
+    <string name="makecopy_failure">助记词顺序错误</string>
 </resources>

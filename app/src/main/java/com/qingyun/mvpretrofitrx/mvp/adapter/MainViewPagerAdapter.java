@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
-
+import com.qingyun.mvpretrofitrx.mvp.fragment.AssetFragment;
 
 
 import java.util.ArrayList;
@@ -62,6 +62,20 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     }
 
 
+    public void notifyDataSetChanged(List<BaseFragment>  fragments) {
+        this.fragments = fragments;
+        super.notifyDataSetChanged();
+    }
+
+
+    public void  replaceFragment(int index,BaseFragment baseFragment){
+//            fragments.add(index,baseFragment);
+//            fragments.remove(index+1);
+////            getSupportFragmentManager().beginTransaction().replace(0,new AssetFragment()).commit();
+//            fm.beginTransaction().replace(0,baseFragment).commit();
+//        notifyDataSetChanged();
+
+    }
 
     @Override
     public int getItemPosition(@NonNull Object object) {

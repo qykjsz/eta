@@ -2,10 +2,14 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
 
+import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.senon.mvpretrofitrx.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,7 +52,6 @@ public class MakeCopyWalletActivity extends BaseActivity {
 
     @Override
     public void init() {
-
     }
 
     @Override
@@ -61,5 +64,6 @@ public class MakeCopyWalletActivity extends BaseActivity {
     @OnClick(R.id.btn_make_copy)
     public void onViewClicked() {
         startActivity(MakeCopyCommemorationActivity.class);
+        finish();
     }
 }

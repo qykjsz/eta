@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,9 @@ import com.develop.wallet.eth.WalletManager;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.progress.ProgressCancelListener;
 import com.qingyun.mvpretrofitrx.mvp.progress.ProgressDialogHandler;
 import com.qingyun.mvpretrofitrx.mvp.progress.ProgressObserver;
@@ -21,15 +25,17 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
 
+import org.greenrobot.eventbus.EventBus;
 import org.web3j.crypto.WalletUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class CreateMyWalletActivity extends BaseActivity implements Observer, ProgressCancelListener {
+public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View,WalletAssetContact.Presenter> implements Observer, ProgressCancelListener,WalletAssetContact.View {
     @BindView(R.id.et_wallet_name)
     EditText etWalletName;
     @BindView(R.id.et_password)
@@ -64,14 +70,15 @@ public class CreateMyWalletActivity extends BaseActivity implements Observer, Pr
     }
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public WalletAssetContact.Presenter createPresenter() {
+        return new WalletAssetPresenter(this);
     }
 
     @Override
-    public BaseView createView() {
-        return null;
+    public WalletAssetContact.View createView() {
+        return this;
     }
+
 
     @Override
     public void init() {
@@ -100,10 +107,11 @@ public class CreateMyWalletActivity extends BaseActivity implements Observer, Pr
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Wallet wallet = WalletManager.generateWalletAddress();
+                Wallet wallet = WalletManager.generateWalletAddress(etWalletName.getText().toString());
                 Log.e("------------", wallet.getAddress());
                 Log.e("------------", wallet.getPrivateKey());
                 ApplicationUtil.setCurrentWallet(wallet);
+                EventBus.getDefault().post(wallet);
 //                Wallet wallet1 = WalletManager.generateWalletKeystore(etPassword.getText().toString(), wallet.getMnemonic());
                 handler.sendEmptyMessage(1);
             }
@@ -118,9 +126,12 @@ public class CreateMyWalletActivity extends BaseActivity implements Observer, Pr
         @Override
         public boolean handleMessage(Message msg) {
            if ( msg.what == 1){
-               LoadingUtils.loadingDismiss();
-               ToastUtil.showShortToast(R.string.create_wallet_success);
-               startActivity(MakeCopyWalletActivity.class);
+               getPresenter().addWallet(ApplicationUtil.getCurrentWallet().getAddress());
+
+//               LoadingUtils.loadingDismiss();
+//               ToastUtil.showShortToast(R.string.create_wallet_success);
+//               finish();
+//               startActivity(MakeCopyWalletActivity.class);
            }
             return true;
         }
@@ -149,5 +160,23 @@ public class CreateMyWalletActivity extends BaseActivity implements Observer, Pr
     @Override
     public void onComplete() {
 
+    }
+
+    @Override
+    public void getWalletInfoSuccess(AssetResponse assetResponse) {
+
+    }
+
+    @Override
+    public void addWalletSuccess() {
+        LoadingUtils.loadingDismiss();
+        ToastUtil.showShortToast(R.string.create_wallet_success);
+        finish();
+        startActivity(MakeCopyWalletActivity.class);
+    }
+
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+        return this.bindToLifecycle();
     }
 }

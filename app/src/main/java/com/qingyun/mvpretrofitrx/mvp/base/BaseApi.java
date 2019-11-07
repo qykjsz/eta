@@ -74,13 +74,15 @@ public class BaseApi {
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
         //增加头部信息
         token = (String) SpUtils.getObjectFromShare(ApplicationUtil.getContext(),"token");
-        int choose = (int) SpUtils.getObjectFromShare(ApplicationUtil.getContext(), "language");
+//        int choose = (int) SpUtils.getObjectFromShare(ApplicationUtil.getContext(), "language");
         String local = null;
-        if (choose==1){
-            local="zh-CN";
-        }else if (choose==2){
-            local="en";
-        }
+//        if (choose==1){
+//            local="zh-CN";
+//        }else if (choose==2){
+//            local="en";
+//        }
+        local="zh-CN";
+
         if (token==null) token="";
         final String finalLocal = local;
         Interceptor headerInterceptor = new Interceptor() {
@@ -104,7 +106,7 @@ public class BaseApi {
                 .addInterceptor(mRewriteCacheControlInterceptor)//没网的情况下
                 .addNetworkInterceptor(mRewriteCacheControlInterceptor)//有网的情况下
                 .addInterceptor(headerInterceptor)
-//                .addInterceptor(logInterceptor)
+                .addInterceptor(logInterceptor)
                 .cache(cache)
                 .build();
 

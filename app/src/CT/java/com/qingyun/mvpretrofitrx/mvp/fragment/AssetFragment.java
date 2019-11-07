@@ -32,14 +32,18 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetModle;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.senon.mvpretrofitrx.R;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import org.web3j.abi.datatypes.Int;
 
@@ -50,11 +54,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.ObservableTransformer;
 import per.goweii.anylayer.AnimHelper;
 import per.goweii.anylayer.AnyLayer;
 import per.goweii.anylayer.LayerManager;
 
-public class AssetFragment extends BaseFragment {
+public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAssetContact.Presenter> implements WalletAssetContact.View {
     private static final int ETH_BLANCE = 1;
     @BindView(R.id.tv_name)
     TextView tvName;
@@ -103,18 +108,20 @@ public class AssetFragment extends BaseFragment {
     }
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public WalletAssetContact.Presenter createPresenter() {
+        return new WalletAssetPresenter(getContext());
     }
 
     @Override
-    public BaseView createView() {
-        return null;
+    public WalletAssetContact.View createView() {
+        return this;
     }
+
 
     @Override
     public void init() {
-
+        if (ApplicationUtil.getCurrentWallet()!=null)
+        getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
 
         new Thread(new Runnable() {
             @Override
@@ -127,7 +134,7 @@ public class AssetFragment extends BaseFragment {
         }).start();
 
         tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
-        if (((int)SpUtils.getObjectFromShare(getContext(),"is_make_copy"))!=1){
+        if ((SpUtils.getObjectFromShare(getContext(),"is_make_copy"))==null||((int)SpUtils.getObjectFromShare(getContext(),"is_make_copy"))!=1){
             DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.delete_wallet, R.string.beifen, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -265,5 +272,21 @@ public class AssetFragment extends BaseFragment {
                     }
                 })
                 .show();
+    }
+
+    @Override
+    public void getWalletInfoSuccess(AssetResponse assetResponse) {
+
+    }
+
+    @Override
+    public void addWalletSuccess() {
+
+    }
+
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+        return this.bindUntilEvent(FragmentEvent.PAUSE);
+
     }
 }

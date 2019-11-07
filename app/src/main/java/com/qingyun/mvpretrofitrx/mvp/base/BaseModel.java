@@ -23,7 +23,7 @@ public class BaseModel<T> {
     public void subscribe(Context context, final Observable observable, ObserverResponseListener<T> listener,
                           ObservableTransformer<T,T> transformer, boolean isDialog, boolean cancelable) {
         if (transformer==null) return;
-        final Observer observer = new ProgressObserver(context, listener, isDialog,cancelable);
+        final Observer observer = new ProgressObserver<T>(context, listener, isDialog,cancelable);
         observable.compose(transformer)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

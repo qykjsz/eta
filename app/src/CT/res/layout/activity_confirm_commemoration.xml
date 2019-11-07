@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/color_FFFFFF"
     android:layout_height="match_parent">
 
     <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
@@ -32,8 +33,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
+    <am.widget.wraplayout.WrapLayout
+        android:id="@+id/flex_input"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@mipmap/zjc_yykuang"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23"
+        app:wlyHorizontalSpacing="10dp"
+        app:wlyVerticalSpacing="10dp"
+        app:wlyGravity="top"
+        />
+
+
+
+    <am.widget.wraplayout.WrapLayout
+        android:id="@+id/flex_normal"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flex_input"
+        app:wlyHorizontalSpacing="10dp"
+        app:wlyVerticalSpacing="10dp"
+        app:wlyGravity="top"
+        />
+
+
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/btn_complete"
         style="@style/main_btn"
         android:layout_width="0dp"
         android:layout_marginBottom="@dimen/dp_70"

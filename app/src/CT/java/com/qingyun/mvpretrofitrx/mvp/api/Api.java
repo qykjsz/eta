@@ -11,7 +11,7 @@ import io.reactivex.Observable;
 public class Api {
 
 //    private String baseUrl = "https://application.us.zone/api/";
-    private static String baseUrl = "http://13.250.27.45:8081/api/";
+    private static String baseUrl = "https://et2.etac.io/api/";
     private volatile static ApiService apiService;
     public static ApiService getApiService() {
 
@@ -28,12 +28,12 @@ public class Api {
     private Api() {
         if (ApplicationUtil.isApkInDebug(ApplicationUtil.getContext()))
         {
-            baseUrl = "http://13.250.27.45:8081/api/";
+            baseUrl = "https://et2.etac.io/api/";
             Log.e("---------------","debug");
         }else {
             Log.e("---------------","release");
 
-            baseUrl = "https://application.us.zone/api/";
+            baseUrl = "https://et2.etac.io/api/";
 
         }
         BaseApi baseApi = new BaseApi();

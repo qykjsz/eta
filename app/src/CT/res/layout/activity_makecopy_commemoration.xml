@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/color_FFFFFF"
     android:layout_height="match_parent">
 
 
@@ -36,7 +37,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="@dimen/dp_padding_x_min"
-        android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:layout_marginTop="@dimen/dp_45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20"

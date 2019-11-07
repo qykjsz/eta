@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -61,8 +62,14 @@ public class MakeCopyCommemorationActivity extends BaseActivity {
         String[] mnemonicArr = mnemonicStr.split(" ");
         for (int i = 0;i<mnemonicArr.length;i++){
             TextView textView = new TextView(getContext());
+            textView.setTextColor(getResources().getColor(R.color.color_666666));
+            textView.setBackgroundColor(getResources().getColor(R.color.color_EBEBEB));
+            textView.setHeight(getResources().getDimensionPixelSize(R.dimen.dp_28));
+            textView.setPadding(getResources().getDimensionPixelSize(R.dimen.dp_8),0,getResources().getDimensionPixelSize(R.dimen.dp_8),0);
+            textView.setGravity(Gravity.CENTER);
             textView.setText(mnemonicArr[i]);
             flex.addView(textView);
+
         }
         flex.invalidate();
         setIvTitleRight(R.mipmap.zhu_ma, new View.OnClickListener() {
@@ -84,5 +91,6 @@ public class MakeCopyCommemorationActivity extends BaseActivity {
     @OnClick(R.id.btn_next)
     public void onViewClicked() {
         startActivity(ConfirmCommemorationActivity.class);
+        finish();
     }
 }
