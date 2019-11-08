@@ -6,8 +6,10 @@ import android.util.Log;
 import com.develop.mnemonic.KeyPairUtils;
 import com.develop.mnemonic.MnemonicUtils;
 import com.develop.wallet.eth.listener.WalletListener;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.FunctionReturnDecoder;
@@ -62,12 +64,12 @@ public class WalletManager {
     /**
      * 代币合约地址
      */
-    public static String tokenAddres = "0x047a880b27ca11509c9c1e853fe47229febc57fe";
+    public static String tokenAddres = "0x2F5961e307Ea42f4633f8D6624DFae298f6bBf62";
 
     /**
      * 区块链服务器地址
      */
-    public static String URL = "http://192.168.1.138";
+    public static String URL = "https://ropsten.infura.io/v3/bb770b6135ec434e9259072aee28efe0";
 
 
     public static BigInteger GAS_PRICE = BigInteger.valueOf(0x3b9aca00);
@@ -116,7 +118,7 @@ public class WalletManager {
     /**1
      * 生成钱包地址
      */
-    public static Wallet generateWalletAddress() {
+    public static Wallet generateWalletAddress(String walletName) {
         try {
             String mnemonic = MnemonicUtils.generateMnemonic();
             ECKeyPair ecKeyPair = WalletUtils.generateBip32ECKeyPair(mnemonic);
@@ -124,7 +126,9 @@ public class WalletManager {
             String privateKey = EthUtils.getPrivateKey(ecKeyPair);
             String publicKey = EthUtils.getPublicKey(ecKeyPair);
             log(String.format("generateWalletAddress: mnemonic = %s, address = %s, privateKey = %s", mnemonic, address, privateKey));
-            return new Wallet(mnemonic, address, privateKey, publicKey);
+            Wallet wallet = new Wallet(mnemonic, address, privateKey, publicKey);
+            wallet.setWalletName(walletName);
+            return wallet;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,6 +186,65 @@ public class WalletManager {
 
 
 
+    /**
+     * 导出私钥
+     *
+     * @param password   创建钱包时的密码
+     * @param walletFile
+     * @return
+     */
+    public String exportPrivateKey(String password, WalletFile walletFile) {
+        try {
+            ECKeyPair ecKeyPair = org.web3j.crypto.Wallet.decrypt(password, walletFile); //可能出现OOM
+//            ECKeyPair ecKeyPair = LWallet.decrypt(password, walletFile);
+            String privateKey = Numeric.toHexStringNoPrefix(ecKeyPair.getPrivateKey());
+            return privateKey;
+        } catch (CipherException e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+
+
+
+    /**
+     * 导出Keystore
+     *
+     * @param password   创建钱包时的密码
+     * @param walletFile
+     * @return
+     */
+    public String exportKeystore(String password, WalletFile walletFile) {
+        if (decrypt(password, walletFile)) {
+            return new Gson().toJson(walletFile);
+        } else {
+            return "decrypt failed";
+        }
+    }
+
+    /**
+     * 解密
+     * 如果方法没有抛出CipherException异常则表示解密成功，也就是说可以把Wallet相关信息展示给用户看
+     *
+     * @param password   创建钱包时的密码
+     * @param walletFile
+     * @return
+     */
+    public boolean decrypt(String password, WalletFile walletFile) {
+        try {
+            ECKeyPair ecKeyPair = org.web3j.crypto.Wallet.decrypt(password, walletFile); //可能出现OOM
+//            ECKeyPair ecKeyPair = LWallet.decrypt(password, walletFile);
+            return true;
+        } catch (CipherException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
+
     public static void importWalletByKeystore(String password,String keystore,String name,ImportWalletListener importWalletListener){
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -197,7 +260,7 @@ public class WalletManager {
             String privateKey = keyPair.getPrivateKey().toString(16);
             String publicKey = keyPair.getPublicKey().toString(16);
             String address = "0x" + Keys.getAddress(publicKey);
-            Wallet wallet = new Wallet(null, address, privateKey, publicKey);
+            Wallet wallet = new Wallet(null, address, privateKey, publicKey,keystore);
             wallet.setWalletName(name);
             importWalletListener.importSuccess(wallet);
             Log.e("------------", address);
@@ -223,7 +286,19 @@ public class WalletManager {
         String privateKey = ecKeyPair.getPrivateKey().toString(16);
         String publicKey = ecKeyPair.getPublicKey().toString(16);
         String address = "0x" + Keys.getAddress(publicKey);
-        Wallet wallet = new Wallet(menmory, address, privateKey, publicKey);
+        String json = null;
+        WalletFile walletFile = null;
+        try {
+            walletFile = WalletUtils.createWalletFile(passwd, ecKeyPair, false);
+            json = WalletUtils.objectMapper.writeValueAsString(walletFile);
+        } catch (CipherException e) {
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+
+        Wallet wallet = new Wallet(menmory, address, privateKey, publicKey,json);
         wallet.setWalletName(name);
         importWalletListener.importSuccess(wallet);
         //创建钱包地址与密钥
@@ -241,8 +316,7 @@ public class WalletManager {
         void importSuccess(Wallet wallet);
     }
 
-
-    public static void importWalletByPrivateKey(String privateKey,String name,ImportWalletListener importWalletListener){
+    public static void importWalletByPrivateKey(String privateKey,String name,String passwd,ImportWalletListener importWalletListener){
         Credentials credentials = Credentials.create(privateKey);
         ECKeyPair ecKeyPair = credentials.getEcKeyPair();
 //        ECKeyPair.create(new BigInteger(privateKey,16));
@@ -251,11 +325,24 @@ public class WalletManager {
                 + "\nprivateKey:\n" + Numeric.encodeQuantity(ecKeyPair.getPrivateKey())
                 + "\nPublicKey:\n" + Numeric.encodeQuantity(ecKeyPair.getPublicKey());
         Log.e("ByMemoryWord:",msg);
-        Wallet wallet = new Wallet(null, credentials.getAddress(), Numeric.encodeQuantity(ecKeyPair.getPrivateKey()),  Numeric.encodeQuantity(ecKeyPair.getPublicKey()));
+
+        String json = null;
+        WalletFile walletFile = null;
+        try {
+            walletFile = WalletUtils.createWalletFile(passwd, ecKeyPair, false);
+            json = WalletUtils.objectMapper.writeValueAsString(walletFile);
+        } catch (CipherException e) {
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        Wallet wallet = new Wallet(null, credentials.getAddress(), Numeric.encodeQuantity(ecKeyPair.getPrivateKey()),  Numeric.encodeQuantity(ecKeyPair.getPublicKey()),json);
         wallet.setWalletName(name);
         importWalletListener.importSuccess(wallet);
 
     }
+
+
 
 
 

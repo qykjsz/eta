@@ -39,7 +39,7 @@ import static org.web3j.crypto.Keys.PRIVATE_KEY_LENGTH_IN_HEX;
  * @author Angus
  */
 public class WalletUtils {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    public static final ObjectMapper objectMapper = new ObjectMapper();
 
     static {
         objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
@@ -186,7 +186,6 @@ public class WalletUtils {
         String json = objectMapper.writeValueAsString(walletFile);
         String privateKey = EthUtils.getPrivateKey(ecKeyPair);
         String publicKey = EthUtils.getPublicKey(ecKeyPair);
-
         return new Wallet(mnemonic, EthUtils.getAddress(ecKeyPair), privateKey, publicKey, json);
     }
 

@@ -1,5 +1,7 @@
 package com.develop.wallet.eth;
 
+import org.web3j.crypto.WalletFile;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +14,37 @@ public class Wallet implements Serializable {
     private String publicKey;
     private String keystore;
     private String walletName;
+    private String coinType;
+    private Boolean isMakeCopy;
+    private String walletFile;
+
+
+    public String getWalletFile() {
+        return walletFile;
+    }
+
+    public void setWalletFile(String walletFile) {
+        this.walletFile = walletFile;
+    }
+
+    public Boolean getMakeCopy() {
+        if (isMakeCopy==null){
+            isMakeCopy=false;
+        }
+        return isMakeCopy;
+    }
+
+    public void setMakeCopy(Boolean makeCopy) {
+        isMakeCopy = makeCopy;
+    }
+
+    public String getCoinType() {
+        return "ETH";
+    }
+
+    public void setCoinType(String coinType) {
+        this.coinType = coinType;
+    }
 
     public String getWalletName() {
         return walletName;
@@ -44,6 +77,8 @@ public class Wallet implements Serializable {
         this(mnemonic, address, privateKey, publicKey);
         this.keystore = keystore;
     }
+
+
 
     public String getMnemonic() {
         return mnemonic;
