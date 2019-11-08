@@ -55,7 +55,7 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ImportByCommemorationActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ImportByKeystoreActivity"/>
         <service android:name="com.qingyun.mvpretrofitrx.mvp.weight.dialog.CommonDialogService" />
-
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity"/>
     </application>
 
 </manifest>

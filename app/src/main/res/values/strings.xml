@@ -175,4 +175,7 @@
     <string name="comme_complete">请先完成助记词顺序记忆</string>
     <string name="makecopy_success">备份成功</string>
     <string name="makecopy_failure">助记词顺序错误</string>
+    <string name="had_make_copy">已备份</string>
+    <string name="transfer_success">转账成功</string>
+    <string name="add_wallet">添加钱包</string>
 </resources>

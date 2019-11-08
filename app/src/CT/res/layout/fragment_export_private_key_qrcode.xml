@@ -21,7 +21,9 @@
 
     <TextView
         android:id="@+id/textView62"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         android:text="@string/tips_export_privite_key_qrcode_1"
@@ -42,7 +44,9 @@
 
     <TextView
         android:id="@+id/textView64"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         android:text="@string/tips_export_privite_key_qrcode_2"
@@ -71,8 +75,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line1">
 
+
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/btn_eye"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_50"
@@ -83,7 +88,7 @@
             app:srcCompat="@mipmap/dcsy_eye" />
 
         <TextView
-            android:id="@+id/textView59"
+            android:id="@+id/btn_visiable"
             style="@style/main_btn"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_29"
@@ -97,6 +102,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+
+            />
+
     </android.support.constraint.ConstraintLayout>
 
 

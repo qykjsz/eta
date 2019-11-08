@@ -35,9 +35,9 @@
         android:layout_marginStart="@dimen/dp_10"
         android:textSize="@dimen/sp_15"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView16"
-        app:layout_constraintStart_toEndOf="@+id/imageView16"
-        app:layout_constraintTop_toTopOf="@+id/imageView16" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_copy"
+        app:layout_constraintStart_toEndOf="@+id/btn_copy"
+        app:layout_constraintTop_toTopOf="@+id/btn_copy" />
 
     <TextView
         android:id="@+id/tv_address"

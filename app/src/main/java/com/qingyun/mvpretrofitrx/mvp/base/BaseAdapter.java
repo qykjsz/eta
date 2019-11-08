@@ -22,6 +22,10 @@ public abstract class BaseAdapter<T extends Object, VH extends RecyclerView.View
     private List<T> list;
 
 
+    public int getSelectPosition() {
+        return selectPosition;
+    }
+
     private List<T> selectItems = new ArrayList<>();
 
     private SparseBooleanArray mCheckStates = new SparseBooleanArray();

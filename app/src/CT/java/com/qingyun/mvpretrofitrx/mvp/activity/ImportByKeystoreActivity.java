@@ -10,14 +10,18 @@ import com.develop.wallet.eth.WalletManager;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.ObservableTransformer;
 
-public class ImportByKeystoreActivity extends BaseActivity {
+public class ImportByKeystoreActivity extends BaseActivity<WalletAssetContact.View,WalletAssetContact.Presenter> implements  WalletAssetContact.View{
     @BindView(R.id.et_content)
     EditText etContent;
     @BindView(R.id.et_wallet_name)
@@ -51,14 +55,15 @@ public class ImportByKeystoreActivity extends BaseActivity {
     }
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public WalletAssetContact.Presenter createPresenter() {
+        return new WalletAssetPresenter(this);
     }
 
     @Override
-    public BaseView createView() {
-        return null;
+    public WalletAssetContact.View createView() {
+        return this;
     }
+
 
     @Override
     public void init() {
@@ -83,12 +88,29 @@ public class ImportByKeystoreActivity extends BaseActivity {
         WalletManager.importWalletByKeystore(etKeystorePassword.getText().toString(), etContent.getText().toString(), etWalletName.getText().toString(), new WalletManager.ImportWalletListener() {
             @Override
             public void importSuccess(Wallet wallet) {
-                finish();
+                getPresenter().addWallet(wallet.getAddress());
                 ApplicationUtil.setCurrentWallet(wallet);
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                ApplicationUtil.addWallet(wallet);
+
             }
         });
+    }
+
+    @Override
+    public void getWalletInfoSuccess(AssetResponse assetResponse) {
+
+    }
+
+    @Override
+    public void addWalletSuccess() {
+        finish();
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+        return this.bindToLifecycle();
     }
 }

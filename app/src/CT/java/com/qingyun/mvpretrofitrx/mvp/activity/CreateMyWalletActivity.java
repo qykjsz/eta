@@ -108,9 +108,12 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
             @Override
             public void run() {
                 Wallet wallet = WalletManager.generateWalletAddress(etWalletName.getText().toString());
+                wallet = WalletManager.generateWalletKeystore(etPassword.getText().toString(),wallet.getMnemonic());
                 Log.e("------------", wallet.getAddress());
                 Log.e("------------", wallet.getPrivateKey());
+                wallet.setWalletName(etWalletName.getText().toString());
                 ApplicationUtil.setCurrentWallet(wallet);
+                ApplicationUtil.addWallet(wallet);
                 EventBus.getDefault().post(wallet);
 //                Wallet wallet1 = WalletManager.generateWalletKeystore(etPassword.getText().toString(), wallet.getMnemonic());
                 handler.sendEmptyMessage(1);

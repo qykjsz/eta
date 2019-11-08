@@ -2,12 +2,20 @@ package com.qingyun.mvpretrofitrx.mvp.entity;
 
 public class Asset {
     private String name;
+    private String img;
     private String number;
     private String usdtnumber;
-    private String proportion;
 
     public String getName() {
         return name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public void setName(String name) {
@@ -28,14 +36,6 @@ public class Asset {
 
     public void setUsdtnumber(String usdtnumber) {
         this.usdtnumber = usdtnumber;
-    }
-
-    public String getProportion() {
-        return proportion;
-    }
-
-    public void setProportion(String proportion) {
-        this.proportion = proportion;
     }
 
 }

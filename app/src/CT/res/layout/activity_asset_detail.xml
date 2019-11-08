@@ -20,11 +20,11 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/dp_20"
             android:padding="@dimen/dp_padding_x_min"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/back" />
+            app:srcCompat="@mipmap/back_not_header" />
 
         <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
 
@@ -150,13 +150,13 @@
             app:layout_constraintTop_toBottomOf="@+id/ly_asset" />
 
         <TextView
-            android:id="@+id/textView51"
+            android:id="@+id/tv_wallet_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/textView21"
-            app:layout_constraintEnd_toStartOf="@+id/imageView10"
+            app:layout_constraintEnd_toStartOf="@+id/btn_copy_publish_key"
             app:layout_constraintStart_toEndOf="@+id/textView21"
             app:layout_constraintTop_toTopOf="@+id/textView21" />
 
@@ -172,14 +172,14 @@
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
         <TextView
-            android:id="@+id/textView53"
+            android:id="@+id/tv_publish_key"
             android:layout_width="0dp"
             android:singleLine="true"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_10"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/textView52"
-            app:layout_constraintEnd_toStartOf="@+id/imageView10"
+            app:layout_constraintEnd_toStartOf="@+id/btn_copy_publish_key"
             app:layout_constraintStart_toEndOf="@+id/textView52"
             app:layout_constraintTop_toTopOf="@+id/textView52" />
 
@@ -228,13 +228,13 @@
             tools:layout_editor_absoluteX="32dp" />
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/btn_copy_publish_key"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView53"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_publish_key"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/dp_padding_x_min"
-            app:layout_constraintTop_toTopOf="@+id/textView53"
+            app:layout_constraintTop_toTopOf="@+id/tv_publish_key"
             app:srcCompat="@mipmap/zc_fuzhi" />
 
         <TextView

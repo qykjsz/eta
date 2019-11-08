@@ -28,11 +28,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/iv_code"
             android:layout_width="@dimen/dp_179"
             android:layout_height="@dimen/dp_179"
             android:layout_marginTop="15dp"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,29 +39,17 @@
             app:srcCompat="@mipmap/app_icon" />
 
         <TextView
-            android:id="@+id/textView46"
+            android:id="@+id/btn_save_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/setting_price"
-            android:textColor="@color/main_blue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView47"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
-
-        <TextView
-            android:id="@+id/textView47"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/save_img"
             android:textColor="@color/main_blue"
-            app:layout_constraintBottom_toBottomOf="@+id/textView46"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView46"
-            app:layout_constraintTop_toTopOf="@+id/textView46" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_code" />
 
 
     </android.support.constraint.ConstraintLayout>
@@ -88,7 +75,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView48"
+            android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
@@ -102,7 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
         <TextView
-            android:id="@+id/textView49"
+            android:id="@+id/btn_copy_address"
             style="@style/main_btn"
             android:layout_width="@dimen/dp_0"
             android:layout_marginBottom="@dimen/dp_20"

@@ -2,16 +2,27 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.CopyUtils;
 import com.senon.mvpretrofitrx.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AssetDetailActivity extends BaseActivity {
+    @BindView(R.id.tv_income_today)
+    TextView tvIncomeToday;
+    @BindView(R.id.tv_wallet_name)
+    TextView tvWalletName;
+    @BindView(R.id.tv_publish_key)
+    TextView tvPublishKey;
+
     @Override
     protected String getTitleRightText() {
         return null;
@@ -49,7 +60,8 @@ public class AssetDetailActivity extends BaseActivity {
 
     @Override
     public void init() {
-
+        tvPublishKey.setText(ApplicationUtil.getCurrentWallet().getPublicKey());
+        tvWalletName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
     }
 
     @Override
@@ -71,6 +83,20 @@ public class AssetDetailActivity extends BaseActivity {
             case R.id.btn_export_key_store:
                 startActivity(ExportKeystoreActivity.class);
 
+                break;
+        }
+    }
+
+    @OnClick({R.id.btn_back, R.id.btn_visiable, R.id.btn_copy_publish_key})
+    public void onClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                finish();
+                break;
+            case R.id.btn_visiable:
+                break;
+            case R.id.btn_copy_publish_key:
+                CopyUtils.copy(getContext(),tvPublishKey.getText().toString());
                 break;
         }
     }

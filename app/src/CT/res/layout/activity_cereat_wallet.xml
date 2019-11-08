@@ -24,18 +24,17 @@
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/dp_20"
                 android:padding="@dimen/dp_padding_x_min"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/back" />
+                app:srcCompat="@mipmap/back_not_header" />
 
             <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
-
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/asset_detail"
+                android:text="@string/add_wallet"
                 android:textColor="@color/color_FFFFFF"
                 android:textSize="@dimen/sp_17"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_back"
@@ -72,7 +71,7 @@
             <android.support.constraint.ConstraintLayout
                 app:layout_constraintTop_toBottomOf="@+id/textView82"
                 android:layout_marginTop="@dimen/dp_padding_x_min"
-                android:id="@+id/btn_import_wallet"
+                android:id="@+id/btn_import_by_private_key"
                 android:layout_width="@dimen/dp_0"
                 android:background="@mipmap/sy_yykuang_02"
                 android:layout_height="@dimen/dp_70"
@@ -134,7 +133,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_import_wallet">
+                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_private_key">
 
 
                 <ImageView
@@ -349,7 +348,7 @@
 
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/constraintLayout8"
+                android:id="@+id/btn_create"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_70"
                 android:layout_marginStart="@dimen/dp_padding_x_min"

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_120"
+    android:background="@mipmap/qblb_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+        <TextView
+            android:id="@+id/current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current"
+            android:paddingStart="@dimen/dp_6"
+            android:paddingEnd="@dimen/dp_6"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/sp_10"
+            android:layout_marginStart="@dimen/dp_padding_x_min"
+            android:textColor="@color/main_blue"
+            android:background="@color/color_FFFFFF"
+            />
+
+
+
+        <TextView
+            android:id="@+id/tv_make_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_make_copy"
+            android:paddingStart="@dimen/dp_6"
+            android:paddingEnd="@dimen/dp_6"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/current"
+            android:layout_marginTop="@dimen/sp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textColor="@color/color_FFFFFF"
+            android:background="@drawable/bg_ffffff_round_5_sto"
+            />
+
+        <TextView
+            android:id="@+id/btn_wallet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_padding_x_min"
+            android:text="TextView"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintStart_toStartOf="@+id/current"
+            app:layout_constraintTop_toBottomOf="@+id/current" />
+
+        <TextView
+            android:id="@+id/tv_wallet_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_padding_x_min"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="TextView"
+            android:textColor="#B7BCDC"
+            android:textSize="@dimen/sp_11"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_copy"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/qblb_fuzhi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_wallet_address"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_wallet_address"
+            android:layout_marginEnd="@dimen/dp_padding_x_min"
+            tools:layout_editor_absoluteX="168dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:id="@+id/textView81"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cumtomer_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/main_blue"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_10"
+            tools:layout_editor_absoluteX="234dp"
+            tools:layout_editor_absoluteY="5dp" />
+
+</android.support.constraint.ConstraintLayout>

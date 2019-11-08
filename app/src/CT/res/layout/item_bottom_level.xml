@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_70"
+    android:background="@mipmap/sy_yykuang_02"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 

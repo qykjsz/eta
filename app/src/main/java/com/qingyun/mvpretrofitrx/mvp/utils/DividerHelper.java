@@ -32,7 +32,13 @@ public class DividerHelper {
                 .build();
     }
 
+    public static HorizontalDividerItemDecoration getPaddingDivider(Context context,int paddResId){
 
+        return new HorizontalDividerItemDecoration.Builder(context)
+                .color(context.getResources().getColor(R.color.trans))
+                .sizeResId(paddResId)
+                .build();
+    }
     public static HorizontalDividerItemDecoration getRankFragmentDivider(Context context){
 
         return new HorizontalDividerItemDecoration.Builder(context)

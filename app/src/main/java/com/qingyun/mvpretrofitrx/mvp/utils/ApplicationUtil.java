@@ -38,8 +38,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import skin.support.SkinCompatManager;
 import skin.support.constraint.app.SkinConstraintViewInflater;
@@ -81,16 +83,54 @@ public class ApplicationUtil extends Application implements Application.Activity
 
     public static void setCurrentWallet(Wallet wallet) {
         currentWallet = wallet;
-        SpUtils.setObjectToShare(getContext(),wallet,"wallet");
+        SpUtils.setObjectToShare(getContext(),wallet,"current_wallet");
     }
 
 
 
     public static Wallet getCurrentWallet() {
         if (currentWallet==null)        {
-            currentWallet = (Wallet) SpUtils.getObjectFromShare(getContext(),"wallet");
+            currentWallet = (Wallet) SpUtils.getObjectFromShare(getContext(),"current_wallet");
         }
         return currentWallet;
+    }
+
+
+
+
+    public static Map<String,List<Wallet>> getWallet(){
+
+       return (Map<String, List<Wallet>>) SpUtils.getObjectFromShare(getContext(),"wallet");
+    }
+
+    public static List<Wallet> getWalletBuyCoinType(String coinType){
+
+        Map<String,List<Wallet>> walletMap =   getWallet();
+        if (walletMap==null) return new ArrayList<>();
+        return walletMap.get(coinType)==null?new ArrayList<Wallet>():walletMap.get(coinType);
+    }
+
+
+
+
+    public static void addWallet(Wallet wallet) {
+        Map<String,List<Wallet>> walletMap = null;
+        List<Wallet> wallets = null;
+        if (SpUtils.getObjectFromShare(getContext(),"wallet")==null){
+            walletMap = new HashMap<>();
+            wallets = new ArrayList<>();
+            wallets.add(wallet);
+            walletMap.put(wallet.getCoinType(),wallets);
+        }else {
+            walletMap = (Map<String, List<Wallet>>) SpUtils.getObjectFromShare(getContext(),"wallet");
+            wallets =  walletMap.get(wallet.getCoinType());
+            if (wallets==null){
+                wallets = new ArrayList<>();
+            }
+            wallets.add(wallet);
+        }
+        walletMap.put(wallet.getCoinType(),wallets);
+        SpUtils.setObjectToShare(getContext(),walletMap,"wallet");
     }
 
 

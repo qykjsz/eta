@@ -20,11 +20,11 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/dp_20"
             android:padding="@dimen/dp_padding_x_min"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/back" />
+            app:srcCompat="@mipmap/back_not_header" />
 
         <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
 

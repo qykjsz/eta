@@ -48,7 +48,7 @@ public class ExportKeystoreActivity extends BaseActivity {
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.export_privite_key);
+        return getResources().getString(R.string.export_ketstore);
     }
 
     @Override

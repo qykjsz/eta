@@ -1,7 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
 import android.animation.Animator;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,10 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.develop.wallet.eth.Wallet;
 import com.develop.wallet.eth.WalletManager;
 import com.gongwen.marqueen.SimpleMarqueeView;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
+import com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetDetailActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.CreateWalletActivity;
@@ -28,24 +27,25 @@ import com.qingyun.mvpretrofitrx.mvp.activity.QuickExchangeActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.TransferActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetModleAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.CoinTypeAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.MyWalletAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetModle;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.CoinType;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
+import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
-
-import org.web3j.abi.datatypes.Int;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,16 @@ import per.goweii.anylayer.AnimHelper;
 import per.goweii.anylayer.AnyLayer;
 import per.goweii.anylayer.LayerManager;
 
-public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAssetContact.Presenter> implements WalletAssetContact.View {
+import static com.qingyun.mvpretrofitrx.mvp.entity.CoinType.BINANCE;
+import static com.qingyun.mvpretrofitrx.mvp.entity.CoinType.BOS;
+import static com.qingyun.mvpretrofitrx.mvp.entity.CoinType.COSMOS;
+import static com.qingyun.mvpretrofitrx.mvp.entity.CoinType.EOS;
+import static com.qingyun.mvpretrofitrx.mvp.entity.CoinType.ETH;
+import static com.qingyun.mvpretrofitrx.mvp.entity.CoinType.IOST;
+import static com.qingyun.mvpretrofitrx.mvp.entity.CoinType.MOAC;
+import static com.qingyun.mvpretrofitrx.mvp.entity.CoinType.Tron;
+
+public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletAssetContact.Presenter> implements WalletAssetContact.View {
     private static final int ETH_BLANCE = 1;
     @BindView(R.id.tv_name)
     TextView tvName;
@@ -90,18 +99,21 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAs
     Unbinder unbinder;
     AssetModleAdapter assetModleAdapter;
     AssetAdapter assetAdapter;
+    @BindView(R.id.progress)
+    MultistageProgress progress;
     private List<AssetModle> modleList;
     private List<Asset> assetList;
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            if (msg.what==ETH_BLANCE){
-                tvAsset.setText((String)msg.obj);
+            if (msg.what == ETH_BLANCE) {
+                tvAsset.setText((String) msg.obj);
             }
             return false;
         }
     });
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_asset;
@@ -120,8 +132,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAs
 
     @Override
     public void init() {
-        if (ApplicationUtil.getCurrentWallet()!=null)
-        getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
+
+        refreashData();
 
         new Thread(new Runnable() {
             @Override
@@ -134,7 +146,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAs
         }).start();
 
         tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
-        if ((SpUtils.getObjectFromShare(getContext(),"is_make_copy"))==null||((int)SpUtils.getObjectFromShare(getContext(),"is_make_copy"))!=1){
+        if ((SpUtils.getObjectFromShare(getContext(), "is_make_copy")) == null || ((int) SpUtils.getObjectFromShare(getContext(), "is_make_copy")) != 1) {
             DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.delete_wallet, R.string.beifen, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -162,10 +174,6 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAs
 
 
         assetList = new ArrayList<>();
-        assetList.add(new Asset());
-        assetList.add(new Asset());
-        assetList.add(new Asset());
-        assetList.add(new Asset());
 
         assetAdapter = new AssetAdapter(getContext(), assetList);
         assetAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
@@ -179,6 +187,13 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAs
         rcyWallet.setAdapter(assetAdapter);
         refreashView(assetList, rcyWallet);
 
+    }
+
+    @Override
+    public void refreashData() {
+        super.refreashData();
+        if (ApplicationUtil.getCurrentWallet() != null)
+            getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
     }
 
     @Override
@@ -210,9 +225,12 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAs
         unbinder.unbind();
     }
 
-    @OnClick({R.id.ly_asset, R.id.btn_transfer, R.id.btn_get_money, R.id.btn_shan_dui, R.id.btn_packet, R.id.btn_scan, R.id.btn_visiable, R.id.btn_more_info})
+    @OnClick({R.id.btn_add_coin,R.id.ly_asset, R.id.btn_transfer, R.id.btn_get_money, R.id.btn_shan_dui, R.id.btn_packet, R.id.btn_scan, R.id.btn_visiable, R.id.btn_more_info})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_add_coin:
+                startActivity(AddCoinActivity.class);
+                break;
             case R.id.ly_asset:
                 startActivity(AssetDetailActivity.class);
                 break;
@@ -261,13 +279,55 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAs
                     @Override
                     public void bind(AnyLayer anyLayer) {
                         // TODO 绑定数据
-                       ImageView addWallet =  anyLayer.getView(R.id.btn_aa_wallet);
+                        ImageView addWallet = anyLayer.getView(R.id.btn_aa_wallet);
+                        RecyclerView recyclerView = anyLayer.getView(R.id.recyclerView2);
+                        RecyclerView rcyWallet = anyLayer.getView(R.id.rcy_wallet);
+                        List<CoinType> list = new ArrayList<>();
+                        final TextView tv_wallet_name = anyLayer.getView(R.id.tv_wallet_name);
+
+
+                        List<Wallet> mylist = new ArrayList<>();
+                        final MyWalletAdapter myWalletAdapter = new MyWalletAdapter(getContext(),mylist);
+                        rcyWallet.setLayoutManager(new LinearLayoutManager(getContext()));
+                        rcyWallet.addItemDecoration(DividerHelper.getPaddingDivider(getContext(),R.dimen.dp_20));
+                        rcyWallet.setAdapter(myWalletAdapter);
+
+
+
+                        list.add(new CoinType(R.mipmap.qbgl_eos,R.mipmap.qbgl_eos_xz,EOS));
+                        list.add(new CoinType(R.mipmap.qbgl_eth,R.mipmap.qbgl_eth_xz,ETH));
+                        list.add(new CoinType(R.mipmap.qbgl_iost,R.mipmap.qbgl_iost_xz,IOST));
+                        list.add(new CoinType(R.mipmap.qbgl_tron,R.mipmap.qbgl_tron_xz,Tron));
+                        list.add(new CoinType(R.mipmap.qbgl_binance,R.mipmap.qbgl_binance_xz,BINANCE));
+                        list.add(new CoinType(R.mipmap.qbgl_bos,R.mipmap.qbgl_bos_xz,BOS));
+                        list.add(new CoinType(R.mipmap.qbgl_cosmos,R.mipmap.qbgl_cosmos_xz,COSMOS));
+                        list.add(new CoinType(R.mipmap.qbgl_moac,R.mipmap.qbgl_moac_xz,MOAC));
+
+                        CoinTypeAdapter coinTypeAdapter = new CoinTypeAdapter(getContext(),list);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recyclerView.setAdapter(coinTypeAdapter);
+                        coinTypeAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(List list, int position) {
+
+                                tv_wallet_name.setText(((CoinType)list.get(position)).getCoinType());
+                                List<Wallet> mlist = (List<Wallet>) ApplicationUtil.getWalletBuyCoinType(((CoinType) list.get(position)).getCoinType());
+                                myWalletAdapter.notifyDataSetChanged(mlist);
+
+                            }
+                        });
+                        coinTypeAdapter.setDefaultSelectItem(1);
+                        tv_wallet_name.setText(ETH);
+                        List<Wallet> mlist = (List<Wallet>) ApplicationUtil.getWalletBuyCoinType(((CoinType) list.get(1)).getCoinType());
+                        myWalletAdapter.notifyDataSetChanged(mlist);
                         addWallet.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 startActivity(CreateWalletActivity.class);
                             }
                         });
+
+
 
                     }
                 })
@@ -276,7 +336,14 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View,WalletAs
 
     @Override
     public void getWalletInfoSuccess(AssetResponse assetResponse) {
-
+        assetList = assetResponse.getGlod();
+        tvAsset.setText(assetResponse.getAllnumber());
+        assetAdapter.notifyDataSetChanged(assetList);
+        refreashView(assetList, rcyWallet);
+//        int[] colors = new int[assetResponse.getProportion().];
+//        int[] colors = new int[]{assetResponse.getProportion()};
+//        float[] weights;
+//        progress.setColors(colors,weights);
     }
 
     @Override

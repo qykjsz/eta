@@ -9,6 +9,8 @@ import com.develop.wallet.eth.WalletManager;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
@@ -26,6 +28,7 @@ public class TransferImmediateActivity extends BaseActivity {
     TextView tvMining;
     @BindView(R.id.tv_eth_banlance)
     TextView tvEthBanlance;
+
 
     @Override
     protected String getTitleRightText() {
@@ -74,16 +77,19 @@ public class TransferImmediateActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_contact, R.id.btn_all})
+    @OnClick({R.id.btn_contact, R.id.btn_all,R.id.btn_transfer})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_contact:
                 break;
             case R.id.btn_all:
                 break;
-            case  R.id.btn_transfer:
-
-            break;
+            case R.id.btn_transfer:
+                WalletManager.sendTransactionByPrivateKey(ApplicationUtil.getCurrentWallet().getAddress(),
+                        ApplicationUtil.getCurrentWallet().getPrivateKey(), tvAssdrss.getText().toString(),tvAmount.getText().toString()
+                );
+                ToastUtil.showShortToast(R.string.transfer_success);
+                break;
         }
     }
 }

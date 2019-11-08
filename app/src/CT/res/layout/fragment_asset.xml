@@ -191,6 +191,17 @@
                     app:layout_constraintTop_toTopOf="@+id/textView7" />
 
 
+                <com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress
+                    android:id="@+id/progress"
+                    android:layout_width="@dimen/dp_0"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="@dimen/dp_4" />
+
             </android.support.constraint.ConstraintLayout>
 
             <ImageView
@@ -276,7 +287,7 @@
                 android:background="@drawable/bg_f5f5f5_round_12"
                 android:drawableStart="@mipmap/sy_sousuo"
                 android:paddingStart="@dimen/dp_10"
-                app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                app:layout_constraintEnd_toStartOf="@+id/btn_add_coin"
                 android:paddingEnd="@dimen/dp_10"
                 android:hint="@string/search"
                 android:layout_marginEnd="@dimen/dp_8"
@@ -287,7 +298,7 @@
                 />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/btn_add_coin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"

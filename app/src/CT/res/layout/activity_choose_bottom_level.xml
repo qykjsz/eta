@@ -31,7 +31,7 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/asset_detail"
+            android:text="@string/choose_bottom"
             android:textColor="@color/color_FFFFFF"
             android:textSize="@dimen/sp_17"
             app:layout_constraintBottom_toBottomOf="@+id/btn_back"
@@ -55,6 +55,9 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rcy"
+            android:layout_marginTop="@dimen/dp_padding_x_min"
+            android:layout_marginStart="@dimen/dp_padding_x_min"
+            android:layout_marginEnd="@dimen/dp_padding_x_min"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -109,9 +109,9 @@
             android:text="@string/format_amount"
             android:textColor="@color/color_FFFFFF"
             android:textSize="@dimen/sp_20"
-            app:layout_constraintEnd_toEndOf="@+id/textView47"
-            app:layout_constraintStart_toStartOf="@+id/textView47"
-            app:layout_constraintTop_toBottomOf="@+id/textView47" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_save_code"
+            app:layout_constraintStart_toStartOf="@+id/btn_save_code"
+            app:layout_constraintTop_toBottomOf="@+id/btn_save_code" />
 
 
     </android.support.constraint.ConstraintLayout>
