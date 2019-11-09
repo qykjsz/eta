@@ -151,7 +151,7 @@
         <item name="android:src">@mipmap/wo_yjt</item>
     </style>
 
-    <style name="WrapWrap.ImageView_bank_gd_icon">wd_gd_icon
+    <style name="WrapWrap.ImageView_bank_gd_icon">
 
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>

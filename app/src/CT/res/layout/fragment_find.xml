@@ -41,11 +41,76 @@
         android:layout_marginTop="-30dp"
         android:background="@drawable/bg_ffffff_top_round_25">
 
-        <TextView
-            android:id="@+id/tv_ic"
+        <ImageView
+            style="@style/MatchWrap"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:src="@mipmap/fx_banner" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_ffe9ebea"
-            android:textSize="@dimen/sp_18" />
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20">
+
+            <TextView
+                style="@style/WrapWrap"
+                android:text="我的DApp"
+                android:textColor="@color/color_FF333333" />
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_toLeftOf="@+id/iv"
+                android:text="更多"
+                android:textColor="@color/color_FF999999" />
+
+            <ImageView
+                android:id="@+id/iv"
+                style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcy_modle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_10" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20">
+
+            <TextView
+                style="@style/WrapWrap"
+                android:text="精选DApp"
+                android:textColor="@color/color_FF333333" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcy_modle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_10" />
+
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:text="官方精选，不容错过"
+                android:textColor="@color/color_FF999999" />
+
+
+        </RelativeLayout>
+
+
     </LinearLayout>
 </LinearLayout>
