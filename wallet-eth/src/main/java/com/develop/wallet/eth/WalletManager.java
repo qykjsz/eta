@@ -1,5 +1,6 @@
 package com.develop.wallet.eth;
 
+import android.app.Application;
 import android.os.Environment;
 import android.util.Log;
 
@@ -77,7 +78,6 @@ public class WalletManager {
 
     private static Web3j web3j;
     private static Admin admin;
-
     private static ExecutorService mExecutorService;
 
     public static Web3j getWeb3j() {
@@ -168,10 +168,11 @@ public class WalletManager {
      * @param mnemonic
      * @return
      */
-    public static Wallet generateWalletKeystore(String password, String mnemonic) {
+    public static Wallet generateWalletKeystore(String password, String mnemonic,File destination) {
         try {
 
-            Wallet wallet = WalletUtils.generateBip32Wallet(password, mnemonic);
+            Wallet wallet =  WalletUtils.generateBip32WalletFile(password,destination,mnemonic);
+//            Wallet wallet = WalletUtils.generateBip32Wallet(password, mnemonic);
             if (wallet != null) {
                 log(String.format("generateWalletKeystore: mnemonic = %s, password = %s, privateKey = %s, keystore = %s", mnemonic, password, wallet.getPrivateKey(), wallet.getKeystore()));
             }

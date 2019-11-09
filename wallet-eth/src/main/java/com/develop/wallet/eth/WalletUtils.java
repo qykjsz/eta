@@ -93,6 +93,9 @@ public class WalletUtils {
         return fileName;
     }
 
+
+
+
     /**
      * 生成keystore
      *
@@ -172,6 +175,30 @@ public class WalletUtils {
         wallet.setFilename(fileName);
         return wallet;
     }
+
+
+
+    /**
+     * 通过助记词 bip32 生成钱包 (生成keystore文件)
+     *
+     * @param password
+     * @return
+     * @throws CipherException
+     * @throws IOException
+     */
+    public static Wallet generateBip32WalletFile(String password, File destinationDirectory,String mnemonic)
+            throws CipherException, IOException {
+        ECKeyPair ecKeyPair = generateBip32ECKeyPair(mnemonic);
+        WalletFile walletFile = createWalletFile(password, ecKeyPair, false);
+        String json = objectMapper.writeValueAsString(walletFile);
+        String fileName = generateWalletFile(password, ecKeyPair, destinationDirectory, false);
+        Wallet wallet = new Wallet(mnemonic, EthUtils.getAddress(ecKeyPair), EthUtils.getPrivateKey(ecKeyPair), EthUtils.getPublicKey(ecKeyPair),json);
+        wallet.setFilename(fileName);
+        return wallet;
+    }
+
+
+
 
     /**
      * 通过助记词 bip32 生成钱包 (不创建文件，只返回keystore数据)
