@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchMatch.Vertical"
+    android:background="@color/color_FFFFFF"
+    tools:context="com.qingyun.mvpretrofitrx.mvp.activity.SupportActivity">
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="钱包操作" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="区块链知识" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+</LinearLayout>

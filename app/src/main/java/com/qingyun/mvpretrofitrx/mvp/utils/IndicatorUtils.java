@@ -25,7 +25,7 @@ import java.util.List;
 
 public class IndicatorUtils {
 
-    public static void initMagicIndicator3(MagicIndicator magicIndicator,final ViewPager vp, final List<String> titles, final Activity activity) {
+    public static void initMagicIndicator3(MagicIndicator magicIndicator, final ViewPager vp, final List<String> titles, final Activity activity) {
         CommonNavigator commonNavigator = new CommonNavigator(activity);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
 
@@ -38,8 +38,7 @@ public class IndicatorUtils {
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
                 simplePagerTitleView.setNormalColor(activity.getResources().getColor(R.color.color_text_1));
-                simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX,(float)activity.getResources().getDimensionPixelSize(R.dimen.sp_16));
-
+                simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, (float) activity.getResources().getDimensionPixelSize(R.dimen.sp_16));
                 simplePagerTitleView.setSelectedColor(activity.getResources().getColor(R.color.color_main_text));
                 simplePagerTitleView.setText(titles.get(index));
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
@@ -66,13 +65,12 @@ public class IndicatorUtils {
 
 
     /**
-     *
      * @param vp
      * @param titles
      * @param activity
      * @param magicIndicator
      * @param defaultPosition 默认选中index
-     * @param indiW   下标长度
+     * @param indiW           下标长度
      */
 
     public static void initMagicIndicator3M(final ViewPager vp, final List<String> titles, final Activity activity, MagicIndicator magicIndicator, int defaultPosition, final int indiW) {
@@ -97,12 +95,14 @@ public class IndicatorUtils {
 
                     @Override
                     public void onSelected(int index, int totalCount) {
-                        titleText.setTextColor(activity.getResources().getColor(R.color.main_blue));
+                        titleText.setTextSize(20);
+                        titleText.setTextColor(activity.getResources().getColor(R.color.color_FFFFFF));
                     }
 
                     @Override
                     public void onDeselected(int index, int totalCount) {
-                        titleText.setTextColor(activity.getResources().getColor(R.color.color_999999));
+                        titleText.setTextSize(14);
+                        titleText.setTextColor(activity.getResources().getColor(R.color.color_FFCDD6FD));
 
                     }
 
@@ -135,7 +135,7 @@ public class IndicatorUtils {
                 linePagerIndicator.setMode(LinePagerIndicator.MODE_EXACTLY);
                 linePagerIndicator.setLineWidth(UIUtil.dip2px(context, indiW));
                 linePagerIndicator.setLineHeight(activity.getResources().getDimensionPixelSize(R.dimen.dp_2));
-                linePagerIndicator.setColors(activity.getResources().getColor(R.color.main_blue));
+                linePagerIndicator.setColors(activity.getResources().getColor(R.color.color_FFFFFF));
                 return linePagerIndicator;
             }
         });
@@ -143,7 +143,6 @@ public class IndicatorUtils {
         magicIndicator.onPageSelected(defaultPosition);
         ViewPagerHelper.bind(magicIndicator, vp);
     }
-
 
 
 }

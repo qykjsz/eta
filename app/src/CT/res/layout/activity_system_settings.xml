@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchMatch.Vertical"
+    tools:context="com.qingyun.mvpretrofitrx.mvp.activity.SystemSettingsActivity">
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="语言选择" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="节点设置" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="货币单位" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="推送通知" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="红涨绿跌" />
+
+        <Switch
+            style="@style/WrapWrap"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:checked="true"
+            android:textColor="@color/color_FFFFFF"
+            android:thumb="@drawable/switch_white_circle_selector"
+            android:track="@drawable/switch_selector_green" />
+
+
+    </RelativeLayout>
+</LinearLayout>

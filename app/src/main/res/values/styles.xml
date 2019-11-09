@@ -15,8 +15,10 @@
         <item name="android:layout_marginRight">@dimen/dp_padding_x_min</item>
         <item name="android:background">@color/color_line</item>
     </style>
+
     <style name="MyDialogStyle1">
-        <item name="android:windowBackground">@android:color/transparent</item><!-- 设置dialog背景为透明背景 -->
+        <item name="android:windowBackground">@android:color/transparent
+        </item><!-- 设置dialog背景为透明背景 -->
         <item name="android:backgroundDimEnabled">false</item><!-- 设置dialog背景不变暗 -->
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -56,5 +58,124 @@
         <item name="android:background">@color/color_line</item>
     </style>
 
+    <style name="TextColor">
+        <item name="android:textColor">@color/black</item>
+    </style>
 
+    <!-- 先宽度****后高度   的匹配-->
+    <style name="WrapMatch" parent="TextColor">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="WrapWrap" parent="TextColor">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchWrap" parent="TextColor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchMatch" parent="TextColor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+
+    <!-- 先宽度****后高度   的比重-->
+
+    <style name="AutoWrap" parent="TextColor">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WrapAuto" parent="TextColor">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+
+    <!-- 先宽度****后高度   的  水平或垂直  -->
+
+    <style name="WrapWrap.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="WrapWrap.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MatchWrap.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="MatchWrap.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MatchMatch.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="MatchMatch.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+
+    <!-- 先宽度****后高度   的比重  的  水平或垂直-->
+
+
+    <style name="AutoWrap.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AutoWrap.horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="WrapAuto.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+    <style name="WrapWrap.ImageView_bank">wd_gd_icon
+
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginEnd">@dimen/dp_20</item>
+        <item name="android:layout_marginRight">@dimen/dp_20</item>
+        <item name="android:src">@mipmap/wo_yjt</item>
+    </style>
+
+    <style name="WrapWrap.ImageView_bank_gd_icon">wd_gd_icon
+
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginEnd">@dimen/dp_20</item>
+        <item name="android:layout_marginRight">@dimen/dp_20</item>
+        <item name="android:src">@mipmap/wd_gd_icon</item>
+    </style>
+    <!--      android:layout_width="@dimen/dp_44"
+                        android:layout_height="@dimen/dp_44"-->
+    <style name="wo_iv">
+        <item name="android:layout_width">@dimen/dp_44</item>
+        <item name="android:layout_height">@dimen/dp_44</item>
+    </style>
+    <style name="wo_iv_19">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">@dimen/dp_19</item>
+        <item name="android:layout_height">@dimen/dp_19</item>
+    </style>
+
+
+    <style name="View_xian">
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:background">#FFEBEBEB</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+    </style>
 </resources>

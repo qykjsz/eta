@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchMatch.Vertical"
+    android:background="@color/color_FFFFFF"
+    tools:context="com.qingyun.mvpretrofitrx.mvp.activity.AboutUsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_175">
+
+        <ImageView
+            android:id="@+id/tv_ic"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/color_FF1758FB" />
+
+        <TextView
+            android:id="@+id/tv_app"
+            style="@style/WrapWrap"
+            android:layout_below="@+id/tv_ic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="app" />
+
+        <TextView
+            style="@style/WrapWrap"
+            android:layout_below="@+id/tv_app"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="关于此App的简介"
+            android:textColor="@color/color_FF999999" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginTop="@dimen/dp_45" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="使用协议" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="隐私条款" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+            android:text="版本日志" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            style="@style/WrapWrap"
+
+            android:text="联系我们" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        style="@style/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qingyun.mvpretrofitrx.mvp.view.MyGridView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/public_grid_view"
+    style="@style/MatchWrap"
+    android:background="@color/white"
+    android:listSelector="@color/white"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:scrollbars="none">
+
+
+</com.qingyun.mvpretrofitrx.mvp.view.MyGridView>

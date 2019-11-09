@@ -1,6 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MatchMatch.Vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        style="@style/MatchWrap.Horizontal"
+        android:background="@mipmap/wo_top_bg">
+
+        <ImageView
+            android:id="@+id/iv_he"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_30"
+            android:background="@color/white" />
+
+        <RelativeLayout
+            style="@style/MatchWrap"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_toRightOf="@+id/iv_he"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/WrapWrap"
+                android:text="一条咸鱼"
+                android:textColor="@color/color_FFFFFF" />
+
+            <TextView
+                android:id="@+id/tv_phe"
+                style="@style/WrapWrap"
+                android:layout_below="@+id/tv_name"
+                android:text="UID:188 *** 6554"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView style="@style/WrapWrap.ImageView_bank" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/MatchMatch.Vertical"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/bg_ffffff_top_round_25">
+
+        <LinearLayout
+            android:id="@+id/ll_top"
+            style="@style/MatchWrap.Horizontal"
+            android:layout_marginTop="@dimen/dp_30">
+
+            <LinearLayout
+                android:id="@+id/ll_Asset_overview"
+                style="@style/AutoWrap.Vertical"
+                android:gravity="center">
+
+                <ImageView
+                    style="@style/wo_iv"
+                    android:src="@mipmap/wo_zi_1" />
+
+                <TextView
+                    style="@style/WrapWrap"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/Asset_overview"
+                    android:textColor="@color/color_FF333333" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_Management_of_the_purse"
+                style="@style/AutoWrap.Vertical"
+                android:gravity="center">
+
+                <ImageView
+                    style="@style/wo_iv"
+                    android:src="@mipmap/wo_guan_2" />
+
+                <TextView
+                    style="@style/WrapWrap"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/Management_of_the_purse"
+                    android:textColor="@color/color_FF333333" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_trading_record"
+                style="@style/AutoWrap.Vertical"
+                android:gravity="center">
+
+                <ImageView
+                    style="@style/wo_iv"
+                    android:src="@mipmap/wo_jiao_3" />
+
+                <TextView
+                    style="@style/WrapWrap"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/trading_record"
+                    android:textColor="@color/color_FF333333" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_phone"
+            style="@style/MatchWrap.Horizontal"
+            android:layout_below="@+id/ll_top"
+            android:layout_marginStart="@dimen/dp_19"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginEnd="@dimen/dp_19">
+
+            <ImageView
+                style="@style/wo_iv_19"
+                android:src="@mipmap/wo_lian_4" />
+
+            <RelativeLayout
+                style="@style/MatchWrap"
+                android:layout_marginStart="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    style="@style/WrapWrap"
+                    android:layout_centerVertical="true"
+                    android:text="@string/contact"
+                    android:textColor="@color/color_FF333333" />
+
+                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+                <View
+                    style="@style/View_xian"
+                    android:layout_below="@+id/tv_phone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_yao_qing"
+            style="@style/MatchWrap.Horizontal"
+            android:layout_below="@+id/ll_phone"
+            android:layout_marginStart="@dimen/dp_19"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginEnd="@dimen/dp_19">
+
+            <ImageView
+                style="@style/wo_iv_19"
+                android:src="@mipmap/wo_yao_5" />
+
+            <RelativeLayout
+                style="@style/MatchWrap"
+                android:layout_marginStart="@dimen/dp_10">
+
+                <TextView
+
+                    android:id="@+id/tv_invite"
+                    style="@style/WrapWrap"
+                    android:layout_centerVertical="true"
+                    android:text="@string/invite_friends"
+                    android:textColor="@color/color_FF333333" />
+
+                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+                <View
+                    style="@style/View_xian"
+                    android:layout_below="@+id/tv_invite" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_help"
+            style="@style/MatchWrap.Horizontal"
+            android:layout_below="@+id/ll_yao_qing"
+            android:layout_marginStart="@dimen/dp_19"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_19">
+
+            <ImageView
+                style="@style/wo_iv_19"
+                android:src="@mipmap/wo_help_6" />
+
+            <RelativeLayout
+                style="@style/MatchWrap"
+                android:layout_marginStart="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/tv_help"
+                    style="@style/WrapWrap"
+                    android:layout_centerVertical="true"
+                    android:text="@string/support_center"
+                    android:textColor="@color/color_FF333333" />
+
+                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+                <View
+                    style="@style/View_xian"
+                    android:layout_below="@+id/tv_help" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_About_Us"
+            style="@style/MatchWrap.Horizontal"
+            android:layout_below="@+id/ll_help"
+            android:layout_marginStart="@dimen/dp_19"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_19">
+
+            <ImageView
+                style="@style/wo_iv_19"
+                android:src="@mipmap/wo_guan_7" />
+
+            <RelativeLayout
+                style="@style/MatchWrap"
+                android:layout_marginStart="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/tv_About_Us"
+                    style="@style/WrapWrap"
+                    android:layout_centerVertical="true"
+                    android:text="@string/About_Us"
+                    android:textColor="@color/color_FF333333" />
+
+                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+                <View
+                    style="@style/View_xian"
+                    android:layout_below="@+id/tv_About_Us" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_set"
+            style="@style/MatchWrap.Horizontal"
+            android:layout_below="@+id/ll_About_Us"
+            android:layout_marginStart="@dimen/dp_19"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_19">
+
+            <ImageView
+                style="@style/wo_iv_19"
+                android:src="@mipmap/wo_she_8" />
+
+            <RelativeLayout
+                style="@style/MatchWrap"
+                android:layout_marginStart="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/tv_set"
+                    style="@style/WrapWrap"
+                    android:layout_centerVertical="true"
+                    android:text="@string/system_settings"
+                    android:textColor="@color/color_FF333333" />
+
+                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+                <View
+                    style="@style/View_xian"
+                    android:layout_below="@+id/tv_set" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_log_out"
+            style="@style/WrapWrap"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="退出登录"
+            android:textColor="@color/color_FF1758FB"
+            android:textSize="@dimen/sp_17" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -198,4 +198,11 @@
     <string name="bind_coin_success">绑定成功</string>
     <string name="sure_to_unbind_coin">确定取消绑定？</string>
     <string name="sure_to_bind_coin">确定绑定？</string>
+    <string name="Asset_overview">资产总览</string>
+    <string name="Management_of_the_purse">管理钱包</string>
+    <string name="trading_record">交易记录</string>
+    <string name="invite_friends">邀请好友</string>
+    <string name="support_center">帮助中心</string>
+    <string name="About_Us">关于我们</string>
+    <string name="system_settings">系统设置</string>
 </resources>
