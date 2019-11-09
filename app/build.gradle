@@ -177,6 +177,7 @@ dependencies {
 
     // skin-support-cardview CardView 控件支持[可选]
     implementation 'skin.support:skin-support-constraint-layout:3.1.1'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 
     // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
     implementation project(':wallet-eth')

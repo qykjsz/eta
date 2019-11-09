@@ -178,4 +178,24 @@
     <string name="had_make_copy">已备份</string>
     <string name="transfer_success">转账成功</string>
     <string name="add_wallet">添加钱包</string>
+    <string name="sure_have_read_agree">请确认已经阅读相关协议</string>
+    <string name="storage_permission_need_open">使用此功能必须开启内存权限</string>
+    <string name="sure_to_delete_wallet">确认删除钱包？</string>
+    <string name="bottom_name_eos">EOS底层</string>
+    <string name="bottom_name_eth">IOST底层</string>
+    <string name="bottom_name_iost">IOST底层</string>
+    <string name="bottom_name_tron">Tron底层</string>
+    <string name="bottom_name_binance">Binance底层</string>
+    <string name="bottom_name_bos">BOS底层</string>
+    <string name="bottom_name_cosmos">COSMOS底层</string>
+    <string name="bottom_name_mk">墨客底层</string>
+    <string name="not_open">暂未开放</string>
+    <string name="wallet_name_must">钱包名称为必填项</string>
+    <string name="connfirm_password_must">确认密码为必填项</string>
+    <string name="password_must">密码为必填项</string>
+    <string name="private_key_must">私钥为必填项</string>
+    <string name="comm_must">助记词为必填项</string>
+    <string name="bind_coin_success">绑定成功</string>
+    <string name="sure_to_unbind_coin">确定取消绑定？</string>
+    <string name="sure_to_bind_coin">确定绑定？</string>
 </resources>

@@ -4,24 +4,31 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
-import com.qingyun.mvpretrofitrx.mvp.entity.BottomLevel;
+import com.qingyun.mvpretrofitrx.mvp.entity.CoinType;
+import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
 
-public class BottomLevelAdapter extends BaseAdapter<BottomLevel, BottomLevelAdapter.BottomLevelViewHolder> {
+import butterknife.BindView;
+
+public class BottomLevelAdapter extends BaseAdapter<CoinType, BottomLevelAdapter.BottomLevelViewHolder> {
 
 
-    public BottomLevelAdapter(Context context, List<BottomLevel> list) {
+
+
+    public BottomLevelAdapter(Context context, List<CoinType> list) {
         super(context, list);
     }
 
     @Override
     protected BottomLevelViewHolder getViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_bottom_level,parent,false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_bottom_level, parent, false);
         return new BottomLevelViewHolder(view);
     }
 
@@ -37,12 +44,20 @@ public class BottomLevelAdapter extends BaseAdapter<BottomLevel, BottomLevelAdap
 
     @Override
     protected void viewHolderBind(BottomLevelViewHolder holder, int position) {
+        holder.tvName.setText(getList().get(position).getCoinType());
+        holder.tvBottom.setText(getList().get(position).getName());
+        holder.ivPic.setImageResource(getList().get(position).getResId());
 
     }
 
-    class BottomLevelViewHolder extends BaseViewHolder{
+    class BottomLevelViewHolder extends BaseViewHolder {
 
-
+        @BindView(R.id.iv_pic)
+        ImageView ivPic;
+        @BindView(R.id.tv_name)
+        BoldTextView tvName;
+        @BindView(R.id.tv_bottom)
+        TextView tvBottom;
         public BottomLevelViewHolder(View itemView) {
             super(itemView);
         }

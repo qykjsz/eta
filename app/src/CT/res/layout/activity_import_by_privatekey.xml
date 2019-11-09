@@ -76,7 +76,7 @@
         android:id="@+id/et_wallet_system"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/eth"
         app:layout_constraintBottom_toBottomOf="@+id/textView112"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView112"

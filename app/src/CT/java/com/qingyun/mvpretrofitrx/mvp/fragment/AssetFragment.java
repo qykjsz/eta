@@ -24,6 +24,7 @@ import com.qingyun.mvpretrofitrx.mvp.activity.CreateWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.QuickExchangeActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.TransferActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetModleAdapter;
@@ -46,6 +47,10 @@ import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,32 +138,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     @Override
     public void init() {
 
+        EventBus.getDefault().register(this);
         refreashData();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Message msg = new Message();
-                msg.what=ETH_BLANCE;
-                msg.obj = WalletManager.getEthBalance(ApplicationUtil.getCurrentWallet().getAddress()).toString();
-                handler.sendMessage(msg);
-            }
-        }).start();
-
-        tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
-        if ((SpUtils.getObjectFromShare(getContext(), "is_make_copy")) == null || ((int) SpUtils.getObjectFromShare(getContext(), "is_make_copy")) != 1) {
-            DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.delete_wallet, R.string.beifen, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            }, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(MakeCopyWalletActivity.class);
-                }
-            });
-        }
 
         modleList = new ArrayList<>();
         modleList.add(new AssetModle(R.mipmap.sy_ziyuan, R.string.ziyuan));
@@ -194,6 +175,33 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         super.refreashData();
         if (ApplicationUtil.getCurrentWallet() != null)
             getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                msg.what=ETH_BLANCE;
+                msg.obj = WalletManager.getEthBalance(ApplicationUtil.getCurrentWallet().getAddress()).toString();
+                handler.sendMessage(msg);
+            }
+        }).start();
+
+        tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
+        if ((SpUtils.getObjectFromShare(getContext(), "is_make_copy")) == null || ((int) SpUtils.getObjectFromShare(getContext(), "is_make_copy")) != 1) {
+            DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.delete_wallet, R.string.beifen, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            }, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(MakeCopyWalletActivity.class);
+                }
+            });
+        }
+
     }
 
     @Override
@@ -247,6 +255,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             case R.id.btn_packet:
                 break;
             case R.id.btn_scan:
+                startActivity(ScanActivity.class);
                 break;
             case R.id.btn_visiable:
                 break;
@@ -277,21 +286,26 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 })
                 .bindData(new LayerManager.IDataBinder() {
                     @Override
-                    public void bind(AnyLayer anyLayer) {
+                    public void bind(final AnyLayer anyLayer) {
                         // TODO 绑定数据
                         ImageView addWallet = anyLayer.getView(R.id.btn_aa_wallet);
                         RecyclerView recyclerView = anyLayer.getView(R.id.recyclerView2);
                         RecyclerView rcyWallet = anyLayer.getView(R.id.rcy_wallet);
                         List<CoinType> list = new ArrayList<>();
                         final TextView tv_wallet_name = anyLayer.getView(R.id.tv_wallet_name);
-
-
                         List<Wallet> mylist = new ArrayList<>();
                         final MyWalletAdapter myWalletAdapter = new MyWalletAdapter(getContext(),mylist);
                         rcyWallet.setLayoutManager(new LinearLayoutManager(getContext()));
                         rcyWallet.addItemDecoration(DividerHelper.getPaddingDivider(getContext(),R.dimen.dp_20));
                         rcyWallet.setAdapter(myWalletAdapter);
-
+                        myWalletAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(List list, int position) {
+                               ApplicationUtil.setCurrentWallet ((Wallet)list.get(position));
+                               anyLayer.dismiss();
+                               refreashData();
+                            }
+                        });
 
 
                         list.add(new CoinType(R.mipmap.qbgl_eos,R.mipmap.qbgl_eos_xz,EOS));
@@ -349,6 +363,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     @Override
     public void addWalletSuccess() {
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreashWallet(Wallet wallet) {
+       refreashData();
     }
 
     @Override

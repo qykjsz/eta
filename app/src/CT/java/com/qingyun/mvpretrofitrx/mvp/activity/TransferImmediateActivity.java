@@ -10,6 +10,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
@@ -67,7 +68,9 @@ public class TransferImmediateActivity extends BaseActivity {
 
     @Override
     public void init() {
-
+        String address = getIntent().getStringExtra(IntentUtils.TRANSFER_ADDRESS);
+        if (address!=null)
+        tvAssdrss.setText(address);
     }
 
     @Override

@@ -96,7 +96,7 @@
         android:layout_height="0dp"
         android:gravity="center_vertical"
         android:background="@color/color_FFFFFF"
-        android:text="TextView"
+        android:text="m/44’/66‘/0/0"
         app:layout_constraintBottom_toBottomOf="@+id/textView122"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView122"

@@ -362,7 +362,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView159"
+                    android:id="@+id/iv_pic"
                     android:layout_width="@dimen/dp_44"
                     android:layout_height="@dimen/dp_44"
                     android:layout_marginStart="@dimen/dp_20"
@@ -376,8 +376,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
                     android:text="@string/not_wallet"
-                    app:layout_constraintStart_toEndOf="@+id/imageView159"
-                    app:layout_constraintTop_toTopOf="@+id/imageView159" />
+                    app:layout_constraintStart_toEndOf="@+id/iv_pic"
+                    app:layout_constraintTop_toTopOf="@+id/iv_pic" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -386,8 +386,8 @@
                     android:text="@string/create_wallet"
                     android:textColor="@color/color_text_2"
                     android:textSize="@dimen/sp_10"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView159"
-                    app:layout_constraintStart_toEndOf="@+id/imageView159" />
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
+                    app:layout_constraintStart_toEndOf="@+id/iv_pic" />
 
 
                 <ImageView

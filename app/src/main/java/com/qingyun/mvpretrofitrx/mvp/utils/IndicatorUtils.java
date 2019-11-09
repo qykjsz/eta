@@ -5,17 +5,20 @@ import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
 import com.senon.mvpretrofitrx.R;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.CommonPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.List;
@@ -60,5 +63,87 @@ public class IndicatorUtils {
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, vp);
     }
+
+
+    /**
+     *
+     * @param vp
+     * @param titles
+     * @param activity
+     * @param magicIndicator
+     * @param defaultPosition 默认选中index
+     * @param indiW   下标长度
+     */
+
+    public static void initMagicIndicator3M(final ViewPager vp, final List<String> titles, final Activity activity, MagicIndicator magicIndicator, int defaultPosition, final int indiW) {
+        CommonNavigator commonNavigator = new CommonNavigator(activity);
+        commonNavigator.setAdjustMode(true);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+
+            @Override
+            public int getCount() {
+                return titles.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                CommonPagerTitleView commonPagerTitleView = new CommonPagerTitleView(activity);
+                commonPagerTitleView.setContentView(R.layout.simple_pager_title_layout);
+
+                final TextView titleText = (TextView) commonPagerTitleView.findViewById(R.id.tv);
+                titleText.setText(titles.get(index));
+
+                commonPagerTitleView.setOnPagerTitleChangeListener(new CommonPagerTitleView.OnPagerTitleChangeListener() {
+
+                    @Override
+                    public void onSelected(int index, int totalCount) {
+                        titleText.setTextColor(activity.getResources().getColor(R.color.main_blue));
+                    }
+
+                    @Override
+                    public void onDeselected(int index, int totalCount) {
+                        titleText.setTextColor(activity.getResources().getColor(R.color.color_999999));
+
+                    }
+
+                    @Override
+                    public void onLeave(int index, int totalCount, float leavePercent, boolean leftToRight) {
+
+                    }
+
+                    @Override
+                    public void onEnter(int index, int totalCount, float enterPercent, boolean leftToRight) {
+
+                    }
+
+
+                });
+
+                commonPagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        vp.setCurrentItem(index);
+                    }
+                });
+
+                return commonPagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
+                linePagerIndicator.setMode(LinePagerIndicator.MODE_EXACTLY);
+                linePagerIndicator.setLineWidth(UIUtil.dip2px(context, indiW));
+                linePagerIndicator.setLineHeight(activity.getResources().getDimensionPixelSize(R.dimen.dp_2));
+                linePagerIndicator.setColors(activity.getResources().getColor(R.color.main_blue));
+                return linePagerIndicator;
+            }
+        });
+        magicIndicator.setNavigator(commonNavigator);
+        magicIndicator.onPageSelected(defaultPosition);
+        ViewPagerHelper.bind(magicIndicator, vp);
+    }
+
+
 
 }

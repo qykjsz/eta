@@ -12,6 +12,15 @@ public class CoinType {
     public static String BOS="BOS";
     public static String COSMOS="COSMOS";
     public static String MOAC="MOAC";
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getCoinType() {
         return coinType;
@@ -21,6 +30,13 @@ public class CoinType {
         this.coinType = coinType;
     }
 
+
+    public CoinType(int resId, int selectResId, String coinType, String name) {
+        this.resId = resId;
+        this.selectResId = selectResId;
+        this.coinType = coinType;
+        this.name = name;
+    }
 
     public CoinType(int resId, int selectResId, String coinType) {
         this.resId = resId;

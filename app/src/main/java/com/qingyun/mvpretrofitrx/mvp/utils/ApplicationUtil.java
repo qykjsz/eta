@@ -134,6 +134,18 @@ public class ApplicationUtil extends Application implements Application.Activity
     }
 
 
+    public static void deleteWallet(Wallet wallet){
+        Map<String, List<Wallet>> walletMap = (Map<String, List<Wallet>>) SpUtils.getObjectFromShare(getContext(), "wallet");
+        List<Wallet> wallets = walletMap.get(wallet.getCoinType());
+        for (int i = 0;i<wallets.size();i++){
+            if (wallets.get(i).getAddress().equals(wallet.getAddress())){
+                wallets.remove(i);
+            }
+        }
+        walletMap.put(wallet.getCoinType(),wallets);
+        SpUtils.setObjectToShare(getContext(),walletMap,"wallet");
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

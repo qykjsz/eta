@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.utils;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
@@ -15,7 +16,9 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 
 import com.senon.mvpretrofitrx.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import io.reactivex.functions.Consumer;
 import per.goweii.anylayer.AnimHelper;
 import per.goweii.anylayer.AnyLayer;
 import per.goweii.anylayer.LayerManager;
@@ -62,9 +65,6 @@ public class DialogUtils {
 //    }
 
 
-
-
-
     public static void showPictureChooseDialog(final Activity context, final boolean circle) {
         AnyLayer.with(context)
                 .contentView(R.layout.dialog_add_img)
@@ -78,8 +78,10 @@ public class DialogUtils {
                                 .selectionMode(PictureConfig.SINGLE)
                                 .isCamera(false)
                                 .compress(true)
+                                .videoQuality(50)
+                                .cropCompressQuality(50)
                                 .circleDimmedLayer(circle)
-                                .enableCrop(true)
+                                .enableCrop(false)
                                 .forResult(CODE_CHOOSE_PICTURE_PHONE);
                     }
                 })
@@ -90,13 +92,32 @@ public class DialogUtils {
                          * create()方法参数一是上下文，在activity中传activity.this，在fragment中传fragment.this。参数二为请求码，用于结果回调onActivityResult中判断
                          * selectPicture()方法参数分别为 是否裁剪、裁剪后图片的宽(单位px)、裁剪后图片的高、宽比例、高比例。都不传则默认为裁剪，宽200，高200，宽高比例为1：1。
                          */
-                        com.luck.picture.lib.PictureSelector.create(context).openCamera(PictureMimeType.ofImage())
-                                .selectionMode(PictureConfig.SINGLE)
-                                .isCamera(false)
-                                .compress(true)
-                                .circleDimmedLayer(circle)
-                                .enableCrop(true)
-                                .forResult(CODE_CHOOSE_PICTURE_CAMEAR);
+
+                        RxPermissions rxPermissions=new RxPermissions(context);
+                        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+                            @Override
+                            public void accept(Boolean aBoolean) throws Exception {
+                                if (aBoolean){
+
+                                    com.luck.picture.lib.PictureSelector.create(context).openCamera(PictureMimeType.ofImage())
+                                            .selectionMode(PictureConfig.SINGLE)
+                                            .isCamera(false)
+                                            .compress(true)
+                                            .videoQuality(50)
+                                            .cropCompressQuality(50)
+                                            .circleDimmedLayer(circle)
+                                            .enableCrop(false)
+                                            .forResult(CODE_CHOOSE_PICTURE_CAMEAR);
+
+                                }else{
+                                    //只要有一个权限被拒绝，就会执行
+                                    ToastUtil.showShortToast(R.string.storage_permission_need_open);
+                                }
+                            }
+                        });
+
+
+
                     }
                 })
 
@@ -123,6 +144,65 @@ public class DialogUtils {
 
 
 
+
+//    public static void showPictureChooseDialog(final Activity context, final boolean circle) {
+//        AnyLayer.with(context)
+//                .contentView(R.layout.dialog_add_img)
+//                .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+//                .gravity(Gravity.BOTTOM)
+//                .onClickToDismiss(R.id.btn_cancel)
+//                .onClickToDismiss(R.id.btn_select_divice, new LayerManager.OnLayerClickListener() {
+//                    @Override
+//                    public void onClick(AnyLayer anyLayer, View v) {
+//                        com.luck.picture.lib.PictureSelector.create(context).openGallery(PictureMimeType.ofImage())
+//                                .selectionMode(PictureConfig.SINGLE)
+//                                .isCamera(false)
+//                                .compress(true)
+//                                .circleDimmedLayer(circle)
+//                                .enableCrop(true)
+//                                .forResult(CODE_CHOOSE_PICTURE_PHONE);
+//                    }
+//                })
+//                .onClickToDismiss(R.id.btn_open_camear, new LayerManager.OnLayerClickListener() {
+//                    @Override
+//                    public void onClick(AnyLayer anyLayer, View v) {
+//                        /**
+//                         * create()方法参数一是上下文，在activity中传activity.this，在fragment中传fragment.this。参数二为请求码，用于结果回调onActivityResult中判断
+//                         * selectPicture()方法参数分别为 是否裁剪、裁剪后图片的宽(单位px)、裁剪后图片的高、宽比例、高比例。都不传则默认为裁剪，宽200，高200，宽高比例为1：1。
+//                         */
+//                        com.luck.picture.lib.PictureSelector.create(context).openCamera(PictureMimeType.ofImage())
+//                                .selectionMode(PictureConfig.SINGLE)
+//                                .isCamera(false)
+//                                .compress(true)
+//                                .circleDimmedLayer(circle)
+//                                .enableCrop(true)
+//                                .forResult(CODE_CHOOSE_PICTURE_CAMEAR);
+//                    }
+//                })
+//
+//                .contentAnim(new LayerManager.IAnim() {
+//                    @Override
+//                    public Animator inAnim(View content) {
+//                        return AnimHelper.createBottomAlphaInAnim(content);
+//                    }
+//
+//                    @Override
+//                    public Animator outAnim(View content) {
+//                        return AnimHelper.createBottomAlphaOutAnim(content);
+//                    }
+//                })
+//                .bindData(new LayerManager.IDataBinder() {
+//                    @Override
+//                    public void bind(AnyLayer anyLayer) {
+//                        // TODO 绑定数据
+//
+//                    }
+//                })
+//                .show();
+//    }
+
+
+
     public static void showConfirmDialog(final Activity context, final int resId, final int strId, final int leftStrId, final int rightStrId, final View.OnClickListener leftClick, final View.OnClickListener rightClick) {
         AnyLayer.with(context)
                 .contentView(R.layout.dialog_confirm)
@@ -131,7 +211,7 @@ public class DialogUtils {
 
                 .bindData(new LayerManager.IDataBinder() {
                     @Override
-                    public void bind(AnyLayer anyLayer) {
+                    public void bind(final AnyLayer anyLayer) {
                         ImageView ivIcon = (ImageView) anyLayer.getView(R.id.iv_icon);
                         TextView tvRemark = (TextView) anyLayer.getView(R.id.tv_remark);
                         TextView btnLeft = (TextView) anyLayer.getView(R.id.btn_left);
@@ -148,14 +228,21 @@ public class DialogUtils {
                             @Override
                             public void onClick(View v) {
                                 if (leftClick!=null)
+                                {
+                                    anyLayer.dismiss();
                                     leftClick.onClick(v);
+
+                                }
                             }
                         });
                         btnRight.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 if (rightClick!=null)
+                                {
+                                    anyLayer.dismiss();
                                     rightClick.onClick(v);
+                                }
                             }
                         });
                     }

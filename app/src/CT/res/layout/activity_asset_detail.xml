@@ -284,7 +284,7 @@
 
 
         <TextView
-            android:id="@+id/textView57"
+            android:id="@+id/btn_delete_wallet"
             android:layout_width="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

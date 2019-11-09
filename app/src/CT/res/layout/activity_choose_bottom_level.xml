@@ -20,11 +20,11 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/dp_20"
             android:padding="@dimen/dp_padding_x_min"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/back" />
+            app:srcCompat="@mipmap/back_not_header" />
 
         <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
 
@@ -45,7 +45,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="@dimen/dp_0"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/dp_74"
         android:background="@drawable/bg_ffffff_top_round_25"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,14 +56,17 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rcy"
-            android:layout_marginTop="@dimen/dp_padding_x_min"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/dp_padding_x_min"
+            android:layout_marginTop="@dimen/dp_padding_x_min"
             android:layout_marginEnd="@dimen/dp_padding_x_min"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content">
+            android:paddingBottom="@dimen/dp_padding_x_min"
+            app:layout_constraintVertical_bias="0.0">
 
         </android.support.v7.widget.RecyclerView>
 

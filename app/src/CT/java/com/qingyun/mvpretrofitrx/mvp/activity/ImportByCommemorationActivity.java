@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -14,6 +15,7 @@ import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
@@ -86,6 +88,37 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
 
     @OnClick(R.id.btn_import)
     public void onViewClicked() {
+
+        if (TextUtils.isEmpty(etMom.getText().toString())){
+            ToastUtil.showShortToast(R.string.comm_must);
+
+            return;
+        }
+
+        if (TextUtils.isEmpty(etPassword.getText().toString())){
+            ToastUtil.showShortToast(R.string.password_must);
+
+            return;
+        }
+
+        if (TextUtils.isEmpty(etConfirmPassword.getText().toString())){
+            ToastUtil.showShortToast(R.string.connfirm_password_must);
+
+            return;
+        }
+
+        if (TextUtils.isEmpty(etWalletName.getText().toString())){
+            ToastUtil.showShortToast(R.string.wallet_name_must);
+            return;
+        }
+
+        if (!cbRead.isChecked()){
+            ToastUtil.showShortToast(R.string.sure_have_read_agree);
+            return;
+        }
+
+
+
         WalletManager.importWalletByMemoryWord(etPassword.getText().toString(), etMom.getText().toString(), etWalletName.getText().toString(), new WalletManager.ImportWalletListener() {
             @Override
             public void importSuccess(Wallet wallet) {

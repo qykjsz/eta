@@ -32,6 +32,7 @@ public class IntentUtils {
     public static final String HISTORY_TYPE = "history_type";
     public static final String COMPOSE = "compose";
     public static final String DISTRIBUTION = "distribution";
+    public static final String TRANSFER_ADDRESS = "transfer_address";
 
     public static String NEW_ID="news_id";
 }
