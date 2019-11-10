@@ -7,13 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetWalletLogAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetWalletLog;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.senon.mvpretrofitrx.R;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +34,22 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.ObservableTransformer;
 
-public class AssetWalletLogFragment extends BaseFragment {
+public class AssetWalletLogFragment extends BaseFragment<WalletAssetContact.View,WalletAssetContact.Presenter> implements WalletAssetContact.View {
+    private final int type;
+    private final Asset asset;
     @BindView(R.id.rcy)
     RecyclerView rcy;
     Unbinder unbinder;
     AssetWalletLogAdapter assetWalletLogAdapter;
-    private List<AssetWalletLog> list;
+    private List<TransferLog> list;
+
+    public AssetWalletLogFragment(int type, Asset asset) {
+        this.type = type;
+        this.asset = asset;
+    }
+
 
     @Override
     public int getLayoutId() {
@@ -35,34 +57,26 @@ public class AssetWalletLogFragment extends BaseFragment {
     }
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public WalletAssetContact.Presenter createPresenter() {
+        return new WalletAssetPresenter(getContext());
     }
 
     @Override
-    public BaseView createView() {
-        return null;
+    public WalletAssetContact.View createView() {
+        return this;
     }
+
 
     @Override
     public void init() {
         list = new ArrayList<>();
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-        list.add(new AssetWalletLog());
-
         assetWalletLogAdapter = new AssetWalletLogAdapter(getContext(),list);
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.addItemDecoration(DividerHelper.getMyDivider(getContext()));
         rcy.setAdapter(assetWalletLogAdapter);
         refreashView(list,rcy);
+
+        getPresenter().getLog(ApplicationUtil.getCurrentWallet().getAddress(),asset.getName(),type,page);
     }
 
     @Override
@@ -93,4 +107,35 @@ public class AssetWalletLogFragment extends BaseFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @Override
+    public void getWalletInfoSuccess(AssetResponse assetResponse) {
+    }
+
+    @Override
+    public void addWalletSuccess() {
+
+    }
+
+    @Override
+    public void getLogSuccess(TransferLogResponse transferLogResponse) {
+        if (isLoadMore){
+            list.addAll(transferLogResponse.getOrder());
+        }else {
+            list = transferLogResponse.getOrder();
+        }
+        if (list==null) list = new ArrayList<>();
+        assetWalletLogAdapter.notifyDataSetChanged(list);
+        refreashView(list,rcy);
+        EventBus.getDefault().post(transferLogResponse);
+    }
+
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+        return this.bindUntilEvent(FragmentEvent.PAUSE);
+
+    }
+
+
+
 }

@@ -67,7 +67,7 @@
             android:id="@+id/textView50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_padding_x_min"
+            android:layout_marginTop="@dimen/dp_30"
             android:text="@string/get_money_address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

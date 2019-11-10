@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -37,11 +38,14 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetModle;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinType;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
@@ -118,6 +122,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             return false;
         }
     });
+    private AssetResponse assetResponse;
 
     @Override
     public int getLayoutId() {
@@ -160,7 +165,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         assetAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
-                startActivity(AssetWalletActivity.class);
+
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentUtils.ASSET,(Asset)assetList.get(position));
+                startActivity(AssetWalletActivity.class,bundle);
             }
         });
         rcyWallet.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -168,6 +177,18 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         rcyWallet.setAdapter(assetAdapter);
         refreashView(assetList, rcyWallet);
 
+    }
+
+
+    public void startActivity(Class c){
+        Intent intent = new Intent(getContext(),c);
+        startActivity(intent);
+    }
+
+    public void startActivity(Class c,Bundle bundle){
+        Intent intent = new Intent(getContext(),c);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override
@@ -240,7 +261,13 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 startActivity(AddCoinActivity.class);
                 break;
             case R.id.ly_asset:
-                startActivity(AssetDetailActivity.class);
+                if (assetResponse==null){
+                    ToastUtil.showShortToast(R.string.requst_err);
+                    return;
+                }
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentUtils.ASSET_RESPONSE,assetResponse);
+                startActivity(AssetDetailActivity.class,bundle);
                 break;
             case R.id.btn_transfer:
                 startActivity(TransferActivity.class);
@@ -350,9 +377,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void getWalletInfoSuccess(AssetResponse assetResponse) {
+        this.assetResponse = assetResponse;
         assetList = assetResponse.getGlod();
         tvAsset.setText(assetResponse.getAllnumber());
         assetAdapter.notifyDataSetChanged(assetList);
+        tvIncomeToday.setText(assetResponse.getToday());
         refreashView(assetList, rcyWallet);
 //        int[] colors = new int[assetResponse.getProportion().];
 //        int[] colors = new int[]{assetResponse.getProportion()};
@@ -362,6 +391,12 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void addWalletSuccess() {
+
+    }
+
+    @Override
+    public void getLogSuccess(TransferLogResponse transferLogResponse) {
+
 
     }
 

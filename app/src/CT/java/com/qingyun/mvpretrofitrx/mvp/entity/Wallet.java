@@ -7,7 +7,6 @@ public class Wallet {
     private String name;
     private String hyaddress;
     private String img;
-
 //    1.我已经添加 2.我没有添加
     private String have;
 

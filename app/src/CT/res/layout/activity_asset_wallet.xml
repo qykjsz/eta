@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/textView75"
+        app:layout_constraintBottom_toTopOf="@+id/btn_transfer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -204,7 +204,7 @@
 
 
     <TextView
-        android:id="@+id/textView75"
+        android:id="@+id/btn_transfer"
         style="@style/main_btn_2"
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_44"
@@ -223,10 +223,10 @@
         android:layout_height="@dimen/dp_44"
         android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:text="@string/get_money"
-        app:layout_constraintBottom_toBottomOf="@+id/textView75"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_transfer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView75"
-        app:layout_constraintTop_toTopOf="@+id/textView75" />
+        app:layout_constraintStart_toEndOf="@+id/btn_transfer"
+        app:layout_constraintTop_toTopOf="@+id/btn_transfer" />
 
 
 </android.support.constraint.ConstraintLayout>

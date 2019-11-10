@@ -1,12 +1,21 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AssetResponse {
+public class AssetResponse implements Serializable {
     private String allnumber;
     private List<Asset> glod;
     private Proportion proportion;
+    private String today;
 
+    public String getToday() {
+        return today;
+    }
+
+    public void setToday(String today) {
+        this.today = today;
+    }
 
     public Proportion getProportion() {
         return proportion;

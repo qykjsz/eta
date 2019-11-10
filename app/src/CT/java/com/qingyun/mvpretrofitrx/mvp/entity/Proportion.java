@@ -1,6 +1,8 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
-public class Proportion {
+import java.io.Serializable;
+
+public class Proportion implements Serializable {
     private String translate;
     private String ETH;
     private String USDT;

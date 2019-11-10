@@ -205,4 +205,5 @@
     <string name="support_center">帮助中心</string>
     <string name="About_Us">关于我们</string>
     <string name="system_settings">系统设置</string>
+    <string name="requst_err">请求错误</string>
 </resources>

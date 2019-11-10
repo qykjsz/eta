@@ -9,6 +9,7 @@ import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.CopyUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
@@ -21,6 +22,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils.ASSET_RESPONSE;
+
 public class AssetDetailActivity extends BaseActivity {
     @BindView(R.id.tv_income_today)
     TextView tvIncomeToday;
@@ -28,6 +31,8 @@ public class AssetDetailActivity extends BaseActivity {
     TextView tvWalletName;
     @BindView(R.id.tv_publish_key)
     TextView tvPublishKey;
+    @BindView(R.id.tv_asset)
+    TextView tvAsset;
 
     @Override
     protected String getTitleRightText() {
@@ -66,8 +71,11 @@ public class AssetDetailActivity extends BaseActivity {
 
     @Override
     public void init() {
+        AssetResponse assetResponse = (AssetResponse) getIntent().getSerializableExtra(ASSET_RESPONSE);
         tvPublishKey.setText(ApplicationUtil.getCurrentWallet().getPublicKey());
         tvWalletName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
+        tvIncomeToday.setText(assetResponse.getToday());
+        tvAsset.setText(assetResponse.getAllnumber());
     }
 
     @Override
@@ -93,7 +101,7 @@ public class AssetDetailActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.btn_back, R.id.btn_visiable, R.id.btn_copy_publish_key,R.id.btn_delete_wallet})
+    @OnClick({R.id.btn_back, R.id.btn_visiable, R.id.btn_copy_publish_key, R.id.btn_delete_wallet})
     public void onClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -112,16 +120,16 @@ public class AssetDetailActivity extends BaseActivity {
                     public void onClick(View v) {
                         boolean haveWallet = false;
                         ApplicationUtil.deleteWallet(ApplicationUtil.getCurrentWallet());
-                        if (ApplicationUtil.getWallet().entrySet()!=null&&ApplicationUtil.getWallet().entrySet().size()>0){
-                            for(Map.Entry<String, List<Wallet>> entry : ApplicationUtil.getWallet().entrySet()){
-                                if (entry.getValue()!=null&&entry.getValue().size()>0){
+                        if (ApplicationUtil.getWallet().entrySet() != null && ApplicationUtil.getWallet().entrySet().size() > 0) {
+                            for (Map.Entry<String, List<Wallet>> entry : ApplicationUtil.getWallet().entrySet()) {
+                                if (entry.getValue() != null && entry.getValue().size() > 0) {
                                     haveWallet = true;
                                     ApplicationUtil.setCurrentWallet(entry.getValue().get(0));
                                     break;
                                 }
                             }
                         }
-                        if (haveWallet==false){
+                        if (haveWallet == false) {
                             ApplicationUtil.setCurrentWallet(null);
                         }
                         Intent intent = new Intent(getContext(), MainActivity.class);

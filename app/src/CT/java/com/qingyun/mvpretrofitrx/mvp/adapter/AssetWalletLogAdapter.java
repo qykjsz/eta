@@ -8,14 +8,15 @@ import android.view.ViewGroup;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetWalletLog;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
 
-public class AssetWalletLogAdapter extends BaseAdapter<AssetWalletLog, AssetWalletLogAdapter.AssetWalletLogViewHolder> {
+public class AssetWalletLogAdapter extends BaseAdapter<TransferLog, AssetWalletLogAdapter.AssetWalletLogViewHolder> {
 
 
-    public AssetWalletLogAdapter(Context context, List<AssetWalletLog> list) {
+    public AssetWalletLogAdapter(Context context, List<TransferLog> list) {
         super(context, list);
     }
 

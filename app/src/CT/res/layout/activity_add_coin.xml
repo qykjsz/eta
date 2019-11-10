@@ -45,7 +45,7 @@
 
 
         <ezy.ui.layout.LoadingLayout
-            android:id="@+id/freash_loading"
+            android:id="@+id/refreash_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

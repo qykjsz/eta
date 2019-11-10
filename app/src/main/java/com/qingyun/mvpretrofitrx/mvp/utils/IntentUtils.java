@@ -33,6 +33,8 @@ public class IntentUtils {
     public static final String COMPOSE = "compose";
     public static final String DISTRIBUTION = "distribution";
     public static final String TRANSFER_ADDRESS = "transfer_address";
+    public static final String ASSET = "asset";
+    public static final String ASSET_RESPONSE = "asset_response";
 
     public static String NEW_ID="news_id";
 }

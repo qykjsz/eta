@@ -15,6 +15,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.progress.ProgressCancelListener;
 import com.qingyun.mvpretrofitrx.mvp.progress.ProgressDialogHandler;
@@ -201,6 +202,12 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
         ToastUtil.showShortToast(R.string.create_wallet_success);
         finish();
         startActivity(MakeCopyWalletActivity.class);
+    }
+
+    @Override
+    public void getLogSuccess(TransferLogResponse transferLogResponse) {
+
+
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
@@ -142,6 +143,11 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
         Intent intent = new Intent(getContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void getLogSuccess(TransferLogResponse transferLogResponse) {
+
     }
 
     @Override

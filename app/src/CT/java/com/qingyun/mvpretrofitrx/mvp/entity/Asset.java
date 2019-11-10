@@ -1,10 +1,21 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
-public class Asset {
+import java.io.Serializable;
+
+public class Asset implements Serializable {
     private String name;
     private String img;
     private String number;
     private String usdtnumber;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

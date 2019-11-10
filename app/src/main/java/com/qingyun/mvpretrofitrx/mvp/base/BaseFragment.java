@@ -208,6 +208,17 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
         return mView;
     }
 
+
+
+
+    public void startActivity(Class c,Bundle bundle){
+        Intent intent = new Intent(getContext(),c);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

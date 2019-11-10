@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.model.WalletAssetModel;
 import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
 
@@ -44,6 +45,25 @@ public class WalletAssetPresenter extends WalletAssetContact.Presenter {
             public void onNext(Object o) {
                 if(getView() != null){
                     getView().addWalletSuccess();
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void getLog(String address, String glod, int type, int page) {
+        model.getLog(context,address,  glod,  type,  page,getView().bindLifecycle(), new ObserverResponseListener<TransferLogResponse>() {
+
+            @Override
+            public void onNext(TransferLogResponse  transferLogResponse) {
+                if(getView() != null){
+                    getView().getLogSuccess(transferLogResponse);
                 }
             }
 

@@ -6,6 +6,8 @@ import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 
 import java.util.List;
@@ -53,4 +55,8 @@ public interface ApiService {
 
     @POST("et_contactsall")
     Observable <BaseResponse<List<Contact>>> getContactList(@Query("contacts")String contacts);
+
+
+    @POST("et_recordorder")
+    Observable <BaseResponse<TransferLogResponse>>getLog(@Query("address")String address, @Query("glod")String glod, @Query("type")int type, @Query("page")int page);
 }
