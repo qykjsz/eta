@@ -106,6 +106,7 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
 
     @OnClick(R.id.btn_back)
     public void onViewClicked() {
+        finish();
     }
 
     @OnClick({R.id.btn_transfer_immediate, R.id.btn_transfer_scan, R.id.btn_transfer_contact})
