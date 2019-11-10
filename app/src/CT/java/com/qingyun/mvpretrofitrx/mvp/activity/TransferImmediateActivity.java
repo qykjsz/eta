@@ -5,14 +5,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.develop.wallet.eth.Wallet;
 import com.develop.wallet.eth.WalletManager;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +74,7 @@ public class TransferImmediateActivity extends BaseActivity {
 
     @Override
     public void init() {
+        EventBus.getDefault().register(this);
         String address = getIntent().getStringExtra(IntentUtils.TRANSFER_ADDRESS);
         if (address!=null)
         tvAssdrss.setText(address);
@@ -95,4 +102,10 @@ public class TransferImmediateActivity extends BaseActivity {
                 break;
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getContact(Contact contact) {
+        tvAssdrss.setText(contact.getAddress());
+    }
+
 }

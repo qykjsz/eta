@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/et_name"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center_vertical"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView39" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/et_remark"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/color_FFFFFF"
@@ -75,10 +75,12 @@
         app:layout_constraintTop_toTopOf="@+id/textView40" />
 
     <TextView
-        android:id="@+id/textView43"
+        android:id="@+id/tv_bottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="@string/choose_wallet_bottom"
+        android:text="@string/eth"
+        android:background="@color/color_FFFFFF"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="@+id/textView41"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +88,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView41" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/et_address"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/color_FFFFFF"
@@ -100,7 +102,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView42" />
 
     <TextView
-        android:id="@+id/textView45"
+        android:id="@+id/btn_save"
         style="@style/main_btn"
         android:layout_marginBottom="@dimen/dp_70"
         android:text="@string/save"
@@ -109,13 +111,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/btn_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_padding_x_min"
-        app:layout_constraintBottom_toBottomOf="@+id/editText7"
-        app:layout_constraintEnd_toEndOf="@+id/editText7"
-        app:layout_constraintTop_toTopOf="@+id/editText7"
+        app:layout_constraintBottom_toBottomOf="@+id/et_address"
+        app:layout_constraintEnd_toEndOf="@+id/et_address"
+        app:layout_constraintTop_toTopOf="@+id/et_address"
         app:srcCompat="@mipmap/icon_scan" />
 
 </android.support.constraint.ConstraintLayout>

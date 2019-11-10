@@ -1,11 +1,37 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.contract.ContactsContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
+import com.qingyun.mvpretrofitrx.mvp.presenter.ContactsPresenter;
+import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.senon.mvpretrofitrx.R;
 
-public class AddNewContactActivity extends BaseActivity {
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cc.shinichi.library.tool.utility.ui.PhoneUtil;
+import io.reactivex.ObservableTransformer;
+
+public class AddNewContactActivity extends BaseActivity<ContactsContact.View,ContactsContact.Presenter> implements ContactsContact.View {
+    @BindView(R.id.et_name)
+    EditText etName;
+    @BindView(R.id.et_remark)
+    EditText etRemark;
+    @BindView(R.id.tv_bottom)
+    TextView tvBottom;
+    @BindView(R.id.et_address)
+    EditText etAddress;
+
     @Override
     protected String getTitleRightText() {
         return null;
@@ -32,17 +58,51 @@ public class AddNewContactActivity extends BaseActivity {
     }
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public ContactsContact.Presenter createPresenter() {
+        return new ContactsPresenter(this);
     }
 
     @Override
-    public BaseView createView() {
-        return null;
+    public ContactsContact.View createView() {
+        return this;
     }
+
 
     @Override
     public void init() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.btn_save, R.id.btn_scan})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_save:
+                getPresenter().addContacts(SystemUtil.getMyUUID(),etName.getText().toString(),etRemark.getText().toString(),tvBottom.getText().toString(),etAddress.getText().toString());
+                break;
+            case R.id.btn_scan:
+                break;
+        }
+    }
+
+    @Override
+    public void addContactsSuccess() {
+        finish();
+    }
+
+    @Override
+    public void getContactListSuccess(List<Contact> contactList) {
+
+    }
+
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+        return this.bindToLifecycle();
     }
 }

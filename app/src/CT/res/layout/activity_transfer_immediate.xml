@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/left"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_25"
         android:textColor="@color/main_blue"
         android:textSize="@dimen/sp_11"
         app:layout_constraintStart_toStartOf="@+id/tv_amount"
@@ -78,9 +78,10 @@
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="@dimen/dp_30"
         android:text="@string/remark"
-        app:layout_constraintStart_toStartOf="@+id/textView35"
+        app:layout_constraintStart_toStartOf="@+id/textView27"
         app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
     <EditText
@@ -169,7 +170,7 @@
         android:textColor="@color/main_blue"
         android:textSize="@dimen/sp_11"
         app:layout_constraintBottom_toBottomOf="@+id/tv_eth_banlance"
-        app:layout_constraintStart_toStartOf="@+id/tv_assdrss"
+        app:layout_constraintStart_toEndOf="@+id/tv_eth_banlance"
         />
 
 

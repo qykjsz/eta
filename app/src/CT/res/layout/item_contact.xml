@@ -6,7 +6,7 @@
     android:layout_height="@dimen/dp_70">
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/iv_pic"
         android:layout_width="@dimen/dp_50"
         android:layout_height="@dimen/dp_50"
         android:layout_marginStart="@dimen/dp_padding_x_min"
@@ -16,17 +16,17 @@
         app:srcCompat="@mipmap/avater_default" />
 
     <TextView
-        android:id="@+id/textView36"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/imageView7" />
+        app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
+        app:layout_constraintStart_toEndOf="@+id/iv_pic"
+        app:layout_constraintTop_toTopOf="@+id/iv_pic" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/tv_coin_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
@@ -36,9 +36,9 @@
         android:text="@string/eth_cn"
         android:textColor="@color/color_FFFFFF"
         android:textSize="@dimen/sp_11"
-        app:layout_constraintBottom_toBottomOf="@+id/textView36"
-        app:layout_constraintStart_toEndOf="@+id/textView36"
-        app:layout_constraintTop_toTopOf="@+id/textView36" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_name" />
 
 
 </android.support.constraint.ConstraintLayout>

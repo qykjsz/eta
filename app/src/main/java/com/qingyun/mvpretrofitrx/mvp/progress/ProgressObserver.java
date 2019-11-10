@@ -72,8 +72,9 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
 
         }else {
 
-
         }
+        if (!TextUtils.isEmpty(tBaseResponse.getMsg()))
+        ToastUtil.showShortToast(tBaseResponse.getMsg());
     }
 
 //    @Override
@@ -106,7 +107,6 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
             ResponseBody body = ((com.jakewharton.retrofit2.adapter.rxjava2.HttpException) e).response().errorBody();
             //token失效
             if (((com.jakewharton.retrofit2.adapter.rxjava2.HttpException) e).code()==401){
-
 
                 ApplicationUtil.exitApp();
                 return;

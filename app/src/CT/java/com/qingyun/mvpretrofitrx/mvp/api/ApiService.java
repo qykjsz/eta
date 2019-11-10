@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.api;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
@@ -41,4 +42,15 @@ public interface ApiService {
 
     @POST("et_glodoperation")
     Observable  <BaseResponse<Object>>bindCoin(@Query("operationtype")String operationtype, @Query("address")String address, @Query("glodid")String glodid);
+
+//    contacts	[string]	是	设备号
+//    name	[string]	是	联系人姓名
+//    remarks 复制	[string]	是	备注（可以为空）
+//    wallettype	[string]	是	不知道你们怎么选 后台只能添加ETH
+//    address	[string]	是	地址
+    @POST("et_addcontacts")
+    Observable  <BaseResponse<Object>>addContacts(@Query("contacts")String contacts,@Query("name") String name, @Query("remarks")String remarks, @Query("wallettype")String wallettype,@Query("address") String address);
+
+    @POST("et_contactsall")
+    Observable <BaseResponse<List<Contact>>> getContactList(@Query("contacts")String contacts);
 }

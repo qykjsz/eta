@@ -101,7 +101,7 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
         hideBar();
         refreash = rootView.findViewById(R.id.refreash);
         nodata = rootView.findViewById(R.id.nodata);
-        freash_loading = rootView.findViewById(R.id.freash_loading);
+        freash_loading = rootView.findViewById(R.id.refreash_loading);
         initRefreshLayout(refreash);
         requestList();
         init();
