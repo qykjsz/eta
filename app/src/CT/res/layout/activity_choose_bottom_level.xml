@@ -61,11 +61,12 @@
             android:layout_marginStart="@dimen/dp_padding_x_min"
             android:layout_marginTop="@dimen/dp_padding_x_min"
             android:layout_marginEnd="@dimen/dp_padding_x_min"
+            android:paddingBottom="@dimen/dp_padding_x_min"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingBottom="@dimen/dp_padding_x_min"
             app:layout_constraintVertical_bias="0.0">
 
         </android.support.v7.widget.RecyclerView>

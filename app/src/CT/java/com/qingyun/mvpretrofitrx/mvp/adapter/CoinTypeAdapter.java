@@ -1,11 +1,13 @@
 package com.qingyun.mvpretrofitrx.mvp.adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.qingyun.mvpretrofitrx.mvp.activity.ThewalletManagementActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinType;
@@ -16,7 +18,6 @@ import java.util.List;
 import butterknife.BindView;
 
 public class CoinTypeAdapter extends BaseAdapter<CoinType, CoinTypeAdapter.CoinTypeViewHolder> {
-
 
 
     public CoinTypeAdapter(Context context, List<CoinType> list) {
@@ -42,10 +43,15 @@ public class CoinTypeAdapter extends BaseAdapter<CoinType, CoinTypeAdapter.CoinT
 
     @Override
     protected void viewHolderBind(CoinTypeViewHolder holder, int position) {
-        if (getSelectPosition()==position){
+        if (getContext() instanceof ThewalletManagementActivity) {
+            if (position == 0) {
+                holder.cl.setBackground(getContext().getResources().getDrawable(R.drawable.bg_ffffff_top_ret25));
+            }
+        }
+        if (getSelectPosition() == position) {
             holder.ivImg.setImageResource(getList().get(position).getSelectResId());
 
-        }else {
+        } else {
             holder.ivImg.setImageResource(getList().get(position).getResId());
 
         }
@@ -53,7 +59,8 @@ public class CoinTypeAdapter extends BaseAdapter<CoinType, CoinTypeAdapter.CoinT
     }
 
     class CoinTypeViewHolder extends BaseViewHolder {
-
+        @BindView(R.id.cl)
+        ConstraintLayout cl;
         @BindView(R.id.iv_img)
         ImageView ivImg;
 

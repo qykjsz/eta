@@ -32,7 +32,7 @@ public class TradingRecordActivity extends BaseActivity {
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string._000);
+        return getResources().getString(R.string.trading_record);
     }
 
     @Override

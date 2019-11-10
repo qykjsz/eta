@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchMatch.Vertical"
+    tools:context="com.qingyun.mvpretrofitrx.mvp.activity.ThewalletManagementActivity">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_110"
+        android:background="@mipmap/zz_top_bg">
+
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:padding="@dimen/dp_padding_x_min"
+            android:src="@mipmap/back_not_header" />
+
+        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="钱包管理"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_17" />
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/MatchMatch.Horizontal"
+        android:layout_marginTop="-40dp"
+        android:background="@drawable/bg_ffffff_top_round_25">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView2"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="match_parent"
+
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_20">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eth_cn" />
+
+            <ImageView
+                android:id="@+id/addWallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/qbgl_tj" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcy_wallet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_marginTop="@dimen/dp_10" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

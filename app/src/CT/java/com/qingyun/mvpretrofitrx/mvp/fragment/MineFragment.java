@@ -10,9 +10,12 @@ import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.activity.AboutUsActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.ContactActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.GeneralAssetsActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.InvitefriendsActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.SupportActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.SystemSettingsActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.ThewalletManagementActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.TradingRecordActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
@@ -118,11 +121,13 @@ public class MineFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_Asset_overview:
+                startActivity(GeneralAssetsActivity.class);
                 break;
             case R.id.ll_Management_of_the_purse:
-                startActivity(InvitefriendsActivity.class);
+                startActivity(ThewalletManagementActivity.class);
                 break;
             case R.id.ll_trading_record:
+                startActivity(TradingRecordActivity.class);
                 break;
             case R.id.ll_top:
 

@@ -34,7 +34,7 @@ public class InvitefriendsActivity extends BaseActivity {
     }
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.trading_record);
+        return getResources().getString(R.string.invite_friends);
     }
 
     @Override

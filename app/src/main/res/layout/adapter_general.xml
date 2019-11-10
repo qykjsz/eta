@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/sy_eth_kuang">
+
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="@dimen/dp_44"
+            android:layout_height="@dimen/dp_44"
+            android:layout_below="@+id/textView3"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:src="@mipmap/dc_eth" />
+
+        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:text="@string/eth"
+            android:textColor="@color/color_FF333333" />
+
+
+        <TextView
+
+            android:id="@+id/tv_bottom1"
+            style="@style/WrapWrap"
+            android:layout_above="@+id/tv_bottom"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:text="@string/eos_bottom_level"
+            tools:layout_editor_absoluteX="333dp"
+            tools:layout_editor_absoluteY="50dp" />
+
+        <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_pic"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:text="@string/eos_bottom_level"
+            android:textColor="@color/color_FF99AFD9"
+            tools:layout_editor_absoluteX="333dp"
+            tools:layout_editor_absoluteY="79dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="TextView" />
+
+    </RelativeLayout>
+</RelativeLayout>
