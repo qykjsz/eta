@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetModleAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.SelectTheAppAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
@@ -42,7 +43,7 @@ public class FindFragment extends BaseFragment {
     @BindView(R.id.rcy_modle)
     RecyclerView rcyModle;
     private List<AssetModle> modleList;
-    AssetModleAdapter assetModleAdapter;
+    SelectTheAppAdapter selectTheAppAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,18 +82,22 @@ public class FindFragment extends BaseFragment {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
 
         modleList = new ArrayList<>();
-        modleList.add(new AssetModle(R.mipmap.sy_ziyuan, R.string.ziyuan));
-        modleList.add(new AssetModle(R.mipmap.sy_toupiao, R.string.vote));
-        modleList.add(new AssetModle(R.mipmap.sy_maibi, R.string.b_business));
-        modleList.add(new AssetModle(R.mipmap.sy_more, R.string.more_modle));
+        modleList.add(new AssetModle(R.mipmap.fa_02, R.string.ziyuan));
+        modleList.add(new AssetModle(R.mipmap.fa_02, R.string.vote));
+        modleList.add(new AssetModle(R.mipmap.fx_01, R.string.b_business));
+        modleList.add(new AssetModle(R.mipmap.fa_02, R.string.more_modle));
+        modleList.add(new AssetModle(R.mipmap.fa_02, R.string.more_modle));
 
-        assetModleAdapter = new AssetModleAdapter(getContext(), modleList);
-        rcyModle.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        selectTheAppAdapter = new SelectTheAppAdapter(getContext(), modleList);
+        rcyModle.setLayoutManager(new GridLayoutManager(getContext(), 5));
         rcyModle.addItemDecoration(new GridSpacingItemDecoration(4, getResources().getDimensionPixelSize(R.dimen.dp_5), false));
-        rcyModle.setAdapter(assetModleAdapter);
+        rcyModle.setAdapter(selectTheAppAdapter);
         refreashView(modleList, rcyModle);
+        rcyModle1.setLayoutManager(new GridLayoutManager(getContext(), 5));
+        rcyModle1.addItemDecoration(new GridSpacingItemDecoration(4, getResources().getDimensionPixelSize(R.dimen.dp_5), false));
+        rcyModle1.setAdapter(selectTheAppAdapter);
 
-        assetModleAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+        selectTheAppAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
 

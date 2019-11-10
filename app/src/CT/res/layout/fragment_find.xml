@@ -71,15 +71,15 @@
                 android:id="@+id/iv"
                 style="@style/WrapWrap.ImageView_bank_gd_icon" />
 
+        </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcy_modle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:layout_marginStart="@dimen/dp_19"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginEnd="@dimen/dp_10" />
-        </RelativeLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
