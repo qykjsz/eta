@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
-import com.qingyun.mvpretrofitrx.mvp.entity.News;
+import com.qingyun.mvpretrofitrx.mvp.entity.Time;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
 import com.senon.mvpretrofitrx.R;
 
@@ -16,16 +18,16 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class FlashAdapter extends BaseAdapter<News, FlashAdapter.SelectheappViewHolder> {
+public class TimeAdapter extends BaseAdapter<Time.NewsBean, TimeAdapter.SelectheappViewHolder> {
 
 
-    public FlashAdapter(Context context, List<News> list) {
+    public TimeAdapter(Context context, List<Time.NewsBean> list) {
         super(context, list);
     }
 
     @Override
     protected SelectheappViewHolder getViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.adapter_flash, parent, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.adapter_time, parent, false);
         return new SelectheappViewHolder(view);
     }
 
@@ -41,19 +43,19 @@ public class FlashAdapter extends BaseAdapter<News, FlashAdapter.SelectheappView
 
     @Override
     protected void viewHolderBind(SelectheappViewHolder holder, int position) {
-        holder.tvTime.setText(TimeUtils.getTime(Long.parseLong(getList().get(position).getTime()), TimeUtils.DEL_FORMAT_DATE_mm));
-        holder.tvContent.setText(getList().get(position).getContent());
-        holder.tvTitle.setText(getList().get(position).getTitle());
+        Glide.with(getContext()).load(getList().get(position).getImg()).into(holder.ivBack);
+        holder.tvName.setText(getList().get(position).getName());
+        holder.tvTime.setText("来源：ET APP               " + getList().get(position).getTime());
     }
 
     class SelectheappViewHolder extends BaseViewHolder {
 
+        @BindView(R.id.tv_name)
+        TextView tvName;
+        @BindView(R.id.iv_back)
+        ImageView ivBack;
         @BindView(R.id.tv_time)
         TextView tvTime;
-        @BindView(R.id.tv_title)
-        TextView tvTitle;
-        @BindView(R.id.tv_content)
-        TextView tvContent;
 
         public SelectheappViewHolder(View itemView) {
             super(itemView);

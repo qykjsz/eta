@@ -122,7 +122,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
         }
     }
 
-    private void initRefreshLayout(SmartRefreshLayout refreshLayout) {
+    protected void initRefreshLayout(SmartRefreshLayout refreshLayout) {
         if (refreshLayout == null)
             return;
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {

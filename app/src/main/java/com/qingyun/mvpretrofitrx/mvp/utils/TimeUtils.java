@@ -15,6 +15,8 @@ public class TimeUtils {
 			"yyyy/MM/dd");
 	public static final SimpleDateFormat DEL_FORMAT_DATE = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
+		public static final SimpleDateFormat DEL_FORMAT_DATE_mm = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm");
 
 	public static final SimpleDateFormat INT_HOUR_FORMAT = new SimpleDateFormat(
 			"HH");

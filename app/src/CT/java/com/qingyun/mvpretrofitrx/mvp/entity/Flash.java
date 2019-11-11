@@ -10,7 +10,7 @@ public class Flash {
      */
 
     private String pages;
-    private List<com.qingyun.mvpretrofitrx.mvp.entity.News> News;
+    private List<News> News;
 
     public String getPages() {
         return pages;
@@ -20,11 +20,11 @@ public class Flash {
         this.pages = pages;
     }
 
-    public List<com.qingyun.mvpretrofitrx.mvp.entity.News> getNews() {
+    public List<News> getNews() {
         return News;
     }
 
-    public void setNews(List<com.qingyun.mvpretrofitrx.mvp.entity.News> News) {
+    public void setNews(List<News> News) {
         this.News = News;
     }
 
