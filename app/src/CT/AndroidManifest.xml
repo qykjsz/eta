@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme"
         tools:replace="android:theme,android:icon">
-        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ThewalletManagementActivity"></activity>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ExpressTheDetailsActivity"></activity>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ThewalletManagementActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.GeneralAssetsActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TradingRecordActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.InvitefriendsActivity" />

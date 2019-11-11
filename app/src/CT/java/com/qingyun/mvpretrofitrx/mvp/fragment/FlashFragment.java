@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.qingyun.mvpretrofitrx.mvp.activity.ExpressTheDetailsActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.FlashAdapter;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.contract.FlashContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.News;
+import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.Flashpresenter;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -39,7 +43,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
     List<News> list;
     @BindView(R.id.freash_loading)
     LoadingLayout freashLoading;
-
+    News news;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,6 +85,16 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         recyclerView.setAdapter(flashAdapter);
         refreashView(list, recyclerView);
         initRefreshLayout(srl);
+      flashAdapter.setAddListener(new BaseAdapter.OnItemClickListener() {
+          @Override
+          public void onItemClick(List list, int position) {
+              news= (News) list.get(position);
+              Intent intent=new Intent();
+              intent.setClass(getContext(), ExpressTheDetailsActivity.class);
+              intent.putExtra("people", news);
+              startActivity(intent);
+          }
+      });
 
     }
 
