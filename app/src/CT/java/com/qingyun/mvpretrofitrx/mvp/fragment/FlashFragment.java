@@ -8,16 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.FlashContact;
-import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
-import com.qingyun.mvpretrofitrx.mvp.entity.News;
+import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.presenter.Flashpresenter;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,7 +76,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
     }
 
     @Override
-    public void getContactListFlash(News contactList) {
+    public void getContactListFlash(Flash contactList) {
 
     }
 

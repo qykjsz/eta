@@ -1,7 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.base;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -42,7 +41,6 @@ public class BaseApi {
     //连接时长，单位：毫秒
     public static final int CONNECT_TIME_OUT = 7676;
     private String token;
-
     /**
      * 无超时及缓存策略的Retrofit
      *
@@ -75,7 +73,7 @@ public class BaseApi {
         File cacheFile = new File(ApplicationUtil.getContext().getCacheDir(), "cache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
         //增加头部信息
-        token = (String) SpUtils.getObjectFromShare(ApplicationUtil.getContext(), "token");
+        token = (String) SpUtils.getObjectFromShare(ApplicationUtil.getContext(),"token");
 //        int choose = (int) SpUtils.getObjectFromShare(ApplicationUtil.getContext(), "language");
         String local = null;
 //        if (choose==1){
@@ -83,9 +81,9 @@ public class BaseApi {
 //        }else if (choose==2){
 //            local="en";
 //        }
-        local = "zh-CN";
+        local="zh-CN";
 
-        if (token == null) token = "";
+        if (token==null) token="";
         final String finalLocal = local;
         Interceptor headerInterceptor = new Interceptor() {
             @Override
@@ -93,27 +91,20 @@ public class BaseApi {
                 Request build = chain.request().newBuilder()
 //                        .addHeader("Content-Type","application/json;charset=UTF-8")
 //                        .addHeader("Content-Type", "application/x-www-form-urlencoded")//设置允许请求json数据
-                        .addHeader("x-token", token)
+                        .addHeader("x-token",token)
                         .addHeader("locale", finalLocal)
                         .build();
                 return chain.proceed(build);
             }
         };
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                //打印retrofit日志
-                Log.e("zxdRetrofitLog", "retrofitBack = " + message);
-            }
-        });
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         //创建一个OkHttpClient并设置超时时间
         OkHttpClient client = new OkHttpClient.Builder()
                 .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
                 .addNetworkInterceptor(new StethoInterceptor())
                 .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(loggingInterceptor)//没网的情况下
-                .addNetworkInterceptor(loggingInterceptor)//有网的情况下
+                .addInterceptor(mRewriteCacheControlInterceptor)//没网的情况下
+                .addNetworkInterceptor(mRewriteCacheControlInterceptor)//有网的情况下
                 .addInterceptor(headerInterceptor)
                 .addInterceptor(logInterceptor)
                 .cache(cache)
@@ -149,7 +140,7 @@ public class BaseApi {
             }
         };
 
-        String workerClassName = "okhttp3.OkHttpClient";
+        String workerClassName="okhttp3.OkHttpClient";
         try {
             Class workerClass = Class.forName(workerClassName);
             Field hostnameVerifier = workerClass.getDeclaredField("hostnameVerifier");

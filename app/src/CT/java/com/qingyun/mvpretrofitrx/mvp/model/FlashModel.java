@@ -12,9 +12,11 @@ import java.util.List;
 import io.reactivex.ObservableTransformer;
 
 public class FlashModel<T> extends BaseModel {
-    public void getContactList(Context context, String contacts, ObservableTransformer transformer, ObserverResponseListener observerListener) {
-        subscribe(context, Api.getApiService().getflashmoel(contacts), observerListener, transformer);
+
+    public void getFlashList(Context context, String page, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener) {
+        subscribe(context, Api.getApiService().getflashmoel(page), observerListener, transformer);
 
     }
+
 
 }

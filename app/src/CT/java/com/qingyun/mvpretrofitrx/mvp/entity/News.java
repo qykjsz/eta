@@ -1,32 +1,37 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
-import java.util.List;
-
 public class News {
+     /**
+         * title : 金财互联：在解决区块链用户规模和资源开销方面有自身特色技术积累
+         * content : 据新浪网消息，金财互联（002530.SZ）今日在官方互动平台表示，公司在解决区块链的用户规模（高并发）和资源开销方面有自身的特色技术积累，确实用户规模化后，单位成本会降低；在数字版权、高院的法人画像、供应链金融都有区块链产品及用户在实验验证阶段。
+         * time : 1573436282
+         */
 
-    /**
-     * pages : 779
-     * News : [{"title":"金财互联：在解决区块链用户规模和资源开销方面有自身特色技术积累","content":"据新浪网消息，金财互联（002530.SZ）今日在官方互动平台表示，公司在解决区块链的用户规模（高并发）和资源开销方面有自身的特色技术积累，确实用户规模化后，单位成本会降低；在数字版权、高院的法人画像、供应链金融都有区块链产品及用户在实验验证阶段。","time":"1573436282"},{"title":"人民日报：比特币不等于区块链，数字货币只是区块链技术在金融领域的应用之一","content":"据人民日报报道，实际上，区块链技术与金融的结合并非偶然。简单来说，区块链是一个分布式的共享账本和数据库，具有去中心化、不可篡改、全程留痕、可追溯等特点。金融是基于信任的合作，区块链的这些特点为创造信任奠定了基础。在解决信用风险大、资金运用效率低、支付处理成本高等金融领域难题上，区块链技术具有重要意义。从现实来说，比特币不等于区块链，数字货币只是区块链技术在金融领域的应用之一。","time":"1573435561"},{"title":"deVere Group首席执行官：阿联酋对加密货币的需求将快速增长","content":"据Khaleejtimes消息，deVere Group首席执行官兼创始人Nigel Green发表文章称，随着全球加密资产交易量继续飙升，阿联酋和其它海湾合作委员会(GCC)成员国对加密货币和数字资产的需求将在不久的将来迅速加速增长。凭借价值超过2.1亿美元的加密交易，阿联酋已经成为2019年数字货币交易最活跃的国家之一。此外，迪拜国际金融中心还致力于推出一份关于该国采用加密货币的白皮书，以及阿联酋各地金融科技公司的可用机会。","time":"1573435202"},{"title":"BTC新增流量滞后于拉升","content":"据TokenInsight数据显示，反映区块链行业整体表现的TI指数北京时间11月11日8时报679.65点，较昨日同期上涨17.11点，涨幅为2.58%。此外，在TokenInsight密切关注的25个细分行业中，24小时内涨幅最高的为钱包行业，涨幅为3.86%；24小时内跌幅最高的为广告行业，跌幅为0.76%。 据监测显示，BTC 24h交易额为$205亿，活跃地址数较前日下降19.48%，转账数较前日下降7.13%。Coinwalle分析师Jeffrey认为，BTC新增流量滞后于拉升，短期或将延续盘整。 另据Bituniverse智能AI量化分析，今日行情可开启BCH/BTC币币网格交易，区间0.0294-0.0339BTC，赚取币种轮动收益。注：以上内容仅供参考，不构成投资建议。","time":"1573434482"},{"title":"58交易所交割合约24H行情9:00播报","content":"据58交易所交割合约行情，截至9:00：BTC合约现报价9026.43美元，较现货贴水17.33美元，24h涨跌幅3.05%。成交量742.65万手，成交额26.69万美元，当前持仓总量345.21万手，较上一交易日变化12.96万手。EOS合约现报价3.59美元，较现货贴水0.01美元，24h涨跌幅3.46%。成交量114.91万手，成交额1628.29万美元，当前持仓总量299.54万手，较上一交易日变化8.94万手。ETH合约现报价189.01美元，较现货贴水0.38美元，24h涨跌幅2.71%。成交量146.43万手，成交额68.70万美元，当前持仓总量307.65万手，较上一交易日变化-8.09万手。","time":"1573434422"}]
-     */
+        private String title;
+        private String content;
+        private String time;
 
-    private int pages;
-    public List<NewsBean> News;
+        public String getTitle() {
+            return title;
+        }
 
-    public int getPages() {
-        return pages;
-    }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
-    public void setPages(int pages) {
-        this.pages = pages;
-    }
+        public String getContent() {
+            return content;
+        }
 
-    public List<NewsBean> getNews() {
-        return News;
-    }
+        public void setContent(String content) {
+            this.content = content;
+        }
 
-    public void setNews(List<NewsBean> News) {
-        this.News = News;
-    }
+        public String getTime() {
+            return time;
+        }
 
-
+        public void setTime(String time) {
+            this.time = time;
+        }
 }

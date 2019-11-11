@@ -39,7 +39,7 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
     public ProgressObserver(Context context, ObserverResponseListener listener, boolean isDialog, boolean cancelable) {
         this.listener = listener;
         this.context = context;
-        if(isDialog){
+        if (isDialog) {
             mProgressDialogHandler = new ProgressDialogHandler(context, this, cancelable);
         }
     }
@@ -67,14 +67,14 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
     @Override
     public void onNext(BaseResponse<T> tBaseResponse) {
         dismissProgressDialog();
-        if (tBaseResponse.getCode()==200){
+        if (tBaseResponse.getCode() == 200) {
             listener.onNext(tBaseResponse.getData());//可定制接口，通过code回调处理不同的业务
 
-        }else {
+        } else {
 
         }
         if (!TextUtils.isEmpty(tBaseResponse.getMsg()))
-        ToastUtil.showShortToast(tBaseResponse.getMsg());
+            ToastUtil.showShortToast(tBaseResponse.getMsg());
     }
 
 //    @Override
@@ -103,10 +103,10 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
     @Override
     public void onError(Throwable e) {
         dismissProgressDialog();
-        if(e instanceof com.jakewharton.retrofit2.adapter.rxjava2.HttpException){
+        if (e instanceof com.jakewharton.retrofit2.adapter.rxjava2.HttpException) {
             ResponseBody body = ((com.jakewharton.retrofit2.adapter.rxjava2.HttpException) e).response().errorBody();
             //token失效
-            if (((com.jakewharton.retrofit2.adapter.rxjava2.HttpException) e).code()==401){
+            if (((com.jakewharton.retrofit2.adapter.rxjava2.HttpException) e).code() == 401) {
 
                 ApplicationUtil.exitApp();
                 return;
@@ -125,7 +125,7 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
 
         Log.e(TAG, "onError: ", e);
         //自定义异常处理
-        if(e instanceof ExceptionHandle.ResponeThrowable){
+        if (e instanceof ExceptionHandle.ResponeThrowable) {
             listener.onError(e.getMessage());
         } else {
             listener.onError(e.getMessage());

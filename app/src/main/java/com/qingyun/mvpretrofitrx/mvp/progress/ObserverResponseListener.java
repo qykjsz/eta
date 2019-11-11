@@ -1,6 +1,5 @@
 package com.qingyun.mvpretrofitrx.mvp.progress;
 
-import com.qingyun.mvpretrofitrx.mvp.utils.ExceptionHandle.ResponeThrowable;
 
 /**
  * 请求监听
