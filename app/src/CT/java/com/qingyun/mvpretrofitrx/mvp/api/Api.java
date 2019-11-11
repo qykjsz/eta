@@ -10,9 +10,10 @@ import io.reactivex.Observable;
 
 public class Api {
 
-//    private String baseUrl = "https://application.us.zone/api/";
+    //    private String baseUrl = "https://application.us.zone/api/";
     private static String baseUrl = "https://et2.etac.io/api/";
     private volatile static ApiService apiService;
+
     public static ApiService getApiService() {
 
         if (apiService == null) {
@@ -26,12 +27,11 @@ public class Api {
     }
 
     private Api() {
-        if (ApplicationUtil.isApkInDebug(ApplicationUtil.getContext()))
-        {
+        if (ApplicationUtil.isApkInDebug(ApplicationUtil.getContext())) {
             baseUrl = "https://et2.etac.io/api/";
-            Log.e("---------------","debug");
-        }else {
-            Log.e("---------------","release");
+            Log.e("---------------", "debug");
+        } else {
+            Log.e("---------------", "release");
 
             baseUrl = "https://et2.etac.io/api/";
 
@@ -42,7 +42,7 @@ public class Api {
 
     public static void UpdataToken() {
         synchronized (Api.class) {
-                new Api();
+            new Api();
         }
     }
 

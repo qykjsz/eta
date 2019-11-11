@@ -29,34 +29,38 @@ public interface ApiService {
     Observable<Img> upload(@Part MultipartBody.Part img);
 
 
-    Observable <NormalResponse>getSimple();
+    Observable<NormalResponse> getSimple();
 
 
     @POST("et_home")
-    Observable <BaseResponse<AssetResponse>>getWalletInfo(@Query("address") String walletAddress);
+    Observable<BaseResponse<AssetResponse>> getWalletInfo(@Query("address") String walletAddress);
 
     @POST("et_import")
-    Observable <BaseResponse<Object>>addWallet(@Query("address")String walletAddress);
+    Observable<BaseResponse<Object>> addWallet(@Query("address") String walletAddress);
 
     @POST("et_platformglod")
-    Observable <BaseResponse<List<Wallet>>>getSupportCoinList(@Query("address")String address);
+    Observable<BaseResponse<List<Wallet>>> getSupportCoinList(@Query("address") String address);
 
 
     @POST("et_glodoperation")
-    Observable  <BaseResponse<Object>>bindCoin(@Query("operationtype")String operationtype, @Query("address")String address, @Query("glodid")String glodid);
+    Observable<BaseResponse<Object>> bindCoin(@Query("operationtype") String operationtype, @Query("address") String address, @Query("glodid") String glodid);
 
-//    contacts	[string]	是	设备号
+    //    contacts	[string]	是	设备号
 //    name	[string]	是	联系人姓名
 //    remarks 复制	[string]	是	备注（可以为空）
 //    wallettype	[string]	是	不知道你们怎么选 后台只能添加ETH
 //    address	[string]	是	地址
     @POST("et_addcontacts")
-    Observable  <BaseResponse<Object>>addContacts(@Query("contacts")String contacts,@Query("name") String name, @Query("remarks")String remarks, @Query("wallettype")String wallettype,@Query("address") String address);
+    Observable<BaseResponse<Object>> addContacts(@Query("contacts") String contacts, @Query("name") String name, @Query("remarks") String remarks, @Query("wallettype") String wallettype, @Query("address") String address);
 
     @POST("et_contactsall")
-    Observable <BaseResponse<List<Contact>>> getContactList(@Query("contacts")String contacts);
+    Observable<BaseResponse<List<Contact>>> getContactList(@Query("contacts") String contacts);
 
 
     @POST("et_recordorder")
-    Observable <BaseResponse<TransferLogResponse>>getLog(@Query("address")String address, @Query("glod")String glod, @Query("type")int type, @Query("page")int page);
+    Observable<BaseResponse<TransferLogResponse>> getLog(@Query("address") String address, @Query("glod") String glod, @Query("type") int type, @Query("page") int page);
+
+    @POST("et_newsflash")
+    Observable<BaseResponse<TransferLogResponse>> getflashmoel(@Query("page") String page);
+
 }

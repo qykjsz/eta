@@ -8,7 +8,7 @@
 
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/magic_indicator3"
-
+        android:paddingTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
         android:background="@mipmap/zz_top_bg"

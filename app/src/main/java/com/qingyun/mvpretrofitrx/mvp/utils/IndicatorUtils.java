@@ -95,6 +95,7 @@ public class IndicatorUtils {
 
                     @Override
                     public void onSelected(int index, int totalCount) {
+
                         titleText.setTextSize(20);
                         titleText.setTextColor(activity.getResources().getColor(R.color.color_FFFFFF));
                     }

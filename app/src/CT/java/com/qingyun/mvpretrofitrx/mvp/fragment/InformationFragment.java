@@ -89,6 +89,6 @@ public class InformationFragment extends BaseFragment {
         fragments.add(new MakieFragment());
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getActivity().getSupportFragmentManager());
         viewPager.setAdapter(mainViewPagerAdapter);
-        IndicatorUtils.initMagicIndicator3M(viewPager, titles,  getActivity(),magicIndicator3,0,50);
+        IndicatorUtils.initMagicIndicator3M(viewPager, titles,  getActivity(),magicIndicator3,0,20);
     }
 }
