@@ -12,7 +12,9 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
+import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
@@ -106,6 +108,8 @@ public class ChangeWalletPasswordActivity extends BaseActivity {
             return;
         }
 
+        ProgressDialogUtils.getInstances().showDialog();
+
         WalletManager.changePassword(getContext(), etCurrentPassword.getText().toString(), etNewPassword.getText().toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.ImportWalletListener() {
             @Override
             public void importSuccess(Wallet wallet) {
@@ -114,5 +118,7 @@ public class ChangeWalletPasswordActivity extends BaseActivity {
                 ApplicationUtil.addWallet(wallet);
             }
         });
+        ProgressDialogUtils.getInstances().cancel();
+
     }
 }
