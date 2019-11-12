@@ -89,7 +89,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
     public void init() {
         EventBus.getDefault().register(this);
         String address = getIntent().getStringExtra(IntentUtils.TRANSFER_ADDRESS);
-        currentCoin = (Wallet) getIntent().getSerializableExtra(IntentUtils.TRANSFER_ADDRESS);
+        currentCoin = (Wallet) getIntent().getSerializableExtra(IntentUtils.ASSET);
 
         if (address != null)
             tvAssdrss.setText(address);
