@@ -18,6 +18,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.News;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.Flashpresenter;
+import com.qingyun.mvpretrofitrx.mvp.view.TimeLineItemDecoration;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.senon.mvpretrofitrx.R;
@@ -81,7 +82,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         flashAdapter = new FlashAdapter(getContext(), list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, 50, false));
-        //
+        //recyclerView.addItemDecoration(new TimeLineItemDecoration());
         recyclerView.setAdapter(flashAdapter);
         refreashView(list, recyclerView);
         initRefreshLayout(srl);

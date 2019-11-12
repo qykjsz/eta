@@ -71,10 +71,12 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
             listener.onNext(tBaseResponse.getData());//可定制接口，通过code回调处理不同的业务
 
         } else {
-
+            if (!TextUtils.isEmpty(tBaseResponse.getMsg())) {
+                ToastUtil.showShortToast(tBaseResponse.getMsg());
+            }
         }
-        if (!TextUtils.isEmpty(tBaseResponse.getMsg()))
-            ToastUtil.showShortToast(tBaseResponse.getMsg());
+
+
     }
 
 //    @Override

@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/MatchMatch.Vertical"
     tools:context="com.qingyun.mvpretrofitrx.mvp.activity.TradingRecordActivity">
+ <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30">
 
-</android.support.constraint.ConstraintLayout>
+            <ezy.ui.layout.LoadingLayout
+                android:id="@+id/freash_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginEnd="@dimen/dp_20">
+
+
+                </android.support.v7.widget.RecyclerView>
+            </ezy.ui.layout.LoadingLayout>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

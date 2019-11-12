@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_ontiem"
-    style="@style/MatchWrap.Vertical">
+    style="@style/MatchWrap"
+    android:background="@color/color_FFFFFF">
 
-    <TextView
-        android:id="@+id/tv_time"
-        style="@style/WrapWrap"
-        android:background="@drawable/resource"
-        android:gravity="center"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_5"
-        android:paddingEnd="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_5"
-        android:textColor="@color/color_FFFFFF"
-        android:textSize="@dimen/dp_13" />
 
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/MatchWrap"
-        android:layout_marginTop="@dimen/dp_10"
+    <LinearLayout style="@style/MatchWrap.Vertical">
 
-        android:textColor="@color/color_FF333333" />
 
-    <TextView
-        android:id="@+id/tv_content"
-        style="@style/MatchWrap"
-        android:layout_height="50dp"
-        android:textColor="@color/color_FF999999" />
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/WrapWrap"
+            android:background="@drawable/resource"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_5"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/dp_11" />
 
-    <TextView
-        android:layout_marginTop="@dimen/dp_10"
-        android:textColor="#98AFD7"
-        style="@style/WrapWrap"
-        android:text="来源：MoMo"></TextView>
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/MatchWrap"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/color_FF333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/MatchWrap"
+            android:ellipsize="end"
+            android:maxHeight="@dimen/dp_150"
+            android:maxLines="3"
+            android:textColor="@color/color_FF999999"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            style="@style/WrapWrap"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="来源：MoMo"
+            android:textColor="#98AFD7"
+            android:textSize="@dimen/sp_11"></TextView>
+    </LinearLayout>
 
 </LinearLayout>

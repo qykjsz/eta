@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/MatchMatch"
+    android:background="@mipmap/kxfx_bg"
     tools:context="com.qingyun.mvpretrofitrx.mvp.activity.ExpressTheDetailsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        style="@style/MatchMatch.Vertical"
+        android:layout_marginStart="26.5dp"
+        android:layout_marginTop="@dimen/dp_140"
+        android:layout_marginEnd="23.5dp">
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/WrapWrap"
+            android:text="2019/10/22 12:23"
+            android:textColor="@color/color_FFFFFF" />
+
+        <TextView
+            android:id="@+id/tv_title1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_25"
+            android:text="IMF应该考虑发行类似Libra的加密货币"
+            android:textColor="@color/color_FFFFFF" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/MatchWrap"
+            android:layout_marginTop="@dimen/dp_23"
+            android:textColor="@color/color_FFFFFF" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_26"
+            android:textColor="@color/color_FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="来源 ：HuoBi" />
+
+    </LinearLayout>
+</LinearLayout>

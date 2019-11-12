@@ -7,7 +7,7 @@
 
 
     <RelativeLayout
-
+        android:id="@+id/Rl_language_choice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
@@ -28,7 +28,7 @@
         android:layout_height="@dimen/dp_1" />
 
     <RelativeLayout
-
+        android:id="@+id/Rl_Node_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
@@ -49,7 +49,7 @@
         android:layout_height="@dimen/dp_1" />
 
     <RelativeLayout
-
+        android:id="@+id/Rl_unit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
@@ -70,7 +70,7 @@
         android:layout_height="@dimen/dp_1" />
 
     <RelativeLayout
-
+        android:id="@+id/Rl_push_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
@@ -103,6 +103,7 @@
             android:text="红涨绿跌" />
 
         <Switch
+            android:id="@+id/sw_1"
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="@dimen/dp_20"

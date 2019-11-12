@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TimePicker;
 
+import com.qingyun.mvpretrofitrx.mvp.activity.TheArticleDetailsActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.TimeAdapter;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
@@ -41,6 +44,7 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
     Unbinder unbinder;
     List<Time.NewsBean> times;
     TimeAdapter timeAdapter;
+    Time.NewsBean newsBean;
 
     @Override
     public int getLayoutId() {
@@ -69,6 +73,16 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
         recyclerView.setAdapter(timeAdapter);
         refreashView(times, recyclerView);
         initRefreshLayout(srl);
+        timeAdapter.setAddListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(List list, int position) {
+                 newsBean= (Time.NewsBean) list.get(position);
+              Intent intent=new Intent();
+              intent.setClass(getContext(), TheArticleDetailsActivity.class);
+              intent.putExtra("newsBean", newsBean);
+              startActivity(intent);
+            }
+        });
     }
 
     @Override

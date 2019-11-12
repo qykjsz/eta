@@ -45,9 +45,18 @@ public class MakieAdapter extends BaseAdapter<Quotation, MakieAdapter.Selectheap
     protected void viewHolderBind(SelectheappViewHolder holder, int position) {
         holder.tvName.setText(getList().get(position).getName());
         holder.tvShangmoney.setText(getList().get(position).getShangmoney());
-        holder.tvXiamoney.setText(getList().get(position).getXiamoney());
+        holder.tvXiamoney.setText(getContext().getString(R.string.test1) + getList().get(position).getXiamoney());
         holder.tvZb.setText(getList().get(position).getZd());
         Glide.with(getContext()).load(getList().get(position).getImg()).into(holder.ivImg);
+        double s_zd = Double.parseDouble(getList().get(position).getZd());
+
+        if (s_zd > 0) {//你输入的是正数
+            holder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_E04159));
+        } else if (s_zd < 0) {//你输入的是负数
+            holder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_00B794));
+        } else if (getList().get(position).getZd().equals("0")) {
+             holder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_999999));
+        }
     }
 
     class SelectheappViewHolder extends BaseViewHolder {

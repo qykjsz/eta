@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * 直线viewpager指示器，带颜色渐变
- * 博客: http://hackware.lucode.net
+ * 博客:
  * Created by hackware on 2016/6/26.
  */
 public class LinePagerIndicator extends View implements IPagerIndicator {

@@ -2,7 +2,6 @@ package com.qingyun.mvpretrofitrx.mvp.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.TypedValue;
@@ -11,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
-import com.qingyun.mvpretrofitrx.mvp.adapter.AssetAdapter;
-import com.qingyun.mvpretrofitrx.mvp.adapter.AssetModleAdapter;
+import com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.SelectTheAppAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
@@ -28,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class FindFragment extends BaseFragment {
@@ -77,7 +75,7 @@ public class FindFragment extends BaseFragment {
     @Override
     public void init() {
         SearchView.SearchAutoComplete textView = (SearchView.SearchAutoComplete) serachview.findViewById(R.id.search_src_text);
-        textView.setTextColor(getResources().getColor(R.color.material_blue_grey_90));
+        textView.setTextColor(getResources().getColor(R.color.color_FFFFFF));
         textView.setHintTextColor(getResources().getColor(R.color.color_FFFFFF));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
 
@@ -122,4 +120,8 @@ public class FindFragment extends BaseFragment {
         return null;
     }
 
+    @OnClick(R.id.btn_scan)
+    public void onViewClicked() {
+         startActivity(ScanActivity.class);
+    }
 }

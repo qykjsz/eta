@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,10 +34,6 @@ import io.reactivex.ObservableTransformer;
 public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.Presenter> implements MakieContact.View {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.freash_loading)
-    LoadingLayout freashLoading;
-    @BindView(R.id.srl)
-    SmartRefreshLayout srl;
     Unbinder unbinder;
     private List<Quotation> quotations;
     MakieAdapter adapter;
@@ -63,7 +60,8 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
         adapter = new MakieAdapter(getContext(), quotations);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, 50, false));
-        //
+        //   //添加Android自带的分割线
+            recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
         refreashView(quotations, recyclerView);
         // initRefreshLayout(srl);
