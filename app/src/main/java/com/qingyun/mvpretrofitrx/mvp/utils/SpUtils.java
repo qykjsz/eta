@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 
+import com.google.gson.Gson;
+import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,6 +16,29 @@ import java.io.ObjectOutputStream;
 
 public class SpUtils {
 
+
+
+    public static boolean setObjectToShare(Context context, Object object,
+                                           String key,Class clazz){
+
+        SharedPreferences share = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        if (object == null) {
+            SharedPreferences.Editor editor = share.edit().remove(key);
+            return editor.commit();
+        }
+        String json = new Gson().toJson(object, clazz);
+       return share.edit().putString(key,json).commit();
+
+    }
+
+    public  static <T> T getObjectFromShare(Context context, String key, Class<T> clazz){
+        SharedPreferences sharePre = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        String json = sharePre.getString(key,"");
+        return  new Gson().fromJson(json,clazz);
+
+    }
 
     public static boolean setObjectToShare(Context context, Object object,
                                        String key) {

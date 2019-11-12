@@ -27,9 +27,9 @@
         android:text="@string/status"
         android:textColor="@color/color_text_1"
         android:textSize="@dimen/sp_12"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_amount"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView14" />
+        app:layout_constraintTop_toTopOf="@+id/tv_amount" />
 
     <TextView
         android:id="@+id/textView16"
@@ -39,9 +39,9 @@
         android:text="@string/time"
         android:textColor="@color/color_text_1"
         android:textSize="@dimen/sp_12"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_status"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
+        app:layout_constraintTop_toTopOf="@+id/tv_status" />
 
     <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
         android:id="@+id/tv_amount"
@@ -52,8 +52,8 @@
         android:layout_marginBottom="@dimen/dp_8"
         android:text="@string/format_amount"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintStart_toStartOf="@+id/tv_amount"
+        app:layout_constraintTop_toBottomOf="@+id/tv_amount" />
 
     <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
         android:id="@+id/tv_status"
@@ -61,8 +61,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         android:text="@string/status_completed"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintStart_toStartOf="@+id/tv_status"
+        app:layout_constraintTop_toBottomOf="@+id/tv_status" />
 
     <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
         android:id="@+id/tv_time"
@@ -70,6 +70,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         android:text="@string/format_time"
-        app:layout_constraintEnd_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time" />
 </android.support.constraint.ConstraintLayout>

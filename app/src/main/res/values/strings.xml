@@ -35,6 +35,9 @@
     <string name="time">时间</string>
     <string name="formate_time">0000-00 00:00:00</string>
     <string name="status_completed">已完成</string>
+    <string name="status_success">成功</string>
+    <string name="status_failure">失败</string>
+
     <string name="to_wallet_safe">为了您的钱包安全，请备份钱包</string>
     <string name="delete_wallet">删除钱包</string>
     <string name="beifen">立即备份</string>
@@ -182,7 +185,7 @@
     <string name="storage_permission_need_open">使用此功能必须开启内存权限</string>
     <string name="sure_to_delete_wallet">确认删除钱包？</string>
     <string name="bottom_name_eos">EOS底层</string>
-    <string name="bottom_name_eth">IOST底层</string>
+    <string name="bottom_name_eth">ETH底层</string>
     <string name="bottom_name_iost">IOST底层</string>
     <string name="bottom_name_tron">Tron底层</string>
     <string name="bottom_name_binance">Binance底层</string>
@@ -206,4 +209,6 @@
     <string name="About_Us">关于我们</string>
     <string name="system_settings">系统设置</string>
     <string name="requst_err">请求错误</string>
+    <string name="old_password_must">当前密码为必填</string>
+    <string name="change_password_success">修改密码成功</string>
 </resources>

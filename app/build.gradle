@@ -185,5 +185,4 @@ dependencies {
 
     implementation 'am.widget:wraplayout:1.2.1'
 
-
 }

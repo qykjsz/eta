@@ -90,7 +90,7 @@ public class ApplicationUtil extends Application implements Application.Activity
 
     public static Wallet getCurrentWallet() {
         if (currentWallet==null)        {
-            currentWallet = (Wallet) SpUtils.getObjectFromShare(getContext(),"current_wallet");
+            currentWallet = (Wallet) SpUtils.getObjectFromShare(getContext(), "current_wallet");
         }
         return currentWallet;
     }
@@ -99,7 +99,6 @@ public class ApplicationUtil extends Application implements Application.Activity
 
 
     public static Map<String,List<Wallet>> getWallet(){
-
        return (Map<String, List<Wallet>>) SpUtils.getObjectFromShare(getContext(),"wallet");
     }
 
@@ -132,7 +131,6 @@ public class ApplicationUtil extends Application implements Application.Activity
         walletMap.put(wallet.getCoinType(),wallets);
         SpUtils.setObjectToShare(getContext(),walletMap,"wallet");
     }
-
 
     public static void deleteWallet(Wallet wallet){
         Map<String, List<Wallet>> walletMap = (Map<String, List<Wallet>>) SpUtils.getObjectFromShare(getContext(), "wallet");
