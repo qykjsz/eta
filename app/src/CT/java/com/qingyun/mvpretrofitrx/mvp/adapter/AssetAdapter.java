@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
 import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
+import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
 
@@ -18,12 +19,12 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class AssetAdapter extends BaseAdapter<Asset, AssetAdapter.AssetViewHolder> {
+public class AssetAdapter extends BaseAdapter<Wallet, AssetAdapter.AssetViewHolder> {
 
 
 
 
-    public AssetAdapter(Context context, List<Asset> list) {
+    public AssetAdapter(Context context, List<Wallet> list) {
         super(context, list);
     }
 

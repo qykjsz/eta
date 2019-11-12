@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AssetResponse implements Serializable {
     private String allnumber;
-    private List<Asset> glod;
+    private List<Wallet> glod;
     private List<Proportion> proportion;
     private String today;
     private List<MyNews> news;
@@ -43,11 +43,11 @@ public class AssetResponse implements Serializable {
         this.allnumber = allnumber;
     }
 
-    public List<Asset> getGlod() {
+    public List<Wallet> getGlod() {
         return glod;
     }
 
-    public void setGlod(List<Asset> glod) {
+    public void setGlod(List<Wallet> glod) {
         this.glod = glod;
     }
 }

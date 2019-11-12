@@ -117,7 +117,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     @BindView(R.id.rcy_proportion)
     RecyclerView rcyProportion;
     private List<AssetModle> modleList;
-    private List<Asset> assetList;
+    private List<com.qingyun.mvpretrofitrx.mvp.entity.Wallet> assetList;
     private ProportionAdapter proportionAdapter;
 
     Handler handler = new Handler(new Handler.Callback() {
@@ -174,7 +174,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(IntentUtils.ASSET, (Asset) assetList.get(position));
+                bundle.putSerializable(IntentUtils.ASSET, (com.qingyun.mvpretrofitrx.mvp.entity.Wallet) assetList.get(position));
                 startActivity(AssetWalletActivity.class, bundle);
             }
         });
@@ -432,6 +432,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     @Override
     public void getLogSuccess(TransferLogResponse transferLogResponse) {
 
+
+    }
+
+    @Override
+    public void getNodeSuccess(String node) {
 
     }
 

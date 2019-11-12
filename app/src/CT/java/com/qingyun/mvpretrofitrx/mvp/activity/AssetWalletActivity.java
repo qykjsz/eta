@@ -12,6 +12,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.fragment.AssetWalletLogFragment;
 import com.qingyun.mvpretrofitrx.mvp.utils.IndicatorUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
@@ -42,7 +43,7 @@ public class AssetWalletActivity extends BaseActivity {
     TextView tvIncomeToday;
     private List<BaseFragment> fragments;
     private List<String> titles;
-    private Asset asset;
+    private Wallet asset;
     private int type;
 
     @Override
@@ -83,7 +84,7 @@ public class AssetWalletActivity extends BaseActivity {
         titles.add(getResources().getString(R.string.all));
         titles.add(getResources().getString(R.string.transfer_in));
         titles.add(getResources().getString(R.string.transfer_out));
-        asset = (Asset) getIntent().getSerializableExtra(IntentUtils.ASSET);
+        asset = (Wallet) getIntent().getSerializableExtra(IntentUtils.ASSET);
         fragments = new ArrayList<>();
         fragments.add(new AssetWalletLogFragment(3, asset));
         fragments.add(new AssetWalletLogFragment(2, asset));
@@ -113,7 +114,9 @@ public class AssetWalletActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_transfer:
-                startActivity(TransferActivity.class);
+                Bundle bundle  = new Bundle();
+                bundle.putSerializable(IntentUtils.ASSET,asset);
+                startActivity(TransferActivity.class,bundle);
                 break;
             case R.id.btn_back:
                 finish();

@@ -1,6 +1,8 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
-public class Wallet {
+import java.io.Serializable;
+
+public class Wallet implements Serializable {
 
 
     private String id;
@@ -9,6 +11,25 @@ public class Wallet {
     private String img;
 //    1.我已经添加 2.我没有添加
     private String have;
+    private String number;
+    private String usdtnumber;
+
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getUsdtnumber() {
+        return usdtnumber;
+    }
+
+    public void setUsdtnumber(String usdtnumber) {
+        this.usdtnumber = usdtnumber;
+    }
 
     public String getId() {
         return id;

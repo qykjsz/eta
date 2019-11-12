@@ -57,7 +57,7 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
     private LinearLayout lyBack;
     private ImageView nodata;
     public boolean isLoadMore = false;
-    public int page = 1;
+    public int page = 0;
     public int per_page = 10;
     private SmartRefreshLayout refreash;
     private LoadingLayout freash_loading;

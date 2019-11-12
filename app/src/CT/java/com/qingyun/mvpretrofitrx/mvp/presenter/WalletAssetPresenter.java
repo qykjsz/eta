@@ -74,4 +74,22 @@ public class WalletAssetPresenter extends WalletAssetContact.Presenter {
         });
 
     }
+
+    @Override
+    public void getNode() {
+        model.getNode(context,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String  node) {
+                if(getView() != null){
+                    getView().getNodeSuccess(node);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
 }

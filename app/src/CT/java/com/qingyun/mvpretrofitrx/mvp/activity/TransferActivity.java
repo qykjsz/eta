@@ -10,12 +10,15 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
     RecyclerView rcy;
     TransferLogAdapter transferLogAdapter;
     private List<TransferLog> list;
+    private Wallet asset;
 
     @Override
     protected String getTitleRightText() {
@@ -66,16 +70,14 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
     @Override
     public void init() {
 
+        asset = (Wallet) getIntent().getSerializableExtra(IntentUtils.ASSET);
         list = new ArrayList<>();
-        list.add(new TransferLog());
-        list.add(new TransferLog());
-        list.add(new TransferLog());
-        list.add(new TransferLog());
         transferLogAdapter = new TransferLogAdapter(getContext(), list);
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.addItemDecoration(DividerHelper.getMyDivider(getContext()));
         rcy.setAdapter(transferLogAdapter);
         refreashView(list, rcy);
+        getPresenter().getLog(ApplicationUtil.getCurrentWallet().getAddress(),"0",3,page);
     }
 
     @Override
@@ -87,13 +89,15 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
     @Override
     protected void refresh() {
         super.refresh();
-//        getPresenter().getLog(ApplicationUtil.getCurrentWallet().getAddress(),ApplicationUtil.getCurrentWallet().getCoinType());
+        getPresenter().getLog(ApplicationUtil.getCurrentWallet().getAddress(),"0",3,page);
+
 
     }
 
     @Override
     protected void loadMore() {
         super.loadMore();
+        getPresenter().getLog(ApplicationUtil.getCurrentWallet().getAddress(),"0",3,page);
 
     }
 
@@ -113,7 +117,9 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_transfer_immediate:
-                startActivity(TransferImmediateActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentUtils.ASSET,asset);
+                startActivity(TransferImmediateActivity.class,bundle);
                 break;
             case R.id.btn_transfer_scan:
 
@@ -137,6 +143,16 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
 
     @Override
     public void getLogSuccess(TransferLogResponse transferLogResponse) {
+        if (isLoadMore){
+            list.addAll(transferLogResponse.getOrder());
+        }else {
+            list = transferLogResponse.getOrder();
+        }
+        transferLogAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getNodeSuccess(String node) {
 
     }
 

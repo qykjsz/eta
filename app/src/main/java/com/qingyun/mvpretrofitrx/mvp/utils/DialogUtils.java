@@ -5,6 +5,8 @@ import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -15,8 +17,13 @@ import android.widget.TextView;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 
+import com.qingyun.mvpretrofitrx.mvp.adapter.CoinChooseAdapter;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
+import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.senon.mvpretrofitrx.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.util.List;
 
 import io.reactivex.functions.Consumer;
 import per.goweii.anylayer.AnimHelper;
@@ -249,6 +256,47 @@ public class DialogUtils {
                 })
                 .show();
     }
+
+
+
+    public static void showCoinChooseDialog(final Activity context, final List<Wallet> coins, final BaseAdapter.OnItemClickListener onItemClickListener) {
+        AnyLayer.with(context)
+                .contentView(R.layout.dialog_choose_coin)
+                .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+                .gravity(Gravity.BOTTOM)
+
+                .bindData(new LayerManager.IDataBinder() {
+                    @Override
+                    public void bind(final AnyLayer anyLayer) {
+                       RecyclerView recyclerView =  anyLayer.getView(R.id.rcy);
+                        CoinChooseAdapter coinChooseAdapter = new CoinChooseAdapter(context,coins);
+                        coinChooseAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(List list, int position) {
+                                onItemClickListener.onItemClick(list,position);
+                                anyLayer.dismiss();
+                            }
+                        });
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        recyclerView.addItemDecoration(DividerHelper.getMyDivider(context));
+                        recyclerView.setAdapter(coinChooseAdapter);
+                    }
+                })
+                .onClickToDismiss(R.id.cancel)
+                .contentAnim(new LayerManager.IAnim() {
+                    @Override
+                    public Animator inAnim(View content) {
+                        return AnimHelper.createBottomAlphaInAnim(content);
+                    }
+
+                    @Override
+                    public Animator outAnim(View content) {
+                        return AnimHelper.createBottomAlphaOutAnim(content);
+                    }
+                })
+                .show();
+    }
+
 
 
 

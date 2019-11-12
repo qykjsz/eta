@@ -151,6 +151,11 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
     }
 
     @Override
+    public void getNodeSuccess(String node) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindToLifecycle();
     }

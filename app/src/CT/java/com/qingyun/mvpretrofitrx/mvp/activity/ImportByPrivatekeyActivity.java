@@ -109,7 +109,7 @@ public class ImportByPrivatekeyActivity extends BaseActivity<WalletAssetContact.
             ToastUtil.showShortToast(R.string.wallet_name_must);
             return;
         }
-        if (etPassword.getText().toString().equals(etPasswordConnfirm.getText().toString()))
+        if (!etPassword.getText().toString().equals(etPasswordConnfirm.getText().toString()))
         {
             ToastUtil.showShortToast(R.string.tow_input_must_same);
             return;
@@ -145,6 +145,11 @@ public class ImportByPrivatekeyActivity extends BaseActivity<WalletAssetContact.
 
     @Override
     public void getLogSuccess(TransferLogResponse transferLogResponse) {
+
+    }
+
+    @Override
+    public void getNodeSuccess(String node) {
 
     }
 

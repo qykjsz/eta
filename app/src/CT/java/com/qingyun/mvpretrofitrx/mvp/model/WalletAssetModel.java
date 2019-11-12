@@ -28,5 +28,8 @@ public class WalletAssetModel<T> extends BaseModel {
         subscribe(context, Api.getApiService().getLog(address,glod,type,page), observerListener,transformer);
 
     }
+    public void getNode(Context context,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getNode(), observerListener,transformer);
 
+    }
 }

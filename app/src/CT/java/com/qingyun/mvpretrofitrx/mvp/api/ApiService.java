@@ -74,4 +74,6 @@ public interface ApiService {
     @POST("et_quotation")
     Observable<BaseResponse<List<Quotation>>> getmakelist();
 
+    @POST("et_node")
+    Observable <BaseResponse<String>>getNode();
 }

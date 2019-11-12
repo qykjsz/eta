@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetWalletLogAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
@@ -18,6 +17,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetWalletLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
@@ -38,14 +38,14 @@ import io.reactivex.ObservableTransformer;
 
 public class AssetWalletLogFragment extends BaseFragment<WalletAssetContact.View,WalletAssetContact.Presenter> implements WalletAssetContact.View {
     private final int type;
-    private final Asset asset;
+    private final Wallet asset;
     @BindView(R.id.rcy)
     RecyclerView rcy;
     Unbinder unbinder;
     AssetWalletLogAdapter assetWalletLogAdapter;
     private List<TransferLog> list;
 
-    public AssetWalletLogFragment(int type, Asset asset) {
+    public AssetWalletLogFragment(int type, Wallet asset) {
         this.type = type;
         this.asset = asset;
     }
@@ -128,6 +128,11 @@ public class AssetWalletLogFragment extends BaseFragment<WalletAssetContact.View
         assetWalletLogAdapter.notifyDataSetChanged(list);
         refreashView(list,rcy);
         EventBus.getDefault().post(transferLogResponse);
+    }
+
+    @Override
+    public void getNodeSuccess(String node) {
+
     }
 
     @Override

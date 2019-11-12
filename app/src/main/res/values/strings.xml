@@ -211,4 +211,6 @@
     <string name="requst_err">请求错误</string>
     <string name="old_password_must">当前密码为必填</string>
     <string name="change_password_success">修改密码成功</string>
+    <string name="coin_choose">币种选择</string>
+    <string name="business_detail">交易详情</string>
 </resources>
