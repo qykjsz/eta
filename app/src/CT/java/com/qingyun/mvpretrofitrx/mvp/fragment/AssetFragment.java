@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.develop.wallet.eth.Wallet;
 import com.develop.wallet.eth.WalletManager;
+import com.gongwen.marqueen.SimpleMF;
 import com.gongwen.marqueen.SimpleMarqueeView;
+import com.gongwen.marqueen.util.OnItemClickListener;
 import com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetDetailActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
@@ -31,6 +33,7 @@ import com.qingyun.mvpretrofitrx.mvp.adapter.AssetAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetModleAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.CoinTypeAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MyWalletAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.ProportionAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
@@ -38,6 +41,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetModle;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinType;
+import com.qingyun.mvpretrofitrx.mvp.entity.Proportion;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
@@ -110,8 +114,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     AssetAdapter assetAdapter;
     @BindView(R.id.progress)
     MultistageProgress progress;
+    @BindView(R.id.rcy_proportion)
+    RecyclerView rcyProportion;
     private List<AssetModle> modleList;
     private List<Asset> assetList;
+    private ProportionAdapter proportionAdapter;
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -123,6 +130,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         }
     });
     private AssetResponse assetResponse;
+    private List<Proportion> proportionList;
 
     @Override
     public int getLayoutId() {
@@ -142,10 +150,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void init() {
-
         EventBus.getDefault().register(this);
         refreashData();
-
         modleList = new ArrayList<>();
         modleList.add(new AssetModle(R.mipmap.sy_ziyuan, R.string.ziyuan));
         modleList.add(new AssetModle(R.mipmap.sy_toupiao, R.string.vote));
@@ -168,8 +174,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(IntentUtils.ASSET,(Asset)assetList.get(position));
-                startActivity(AssetWalletActivity.class,bundle);
+                bundle.putSerializable(IntentUtils.ASSET, (Asset) assetList.get(position));
+                startActivity(AssetWalletActivity.class, bundle);
             }
         });
         rcyWallet.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -177,16 +183,25 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         rcyWallet.setAdapter(assetAdapter);
         refreashView(assetList, rcyWallet);
 
+
+        proportionList = new ArrayList<>();
+        proportionAdapter = new ProportionAdapter(getContext(),proportionList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        //调整RecyclerView的排列方向
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rcyProportion.setLayoutManager(linearLayoutManager);
+        rcyProportion.setAdapter(proportionAdapter);
+
     }
 
 
-    public void startActivity(Class c){
-        Intent intent = new Intent(getContext(),c);
+    public void startActivity(Class c) {
+        Intent intent = new Intent(getContext(), c);
         startActivity(intent);
     }
 
-    public void startActivity(Class c,Bundle bundle){
-        Intent intent = new Intent(getContext(),c);
+    public void startActivity(Class c, Bundle bundle) {
+        Intent intent = new Intent(getContext(), c);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -202,7 +217,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             @Override
             public void run() {
                 Message msg = new Message();
-                msg.what=ETH_BLANCE;
+                msg.what = ETH_BLANCE;
                 msg.obj = WalletManager.getEthBalance(ApplicationUtil.getCurrentWallet().getAddress()).toString();
                 handler.sendMessage(msg);
             }
@@ -254,20 +269,20 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         unbinder.unbind();
     }
 
-    @OnClick({R.id.btn_add_coin,R.id.ly_asset, R.id.btn_transfer, R.id.btn_get_money, R.id.btn_shan_dui, R.id.btn_packet, R.id.btn_scan, R.id.btn_visiable, R.id.btn_more_info})
+    @OnClick({R.id.btn_add_coin, R.id.ly_asset, R.id.btn_transfer, R.id.btn_get_money, R.id.btn_shan_dui, R.id.btn_packet, R.id.btn_scan, R.id.btn_visiable, R.id.btn_more_info})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_add_coin:
                 startActivity(AddCoinActivity.class);
                 break;
             case R.id.ly_asset:
-                if (assetResponse==null){
+                if (assetResponse == null) {
                     ToastUtil.showShortToast(R.string.requst_err);
                     return;
                 }
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(IntentUtils.ASSET_RESPONSE,assetResponse);
-                startActivity(AssetDetailActivity.class,bundle);
+                bundle.putSerializable(IntentUtils.ASSET_RESPONSE, assetResponse);
+                startActivity(AssetDetailActivity.class, bundle);
                 break;
             case R.id.btn_transfer:
                 startActivity(TransferActivity.class);
@@ -299,7 +314,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 .contentView(R.layout.dialog_wallet_list)
                 .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
                 .gravity(Gravity.BOTTOM)
-
+                .onClickToDismiss(R.id.imageView14)
                 .contentAnim(new LayerManager.IAnim() {
                     @Override
                     public Animator inAnim(View content) {
@@ -321,37 +336,37 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                         List<CoinType> list = new ArrayList<>();
                         final TextView tv_wallet_name = anyLayer.getView(R.id.tv_wallet_name);
                         List<Wallet> mylist = new ArrayList<>();
-                        final MyWalletAdapter myWalletAdapter = new MyWalletAdapter(getContext(),mylist);
+                        final MyWalletAdapter myWalletAdapter = new MyWalletAdapter(getContext(), mylist);
                         rcyWallet.setLayoutManager(new LinearLayoutManager(getContext()));
-                        rcyWallet.addItemDecoration(DividerHelper.getPaddingDivider(getContext(),R.dimen.dp_20));
+                        rcyWallet.addItemDecoration(DividerHelper.getPaddingDivider(getContext(), R.dimen.dp_20));
                         rcyWallet.setAdapter(myWalletAdapter);
                         myWalletAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(List list, int position) {
-                               ApplicationUtil.setCurrentWallet ((Wallet)list.get(position));
-                               anyLayer.dismiss();
-                               refreashData();
+                                ApplicationUtil.setCurrentWallet((Wallet) list.get(position));
+                                anyLayer.dismiss();
+                                refreashData();
                             }
                         });
 
 
-                        list.add(new CoinType(R.mipmap.qbgl_eos,R.mipmap.qbgl_eos_xz,EOS));
-                        list.add(new CoinType(R.mipmap.qbgl_eth,R.mipmap.qbgl_eth_xz,ETH));
-                        list.add(new CoinType(R.mipmap.qbgl_iost,R.mipmap.qbgl_iost_xz,IOST));
-                        list.add(new CoinType(R.mipmap.qbgl_tron,R.mipmap.qbgl_tron_xz,Tron));
-                        list.add(new CoinType(R.mipmap.qbgl_binance,R.mipmap.qbgl_binance_xz,BINANCE));
-                        list.add(new CoinType(R.mipmap.qbgl_bos,R.mipmap.qbgl_bos_xz,BOS));
-                        list.add(new CoinType(R.mipmap.qbgl_cosmos,R.mipmap.qbgl_cosmos_xz,COSMOS));
-                        list.add(new CoinType(R.mipmap.qbgl_moac,R.mipmap.qbgl_moac_xz,MOAC));
+                        list.add(new CoinType(R.mipmap.qbgl_eos, R.mipmap.qbgl_eos_xz, EOS));
+                        list.add(new CoinType(R.mipmap.qbgl_eth, R.mipmap.qbgl_eth_xz, ETH));
+                        list.add(new CoinType(R.mipmap.qbgl_iost, R.mipmap.qbgl_iost_xz, IOST));
+                        list.add(new CoinType(R.mipmap.qbgl_tron, R.mipmap.qbgl_tron_xz, Tron));
+                        list.add(new CoinType(R.mipmap.qbgl_binance, R.mipmap.qbgl_binance_xz, BINANCE));
+                        list.add(new CoinType(R.mipmap.qbgl_bos, R.mipmap.qbgl_bos_xz, BOS));
+                        list.add(new CoinType(R.mipmap.qbgl_cosmos, R.mipmap.qbgl_cosmos_xz, COSMOS));
+                        list.add(new CoinType(R.mipmap.qbgl_moac, R.mipmap.qbgl_moac_xz, MOAC));
 
-                        CoinTypeAdapter coinTypeAdapter = new CoinTypeAdapter(getContext(),list);
+                        CoinTypeAdapter coinTypeAdapter = new CoinTypeAdapter(getContext(), list);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                         recyclerView.setAdapter(coinTypeAdapter);
                         coinTypeAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(List list, int position) {
 
-                                tv_wallet_name.setText(((CoinType)list.get(position)).getCoinType());
+                                tv_wallet_name.setText(((CoinType) list.get(position)).getCoinType());
                                 List<Wallet> mlist = (List<Wallet>) ApplicationUtil.getWalletBuyCoinType(((CoinType) list.get(position)).getCoinType());
                                 myWalletAdapter.notifyDataSetChanged(mlist);
 
@@ -369,7 +384,6 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                         });
 
 
-
                     }
                 })
                 .show();
@@ -383,6 +397,27 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         assetAdapter.notifyDataSetChanged(assetList);
         tvIncomeToday.setText(assetResponse.getToday());
         refreashView(assetList, rcyWallet);
+
+
+        SimpleMF<String> marqueeFactory = new SimpleMF(getContext());
+        List<String> newList = new ArrayList<>();
+        for (int i = 0; i < assetResponse.getNews().size(); i++) {
+            newList.add(assetResponse.getNews().get(i).getName());
+        }
+        marqueeFactory.setData(newList);
+        mvInfoList.setMarqueeFactory(marqueeFactory);
+        mvInfoList.startFlipping();
+        mvInfoList.setOnItemClickListener(new OnItemClickListener<TextView, String>() {
+            @Override
+            public void onItemClickListener(TextView mView, String mData, int mPosition) {
+//                Intent intent = new Intent(getContext(), InformActivity.class);
+//                startActivity(intent);
+            }
+        });
+
+        proportionList = assetResponse.getProportion();
+        proportionAdapter.notifyDataSetChanged(proportionList);
+
 //        int[] colors = new int[assetResponse.getProportion().];
 //        int[] colors = new int[]{assetResponse.getProportion()};
 //        float[] weights;
@@ -402,7 +437,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreashWallet(Wallet wallet) {
-       refreashData();
+        refreashData();
     }
 
     @Override

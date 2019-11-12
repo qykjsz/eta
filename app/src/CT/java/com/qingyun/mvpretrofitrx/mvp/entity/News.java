@@ -14,7 +14,13 @@ public class News implements Parcelable {
         private String content;
         private String time;
 
-        public String getTitle() {
+
+
+    public static Creator<News> getCREATOR() {
+        return CREATOR;
+    }
+
+    public String getTitle() {
             return title;
         }
 

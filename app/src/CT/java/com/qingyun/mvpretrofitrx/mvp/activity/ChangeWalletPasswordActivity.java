@@ -1,13 +1,18 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.develop.wallet.eth.Wallet;
 import com.develop.wallet.eth.WalletManager;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
@@ -75,5 +80,39 @@ public class ChangeWalletPasswordActivity extends BaseActivity {
 
     @OnClick(R.id.ben_confirm)
     public void onViewClicked() {
+        if (TextUtils.isEmpty(etCurrentPassword.getText().toString()))
+        {
+            ToastUtil.showShortToast(R.string.old_password_must);
+            return;
+
+        }
+
+        if (TextUtils.isEmpty(etNewPassword.getText().toString()))
+        {
+            ToastUtil.showShortToast(R.string.password_must);
+            return;
+        }
+
+
+        if (TextUtils.isEmpty(etConfirmPassword.getText().toString()))
+        {
+            ToastUtil.showShortToast(R.string.connfirm_password_must);
+            return;
+        }
+
+        if (!etNewPassword.getText().toString().equals(etConfirmPassword.getText().toString()))
+        {
+            ToastUtil.showShortToast(R.string.tow_input_must_same);
+            return;
+        }
+
+        WalletManager.changePassword(getContext(), etCurrentPassword.getText().toString(), etNewPassword.getText().toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.ImportWalletListener() {
+            @Override
+            public void importSuccess(Wallet wallet) {
+                ToastUtil.showShortToast(R.string.change_password_success);
+                ApplicationUtil.setCurrentWallet(wallet);
+                ApplicationUtil.addWallet(wallet);
+            }
+        });
     }
 }

@@ -2,17 +2,17 @@ package com.qingyun.mvpretrofitrx.mvp.entity;
 
 import java.io.Serializable;
 
-public class Proportion implements Serializable {
-    private String bili;
+public class MyNews implements Serializable {
+
+    private String id;
     private String name;
 
-
-    public String getBili() {
-        return bili;
+    public String getId() {
+        return id;
     }
 
-    public void setBili(String bili) {
-        this.bili = bili;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

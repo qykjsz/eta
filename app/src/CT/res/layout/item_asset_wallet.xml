@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView60"
+        android:id="@+id/tv_coin_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_padding_x_min"
@@ -26,7 +26,7 @@
         android:textColor="@color/color_999999"
         android:textSize="@dimen/sp_11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView60" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin_name" />
 
     <TextView
         android:id="@+id/textView70"
@@ -54,27 +54,27 @@
         app:layout_constraintTop_toTopOf="@+id/textView69" />
 
     <TextView
-        android:id="@+id/textView72"
+        android:id="@+id/tv_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:text="@string/_000"
-        app:layout_constraintBottom_toBottomOf="@+id/textView73"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_status"
         app:layout_constraintStart_toStartOf="@+id/textView69"
-        app:layout_constraintTop_toTopOf="@+id/textView73" />
+        app:layout_constraintTop_toTopOf="@+id/tv_status" />
 
     <TextView
-        android:id="@+id/textView73"
+        android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/status_completed"
-        app:layout_constraintBottom_toBottomOf="@+id/textView74"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_time"
         app:layout_constraintEnd_toEndOf="@+id/textView70"
         app:layout_constraintStart_toStartOf="@+id/textView70"
-        app:layout_constraintTop_toTopOf="@+id/textView74" />
+        app:layout_constraintTop_toTopOf="@+id/tv_time" />
 
     <TextView
-        android:id="@+id/textView74"
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
