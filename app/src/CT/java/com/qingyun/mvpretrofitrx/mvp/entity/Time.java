@@ -1,5 +1,8 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class Time {
@@ -28,8 +31,9 @@ public class Time {
         this.News = News;
     }
 
-    public static class NewsBean {
+    public static class NewsBean implements Parcelable {
         /**
+         *
          * id : 2
          * name : 阿斯达四大爱仕达爱仕达
          * img : https://et2.etac.io/news/news2001.jpg
@@ -72,5 +76,40 @@ public class Time {
         public void setTime(String time) {
             this.time = time;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(this.id);
+            dest.writeString(this.name);
+            dest.writeString(this.img);
+            dest.writeString(this.time);
+        }
+
+        public NewsBean() {
+        }
+
+        protected NewsBean(Parcel in) {
+            this.id = in.readInt();
+            this.name = in.readString();
+            this.img = in.readString();
+            this.time = in.readString();
+        }
+
+        public static final Parcelable.Creator<NewsBean> CREATOR = new Parcelable.Creator<NewsBean>() {
+            @Override
+            public NewsBean createFromParcel(Parcel source) {
+                return new NewsBean(source);
+            }
+
+            @Override
+            public NewsBean[] newArray(int size) {
+                return new NewsBean[size];
+            }
+        };
     }
 }

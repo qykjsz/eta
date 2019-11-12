@@ -1,17 +1,34 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.senon.mvpretrofitrx.R;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 /**
  * 帮助中心
  */
 public class SupportActivity extends BaseActivity {
+
+
+    @BindView(R.id.tv_na)
+    TextView tvNa;
+    @BindView(R.id.ll)
+    LinearLayout ll;
+    @BindView(R.id.lv_back)
+    LinearLayout lvBack;
+    @BindView(R.id.Rl_c)
+    RelativeLayout RlC;
+    private boolean aBoolean = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,5 +74,16 @@ public class SupportActivity extends BaseActivity {
     @Override
     public void init() {
 
+    }
+
+    @OnClick(R.id.Rl_c)
+    public void onViewClicked() {
+        if (aBoolean == false) {
+            aBoolean = true;
+            lvBack.setVisibility(View.GONE);
+        } else {
+             aBoolean = false;
+            lvBack.setVisibility(View.VISIBLE);
+        }
     }
 }

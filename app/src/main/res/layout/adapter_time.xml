@@ -3,6 +3,7 @@
     style="@style/MatchWrap">
 
     <RelativeLayout
+        android:id="@+id/rl_time"
         style="@style/MatchWrap">
 
         <TextView
@@ -20,11 +21,12 @@
             android:layout_centerVertical="true" />
 
         <TextView
-            android:layout_marginBottom="@dimen/dp_10"
             android:id="@+id/tv_time"
             style="@style/MatchWrap"
             android:layout_alignBottom="@+id/iv_back"
+            android:layout_marginBottom="@dimen/dp_10"
             android:layout_toLeftOf="@+id/iv_back"
-            android:textColor="@color/color_98AFD7" />
+            android:textColor="@color/color_98AFD7"
+            android:textSize="@dimen/sp_11" />
     </RelativeLayout>
 </LinearLayout>

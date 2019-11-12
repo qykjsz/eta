@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchWrap.Vertical"
+    tools:context="com.qingyun.mvpretrofitrx.mvp.activity.TheArticleDetailsActivity">
+
+    <LinearLayout
+        style="@style/MatchWrap.Vertical"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_16">
+
+        <TextView
+            android:id="@+id/tv_title1"
+            style="@style/WrapWrap"
+            android:layout_marginTop="@dimen/dp_16" />
+
+        <RelativeLayout
+            style="@style/MatchWrap"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tv_laiyuan"
+                style="@style/WrapWrap"
+                android:text="人民网"
+                android:textColor="@color/color_99AFD9"
+                android:textSize="@dimen/sp_11" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/WrapWrap"
+                android:layout_marginStart="@dimen/dp_30"
+                android:layout_toRightOf="@+id/tv_laiyuan" />
+
+            <ImageView
+                android:src="@mipmap/kx_fx"
+                android:id="@+id/iv_background"
+                style="@style/WrapWrap"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/MatchWrap"
+            android:layout_marginTop="@dimen/dp_20"
+            android:textColor="@color/color_666666" />
+    </LinearLayout>
+
+</LinearLayout>

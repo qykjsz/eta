@@ -6,6 +6,91 @@
     android:background="@color/color_FFFFFF"
     tools:context="com.qingyun.mvpretrofitrx.mvp.activity.SupportActivity">
 
+    <RelativeLayout
+        android:id="@+id/Rl_c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10">
+
+        <TextView
+            android:layout_marginBottom="@dimen/dp_5"
+            android:id="@+id/tv_na"
+            style="@style/WrapWrap"
+            android:text="常见问题" />
+
+        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_back"
+        style="@style/MatchWrap.Vertical">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            style="@style/MatchWrap.Vertical"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10">
+
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:text="什么是私钥？"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                style="@style/line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/MatchWrap.Vertical"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10">
+
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_marginTop="5dp"
+
+                android:layout_marginBottom="@dimen/dp_5"
+                android:text="什么是助记词？"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                style="@style/line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/MatchWrap.Vertical"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10">
+
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:text="如何添加钱包？"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                style="@style/line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1" />
+        </LinearLayout>
+    </LinearLayout>
+
+
     <TextView
         style="@style/line"
         android:layout_width="match_parent"

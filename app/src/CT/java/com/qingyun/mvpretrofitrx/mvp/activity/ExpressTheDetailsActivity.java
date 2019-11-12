@@ -1,14 +1,69 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class ExpressTheDetailsActivity extends AppCompatActivity {
+import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
+import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.News;
+import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
+import com.senon.mvpretrofitrx.R;
 
+import butterknife.BindView;
+
+public class ExpressTheDetailsActivity extends BaseActivity {
+
+    @BindView(R.id.tv_time)
+    TextView tvTime;
+    @BindView(R.id.tv_title1)
+    TextView tvTitle1;
+    @BindView(R.id.tv_content)
+    TextView tvContent;
+    private News news;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_express_the_details);
+        // setContentView(R.layout.activity_express_the_details);
+    }
+
+    @Override
+    protected String getTitleRightText() {
+        return null;
+    }
+
+    @Override
+    protected String getTitleLeftText() {
+        return null;
+    }
+
+    @Override
+    protected String getTitleText() {
+        return null;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_express_the_details;
+    }
+
+    @Override
+    public BasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
+    public BaseView createView() {
+        return null;
+    }
+
+    @Override
+    public void init() {
+        news = getIntent().getParcelableExtra("people");
+        tvTime.setText(TimeUtils.getTime(Long.parseLong(news.getTime()), TimeUtils.DEL_FORMAT_DATE_mm));
+        tvTitle1.setText(news.getTitle());
+        tvContent.setText(news.getContent());
+
     }
 }

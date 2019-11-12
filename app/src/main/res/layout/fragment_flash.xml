@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/zz_top_bg">
+    style="@style/MatchWrap.Vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_103"
+        android:background="@mipmap/wo_top_bg">
+
+    </ImageView>
 
     <LinearLayout
+        android:layout_marginTop="-84dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_10"
         android:background="@drawable/bg_ffffff_top_round_25">
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout

@@ -7,23 +7,25 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.senon.mvpretrofitrx.R;
+
 public class TimeLineItemDecoration extends RecyclerView.ItemDecoration {
 
     private int mCircleSize = 14;//圆圈的半径
     private Paint mPaint;//画笔
     private int mPaintSize = 6;//画笔宽度
-    private String mPaintColor = "#B8B8B8";//画笔默认颜色
+    private int mPaintColor = R.drawable.dash_line;//画笔默认颜色
 
     public TimeLineItemDecoration() {
         mPaint = new Paint();
         mPaint.setStrokeWidth(mPaintSize);
-        mPaint.setColor(Color.parseColor(mPaintColor));
+        mPaint.setColor(mPaintColor);
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        Rect rect = new Rect(200, 0, 0, 0);//使item从outRect中右移200px
+        Rect rect = new Rect(100, 0, 0, 0);//使item从outRect中右移200px
         outRect.set(rect);
     }
 

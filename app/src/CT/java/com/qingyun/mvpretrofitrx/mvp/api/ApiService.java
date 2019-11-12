@@ -9,6 +9,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Img;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation1;
+import com.qingyun.mvpretrofitrx.mvp.entity.TheArticleDetails;
 import com.qingyun.mvpretrofitrx.mvp.entity.Time;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
@@ -74,6 +75,10 @@ public interface ApiService {
     @POST("et_quotation")
     Observable<BaseResponse<List<Quotation>>> getmakelist();
 
+    @POST("et_newscontent")
+    Observable<BaseResponse<TheArticleDetails>> geTheArticleDetails(@Query("id") String id);
+
+    ;
     @POST("et_node")
     Observable <BaseResponse<String>>getNode();
 }

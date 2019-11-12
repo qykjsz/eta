@@ -11,7 +11,7 @@
         android:paddingTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
-        android:background="@mipmap/zz_top_bg"
+        android:background="@mipmap/wo_top_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
