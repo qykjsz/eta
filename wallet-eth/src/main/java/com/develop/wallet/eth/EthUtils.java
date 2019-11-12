@@ -23,7 +23,6 @@ public class EthUtils {
     public static String toChecksumAddress(String address) {
         String lowercaseAddress = cleanHexPrefix(address).toLowerCase();
         String addressHash = (HexUtils.toHex(KECCAK256.keccak256(lowercaseAddress.getBytes())));
-
         StringBuilder result = new StringBuilder(lowercaseAddress.length() + 2);
 
         if (containsHexPrefix(address)) {

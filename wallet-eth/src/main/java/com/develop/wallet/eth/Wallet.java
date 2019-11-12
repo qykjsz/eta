@@ -16,16 +16,8 @@ public class Wallet implements Serializable {
     private String walletName;
     private String coinType;
     private Boolean isMakeCopy;
-    private String walletFile;
 
 
-    public String getWalletFile() {
-        return walletFile;
-    }
-
-    public void setWalletFile(String walletFile) {
-        this.walletFile = walletFile;
-    }
 
     public Boolean getMakeCopy() {
         if (isMakeCopy==null){

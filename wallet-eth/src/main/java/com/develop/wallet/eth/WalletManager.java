@@ -1,8 +1,10 @@
 package com.develop.wallet.eth;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.develop.mnemonic.KeyPairUtils;
 import com.develop.mnemonic.MnemonicUtils;
@@ -187,6 +189,7 @@ public class WalletManager {
 
 
 
+
     /**
      * 导出私钥
      *
@@ -195,6 +198,7 @@ public class WalletManager {
      * @return
      */
     public String exportPrivateKey(String password, WalletFile walletFile) {
+
         try {
             ECKeyPair ecKeyPair = org.web3j.crypto.Wallet.decrypt(password, walletFile); //可能出现OOM
 //            ECKeyPair ecKeyPair = LWallet.decrypt(password, walletFile);
@@ -231,7 +235,7 @@ public class WalletManager {
      * @param walletFile
      * @return
      */
-    public boolean decrypt(String password, WalletFile walletFile) {
+    public static  boolean decrypt(String password, WalletFile walletFile) {
         try {
             ECKeyPair ecKeyPair = org.web3j.crypto.Wallet.decrypt(password, walletFile); //可能出现OOM
 //            ECKeyPair ecKeyPair = LWallet.decrypt(password, walletFile);
@@ -240,6 +244,29 @@ public class WalletManager {
             e.printStackTrace();
             return false;
         }
+    }
+
+
+
+    public static void changePassword(Context context, String oldPassword, String newPassword, Wallet wallet, final ImportWalletListener importWalletListener) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        WalletFile walletFile = null;
+        try {
+            walletFile = objectMapper.readValue(wallet.getKeystore(), WalletFile.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (decrypt(oldPassword,walletFile)){
+            importWalletByPrivateKey(wallet.getPrivateKey(), wallet.getWalletName(), newPassword, new ImportWalletListener() {
+                @Override
+                public void importSuccess(Wallet wallet) {
+                    importWalletListener.importSuccess(wallet);
+                }
+            });
+        }else {
+            Toast.makeText(context,context.getResources().getString(R.string.pass_err),Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
@@ -256,16 +283,17 @@ public class WalletManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         try {
             ECKeyPair keyPair = org.web3j.crypto.Wallet.decrypt(password, walletFile);
             String privateKey = keyPair.getPrivateKey().toString(16);
             String publicKey = keyPair.getPublicKey().toString(16);
             String address = "0x" + Keys.getAddress(publicKey);
+//            WalletFile walletFile = WalletUtils.createWalletFile(password, keyPair, false);
             Wallet wallet = new Wallet(null, address, privateKey, publicKey,keystore);
             wallet.setWalletName(name);
             importWalletListener.importSuccess(wallet);
             Log.e("------------", address);
-            WalletFile generateWalletFile = org.web3j.crypto.Wallet.createLight(password, keyPair);
         } catch (CipherException e) {
             e.printStackTrace();
         }
