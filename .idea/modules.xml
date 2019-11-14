@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/QingYun-master.iml" filepath="$PROJECT_DIR$/QingYun-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eta.iml" filepath="$PROJECT_DIR$/eta.iml" />
       <module fileurl="file://$PROJECT_DIR$/gallery/gallery.iml" filepath="$PROJECT_DIR$/gallery/gallery.iml" />
       <module fileurl="file://$PROJECT_DIR$/indicatorseekbar/indicatorseekbar.iml" filepath="$PROJECT_DIR$/indicatorseekbar/indicatorseekbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_ios_dialog/lib_ios_dialog.iml" filepath="$PROJECT_DIR$/lib_ios_dialog/lib_ios_dialog.iml" />
