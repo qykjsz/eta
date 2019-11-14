@@ -1,13 +1,13 @@
 package com.qingyun.mvpretrofitrx.mvp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
-import android.os.LocaleList;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
+import com.github.jokar.multilanguages.library.MultiLanguage;
+import com.qingyun.mvpretrofitrx.mvp.activity.SplashActivity;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.Locale;
@@ -51,71 +51,60 @@ public class LocalManageUtil {
             case 0:
                 return getSystemLocale(context);
             case 1:
-                return Locale.CHINA;
+                return Locale.CHINESE;
             case 2:
                 return Locale.US;
             case 3:
             default:
-                return Locale.ENGLISH;
+                return Locale.US;
         }
+    }
+
+
+    public static void saveSystemCurrentLanguage(Context context) {
+        SPUtil.getInstance(context).setSystemCurrentLocal(MultiLanguage.getSystemLocal(context));
+    }
+
+    /**
+     * 保存系统语言
+     * @param context
+     * @param newConfig
+     */
+    public static void saveSystemCurrentLanguage(Context context, Configuration newConfig) {
+
+        SPUtil.getInstance(context).setSystemCurrentLocal(MultiLanguage.getSystemLocal(newConfig));
     }
 
     public static void saveSelectLanguage(Context context, int select) {
         SPUtil.getInstance(context).saveLanguage(select);
-        setApplicationLanguage(context);
+        MultiLanguage.setApplicationLanguage(context);
     }
 
-    public static Context setLocal(Context context) {
-        return updateResources(context, getSetLanguageLocale(context));
-    }
+    public static void saveLocal(Activity activity,int choose){
+        LocalManageUtil.saveSelectLanguage(activity, choose);
+//        Resources resources = activity.getResources();
+//        DisplayMetrics dm = resources.getDisplayMetrics();
+//        Configuration config = resources.getConfiguration();
+//        switch (choose){
+//            case 1:
+//                ApplicationUtil.locale =  config.locale = Locale.CHINESE;
+//
+//                break;
+//            case 2:
+//                ApplicationUtil.locale =  config.locale = Locale.US;
+//                break;
+//            case 3:
+//                ApplicationUtil.locale =  config.locale = Locale.FRENCH;
+//                break;
+//            case 4:
+//                ApplicationUtil.locale = config.locale = Locale.JAPAN;
+//                break;
+//            case 5:
+//                ApplicationUtil.locale =  config.locale = Locale.KOREA;
+//                break;
+//        }
+//        resources.updateConfiguration(config, dm);
+        SpUtils.setObjectToShare(activity, choose, "language");
 
-    private static Context updateResources(Context context, Locale locale) {
-        Locale.setDefault(locale);
-        Resources res = context.getResources();
-        Configuration config = new Configuration(res.getConfiguration());
-        if (Build.VERSION.SDK_INT >= 17) {
-            config.setLocale(locale);
-            context = context.createConfigurationContext(config);
-        } else {
-            config.locale = locale;
-            res.updateConfiguration(config, res.getDisplayMetrics());
-        }
-        return context;
-    }
-
-    /**
-     * 设置语言类型
-     */
-    public static void setApplicationLanguage(Context context) {
-        Resources resources = context.getApplicationContext().getResources();
-        DisplayMetrics dm = resources.getDisplayMetrics();
-        Configuration config = resources.getConfiguration();
-        Locale locale = getSetLanguageLocale(context);
-        config.locale = locale;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            LocaleList localeList = new LocaleList(locale);
-            LocaleList.setDefault(localeList);
-            config.setLocales(localeList);
-            context.getApplicationContext().createConfigurationContext(config);
-            Locale.setDefault(locale);
-        }
-        resources.updateConfiguration(config, dm);
-    }
-
-    public static void saveSystemCurrentLanguage(Context context) {
-        Locale locale;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            locale = LocaleList.getDefault().get(0);
-        } else {
-            locale = Locale.getDefault();
-        }
-        Log.d(TAG, locale.getLanguage());
-        SPUtil.getInstance(context).setSystemCurrentLocal(locale);
-    }
-
-    public static void onConfigurationChanged(Context context){
-        saveSystemCurrentLanguage(context);
-        setLocal(context);
-        setApplicationLanguage(context);
     }
 }

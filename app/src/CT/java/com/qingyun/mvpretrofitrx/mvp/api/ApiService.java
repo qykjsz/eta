@@ -6,7 +6,9 @@ import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
+import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
+import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NoticeDetail;
 import com.qingyun.mvpretrofitrx.mvp.entity.PlatformNoticResponse;
@@ -96,4 +98,13 @@ public interface ApiService {
 
     @POST("et_recordorderone")
     Observable <BaseResponse<BusinessDetail>>getBusinessDetail(@Query("address")String address, @Query("glod")String glod, @Query("id")String id);
+
+    @POST("givecharge")
+    Observable <BaseResponse<List<GasPrice>>>getGasPrice();
+
+    @POST("api_giveus")
+    Observable <BaseResponse<List<Item>>>getAboutUsList();
+
+    @POST("api_givehelp")
+    Observable <BaseResponse<List<Item>>>getSupportList();
 }

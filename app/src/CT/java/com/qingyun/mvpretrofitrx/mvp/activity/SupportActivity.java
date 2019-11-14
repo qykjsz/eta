@@ -1,40 +1,34 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import com.qingyun.mvpretrofitrx.mvp.adapter.SupportItemAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.contract.SupportContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.Item;
+import com.qingyun.mvpretrofitrx.mvp.presenter.SupportPresenter;
+import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.senon.mvpretrofitrx.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
-import butterknife.OnClick;
+import butterknife.ButterKnife;
+import io.reactivex.ObservableTransformer;
 
 /**
  * 帮助中心
  */
-public class SupportActivity extends BaseActivity {
+public class SupportActivity extends BaseActivity<SupportContact.View, SupportContact.Presenter> implements SupportContact.View {
 
 
-    @BindView(R.id.tv_na)
-    TextView tvNa;
-    @BindView(R.id.ll)
-    LinearLayout ll;
-    @BindView(R.id.lv_back)
-    LinearLayout lvBack;
-    @BindView(R.id.Rl_c)
-    RelativeLayout RlC;
-    private boolean aBoolean = false;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //  setContentView(R.layout.activity_support);
-    }
+    @BindView(R.id.rcy)
+    RecyclerView rcy;
+    SupportItemAdapter supportItemAdapter;
+    private List<Item> list;
 
     @Override
     protected String getTitleRightText() {
@@ -45,6 +39,7 @@ public class SupportActivity extends BaseActivity {
     protected String getTitleLeftText() {
         return null;
     }
+
 
     @Override
     public boolean haveHeader() {
@@ -62,28 +57,42 @@ public class SupportActivity extends BaseActivity {
     }
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public SupportContact.Presenter createPresenter() {
+        return new SupportPresenter(this);
     }
 
     @Override
-    public BaseView createView() {
-        return null;
+    public SupportContact.View createView() {
+        return this;
     }
 
     @Override
     public void init() {
+        list = new ArrayList<>();
+        supportItemAdapter = new SupportItemAdapter(getContext(),list);
+        rcy.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcy.addItemDecoration(DividerHelper.getMyDivider(getContext()));
+        rcy.setAdapter(supportItemAdapter);
+        getPresenter().getSupportList();
+    }
+
+    @Override
+    public void getSupportListSuccess(List<Item> itemList) {
+        list = itemList;
+        supportItemAdapter.notifyDataSetChanged(list);
+        refreashView(list,rcy);
 
     }
 
-    @OnClick(R.id.Rl_c)
-    public void onViewClicked() {
-        if (aBoolean == false) {
-            aBoolean = true;
-            lvBack.setVisibility(View.GONE);
-        } else {
-             aBoolean = false;
-            lvBack.setVisibility(View.VISIBLE);
-        }
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+        return this.bindToLifecycle();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

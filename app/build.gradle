@@ -184,6 +184,8 @@ dependencies {
     implementation project(':wallet-eth')
 
     implementation 'am.widget:wraplayout:1.2.1'
+    implementation project(':mutilanguagelibrary')
+
 
 
 

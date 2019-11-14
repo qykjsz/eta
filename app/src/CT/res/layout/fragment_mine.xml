@@ -1,272 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/MatchMatch.Vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        style="@style/MatchWrap.Horizontal"
-        android:background="@mipmap/wo_top_bg">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_103"
+
+        android:background="@mipmap/zz_top_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <ImageView
-            android:id="@+id/iv_he"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_50"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_30"
-            android:background="@color/white" />
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:visibility="invisible"
+            android:padding="@dimen/dp_padding_x_min"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/back_not_header" />
 
-        <RelativeLayout
-            style="@style/MatchWrap"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_toRightOf="@+id/iv_he"
-            android:gravity="center_vertical">
+        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
 
-            <TextView
-                android:id="@+id/tv_name"
-                style="@style/WrapWrap"
-                android:text="一条咸鱼"
-                android:textColor="@color/color_FFFFFF" />
-
-            <TextView
-                android:id="@+id/tv_phe"
-                style="@style/WrapWrap"
-                android:layout_below="@+id/tv_name"
-                android:text="UID:188 *** 6554"
-                android:textColor="@color/color_FFFFFF"
-                android:textSize="@dimen/sp_12" />
-
-            <ImageView style="@style/WrapWrap.ImageView_bank" />
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_17"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.50"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_back"
+            app:layout_constraintVertical_bias="0.571" />
+    </android.support.constraint.ConstraintLayout>
 
 
-        </RelativeLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_74"
+        android:background="@drawable/bg_ffffff_top_round_25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        style="@style/MatchMatch.Vertical"
-        android:layout_marginTop="-30dp"
-        android:background="@drawable/bg_ffffff_top_round_25">
-
-        <LinearLayout
-            android:id="@+id/ll_top"
-            style="@style/MatchWrap.Horizontal"
-            android:layout_marginTop="@dimen/dp_30">
-
-            <LinearLayout
-                android:id="@+id/ll_Asset_overview"
-                style="@style/AutoWrap.Vertical"
-                android:gravity="center">
-
-                <ImageView
-                    style="@style/wo_iv"
-                    android:src="@mipmap/wo_zi_1" />
-
-                <TextView
-                    style="@style/WrapWrap"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="@string/Asset_overview"
-                    android:textColor="@color/color_FF333333" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_Management_of_the_purse"
-                style="@style/AutoWrap.Vertical"
-                android:gravity="center">
-
-                <ImageView
-                    style="@style/wo_iv"
-                    android:src="@mipmap/wo_guan_2" />
-
-                <TextView
-                    style="@style/WrapWrap"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="@string/Management_of_the_purse"
-                    android:textColor="@color/color_FF333333" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_trading_record"
-                style="@style/AutoWrap.Vertical"
-                android:gravity="center">
-
-                <ImageView
-                    style="@style/wo_iv"
-                    android:src="@mipmap/wo_jiao_3" />
-
-                <TextView
-                    style="@style/WrapWrap"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="@string/trading_record"
-                    android:textColor="@color/color_FF333333" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_phone"
-            style="@style/MatchWrap.Horizontal"
-            android:layout_below="@+id/ll_top"
-            android:layout_marginStart="@dimen/dp_19"
-            android:layout_marginTop="@dimen/dp_50"
-            android:layout_marginEnd="@dimen/dp_19">
-
-            <ImageView
-                style="@style/wo_iv_19"
-                android:src="@mipmap/wo_lian_4" />
-
-            <RelativeLayout
-                style="@style/MatchWrap"
-                android:layout_marginStart="@dimen/dp_10">
-
-                <TextView
-                    android:id="@+id/tv_phone"
-                    style="@style/WrapWrap"
-                    android:layout_centerVertical="true"
-                    android:text="@string/contact"
-                    android:textColor="@color/color_FF333333" />
-
-                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-                <View
-                    style="@style/View_xian"
-                    android:layout_below="@+id/tv_phone" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_yao_qing"
-            style="@style/MatchWrap.Horizontal"
-            android:layout_below="@+id/ll_phone"
-            android:layout_marginStart="@dimen/dp_19"
-            android:layout_marginTop="@dimen/dp_50"
-            android:layout_marginEnd="@dimen/dp_19">
-
-            <ImageView
-                style="@style/wo_iv_19"
-                android:src="@mipmap/wo_yao_5" />
-
-            <RelativeLayout
-                style="@style/MatchWrap"
-                android:layout_marginStart="@dimen/dp_10">
-
-                <TextView
-
-                    android:id="@+id/tv_invite"
-                    style="@style/WrapWrap"
-                    android:layout_centerVertical="true"
-                    android:text="@string/invite_friends"
-                    android:textColor="@color/color_FF333333" />
-
-                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-                <View
-                    style="@style/View_xian"
-                    android:layout_below="@+id/tv_invite" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_help"
-            style="@style/MatchWrap.Horizontal"
-            android:layout_below="@+id/ll_yao_qing"
-            android:layout_marginStart="@dimen/dp_19"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_19">
-
-            <ImageView
-                style="@style/wo_iv_19"
-                android:src="@mipmap/wo_help_6" />
-
-            <RelativeLayout
-                style="@style/MatchWrap"
-                android:layout_marginStart="@dimen/dp_10">
-
-                <TextView
-                    android:id="@+id/tv_help"
-                    style="@style/WrapWrap"
-                    android:layout_centerVertical="true"
-                    android:text="@string/support_center"
-                    android:textColor="@color/color_FF333333" />
-
-                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-                <View
-                    style="@style/View_xian"
-                    android:layout_below="@+id/tv_help" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_About_Us"
-            style="@style/MatchWrap.Horizontal"
-            android:layout_below="@+id/ll_help"
-            android:layout_marginStart="@dimen/dp_19"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_19">
-
-            <ImageView
-                style="@style/wo_iv_19"
-                android:src="@mipmap/wo_guan_7" />
-
-            <RelativeLayout
-                style="@style/MatchWrap"
-                android:layout_marginStart="@dimen/dp_10">
-
-                <TextView
-                    android:id="@+id/tv_About_Us"
-                    style="@style/WrapWrap"
-                    android:layout_centerVertical="true"
-                    android:text="@string/About_Us"
-                    android:textColor="@color/color_FF333333" />
-
-                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-                <View
-                    style="@style/View_xian"
-                    android:layout_below="@+id/tv_About_Us" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_set"
-            style="@style/MatchWrap.Horizontal"
-            android:layout_below="@+id/ll_About_Us"
-            android:layout_marginStart="@dimen/dp_19"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_19">
-
-            <ImageView
-                style="@style/wo_iv_19"
-                android:src="@mipmap/wo_she_8" />
-
-            <RelativeLayout
-                style="@style/MatchWrap"
-                android:layout_marginStart="@dimen/dp_10">
-
-                <TextView
-                    android:id="@+id/tv_set"
-                    style="@style/WrapWrap"
-                    android:layout_centerVertical="true"
-                    android:text="@string/system_settings"
-                    android:textColor="@color/color_FF333333" />
-
-                <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-                <View
-                    style="@style/View_xian"
-                    android:layout_below="@+id/tv_set" />
-            </RelativeLayout>
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_log_out"
-            style="@style/WrapWrap"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:text="退出登录"
-            android:textColor="@color/color_FF1758FB"
-            android:textSize="@dimen/sp_17" />
-    </RelativeLayout>
+            android:id="@+id/btn_asset_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/wo_zi_1"
+            android:drawablePadding="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:text="@string/Asset_overview"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_wallet_manager"
+            app:layout_constraintEnd_toStartOf="@+id/btn_wallet_manager"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_wallet_manager" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/btn_wallet_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/wo_guan_2"
+            android:drawablePadding="@dimen/dp_5"
+
+            android:text="@string/Management_of_the_purse"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/dp_30"
+            app:layout_constraintEnd_toStartOf="@+id/btn_business_log"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_asset_review"
+            tools:layout_editor_absoluteY="84dp" />
+
+        <TextView
+            android:id="@+id/btn_business_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/wo_jiao_3"
+            android:layout_marginStart="@dimen/dp_10"
+
+            android:drawablePadding="@dimen/dp_5"
+            android:text="@string/trading_record"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_wallet_manager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_wallet_manager"
+            app:layout_constraintTop_toTopOf="@+id/btn_wallet_manager" />
+
+
+        <TextView
+            android:id="@+id/btn_contact"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_43"
+            android:background="@drawable/bg_item"
+            android:layout_marginTop="@dimen/dp_35"
+            android:drawableStart="@mipmap/wo_lian_4"
+            android:drawableEnd="@mipmap/wd_gd_icon"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_padding_x_min"
+            android:paddingEnd="@dimen/dp_padding_x_min"
+            android:text="@string/contact"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_wallet_manager" />
+
+
+        <TextView
+            android:id="@+id/btn_friends"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_43"
+            android:background="@drawable/bg_item"
+            android:drawableStart="@mipmap/wo_yao_5"
+            android:drawableEnd="@mipmap/wd_gd_icon"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_padding_x_min"
+            android:paddingEnd="@dimen/dp_padding_x_min"
+            android:text="@string/invite_friends"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_contact" />
+
+
+        <TextView
+            android:id="@+id/btn_help_center"
+            android:layout_width="@dimen/dp_0"
+            android:background="@drawable/bg_item"
+            android:layout_height="@dimen/dp_43"
+            android:drawableStart="@mipmap/wo_help_6"
+            android:drawableEnd="@mipmap/wd_gd_icon"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_padding_x_min"
+            android:paddingEnd="@dimen/dp_padding_x_min"
+            android:text="@string/support_center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_friends" />
+
+
+        <TextView
+            android:id="@+id/btn_about_us"
+            android:layout_width="@dimen/dp_0"
+            android:background="@drawable/bg_item"
+            android:layout_height="@dimen/dp_43"
+            android:drawableStart="@mipmap/wo_guan_7"
+            android:drawableEnd="@mipmap/wd_gd_icon"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_padding_x_min"
+            android:paddingEnd="@dimen/dp_padding_x_min"
+            android:text="@string/About_Us"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_help_center" />
+
+
+        <TextView
+            android:id="@+id/btn_setting"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_43"
+            android:drawableStart="@mipmap/wo_she_8"
+            android:background="@drawable/bg_item"
+            android:drawableEnd="@mipmap/wd_gd_icon"
+            android:drawablePadding="@dimen/dp_10"
+            app:layout_constraintTop_toBottomOf="@+id/btn_about_us"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/dp_padding_x_min"
+            android:paddingEnd="@dimen/dp_padding_x_min"
+            android:text="@string/system_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="485dp" />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/btn_contact"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            style="@style/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp_44"
+            />
+
+
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/btn_friends"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            style="@style/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp_44"
+            />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/btn_help_center"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            style="@style/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp_44"
+            />
+
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/btn_about_us"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            style="@style/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp_44"
+            />
+
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/btn_setting"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            style="@style/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp_44"
+            />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

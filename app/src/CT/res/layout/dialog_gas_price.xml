@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/dp_10"
+    android:background="@drawable/bg_ffffff_round_10"
+    android:layout_height="wrap_content">
+
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginStart="@dimen/dp_20"
+        android:text="@string/gas_price_setting"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/qblb_guanbi" />
+
+
+    <com.warkiz.widget.IndicatorSeekBar
+        android:id="@+id/sb"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:maxHeight="@dimen/dp_5"
+        android:minHeight="@dimen/dp_5"
+        android:progressDrawable="@drawable/seekbar_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29"
+        app:isb_progress_value_float ="true"
+        app:isb_seek_smoothly="true"
+        app:isb_thumb_drawable="@drawable/seekbar_thumb"
+        app:isb_thumb_size="@dimen/dp_20"
+        app:isb_show_thumb_text="false"
+        app:isb_show_tick_texts="false"
+        app:isb_track_progress_color="@color/main_blue"
+        app:isb_track_progress_size="@dimen/dp_3"
+        />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:text="@string/slow"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBottom_toBottomOf="@+id/textView46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_20"
+
+        android:layout_marginEnd="8dp"
+        android:text="@string/recommend"
+        android:textColor="@color/color_999999"
+        app:layout_constraintEnd_toStartOf="@+id/textView47"
+        app:layout_constraintStart_toEndOf="@+id/textView45"
+        app:layout_constraintTop_toBottomOf="@+id/sb" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:text="@string/fast"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBottom_toBottomOf="@+id/textView46"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+    <TextView
+        android:id="@+id/tv_gas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:text="@string/_000"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBottom_toTopOf="@+id/textView53"
+        app:layout_constraintStart_toStartOf="@+id/textView53"
+        app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:text="@string/senior_model"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_gas"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
+        app:layout_constraintTop_toTopOf="@+id/tv_gas"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <CheckBox
+
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView51"
+        app:layout_constraintEnd_toEndOf="@+id/textView53"
+        app:layout_constraintTop_toTopOf="@+id/textView51" />
+
+    <TextView
+        android:id="@+id/textView53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/dp_padding_x_min"
+        android:text="@string/confirm"
+        style="@style/main_btn"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="290dp" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -196,9 +196,9 @@
             android:layout_marginEnd="@dimen/dp_2"
             android:text="@string/cny"
             android:textColor="@color/color_text_2"
-            app:layout_constraintBottom_toBottomOf="@+id/textView29"
-            app:layout_constraintEnd_toStartOf="@+id/textView29"
-            app:layout_constraintTop_toTopOf="@+id/textView29" />
+            app:layout_constraintBottom_toBottomOf="@+id/btn_gas_price"
+            app:layout_constraintEnd_toStartOf="@+id/btn_gas_price"
+            app:layout_constraintTop_toTopOf="@+id/btn_gas_price" />
 
         <TextView
             android:id="@+id/textView29"

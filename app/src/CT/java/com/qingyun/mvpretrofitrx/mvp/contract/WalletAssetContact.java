@@ -3,9 +3,12 @@ package com.qingyun.mvpretrofitrx.mvp.contract;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+
+import java.util.List;
 
 
 public interface WalletAssetContact {
@@ -17,6 +20,7 @@ public interface WalletAssetContact {
         void getLogSuccess(TransferLogResponse transferLogResponse);
         void getNodeSuccess(String node);
         void searchLogByHashSuccess(TransferLog transferLog);
+        void getGasPriceSuccess(List<GasPrice> gasPrices);
 
     }
 
@@ -28,6 +32,7 @@ public interface WalletAssetContact {
         public abstract void getLog(String address,String glod,int type,int page);
         public abstract void getNode();
         public abstract void searchLogByHash(String address,String hash,String glod);
+        public abstract void getGasPrice();
 
     }
 }

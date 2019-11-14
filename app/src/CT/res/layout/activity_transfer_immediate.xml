@@ -97,22 +97,27 @@
         app:layout_constraintTop_toTopOf="@+id/textView28" />
 
     <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_30"
+        android:id="@+id/btn_gas_price"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
         android:text="@string/minner_pay"
-        app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+        android:background="@drawable/bg_item"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <TextView
         android:id="@+id/tv_mining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_000"
-        app:layout_constraintBottom_toBottomOf="@+id/textView29"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_gas_price"
         app:layout_constraintStart_toStartOf="@+id/tv_note"
-        app:layout_constraintTop_toTopOf="@+id/textView29" />
+        app:layout_constraintTop_toTopOf="@+id/btn_gas_price" />
 
     <TextView
         android:id="@+id/btn_transfer"
@@ -212,8 +217,9 @@
 
 
     <TextView
+        android:id="@+id/line1"
         app:layout_constraintTop_toBottomOf="@+id/textView28"
-        app:layout_constraintBottom_toTopOf="@+id/textView29"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="@dimen/dp_0"
@@ -223,8 +229,7 @@
 
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@+id/textView29"
-        android:layout_marginTop="@dimen/dp_18"
+        app:layout_constraintTop_toBottomOf="@+id/btn_gas_price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="@dimen/dp_0"

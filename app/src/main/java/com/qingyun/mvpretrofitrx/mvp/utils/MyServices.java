@@ -15,7 +15,6 @@ public class MyServices extends IntentService {
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocalManageUtil.setLocal(base));
     }
 
     @Nullable
