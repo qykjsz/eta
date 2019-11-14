@@ -13,10 +13,12 @@ import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
+import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
@@ -118,7 +120,7 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
             return;
         }
 
-
+        ProgressDialogUtils.getInstances().showDialog();
 
         WalletManager.importWalletByMemoryWord(etPassword.getText().toString(), etMom.getText().toString(), etWalletName.getText().toString(), new WalletManager.ImportWalletListener() {
             @Override
@@ -126,7 +128,15 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
                 getPresenter().addWallet(wallet.getAddress());
                 ApplicationUtil.setCurrentWallet(wallet);
                 ApplicationUtil.addWallet(wallet);
+                ProgressDialogUtils.getInstances().cancel();
 
+
+            }
+
+            @Override
+            public void importFailure(Exception e) {
+                ToastUtil.showShortToast(e.toString());
+                ProgressDialogUtils.getInstances().cancel();
 
             }
         });
@@ -152,6 +162,11 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
 
     @Override
     public void getNodeSuccess(String node) {
+
+    }
+
+    @Override
+    public void searchLogByHashSuccess(TransferLog transferLog) {
 
     }
 

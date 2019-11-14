@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/color_FFFFFF"
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_25"
@@ -17,140 +18,227 @@
         app:srcCompat="@mipmap/xq_cg" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_status"
         android:layout_width="wrap_content"
-        android:textSize="@dimen/sp_16"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:text="@string/transfer_success"
-        tools:layout_editor_absoluteX="173dp"
-        tools:layout_editor_absoluteY="85dp" />
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_status" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_6"
         android:text="@string/formate_time"
-        tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="116dp" />
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_status" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="153dp" />
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_25"
+        android:text="@string/price_"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="212dp" />
+        android:layout_marginTop="@dimen/dp_15"
+        android:text="@string/mining_pay_"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="267dp" />
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:text="@string/get_money_address_"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/tv_miner_pay_1" />
 
     <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="26dp"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:text="@string/pay_address_"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@+id/textView24"
+        app:layout_constraintTop_toBottomOf="@+id/tv_getMoney_address"
         tools:layout_editor_absoluteY="321dp" />
 
     <TextView
         android:id="@+id/textView31"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="26dp"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:text="@string/note_"
+        android:textColor="@color/color_999999"
+
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@+id/textView30"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pay_address"
         tools:layout_editor_absoluteY="372dp" />
 
     <TextView
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="416dp" />
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:text="@string/business_no_"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@+id/textView31"
+        app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
     <TextView
         android:id="@+id/textView33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="464dp" />
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:text="@string/block_"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintStart_toStartOf="@+id/textView32"
+        app:layout_constraintTop_toBottomOf="@+id/tv_business_no" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/tv_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_85"
+        android:text="block_"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/tv_miner_pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="152dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/tv_amount"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
 
     <TextView
-        android:id="@+id/textView36"
+        android:id="@+id/tv_miner_pay_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="199dp" />
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_11"
+        app:layout_constraintStart_toStartOf="@+id/tv_miner_pay"
+        app:layout_constraintTop_toBottomOf="@+id/tv_miner_pay" />
 
     <TextView
-        android:id="@+id/textView38"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_getMoney_address"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="233dp" />
+        android:layout_marginEnd="@dimen/dp_35"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="TextViewTextViextViewTextViewTextViewTextViewTextViewTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_miner_pay_1"
+        app:layout_constraintTop_toTopOf="@+id/textView24" />
 
     <TextView
-        android:id="@+id/textView43"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_pay_address"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="280dp" />
+        android:layout_marginEnd="@dimen/dp_35"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="TextViewTextViextViewTextViewTextViewTextViewTextViewTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_getMoney_address"
+        app:layout_constraintTop_toTopOf="@+id/textView30" />
 
     <TextView
-        android:id="@+id/textView45"
+        android:id="@+id/tv_remark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="329dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView31"
+        app:layout_constraintStart_toStartOf="@+id/tv_pay_address"
+        app:layout_constraintTop_toTopOf="@+id/textView31" />
 
     <TextView
-        android:id="@+id/textView46"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_business_no"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="379dp" />
+        android:layout_marginEnd="@dimen/dp_35"
+        android:drawablePadding="@dimen/dp_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_remark"
+        app:layout_constraintTop_toTopOf="@+id/textView32" />
+
+    <ImageView
+        android:id="@+id/btn_getMoney_address"
+        android:src="@mipmap/xq_fz"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_getMoney_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <ImageView
+        android:id="@+id/btn_pay_address"
+        android:src="@mipmap/xq_fz"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_pay_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btn_business_no"
+        android:src="@mipmap/xq_fz"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_business_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
     <TextView
-        android:id="@+id/textView47"
+        android:id="@+id/tv_block"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="426dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView33"
+        app:layout_constraintStart_toStartOf="@+id/tv_business_no"
+        app:layout_constraintTop_toTopOf="@+id/textView33" />
 
     <TextView
-        android:id="@+id/textView48"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="475dp" />
+        android:id="@+id/textView49"
+        style="@style/line"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_remark" />
 
 </android.support.constraint.ConstraintLayout>

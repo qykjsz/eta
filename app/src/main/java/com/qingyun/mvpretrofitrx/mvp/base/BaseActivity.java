@@ -170,9 +170,8 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
 
 
     protected  void refresh(){
-        page = 1;
+        page = 0;
         requestList();
-
     }
 
     protected  void loadMore(){

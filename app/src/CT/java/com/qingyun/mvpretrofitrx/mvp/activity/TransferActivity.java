@@ -7,11 +7,13 @@ import android.view.View;
 
 import com.qingyun.mvpretrofitrx.mvp.adapter.TransferLogAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
@@ -73,11 +75,17 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
         asset = (Wallet) getIntent().getSerializableExtra(IntentUtils.ASSET);
         list = new ArrayList<>();
         transferLogAdapter = new TransferLogAdapter(getContext(), list);
+        transferLogAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(List list, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentUtils.TRANSFER_LOG,((TransferLog)list.get(position)));
+                startActivity(BusinessDetailActivity.class,bundle);
+            }
+        });
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.addItemDecoration(DividerHelper.getMyDivider(getContext()));
         rcy.setAdapter(transferLogAdapter);
-        refreashView(list, rcy);
-        getPresenter().getLog(ApplicationUtil.getCurrentWallet().getAddress(),"0",3,page);
     }
 
     @Override
@@ -148,11 +156,17 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
         }else {
             list = transferLogResponse.getOrder();
         }
-        transferLogAdapter.notifyDataSetChanged();
+        transferLogAdapter.notifyDataSetChanged(list);
+        refreashView(list,rcy);
     }
 
     @Override
     public void getNodeSuccess(String node) {
+
+    }
+
+    @Override
+    public void searchLogByHashSuccess(TransferLog transferLog) {
 
     }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.model.WalletAssetModel;
 import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
@@ -83,6 +84,24 @@ public class WalletAssetPresenter extends WalletAssetContact.Presenter {
             public void onNext(String  node) {
                 if(getView() != null){
                     getView().getNodeSuccess(node);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void searchLogByHash(String address, String hash, String glod) {
+        model.searchLogByHash(context,address,hash,glod,getView().bindLifecycle(), new ObserverResponseListener<TransferLog>() {
+
+            @Override
+            public void onNext(TransferLog  transferLog) {
+                if(getView() != null){
+                    getView().searchLogByHashSuccess(transferLog);
                 }
             }
 

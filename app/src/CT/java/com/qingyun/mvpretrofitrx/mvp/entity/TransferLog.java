@@ -1,6 +1,8 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
-public class TransferLog {
+import java.io.Serializable;
+
+public class TransferLog implements Serializable {
 
     private String id;
     private String type;

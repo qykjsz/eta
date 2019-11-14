@@ -32,4 +32,9 @@ public class WalletAssetModel<T> extends BaseModel {
         subscribe(context, Api.getApiService().getNode(), observerListener,transformer);
 
     }
+
+    public void searchLogByHash(Context context,String address,String hash,String glod,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().searchLogByHash(address,hash,glod), observerListener,transformer);
+
+    }
 }

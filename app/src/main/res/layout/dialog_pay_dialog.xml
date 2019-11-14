@@ -81,4 +81,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/btn_sure"
         app:layout_constraintStart_toEndOf="@id/btn_sure"
         />
+
+    <ImageView
+
+        app:layout_constraintTop_toTopOf="@+id/et_pass"
+        app:layout_constraintBottom_toBottomOf="@+id/et_pass"
+        app:layout_constraintEnd_toEndOf="@+id/et_pass"
+        android:padding="@dimen/dp_10"
+        android:id="@+id/btn_visi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/tc_xianshi"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="16dp" />
 </android.support.constraint.ConstraintLayout>

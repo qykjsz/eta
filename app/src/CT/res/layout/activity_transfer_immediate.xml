@@ -82,7 +82,7 @@
         android:layout_marginTop="@dimen/dp_30"
         android:text="@string/remark"
         app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin_type" />
 
     <EditText
         android:id="@+id/tv_note"
@@ -165,7 +165,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView27" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/tv_coin_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/eth"
@@ -189,7 +189,7 @@
 
     <TextView
         app:layout_constraintTop_toBottomOf="@+id/tv_amount"
-        app:layout_constraintBottom_toTopOf="@+id/textView35"
+        app:layout_constraintBottom_toTopOf="@+id/tv_coin_type"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="@dimen/dp_0"
@@ -201,7 +201,7 @@
 
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@+id/textView35"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coin_type"
         app:layout_constraintBottom_toTopOf="@+id/textView28"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

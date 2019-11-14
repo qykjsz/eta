@@ -69,8 +69,10 @@
         <service android:name="com.qingyun.mvpretrofitrx.mvp.weight.dialog.CommonDialogService" />
 
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity" />
-        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity" />
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.PlatformNoticActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity" />
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.NoticeDetailActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessDetailActivity"/>
     </application>
 
 </manifest>

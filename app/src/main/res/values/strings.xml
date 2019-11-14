@@ -215,4 +215,16 @@
     <string name="change_password_success">修改密码成功</string>
     <string name="coin_choose">币种选择</string>
     <string name="business_detail">交易详情</string>
+    <string name="my_asset1">我的资产（$)</string>
+    <string name="pass_not_null">密码不能为空</string>
+    <string name="platform_notice">平台公告</string>
+    <string name="notice_details">公告详情</string>
+    <string name="price_">金额：</string>
+    <string name="mining_pay_">矿工费用：</string>
+    <string name="get_money_address_">收款地址：</string>
+    <string name="pay_address_">付款地址：</string>
+    <string name="note_">备注：</string>
+    <string name="business_no_">交易号：</string>
+    <string name="block_">区块：</string>
+    <string name="transfer_failure">转账失败</string>
 </resources>

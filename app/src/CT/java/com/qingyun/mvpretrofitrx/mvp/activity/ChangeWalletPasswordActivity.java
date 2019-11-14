@@ -115,10 +115,20 @@ public class ChangeWalletPasswordActivity extends BaseActivity {
             public void importSuccess(Wallet wallet) {
                 ToastUtil.showShortToast(R.string.change_password_success);
                 ApplicationUtil.setCurrentWallet(wallet);
+                ApplicationUtil.deleteWallet(wallet);
                 ApplicationUtil.addWallet(wallet);
+                finish();
+                ProgressDialogUtils.getInstances().cancel();
+
+            }
+
+            @Override
+            public void importFailure(Exception e) {
+                ToastUtil.showShortToast(e.toString());
+                ProgressDialogUtils.getInstances().cancel();
+
             }
         });
-        ProgressDialogUtils.getInstances().cancel();
 
     }
 }

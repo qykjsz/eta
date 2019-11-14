@@ -31,10 +31,9 @@ public class MultistageProgress extends View {
                 Color.parseColor("#0198AE"),
                 Color.parseColor("#008396"),
                 Color.parseColor("#007196"),
-                Color.parseColor("#005672")
         };
         DEF_WEIGHTS = new float[]{
-                138, 35, 230, 230, 57
+                35, 230, 230, 57
         };
     }
 

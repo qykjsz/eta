@@ -91,7 +91,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
         }
         refreash = mView.findViewById(R.id.refreash);
         nodata = mView.findViewById(R.id.nodata);
-        freash_loading = mView.findViewById(R.id.freash_loading);
+        freash_loading = mView.findViewById(R.id.refreash_loading);
         initRefreshLayout(refreash);
 
         requestList();

@@ -136,6 +136,11 @@ public class AssetWalletLogFragment extends BaseFragment<WalletAssetContact.View
     }
 
     @Override
+    public void searchLogByHashSuccess(TransferLog transferLog) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindUntilEvent(FragmentEvent.PAUSE);
 

@@ -2,17 +2,26 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.develop.wallet.eth.Wallet;
+import com.develop.wallet.eth.WalletManager;
+import com.develop.wallet.eth.WalletUtils;
+import com.qingyun.mvpretrofitrx.mvp.adapter.ProportionAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.Proportion;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.CopyUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
+import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
+import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
@@ -33,6 +42,15 @@ public class AssetDetailActivity extends BaseActivity {
     TextView tvPublishKey;
     @BindView(R.id.tv_asset)
     TextView tvAsset;
+    @BindView(R.id.rcy_proportion)
+    RecyclerView rcyProportion;
+    @BindView(R.id.progress)
+    MultistageProgress progress;
+    private AssetResponse assetResponse;
+    private List<Proportion> proportionList;
+    private ProportionAdapter proportionAdapter;
+    private int[] colors;
+    private float[] weight;
 
     @Override
     protected String getTitleRightText() {
@@ -76,6 +94,53 @@ public class AssetDetailActivity extends BaseActivity {
         tvWalletName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
         tvIncomeToday.setText(assetResponse.getToday());
         tvAsset.setText(assetResponse.getAllnumber());
+
+        proportionList = assetResponse.getProportion();
+        proportionAdapter = new ProportionAdapter(getContext(), proportionList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        //调整RecyclerView的排列方向
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rcyProportion.setLayoutManager(linearLayoutManager);
+        rcyProportion.setAdapter(proportionAdapter);
+
+
+        colors = new int[assetResponse.getProportion().size()];
+        for (int i = 0; i < colors.length; i++) {
+            int color = getResources().getColor(R.color.green);
+            switch (i) {
+                case 0:
+                    color = getResources().getColor(R.color.color_FFFFFF);
+                    break;
+                case 1:
+                    color = getResources().getColor(R.color.color_93AEFC);
+
+                    break;
+                case 2:
+                    color = getResources().getColor(R.color.color_FFB632);
+
+                    break;
+                case 3:
+                    color = getResources().getColor(R.color.color_EA566D);
+
+                    break;
+            }
+            colors[i] = color;
+        }
+        weight = new float[assetResponse.getProportion().size()];
+//        boolean all0 = true;
+//        for (int i=0;i<assetResponse.getProportion().size();i++){
+//            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
+//            if (weight[i]!=0) all0 = false;
+//        }
+//        if (all0){
+//            colors[0] = getResources().getColor(R.color.color_F8F8FF);
+//
+//        }
+        progress.setProgress(0);
+        progress.setColors(colors, weight);
+        progress.invalidate();
+
+
     }
 
     @Override
@@ -89,13 +154,85 @@ public class AssetDetailActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_change_password:
+
                 startActivity(ChangeWalletPasswordActivity.class);
+
+//                DialogUtils.showPayDialog(getContext(), new DialogUtils.SureListener() {
+//                    @Override
+//                    public void onSure(Object o) {
+//                        WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
+//                            @Override
+//                            public void onSuccess() {
+//                                startActivity(ChangeWalletPasswordActivity.class);
+//
+//
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Exception e) {
+//                                ToastUtil.showShortToast(R.string.pass_err);
+//
+//                            }
+//                        });
+//
+//                    }
+//                });
+//
+
                 break;
             case R.id.btn_export_private_key:
-                startActivity(ExportPrivateKeyActivity.class);
+                DialogUtils.showPayDialog(getContext(), new DialogUtils.SureListener() {
+                    @Override
+                    public void onSure(Object o) {
+                        ProgressDialogUtils.getInstances().showDialog();
+                       WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
+                           @Override
+                           public void onSuccess() {
+                               startActivity(ExportPrivateKeyActivity.class);
+                               ProgressDialogUtils.getInstances().cancel();
+
+                           }
+
+                           @Override
+                           public void onFailure(Exception e) {
+                               ToastUtil.showShortToast(R.string.pass_err);
+                               ProgressDialogUtils.getInstances().cancel();
+
+                           }
+                       });
+
+                    }
+                });
                 break;
             case R.id.btn_export_key_store:
-                startActivity(ExportKeystoreActivity.class);
+
+
+                DialogUtils.showPayDialog(getContext(), new DialogUtils.SureListener() {
+                    @Override
+                    public void onSure(Object o) {
+                        ProgressDialogUtils.getInstances().showDialog();
+                        WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
+                            @Override
+                            public void onSuccess() {
+                                ProgressDialogUtils.getInstances().cancel();
+
+                                startActivity(ExportKeystoreActivity.class);
+
+
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+                                ProgressDialogUtils.getInstances().cancel();
+
+                                ToastUtil.showShortToast(R.string.pass_err);
+
+                            }
+                        });
+
+                    }
+                });
+
 
                 break;
         }

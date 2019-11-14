@@ -35,41 +35,41 @@ public class DialogUtils {
     public static final int CODE_CHOOSE_PICTURE_PHONE = 10000;
     public static final int CODE_CHOOSE_PICTURE_CAMEAR = 10001;
 
-//    public static void showPayDialog(Context context, final SureListener sureListener){
+    public static void showPayDialog(Context context, final SureListener sureListener){
 //        if (ApplicationUtil.getUser().getHas_pay_password()){
-//            AnyLayer.with(context)
-//                    .contentView(R.layout.dialog_pay_dialog)
-//                    .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
-//                    .gravity(Gravity.CENTER)
-//                    .onClickToDismiss(R.id.btn_cancel)
-//                    .onClick(R.id.btn_sure, new LayerManager.OnLayerClickListener() {
-//                        @Override
-//                        public void onClick(AnyLayer anyLayer, View v) {
-//                            EditText etPass =  anyLayer.getView(R.id.et_pass);
-//                            if (TextUtils.isEmpty(etPass.getText().toString())){
-//                                ToastUtil.showShortToast(R.string.pass_not_null);
-//                                return;
-//                            }
-//                            if (sureListener!=null){
-//                                sureListener.onSure(etPass.getText().toString());
-//                                anyLayer.dismiss();
-//                            }
-//                        }
-//                    })
-//                    .bindData(new LayerManager.IDataBinder() {
-//                        @Override
-//                        public void bind(AnyLayer anyLayer) {
-//                            // TODO 绑定数据
-//
-//                        }
-//                    })
-//                    .show();
+            AnyLayer.with(context)
+                    .contentView(R.layout.dialog_pay_dialog)
+                    .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+                    .gravity(Gravity.CENTER)
+                    .onClickToDismiss(R.id.btn_cancel)
+                    .onClick(R.id.btn_sure, new LayerManager.OnLayerClickListener() {
+                        @Override
+                        public void onClick(AnyLayer anyLayer, View v) {
+                            EditText etPass =  anyLayer.getView(R.id.et_pass);
+                            if (TextUtils.isEmpty(etPass.getText().toString())){
+                                ToastUtil.showShortToast(R.string.pass_not_null);
+                                return;
+                            }
+                            if (sureListener!=null){
+                                sureListener.onSure(etPass.getText().toString());
+                                anyLayer.dismiss();
+                            }
+                        }
+                    })
+                    .bindData(new LayerManager.IDataBinder() {
+                        @Override
+                        public void bind(AnyLayer anyLayer) {
+                            // TODO 绑定数据
+
+                        }
+                    })
+                    .show();
 //        }else {
 ////            Intent intent = new Intent(context,ChangePayPasswordActivity.class);
 ////            context.startActivity(intent);
 //        }
-//
-//    }
+
+    }
 
 
     public static void showPictureChooseDialog(final Activity context, final boolean circle) {

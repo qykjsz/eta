@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.CreateWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.PlatformNoticActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.QuickExchangeActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.TransferActivity;
@@ -37,11 +39,11 @@ import com.qingyun.mvpretrofitrx.mvp.adapter.ProportionAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
-import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetModle;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinType;
 import com.qingyun.mvpretrofitrx.mvp.entity.Proportion;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
@@ -60,6 +62,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,18 +122,10 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     private List<AssetModle> modleList;
     private List<com.qingyun.mvpretrofitrx.mvp.entity.Wallet> assetList;
     private ProportionAdapter proportionAdapter;
-
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            if (msg.what == ETH_BLANCE) {
-                tvAsset.setText((String) msg.obj);
-            }
-            return false;
-        }
-    });
     private AssetResponse assetResponse;
     private List<Proportion> proportionList;
+    private float[] weight;
+    private int[] colors;
 
     @Override
     public int getLayoutId() {
@@ -182,10 +177,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 //        rcyWallet.addItemDecoration(DividerHelper.getMy10PaddingDivider(getContext()));
         rcyWallet.setAdapter(assetAdapter);
         refreashView(assetList, rcyWallet);
-
-
         proportionList = new ArrayList<>();
-        proportionAdapter = new ProportionAdapter(getContext(),proportionList);
+        proportionAdapter = new ProportionAdapter(getContext(), proportionList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //调整RecyclerView的排列方向
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -212,16 +205,6 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         if (ApplicationUtil.getCurrentWallet() != null)
             getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
 
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Message msg = new Message();
-                msg.what = ETH_BLANCE;
-                msg.obj = WalletManager.getEthBalance(ApplicationUtil.getCurrentWallet().getAddress()).toString();
-                handler.sendMessage(msg);
-            }
-        }).start();
 
         tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
         if ((SpUtils.getObjectFromShare(getContext(), "is_make_copy")) == null || ((int) SpUtils.getObjectFromShare(getContext(), "is_make_copy")) != 1) {
@@ -302,6 +285,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             case R.id.btn_visiable:
                 break;
             case R.id.btn_more_info:
+
+                startActivity(PlatformNoticActivity.class);
                 break;
         }
     }
@@ -418,6 +403,43 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         proportionList = assetResponse.getProportion();
         proportionAdapter.notifyDataSetChanged(proportionList);
 
+
+        colors = new int[assetResponse.getProportion().size()];
+        for (int i=0;i<colors.length;i++){
+            int color = getResources().getColor(R.color.green);
+            switch (i)
+            {
+                case 0:
+                    color = getResources().getColor(R.color.color_FFFFFF);
+                    break;
+                case 1:
+                    color = getResources().getColor(R.color.color_93AEFC);
+
+                    break;
+                case 2:
+                    color = getResources().getColor(R.color.color_FFB632);
+
+                    break;
+                case 3:
+                    color = getResources().getColor(R.color.color_EA566D);
+
+                    break;
+            }
+            colors[i] = color;
+        }
+        weight = new float[assetResponse.getProportion().size()];
+//        boolean all0 = true;
+//        for (int i=0;i<assetResponse.getProportion().size();i++){
+//            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
+//            if (weight[i]!=0) all0 = false;
+//        }
+//        if (all0){
+//            colors[0] = getResources().getColor(R.color.color_F8F8FF);
+//
+//        }
+        progress.setProgress(0);
+        progress.setColors(colors,weight);
+        progress.invalidate();
 //        int[] colors = new int[assetResponse.getProportion().];
 //        int[] colors = new int[]{assetResponse.getProportion()};
 //        float[] weights;
@@ -437,6 +459,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void getNodeSuccess(String node) {
+
+    }
+
+    @Override
+    public void searchLogByHashSuccess(TransferLog transferLog) {
 
     }
 

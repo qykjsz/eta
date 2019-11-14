@@ -30,7 +30,7 @@
     <color name="color_3377FF">#3377FF</color>
     <color name="main_blue">#3377FF</color>
     <color name="color_FFF5F5F5">#FFF5F5F5</color>
-    <color name="red">#E50000</color>
+    <color name="red">#E04159</color>
     <color name="color_yellow">#FFB200</color>
     <color name="color_F7FAFF">#F7FAFF</color>
     <color name="bg_dialog">#20000000</color>
@@ -87,5 +87,12 @@
     <color name="color_98AFD7">#98AFD7</color>
     <color name="color_E04159">#E04159</color>
     <color name="color_00B794">#00B794</color>
+    <color name="color_93AEFC">#93AEFC</color>
+    <color name="color_FFB632">#FFB632</color>
+    <color name="color_EA566D">#EA566D</color>
+    <color name="color_F8F8FF">#F8F8FF</color>
+    <color name="color_E8E8E8">#E8E8E8</color>
+    <color name="color_F2F2F2">#F2F2F2</color>
+    <color name="color_DBDBDB">#DBDBDB</color>
 
 </resources>

@@ -116,8 +116,8 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
             try {
                 String s = body.string();
                 Gson gson = new Gson();
-                NormalResponse bad = gson.fromJson(s, NormalResponse.class);
-                ToastUtil.showShortToast(bad.getDetail());
+                BaseResponse bad = gson.fromJson(s, BaseResponse.class);
+                ToastUtil.showShortToast(bad.getMsg());
 
 
             } catch (IOException IOe) {

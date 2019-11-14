@@ -3,10 +3,13 @@ package com.qingyun.mvpretrofitrx.mvp.api;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.NoticeDetail;
+import com.qingyun.mvpretrofitrx.mvp.entity.PlatformNoticResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation1;
 import com.qingyun.mvpretrofitrx.mvp.entity.TheArticleDetails;
@@ -81,4 +84,16 @@ public interface ApiService {
     ;
     @POST("et_node")
     Observable <BaseResponse<String>>getNode();
+
+    @POST("et_recordorderhash")
+    Observable  <BaseResponse<TransferLog>>searchLogByHash(@Query("address")String address, @Query("hash")String hash,@Query("glod") String glod);
+
+    @POST("et_notice")
+    Observable <BaseResponse<PlatformNoticResponse>>getNoticeList(@Query("page")int page, @Query("contacts")String contacts);
+
+    @POST("et_noticeone")
+    Observable <BaseResponse<NoticeDetail>>getNoticeDetail(@Query("id") int id, @Query("contacts")String contacts);
+
+    @POST("et_recordorderone")
+    Observable <BaseResponse<BusinessDetail>>getBusinessDetail(@Query("address")String address, @Query("glod")String glod, @Query("id")String id);
 }

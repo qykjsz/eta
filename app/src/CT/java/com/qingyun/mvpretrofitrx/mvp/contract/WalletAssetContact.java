@@ -4,6 +4,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 
 
@@ -15,6 +16,7 @@ public interface WalletAssetContact {
         void addWalletSuccess();
         void getLogSuccess(TransferLogResponse transferLogResponse);
         void getNodeSuccess(String node);
+        void searchLogByHashSuccess(TransferLog transferLog);
 
     }
 
@@ -25,6 +27,7 @@ public interface WalletAssetContact {
 //        type	[string]	是	交易类型 1.转入 2.转入 3.全部
         public abstract void getLog(String address,String glod,int type,int page);
         public abstract void getNode();
+        public abstract void searchLogByHash(String address,String hash,String glod);
 
     }
 }
