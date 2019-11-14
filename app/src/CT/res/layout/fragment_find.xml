@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_103"
         android:background="@mipmap/zz_top_bg"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="15dp">
 
         <ImageView
             android:id="@+id/btn_scan"
@@ -31,20 +32,21 @@
             app:iconifiedByDefault="false"
             app:queryHint="搜索DApp或输入链接进入玩耍"
             />
-
-
     </RelativeLayout>
+
+
 
     <LinearLayout
         style="@style/MatchMatch.Vertical"
-        android:layout_marginTop="-27dp"
-        android:background="@drawable/bg_ffffff_top_round_25">
+        android:layout_marginTop="-18dp"
+        android:background="@drawable/bg_ffffff_top_round_25"
+        >
 
         <ImageView
             style="@style/MatchWrap"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
             android:layout_marginEnd="@dimen/dp_20"
             android:src="@mipmap/fx_banner" />
 
@@ -57,18 +59,21 @@
             <TextView
                 style="@style/WrapWrap"
                 android:text="我的DApp"
-                android:textColor="@color/color_FF333333" />
+                android:textColor="@color/color_FF333333"
+                android:textStyle="bold"/>
 
             <TextView
                 style="@style/WrapWrap"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:layout_toLeftOf="@+id/iv"
                 android:text="更多"
-                android:textColor="@color/color_FF999999" />
+                android:textColor="@color/color_FF999999"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/iv"
-                style="@style/WrapWrap.ImageView_bank_gd_icon" />
+                style="@style/WrapWrap.ImageView_bank_gd_icon"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
@@ -89,7 +94,8 @@
             <TextView
                 style="@style/WrapWrap"
                 android:text="精选DApp"
-                android:textColor="@color/color_FF333333" />
+                android:textColor="@color/color_FF333333"
+                android:textStyle="bold"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcy_modle"
