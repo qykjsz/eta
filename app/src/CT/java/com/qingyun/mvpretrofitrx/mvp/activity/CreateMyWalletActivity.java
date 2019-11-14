@@ -15,6 +15,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
@@ -27,6 +28,8 @@ import com.senon.mvpretrofitrx.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -218,6 +221,11 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
 
     @Override
     public void searchLogByHashSuccess(TransferLog transferLog) {
+
+    }
+
+    @Override
+    public void getGasPriceSuccess(List<GasPrice> gasPrices) {
 
     }
 

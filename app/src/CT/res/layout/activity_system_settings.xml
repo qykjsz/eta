@@ -1,117 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/MatchMatch.Vertical"
-    tools:context="com.qingyun.mvpretrofitrx.mvp.activity.SystemSettingsActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <RelativeLayout
-        android:id="@+id/Rl_language_choice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10">
-
-        <TextView
-            style="@style/WrapWrap"
-            android:text="语言选择" />
-
-        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-    </RelativeLayout>
 
     <TextView
-        style="@style/line"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1" />
-
-    <RelativeLayout
-        android:id="@+id/Rl_Node_set"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10">
-
-        <TextView
-            style="@style/WrapWrap"
-            android:text="节点设置" />
-
-        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-    </RelativeLayout>
+        android:id="@+id/btn_language"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_item"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:text="@string/choose_language"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        style="@style/line"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1" />
+        android:id="@+id/btn_node"
+        android:layout_width="0dp"
 
-    <RelativeLayout
-        android:id="@+id/Rl_unit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10">
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_item"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:text="@string/node_setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_language" />
 
-        <TextView
-            style="@style/WrapWrap"
-            android:text="货币单位" />
-
-        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-    </RelativeLayout>
 
     <TextView
-        style="@style/line"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1" />
+        android:id="@+id/btn_unit"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_item"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:text="@string/coin_unit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_node" />
 
-    <RelativeLayout
-        android:id="@+id/Rl_push_notification"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10">
-
-        <TextView
-            style="@style/WrapWrap"
-            android:text="推送通知" />
-
-        <ImageView style="@style/WrapWrap.ImageView_bank_gd_icon" />
-
-    </RelativeLayout>
 
     <TextView
+        android:id="@+id/btn_up_down"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_item"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:text="@string/up_and_down"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_push" />
+
+
+    <TextView
+        android:id="@+id/btn_push"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_item"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:text="@string/push_notify"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_unit" />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_language"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         style="@style/line"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1" />
-
-    <RelativeLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10">
-
-        <TextView
-            style="@style/WrapWrap"
-            android:text="红涨绿跌" />
-
-        <Switch
-            android:id="@+id/sw_1"
-            style="@style/WrapWrap"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="@dimen/dp_20"
-            android:checked="true"
-            android:textColor="@color/color_FFFFFF"
-            android:thumb="@drawable/switch_white_circle_selector"
-            android:track="@drawable/switch_selector_green" />
+        />
 
 
-    </RelativeLayout>
-</LinearLayout>
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_node"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_unit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_push"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_up_down"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+        />
+</android.support.constraint.ConstraintLayout>

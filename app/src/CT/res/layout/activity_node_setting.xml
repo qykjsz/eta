@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/boldTextView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_35"
+        android:background="@color/color_F2F2F2"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/recommend_node"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:text="@string/node_speed"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBottom_toBottomOf="@+id/boldTextView"
+        app:layout_constraintEnd_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@id/boldTextView" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:drawableStart="@drawable/circle_green"
+        android:drawablePadding="@dimen/dp_4"
+        android:text="@string/fast"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBottom_toBottomOf="@+id/boldTextView"
+        app:layout_constraintEnd_toStartOf="@+id/textView36"
+        app:layout_constraintTop_toTopOf="@id/boldTextView" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:drawableStart="@drawable/circle_yelown"
+        android:drawablePadding="@dimen/dp_4"
+        android:text="@string/middle"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBottom_toBottomOf="@+id/boldTextView"
+        app:layout_constraintEnd_toStartOf="@+id/textView38"
+        app:layout_constraintTop_toTopOf="@id/boldTextView" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:drawableStart="@drawable/circle_red"
+        android:drawablePadding="@dimen/dp_4"
+        android:text="@string/slow"
+
+        android:textColor="@color/color_999999"
+        app:layout_constraintTop_toTopOf="@id/boldTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/boldTextView"
+        app:layout_constraintEnd_toEndOf="@+id/boldTextView" />
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boldTextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView43"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0">
+
+        <ezy.ui.layout.LoadingLayout
+            android:id="@+id/refreash_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/boldTextView"
+                app:layout_constraintBottom_toTopOf="@+id/textView43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+        </ezy.ui.layout.LoadingLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/textView43"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:text="@string/add_my_node"
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/main_blue"
+        android:background="@color/color_F2F2F2"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="668dp" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

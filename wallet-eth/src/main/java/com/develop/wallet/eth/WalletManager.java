@@ -46,10 +46,12 @@ import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.core.methods.response.EthUninstallFilter;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.utils.Convert;
 import org.web3j.utils.Numeric;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -113,7 +115,7 @@ public class WalletManager {
     /**
      * 配置地址
      *
-     * @param token
+     * @param
 
      */
     public static void config( String url) {
@@ -601,6 +603,13 @@ public class WalletManager {
     }
 
 
+    public static String sendTransactionByPrivateKey(String fromAddress, String privateKey, String toAddress, String amount,float gasPrice,float gasLitmit) {
+        ECKeyPair ecKeyPair = ECKeyPair.create(EthUtils.toKeyBigInteger(privateKey));
+        return sendTransaction(fromAddress, ecKeyPair, toAddress, EthUtils.toBigInteger(amount),gasPrice,gasLitmit);
+    }
+
+
+
     public static String sendTransactionByPrivateKey(String fromAddress, BigInteger privateKey, String toAddress, String amount) {
         ECKeyPair ecKeyPair = ECKeyPair.create(privateKey);
         return sendTransaction(fromAddress, ecKeyPair, toAddress, EthUtils.toBigInteger(amount));
@@ -657,6 +666,20 @@ public class WalletManager {
         return hash;
     }
 
+
+    /**
+     * 发送转账交易
+     */
+    private static String sendTransaction(String fromAddress, ECKeyPair ecKeyPair, String toAddress, BigInteger amount,float gasPrice,float gasLitmit) {
+        // noce
+        BigInteger nonce = getNonce(fromAddress);
+        String hash = sendTransaction(fromAddress, ecKeyPair, toAddress, amount, nonce, 0,gasPrice,gasLitmit);
+        return hash;
+    }
+
+
+
+
     private static int maxResetCount = 100;
 
     private static String sendTransaction(String fromAddress, ECKeyPair ecKeyPair, String toAddress, BigInteger amount, BigInteger nonce, int resetCount) {
@@ -672,8 +695,8 @@ public class WalletManager {
             //创建交易  注意金额 保留小数点后8位 要转化为整数 比如0.00000001 转化为1
             Function function = new Function("transfer", inputParameters, outputParameters);
             String data = FunctionEncoder.encode(function);
-
-            //智能合约事物
+//
+////            智能合约事物
 //            BigInteger GAS_PRICE = Convert.toWei(BigDecimal.valueOf(5), Convert.Unit.GWEI).toBigInteger();
 //            BigInteger GAS_LIMIT = Convert.toWei(BigDecimal.valueOf(60000), Convert.Unit.GWEI).toBigInteger();
             RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, GAS_PRICE, GAS_LIMIT, tokenAddres, data);
@@ -710,6 +733,61 @@ public class WalletManager {
         }
         return null;
     }
+
+
+    private static String sendTransaction(String fromAddress, ECKeyPair ecKeyPair, String toAddress, BigInteger amount, BigInteger nonce, int resetCount,float gasPrice,float gasLitmit) {
+        try {
+//            PersonalUnlockAccount personalUnlockAccount = getAdmin().personalUnlockAccount(fromAddress, "").send();
+//            if (personalUnlockAccount.accountUnlocked()) {
+//            }
+            List inputParameters = Arrays.asList(new Address(toAddress), new Uint256(amount));
+            List outputParameters = Arrays.asList(new TypeReference<Address>() {
+            }, new TypeReference<Bool>() {
+            });
+
+            //创建交易  注意金额 保留小数点后8位 要转化为整数 比如0.00000001 转化为1
+            Function function = new Function("transfer", inputParameters, outputParameters);
+            String data = FunctionEncoder.encode(function);
+
+//            智能合约事物
+            BigInteger GAS_PRICE = Convert.toWei(BigDecimal.valueOf(gasPrice), Convert.Unit.GWEI).toBigInteger();
+            BigInteger GAS_LIMIT = Convert.toWei(BigDecimal.valueOf(gasLitmit), Convert.Unit.GWEI).toBigInteger();
+            RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, GAS_PRICE, GAS_LIMIT, tokenAddres, data);
+
+            //通过私钥获取凭证  当然也可以根据其他的获取 其他方式详情请看web3j
+            Credentials credentials = Credentials.create(ecKeyPair);
+
+            byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+            String hexValue = Numeric.toHexString(signedMessage);
+            //发送事务
+            EthSendTransaction ethSendTransaction = null;
+            try {
+                ethSendTransaction = getWeb3j().ethSendRawTransaction(hexValue).sendAsync().get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            //事物的HASH
+            String transactionHash = ethSendTransaction.getTransactionHash();
+            // nonce +1 重试
+            log(String.format("sendTransaction: hash = %s, nonce = %s", transactionHash, String.valueOf(nonce)));
+            if (transactionHash == null) {
+                if (resetCount < maxResetCount) {
+                    nonce = nonce.add(BigInteger.valueOf(1));
+                    resetCount += 1;
+                    log(String.format("sendTransaction reset: count = %s, nonce = %s", String.valueOf(resetCount), String.valueOf(nonce)));
+                    return sendTransaction(fromAddress, ecKeyPair, toAddress, amount, nonce, resetCount++,gasPrice,gasLitmit);
+                }
+            }
+            return transactionHash;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
     /**
      * 获取代币余额

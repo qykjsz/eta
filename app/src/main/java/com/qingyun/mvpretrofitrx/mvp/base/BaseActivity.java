@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.github.jokar.multilanguages.library.MultiLanguage;
 import com.qingyun.mvpretrofitrx.mvp.utils.AppUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.LocalManageUtil;
@@ -324,7 +325,8 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
     }
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(LocalManageUtil.setLocal(newBase));
+        super.attachBaseContext(MultiLanguage.setLocal(newBase));
+
     }
 
 }

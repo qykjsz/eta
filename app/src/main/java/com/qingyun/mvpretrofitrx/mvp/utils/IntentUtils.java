@@ -36,6 +36,7 @@ public class IntentUtils {
     public static final String ASSET = "asset";
     public static final String ASSET_RESPONSE = "asset_response";
     public static final String TRANSFER_LOG = "transfer_log";
+    public static final String ITEM = "item";
 
     public static String NEW_ID="news_id";
 }

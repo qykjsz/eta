@@ -73,6 +73,9 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.NoticeDetailActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessDetailActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseLanguageActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.NodeSettingActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.MyWebViewActivity"/>
     </application>
 
 </manifest>

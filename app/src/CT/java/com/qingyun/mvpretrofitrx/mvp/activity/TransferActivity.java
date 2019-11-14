@@ -14,6 +14,7 @@ import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Asset;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
+import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
@@ -22,6 +23,9 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
+
+import org.web3j.abi.Utils;
+import org.web3j.protocol.Web3j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,6 +171,11 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
 
     @Override
     public void searchLogByHashSuccess(TransferLog transferLog) {
+
+    }
+
+    @Override
+    public void getGasPriceSuccess(List<GasPrice> gasPrices) {
 
     }
 

@@ -227,4 +227,25 @@
     <string name="business_no_">交易号：</string>
     <string name="block_">区块：</string>
     <string name="transfer_failure">转账失败</string>
+    <string name="choose_language">语言选择</string>
+    <string name="node_setting">节点设置</string>
+    <string name="coin_unit">货币单位</string>
+    <string name="push_notify">推送通知</string>
+    <string name="up_and_down">红涨绿跌</string>
+    <string name="chinese_china">简体中文</string>
+    <string name="america_english">English</string>
+    <string name="language_francais">法语</string>
+    <string name="language_japan">日语</string>
+    <string name="language_korea">한글</string>
+    <string name="traditional_chinese">繁体中文</string>
+    <string name="language_english">ENGLISH</string>
+    <string name="recommend_node">推荐节点</string>
+    <string name="node_speed">节点速度</string>
+    <string name="fast">快</string>
+    <string name="middle">中</string>
+    <string name="slow">慢</string>
+    <string name="add_my_node">添加自定义节点</string>
+    <string name="gas_price_setting">矿工费用设置</string>
+    <string name="recommend">推荐</string>
+    <string name="senior_model">高级模式</string>
 </resources>

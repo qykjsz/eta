@@ -6,6 +6,33 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/btn_asset_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/btn_wallet_manager"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="84dp" />
 
+    <TextView
+        android:id="@+id/btn_wallet_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/btn_business_log"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_asset_review"
+        tools:layout_editor_absoluteY="84dp" />
 
+    <TextView
+        android:id="@+id/btn_business_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_wallet_manager"
+        tools:layout_editor_absoluteY="91dp" />
 </android.support.constraint.ConstraintLayout>

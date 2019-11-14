@@ -37,4 +37,10 @@ public class WalletAssetModel<T> extends BaseModel {
         subscribe(context, Api.getApiService().searchLogByHash(address,hash,glod), observerListener,transformer);
 
     }
+
+    public void getGasPrice(Context context,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getGasPrice(), observerListener,transformer);
+
+    }
+
 }

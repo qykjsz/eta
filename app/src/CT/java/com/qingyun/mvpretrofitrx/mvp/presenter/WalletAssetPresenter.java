@@ -4,10 +4,13 @@ import android.content.Context;
 
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.model.WalletAssetModel;
 import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
+
+import java.util.List;
 
 public class WalletAssetPresenter extends WalletAssetContact.Presenter {
     private WalletAssetModel model;
@@ -102,6 +105,24 @@ public class WalletAssetPresenter extends WalletAssetContact.Presenter {
             public void onNext(TransferLog  transferLog) {
                 if(getView() != null){
                     getView().searchLogByHashSuccess(transferLog);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getGasPrice() {
+        model.getGasPrice(context,getView().bindLifecycle(), new ObserverResponseListener<List<GasPrice>>() {
+
+            @Override
+            public void onNext(List<GasPrice>  gasPriceList) {
+                if(getView() != null){
+                    getView().getGasPriceSuccess(gasPriceList);
                 }
             }
 

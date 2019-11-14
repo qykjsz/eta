@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/btn_chinese"
+        android:background="@drawable/bg_item"
+        android:layout_width="@dimen/dp_0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/chinese_china"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:layout_height="@dimen/setting_item_height">
+    </TextView>
+
+    <TextView
+        android:id="@+id/btn_traditional_chinese"
+        android:layout_width="@dimen/dp_0"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chinese"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_item"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/traditional_chinese"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:layout_height="@dimen/setting_item_height">
+    </TextView>
+
+    <TextView
+        android:id="@+id/btn_english"
+        android:layout_width="@dimen/dp_0"
+        android:background="@drawable/bg_item"
+        app:layout_constraintTop_toBottomOf="@+id/btn_traditional_chinese"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/language_english"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:layout_height="@dimen/setting_item_height">
+    </TextView>
+
+    <TextView
+        android:id="@+id/btn_korea"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/setting_item_height"
+        android:background="@drawable/bg_item"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/language_korea"
+        app:layout_constraintTop_toBottomOf="@+id/btn_english"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="219dp"></TextView>
+
+
+
+    <ImageView
+        android:id="@+id/iv_chinese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_chinese"
+        app:layout_constraintEnd_toEndOf="@+id/btn_chinese"
+        app:layout_constraintTop_toTopOf="@+id/btn_chinese"
+        app:srcCompat="@mipmap/lang_xz" />
+
+
+    <ImageView
+        android:id="@+id/traditional_chinese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_traditional_chinese"
+        app:layout_constraintEnd_toEndOf="@+id/btn_traditional_chinese"
+        app:layout_constraintTop_toTopOf="@+id/btn_traditional_chinese"
+        app:srcCompat="@mipmap/lang_xz" />
+
+
+
+    <ImageView
+        android:id="@+id/iv_english"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_english"
+        app:layout_constraintEnd_toEndOf="@+id/btn_english"
+        app:layout_constraintTop_toTopOf="@+id/btn_english"
+        app:srcCompat="@mipmap/lang_xz" />
+
+
+
+    <ImageView
+        android:id="@+id/iv_korea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_korea"
+        app:layout_constraintEnd_toEndOf="@+id/btn_korea"
+        app:layout_constraintTop_toTopOf="@+id/btn_korea"
+        app:srcCompat="@mipmap/lang_xz" />
+
+    <TextView
+        android:id="@+id/textView341"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:background="@color/line_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_korea" />
+
+    <TextView
+        android:id="@+id/textView141"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/line_color"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_chinese" />
+
+    <TextView
+        android:id="@+id/textView146"
+        android:layout_width="0dp"
+        android:background="@color/line_color"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_traditional_chinese" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:background="@color/line_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_english" />
+
+</android.support.constraint.ConstraintLayout>
