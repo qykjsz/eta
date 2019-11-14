@@ -10,10 +10,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_30">
 
-            <ezy.ui.layout.LoadingLayout
-                android:id="@+id/freash_loading"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+      >
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -24,6 +21,6 @@
 
 
                 </android.support.v7.widget.RecyclerView>
-            </ezy.ui.layout.LoadingLayout>
+
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

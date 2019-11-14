@@ -28,8 +28,7 @@ public class TradingRecordActivity extends BaseActivity<TradingRecordContact.Vie
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.freash_loading)
-    LoadingLayout freashLoading;
+
     @BindView(R.id.srl)
     SmartRefreshLayout srl;
     AssetWalletLogAdapter assetWalletLogAdapter;
@@ -91,15 +90,16 @@ public class TradingRecordActivity extends BaseActivity<TradingRecordContact.Vie
 
     @Override
     public void init() {
-        if (ApplicationUtil.getCurrentWallet()!= null) {
+        if (ApplicationUtil.getCurrentWallet() != null) {
             getPresenter().getLog(ApplicationUtil.getCurrentWallet().getAddress(), 0 + "", 3, page);
             list = new ArrayList<>();
             assetWalletLogAdapter = new AssetWalletLogAdapter(getContext(), list);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.addItemDecoration(DividerHelper.getMyDivider(getContext()));
             recyclerView.setAdapter(assetWalletLogAdapter);
+              initRefreshLayout(srl);
             refreashView(list, recyclerView);
-            initRefreshLayout(srl);
+
         }
 
 
@@ -107,13 +107,15 @@ public class TradingRecordActivity extends BaseActivity<TradingRecordContact.Vie
 
     @Override
     public void getLogSuccess(TransferLogResponse transferLogResponse) {
-        if (isLoadMore) {
-            list.addAll(transferLogResponse.getOrder());
-        } else {
-            list = transferLogResponse.getOrder();
+        if (transferLogResponse.getOrder() != null) {
+            if (isLoadMore) {
+                list.addAll(transferLogResponse.getOrder());
+            } else {
+                list = transferLogResponse.getOrder();
+            }
+            refreashView(list, recyclerView);
+            assetWalletLogAdapter.notifyDataSetChanged(list);
         }
-        refreashView(list, recyclerView);
-        assetWalletLogAdapter.notifyDataSetChanged(list);
 
     }
 

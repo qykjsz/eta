@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:paddingTop="@dimen/dp_10"
-    android:paddingBottom="@dimen/dp_10"
-    android:layout_height="wrap_content">
+    android:paddingBottom="@dimen/dp_10">
 
     <ImageView
         android:id="@+id/iv_img"
@@ -12,13 +12,13 @@
         android:src="@mipmap/qbgl_eos" />
 
     <TextView
-        android:maxLength="5"
         android:id="@+id/tv_name"
         style="@style/WrapWrap"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/dp_14"
         android:layout_toRightOf="@+id/iv_img"
+        android:maxLength="5"
         android:text="ETH"
         android:textSize="20sp" />
 
@@ -38,16 +38,13 @@
         android:layout_marginStart="@dimen/dp_55"
         android:layout_marginTop="@dimen/dp_5"
         android:layout_toRightOf="@+id/tv_name"
+        android:maxLength="4"
         android:text="$ 3.8399"
         android:textColor="@color/color_98AFD7"
         android:textSize="@dimen/dp_12" />
 
     <TextView
 
-        android:textSize="12sp"
-        android:textColor="@color/color_FFFFFF"
-        android:paddingStart="@dimen/dp_5"
-        android:paddingEnd="@dimen/dp_5"
         android:id="@+id/tv_zb"
         style="@style/WrapWrap"
         android:layout_width="@dimen/dp_60"
@@ -56,5 +53,9 @@
         android:height="@dimen/dp_27"
         android:background="@color/color_999999"
         android:gravity="center"
-        android:text="+65654" />
+        android:paddingStart="@dimen/dp_5"
+        android:paddingEnd="@dimen/dp_5"
+        android:text="+65654"
+        android:textColor="@color/color_FFFFFF"
+        android:textSize="12sp" />
 </RelativeLayout>

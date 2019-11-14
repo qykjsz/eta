@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.activity.ExpressTheDetailsActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.FlashAdapter;
@@ -16,15 +17,16 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.contract.FlashContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.News;
-import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.Flashpresenter;
-import com.qingyun.mvpretrofitrx.mvp.view.TimeLineItemDecoration;
+import com.qingyun.mvpretrofitrx.mvp.utils.TestMain;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,6 +47,8 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
     @BindView(R.id.freash_loading)
     LoadingLayout freashLoading;
     News news;
+    @BindView(R.id.tv_nian)
+    TextView tvNian;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,6 +83,8 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
     public void init() {
         getPresenter().getContacFlashtList(page - 1 + "");
         list = new ArrayList<>();
+
+        tvNian.setText(TestMain.getsetdata());
         flashAdapter = new FlashAdapter(getContext(), list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, 50, false));
@@ -86,16 +92,16 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         recyclerView.setAdapter(flashAdapter);
         refreashView(list, recyclerView);
         initRefreshLayout(srl);
-      flashAdapter.setAddListener(new BaseAdapter.OnItemClickListener() {
-          @Override
-          public void onItemClick(List list, int position) {
-              news= (News) list.get(position);
-              Intent intent=new Intent();
-              intent.setClass(getContext(), ExpressTheDetailsActivity.class);
-              intent.putExtra("people", news);
-              startActivity(intent);
-          }
-      });
+        flashAdapter.setAddListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(List list, int position) {
+                news = (News) list.get(position);
+                Intent intent = new Intent();
+                intent.setClass(getContext(), ExpressTheDetailsActivity.class);
+                intent.putExtra("people", news);
+                startActivity(intent);
+            }
+        });
 
     }
 
