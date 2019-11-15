@@ -36,6 +36,8 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.senon.mvpretrofitrx.R;
 import com.tencent.smtt.sdk.QbSdk;
 
+import org.xutils.x;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -173,7 +175,8 @@ public class ApplicationUtil extends Application implements Application.Activity
         activityList = new ArrayList<>();
         mContext = getApplicationContext();
         Stetho.initializeWithDefaults(this);
-
+        //初始x3
+        x.Ext.init(this);
     }
 
 

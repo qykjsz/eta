@@ -46,5 +46,8 @@ public class Api {
         }
     }
 
+    public static String returnEtUrl(){
+        return baseUrl;
+    }
 
 }

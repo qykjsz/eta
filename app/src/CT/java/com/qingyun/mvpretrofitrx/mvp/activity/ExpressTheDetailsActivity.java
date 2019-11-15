@@ -1,11 +1,14 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.NewFlashData;
 import com.qingyun.mvpretrofitrx.mvp.entity.News;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
 import com.senon.mvpretrofitrx.R;
@@ -20,7 +23,7 @@ public class ExpressTheDetailsActivity extends BaseActivity {
     TextView tvTitle1;
     @BindView(R.id.tv_content)
     TextView tvContent;
-    private News news;
+    private NewFlashData news;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +63,14 @@ public class ExpressTheDetailsActivity extends BaseActivity {
 
     @Override
     public void init() {
-        news = getIntent().getParcelableExtra("people");
-        tvTime.setText(TimeUtils.getTime(Long.parseLong(news.getTime()), TimeUtils.DEL_FORMAT_DATE_mm));
-        tvTitle1.setText(news.getTitle());
-        tvContent.setText(news.getContent());
+        String jsonString  = getIntent().getStringExtra("people");
+        if(!TextUtils.isEmpty(jsonString)){
+            news = JSON.parseObject(jsonString,NewFlashData.class);
+            tvTime.setText(TimeUtils.getTime(news.time, TimeUtils.DEL_FORMAT_DATE_mm));
+            tvTitle1.setText(news.title);
+            tvContent.setText(news.content);
+
+        }
 
     }
 }

@@ -54,7 +54,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
     public SmartRefreshLayout refreash;
     private LoadingLayout freash_loading;
     private View lyHeader1;
-
+    protected int currentPage;
     public P getPresenter() {
         return presenter;
     }

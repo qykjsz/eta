@@ -3,6 +3,5 @@ include ':app','gallery','lib_ios_dialog',
         'library_imgWatcher',
         'magicindicator',
         'indicatorseekbar',
-        'wallet-eth'
-include ':mutilanguagelibrary'
-project(':mutilanguagelibrary').projectDir = "$rootDir/mutilanguagelibrary" as File
+        'wallet-eth',
+   ':mutilanguagelibrary'
