@@ -33,6 +33,7 @@ import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.presenter.Flashpresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.TestMain;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
+import com.qingyun.mvpretrofitrx.mvp.view.DottedLineView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.senon.mvpretrofitrx.R;
@@ -125,15 +126,6 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         request();
         mAdapter = new NewFlashAdapter(mContext);
         listView.setAdapter(mAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                intent.setClass(getContext(), ExpressTheDetailsActivity.class);
-                intent.putExtra("people", news);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -148,7 +140,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         super.refresh();
 //        getPresenter().getContacFlashtList(page + "");
         currentPage = 0;
-        requestList();
+        request();
     }
 
     @Override
@@ -215,6 +207,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             viewHolder.tv_title.setText(item.title);
             viewHolder.tv_content.setText(item.content);
             viewHolder.tv_source.setText("来源："+item.source);
+//            viewHolder.vertical_line.setLineAttribute(0xff0000ff,5,new float[]{10,2,5,5});
         }
 
         public class ViewHolder extends SuperViewHolder {
@@ -223,7 +216,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             public TextView tv_content;//内容
             public TextView tv_source;//来源
             public TextView tv_see;//查看
-
+            public DottedLineView vertical_line;
             public ViewHolder(View view) {
                 super(view);
                 tv_time = view.findViewById(R.id.tv_time);
@@ -231,6 +224,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
                 tv_content = view.findViewById(R.id.tv_content);
                 tv_source = view.findViewById(R.id.tv_source);
                 tv_see = view.findViewById(R.id.tv_see);
+                vertical_line = view.findViewById(R.id.vertical_line);
             }
         }
     }
@@ -238,7 +232,6 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
     private void request(){
         RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl()+"et_newsflash");
         params.addBodyParameter("page",currentPage+"");
-        currentPage++;
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
@@ -250,23 +243,34 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             public void onAfterSuccessOk(JSONObject object) {
                 JSONObject data = object.getJSONObject("data");
                 JSONArray News = data.getJSONArray("News");
+                System.out.println("进来了-------------");
                 List<NewFlashData> list = JSON.parseArray(News.toJSONString(),NewFlashData.class);
                 if(list.size() > 0){
-                    if(currentPage == 1){
+                    if(currentPage == 0){
                         mAdapter.setDatas(list);
                     }else{
                         mAdapter.addData(list);
                     }
+                    currentPage++;
                 }
             }
 
             @Override
             public void onAfterSuccessErr(JSONObject object, String msg) {
                 mSmartRefreshLayout.finishLoadMore(false);//结束加载（加载失败）
-
-
                 mSmartRefreshLayout.finishRefresh(false);//结束刷新（刷新失败）
             }
         });
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {  //Fragment 可见
+            currentPage= 0;
+            request();
+        } else {  //Fragment 不可见
+            System.out.println("进来了-------------444444444444");
+        }
     }
 }

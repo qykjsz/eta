@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF"
     >
 
     <LinearLayout
         android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+       >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -15,11 +17,16 @@
             android:background="@mipmap/kx_dian"
             android:layout_gravity="center"/>
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/view_dashed_vertical"
+        
+
+
+        <com.qingyun.mvpretrofitrx.mvp.view.DottedLineView
+            android:id="@+id/vertical_line"
+            android:layout_width="2dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:screenReaderFocusable="true"
+            android:layout_marginLeft="0.5dp"
             />
     </LinearLayout>
 
@@ -29,7 +36,8 @@
         android:orientation="vertical"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        >
 
         <TextView
             android:id="@+id/tv_time"

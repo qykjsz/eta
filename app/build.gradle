@@ -190,5 +190,4 @@ dependencies {
     implementation 'org.xutils:xutils:3.3.36'
     implementation 'com.alibaba:fastjson:1.2.20'
     implementation 'com.drawthink:expandable-recyclerview:0.0.3'
-
 }

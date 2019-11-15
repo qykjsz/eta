@@ -10,11 +10,13 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.senon.mvpretrofitrx.R;
+
 
 /**
  * Date 2019/11/15.
  * Created by Sam
- * ClassExplain：
+ * ClassExplain：自定义虚线（根据宽高自适配为水平或垂直）
  */
 public class DottedLineView extends View{
     private Context ct;
@@ -24,7 +26,7 @@ public class DottedLineView extends View{
     private int width;
     private int height;
 
-    private int defaultColor=0xffff0000;
+    private int defaultColor= 0xf5f5f5;
 
     public DottedLineView(Context context) {
         this(context, null);
@@ -54,14 +56,12 @@ public class DottedLineView extends View{
         //初始化，并打开抗锯齿
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(defaultColor);
+        mPaint.setColor(getResources().getColor(R.color.color_text_2));
         mPaint.setStrokeWidth(dip2px(ct, 1));
 
         mPath = new Path();
         //数组含义：里面最少要有2个值，值的个数必须是偶数个。偶数位（包含0），表示实线长度，奇数位表示断开的长度
-        effects = new DashPathEffect(new float[]{4, 2}, 0);
-
-
+        effects = new DashPathEffect(new float[]{4, 10}, 0);
     }
 
     /**

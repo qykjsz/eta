@@ -96,14 +96,14 @@ public class IndicatorUtils {
                     @Override
                     public void onSelected(int index, int totalCount) {
 
-                        titleText.setTextSize(20);
+                        titleText.setTextSize(17);
                         titleText.setTextColor(activity.getResources().getColor(R.color.color_FFFFFF));
                     }
 
                     @Override
                     public void onDeselected(int index, int totalCount) {
                         titleText.setTextSize(14);
-                        titleText.setTextColor(activity.getResources().getColor(R.color.color_FFCDD6FD));
+                        titleText.setTextColor(activity.getResources().getColor(R.color.color_CDD6FD));
 
                     }
 

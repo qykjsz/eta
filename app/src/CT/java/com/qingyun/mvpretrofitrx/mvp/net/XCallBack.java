@@ -28,25 +28,15 @@ public abstract class XCallBack implements CommonCallback<String> {
     private static Toast toast;
     @Override
     public void onSuccess(String result) {
-        LogUtil.d("post"+result);
+        Log.d("post",result);
         JSONObject object = JSON.parseObject(result);
         int code = object.getIntValue("code");
         String msg = object.getString("msg");
-        switch (code){
-//            case 0://错误
-//                ToastUtil.showLongToast(msg);
-//                onAfterSuccessErr(object,msg);
-//                break;
-            case 200://成功
-                onAfterSuccessOk(object);
-                break;
-//            case 2://token值失效 退出到登录界面
-//                ToastUtil.showLongToast(msg);
-//                break;
-//            case 3://换设备
-//                onAfterSuccessErr(object,msg);
-//                break;
-
+        if(code == 200){
+            onAfterSuccessOk(object);
+        }else{
+            ToastUtil.showLongToast(msg);
+            onAfterSuccessErr(object,msg);
         }
 
     }
@@ -60,16 +50,16 @@ public abstract class XCallBack implements CommonCallback<String> {
 
     @Override
     public void onError(Throwable ex, boolean isOnCallback) {
-
+        System.out.println("post==进来了----------aaaaaaaaaa---");
         if (ex instanceof HttpException) { // 网络错误
             HttpException httpEx = (HttpException) ex;
             int responseCode = httpEx.getCode();
             String responseMsg = httpEx.getMessage();
             String errorResult = httpEx.getResult();
-            LogUtil.e(ex.toString()+"网络错误"+responseMsg);
+            LogUtil.e("post=="+ex.toString()+"网络错误"+responseMsg);
             ToastUtil.showLongToast(responseCode);
         } else { // 其他错误
-            LogUtil.e(ex.toString()+"失败"+isOnCallback);
+            LogUtil.e("post=="+ex.toString()+"失败"+isOnCallback);
         }
 
     }
