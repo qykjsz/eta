@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
+import com.qingyun.mvpretrofitrx.mvp.entity.Content;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.senon.mvpretrofitrx.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,16 +23,26 @@ import butterknife.BindView;
 public class SupportItemAdapter extends BaseAdapter<Item, SupportItemAdapter.SupportItemViewHolder> {
 
 
-    private ContentAdapter contentAdapter;
     private List<ContentAdapter> contentAdapters;
     public SupportItemAdapter(Context context, List<Item> list) {
         super(context, list);
+        contentAdapters = new ArrayList<>();
+
     }
 
     @Override
     protected SupportItemViewHolder getViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.item_suppot_item, parent, false);
-        return new SupportItemViewHolder(view);
+
+        SupportItemViewHolder supportItemViewHolder = new SupportItemViewHolder(view);
+        for (int i=0;i<getList().size();i++){
+            ContentAdapter contentAdapter = new ContentAdapter(getContext(),getList().get(i).getContent());
+            supportItemViewHolder.rcySecondItem.setLayoutManager(new LinearLayoutManager(getContext()));
+            supportItemViewHolder.rcySecondItem.addItemDecoration(DividerHelper.getMyDivider(getContext()));
+            contentAdapters.add(i,contentAdapter);
+        }
+
+        return supportItemViewHolder;
     }
 
     @Override
@@ -44,14 +56,18 @@ public class SupportItemAdapter extends BaseAdapter<Item, SupportItemAdapter.Sup
     }
 
     @Override
-    protected void viewHolderBind(SupportItemViewHolder holder, int position) {
+    protected void viewHolderBind(SupportItemViewHolder holder, final int position) {
 
         holder.tvItem.setText(getList().get(position).getName());
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                contentAdapters.get(position).notifyDataSetChanged(getList().get(position).getContent());
+//                notifyDataSetChanged();
+//            }
+//        });
 
-        contentAdapter = new ContentAdapter(getContext(),getList().get(position).getContent());
-        holder.rcySecondItem.setLayoutManager(new LinearLayoutManager(getContext()));
-        holder.rcySecondItem.addItemDecoration(DividerHelper.getMyDivider(getContext()));
-        holder.rcySecondItem.setAdapter(contentAdapter);
+//        contentAdapters.get(position).notifyDataSetChanged(getList().get(position).getContent());
     }
 
     class SupportItemViewHolder extends BaseViewHolder {
