@@ -104,8 +104,10 @@ public abstract class BaseAdapter<T extends Object, VH extends RecyclerView.View
         if (isSingleChoose) {
             if (position == selectPosition) {
                 onItemSelect(holder);
+                onItemSelect(holder,position);
             } else {
                 onItemReset(holder);
+                onItemReset(holder,position);
 
             }
         } else {
@@ -137,6 +139,14 @@ public abstract class BaseAdapter<T extends Object, VH extends RecyclerView.View
         });
         viewHolderBind(holder, position);
 
+
+    }
+
+    protected void onItemReset(VH holder, int position) {
+
+    }
+
+    protected void onItemSelect(VH holder, int position) {
 
     }
 

@@ -433,5 +433,6 @@
     <dimen name="btn_height_min">@dimen/dp_28</dimen>
     <dimen name="replace_size">@dimen/sp_21</dimen>
     <dimen name="change_pay_password_margin">@dimen/dp_24</dimen>
+    <dimen name="itemOffset">10dp</dimen>
 
 </resources>

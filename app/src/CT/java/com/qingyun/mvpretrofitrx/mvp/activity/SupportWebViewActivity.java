@@ -1,21 +1,23 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
-import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.Item;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-/**
- * 系统设置
- */
-public class SystemSettingsActivity extends BaseActivity {
-
+public class SupportWebViewActivity extends BaseActivity {
+    @BindView(R.id.webview)
+    WebView webview;
+    private Item item;
 
     @Override
     protected String getTitleRightText() {
@@ -34,12 +36,12 @@ public class SystemSettingsActivity extends BaseActivity {
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.system_settings);
+        return null;
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_system_settings;
+        return R.layout.activity_my_webview;
     }
 
     @Override
@@ -54,6 +56,18 @@ public class SystemSettingsActivity extends BaseActivity {
 
     @Override
     public void init() {
+        setTitle(getIntent().getStringExtra(IntentUtils.TITLE));
+
+        webview.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
+
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.loadUrl(getIntent().getStringExtra(IntentUtils.URL));
 
     }
 
@@ -62,24 +76,5 @@ public class SystemSettingsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-    }
-
-    @OnClick({R.id.btn_language, R.id.btn_node, R.id.btn_unit, R.id.btn_up_down, R.id.btn_push})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_language:
-                startActivity(ChooseLanguageActivity.class);
-                break;
-            case R.id.btn_node:
-                startActivity(NodeSettingActivity.class);
-                break;
-            case R.id.btn_unit:
-                startActivity(CoinUnitActivity.class);
-                break;
-            case R.id.btn_up_down:
-                break;
-            case R.id.btn_push:
-                break;
-        }
     }
 }

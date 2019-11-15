@@ -248,4 +248,5 @@
     <string name="gas_price_setting">矿工费用设置</string>
     <string name="recommend">推荐</string>
     <string name="senior_model">高级模式</string>
+    <string name="wallet_manager">钱包管理</string>
 </resources>

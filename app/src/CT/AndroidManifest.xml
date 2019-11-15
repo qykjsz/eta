@@ -76,6 +76,9 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseLanguageActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.NodeSettingActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.MyWebViewActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.SupportWebViewActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.CoinUnitActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.WalletManagerActivity"/>
     </application>
 
 </manifest>

@@ -4,14 +4,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.qingyun.mvpretrofitrx.mvp.adapter.NodeAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.CoinUnitAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
-import com.qingyun.mvpretrofitrx.mvp.contract.NodeContact;
-import com.qingyun.mvpretrofitrx.mvp.entity.Node;
-import com.qingyun.mvpretrofitrx.mvp.presenter.NodePresenter;
+import com.qingyun.mvpretrofitrx.mvp.entity.CoinUnit;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.ArrayList;
@@ -19,13 +18,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.ObservableTransformer;
+import butterknife.OnClick;
 
-public class NodeSettingActivity extends BaseActivity<NodeContact.View,NodeContact.Presenter> implements NodeContact.View {
+public class CoinUnitActivity extends BaseActivity {
+
+    CoinUnitAdapter coinUnitAdapter;
     @BindView(R.id.rcy)
     RecyclerView rcy;
-    private NodeAdapter nodeAdapter;
-    private List<Node> list;
+    private List<CoinUnit> list;
 
     @Override
     protected String getTitleRightText() {
@@ -44,38 +44,41 @@ public class NodeSettingActivity extends BaseActivity<NodeContact.View,NodeConta
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.node_setting);
+        return getResources().getString(R.string.coin_unit);
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_node_setting;
+        return R.layout.layout_coin_unit;
     }
 
     @Override
-    public NodeContact.Presenter createPresenter() {
-        return new NodePresenter(this);
+    public BasePresenter createPresenter() {
+        return null;
     }
 
     @Override
-    public NodeContact.View createView() {
-        return this;
+    public BaseView createView() {
+        return null;
     }
-
 
     @Override
     public void init() {
         list = new ArrayList<>();
+        list.add(new CoinUnit("AUD"));
+        list.add(new CoinUnit("CNY"));
+        list.add(new CoinUnit("EOS"));
+        list.add(new CoinUnit("EUR"));
+        list.add(new CoinUnit("GBP"));
+        list.add(new CoinUnit("MYR"));
+        list.add(new CoinUnit("USD"));
 
-        nodeAdapter = new NodeAdapter(getContext(), list);
-        nodeAdapter.setDefaultSelectItem(0);
+        coinUnitAdapter = new CoinUnitAdapter(getContext(), list);
+        coinUnitAdapter.setDefaultSelectItem(0);
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.addItemDecoration(DividerHelper.getMyDivider(getContext()));
-        rcy.setAdapter(nodeAdapter);
-        refreashView(list,rcy);
-
-        getPresenter().getNodeList();
-
+        rcy.setAdapter(coinUnitAdapter);
+        refreashView(list, rcy);
     }
 
     @Override
@@ -85,22 +88,8 @@ public class NodeSettingActivity extends BaseActivity<NodeContact.View,NodeConta
         ButterKnife.bind(this);
     }
 
-    @Override
-    protected void refresh() {
-        super.refresh();
-        getPresenter().getNodeList();
-
-    }
-
-    @Override
-    public void getNodeListSuccess(List<Node> nodeList) {
-        nodeAdapter.notifyDataSetChanged(nodeList);
-        list = nodeList;
-        refreashView(list,rcy);
-    }
-
-    @Override
-    public <T> ObservableTransformer<T, T> bindLifecycle() {
-        return this.bindToLifecycle();
+    @OnClick(R.id.confirm)
+    public void onViewClicked() {
+        ToastUtil.showShortToast(R.string.not_open);
     }
 }

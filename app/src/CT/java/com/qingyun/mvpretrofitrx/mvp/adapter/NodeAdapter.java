@@ -49,6 +49,9 @@ public class NodeAdapter extends BaseAdapter<Node, NodeAdapter.NodeViewHolder> {
 
     @Override
     protected void viewHolderBind(NodeViewHolder holder, int position) {
+        holder.tvName.setText(getList().get(position).getName());
+        holder.tvNode.setText(getList().get(position).getUrl());
+        holder.tvSpeed.setText(getList().get(position).getSpeed());
 
     }
 

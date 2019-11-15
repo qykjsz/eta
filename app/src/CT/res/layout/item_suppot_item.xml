@@ -3,27 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/content"
+    android:background="@drawable/bg_item"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/tv_item"
+        android:id="@+id/tv_parent"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_49"
+        android:drawableEnd="@mipmap/wd_gd_icon"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcy_second_item"
-        android:layout_width="@dimen/dp_0"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item">
-
-
-    </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

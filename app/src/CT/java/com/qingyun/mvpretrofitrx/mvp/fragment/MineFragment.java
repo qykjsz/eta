@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.develop.wallet.eth.WalletManager;
 import com.qingyun.mvpretrofitrx.mvp.activity.AboutUsActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.ContactActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.InvitefriendsActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.SupportActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.SystemSettingsActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.WalletManagerActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
@@ -81,6 +83,7 @@ public class MineFragment extends BaseFragment {
             case R.id.btn_asset_review:
                 break;
             case R.id.btn_wallet_manager:
+                startActivity(WalletManagerActivity.class);
                 break;
             case R.id.btn_business_log:
                 break;

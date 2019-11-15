@@ -1,11 +1,10 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
-import com.github.huajianjiang.expandablerecyclerview.widget.Parent;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Item implements Serializable, Parent<Content> {
+public class Item implements Serializable {
     private String name;
     private String iosurl;
     private String androidurl;
@@ -43,18 +42,6 @@ public class Item implements Serializable, Parent<Content> {
         this.androidurl = androidurl;
     }
 
-    @Override
-    public List<Content> getChildren() {
-        return content;
-    }
 
-    @Override
-    public boolean isInitiallyExpandable() {
-        return false;
-    }
 
-    @Override
-    public boolean isInitiallyExpanded() {
-        return false;
-    }
 }

@@ -10,14 +10,12 @@
 
 
     <TextView
-        android:layout_marginStart="@dimen/dp_10"
-        android:id="@+id/tv_child"
+        android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_49"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/dp_padding_x_min"
         android:paddingEnd="@dimen/dp_padding_x_min"
-        android:textColor="@color/color_999999"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

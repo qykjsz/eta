@@ -9,6 +9,8 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
+import com.qingyun.mvpretrofitrx.mvp.entity.Node;
+import com.qingyun.mvpretrofitrx.mvp.entity.NodeResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NoticeDetail;
 import com.qingyun.mvpretrofitrx.mvp.entity.PlatformNoticResponse;
@@ -107,4 +109,8 @@ public interface ApiService {
 
     @POST("api_givehelp")
     Observable <BaseResponse<List<Item>>>getSupportList();
+
+
+    @POST("get_jiedian")
+    Observable <BaseResponse<NodeResponse>>getNodeList();
 }
