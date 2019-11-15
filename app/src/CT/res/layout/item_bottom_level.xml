@@ -29,15 +29,6 @@
             app:layout_constraintTop_toTopOf="@+id/iv_pic" />
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_padding_x_min"
-            android:src="@mipmap/wd_gd_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tv_bottom"
             android:layout_width="wrap_content"

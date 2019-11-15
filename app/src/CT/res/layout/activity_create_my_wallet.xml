@@ -74,7 +74,6 @@
         android:layout_width="0dp"
         android:textColor="@color/color_text_2"
         android:textSize="@dimen/sp_10"
-        android:background="@color/color_FFFFFF"
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/dp_padding_x_min"
         android:layout_marginTop="@dimen/dp_3"
@@ -85,15 +84,6 @@
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toTopOf="@+id/checkBox" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_padding_x_min"
-        android:layout_marginTop="@dimen/dp_padding_x_min"
-        android:button="@drawable/my_switch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView106" />
 
     <TextView
         android:id="@+id/btn_create_wallet"
@@ -137,4 +127,20 @@
         android:layout_marginStart="@dimen/dp_padding_x_min"
         android:layout_marginEnd="@dimen/dp_padding_x_min"
         />
+
+
+
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:button="@drawable/my_switch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView106" />
+
+
+
 </android.support.constraint.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 import android.Manifest;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.CheckBox;
@@ -124,6 +125,7 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
+                            Looper.prepare();//增加部分
 
 
                             Wallet wallet = WalletManager.generateWalletAddress(etWalletName.getText().toString());
@@ -131,11 +133,14 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
                             Log.e("------------", wallet.getAddress());
                             Log.e("------------", wallet.getPrivateKey());
                             wallet.setWalletName(etWalletName.getText().toString());
+                            wallet.setStatus(Wallet.STATUS_NO_MAKE_COPY);
                             ApplicationUtil.setCurrentWallet(wallet);
                             ApplicationUtil.addWallet(wallet);
                             EventBus.getDefault().post(wallet);
 //                Wallet wallet1 = WalletManager.generateWalletKeystore(etPassword.getText().toString(), wallet.getMnemonic());
                             handler.sendEmptyMessage(1);
+                            Looper.loop();//增加部分
+
                         }
                     });
                     thread.start();

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.contract.BusinessDetailContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
@@ -90,10 +91,10 @@ public class BusinessDetailActivity extends BaseActivity<BusinessDetailContact.V
     public void getBusinessDetailSuccess(BusinessDetail businessDetail) {
         if (businessDetail.getStatus().equals("0")){
 //            失败
-            ivStatus.setImageResource(R.mipmap.xq_shibai);
+            Glide.with(getContext()).load(R.mipmap.xq_shibai).into(ivStatus);
             tvStatus.setText(R.string.transfer_failure);
         }else {
-            ivStatus.setImageResource(R.mipmap.xq_cg);
+            Glide.with(getContext()).load(R.mipmap.xq_cg).into(ivStatus);
             tvStatus.setText(R.string.transfer_success);
         }
         tvTime.setText(businessDetail.getTime());

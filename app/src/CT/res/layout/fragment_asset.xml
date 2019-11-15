@@ -161,13 +161,16 @@
 
                 <TextView
                     android:id="@+id/tv_asset"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:singleLine="true"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginEnd="8dp"
                     android:includeFontPadding="false"
-                    android:textColor="@color/color_FFFFFF"
                     android:text="@string/_000"
+                    android:textColor="@color/color_FFFFFF"
                     android:textSize="@dimen/sp_32"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView5"
                     app:layout_constraintStart_toStartOf="@+id/textView2"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -256,11 +259,11 @@
                 android:outAnimation="@anim/text_out"
                 android:paddingLeft="@dimen/dp_8"
                 app:marqueeAnimDuration="500"
-                app:smvTextColor="@color/color_main_text"
+                app:smvTextColor="@color/color_98AFD7"
                 app:smvTextEllipsize="end"
                 app:smvTextGravity="center_vertical"
                 app:smvTextSingleLine="true"
-                app:smvTextSize="@dimen/sp_14" />
+                app:smvTextSize="@dimen/sp_12" />
 
             <TextView
                 android:id="@+id/btn_more_info"

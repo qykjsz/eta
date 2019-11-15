@@ -160,6 +160,7 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
         }else {
             list = transferLogResponse.getOrder();
         }
+        if (list==null) list = new ArrayList<>();
         transferLogAdapter.notifyDataSetChanged(list);
         refreashView(list,rcy);
     }

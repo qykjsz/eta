@@ -128,6 +128,7 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
         WalletManager.importWalletByMemoryWord(etPassword.getText().toString(), etMom.getText().toString(), etWalletName.getText().toString(), new WalletManager.ImportWalletListener() {
             @Override
             public void importSuccess(Wallet wallet) {
+                wallet.setStatus(Wallet.STATUS_NO_MAKE_COPY);
                 getPresenter().addWallet(wallet.getAddress());
                 ApplicationUtil.setCurrentWallet(wallet);
                 ApplicationUtil.addWallet(wallet);

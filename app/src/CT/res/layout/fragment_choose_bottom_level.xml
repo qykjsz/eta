@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -107,14 +107,7 @@
                     app:layout_constraintTop_toTopOf="@+id/iv_pic" />
 
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_padding_x_min"
-                    android:src="@mipmap/wd_gd_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <TextView
                     android:id="@+id/btn_switch_current"
@@ -173,6 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@string/have_wallet"
                     app:layout_constraintStart_toEndOf="@+id/imageView15"
                     app:layout_constraintTop_toTopOf="@+id/imageView15" />
@@ -182,6 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
                     android:text="@string/import_wallet"
+                    android:layout_marginBottom="@dimen/dp_2"
                     android:textColor="@color/color_text_2"
                     android:textSize="@dimen/sp_10"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView15"
@@ -226,6 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@string/not_wallet"
                     app:layout_constraintStart_toEndOf="@+id/imageView151"
                     app:layout_constraintTop_toTopOf="@+id/imageView151" />
@@ -235,6 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
                     android:text="@string/create_wallet"
+                    android:layout_marginBottom="@dimen/dp_2"
                     android:textColor="@color/color_text_2"
                     android:textSize="@dimen/sp_10"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView151"
@@ -256,6 +253,8 @@
                 android:id="@+id/btn_visi_model"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_70"
+
+                android:layout_marginBottom="@dimen/dp_20"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
                 android:background="@mipmap/sy_yykuang_02"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
@@ -280,6 +279,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
                     android:text="@string/visi_modle"
+                    android:layout_marginTop="@dimen/dp_2"
                     app:layout_constraintStart_toEndOf="@+id/imageView152"
                     app:layout_constraintTop_toTopOf="@+id/imageView152" />
 
@@ -288,6 +288,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
                     android:text="@string/use_account_to_login"
+                    android:layout_marginBottom="@dimen/dp_2"
                     android:textColor="@color/color_text_2"
                     android:textSize="@dimen/sp_10"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView152"
@@ -317,4 +318,4 @@
 
 
 
-</android.support.v4.widget.NestedScrollView>
+</FrameLayout>

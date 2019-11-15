@@ -121,6 +121,8 @@ public class ImportByKeystoreActivity extends BaseActivity<WalletAssetContact.Vi
         WalletManager.importWalletByKeystore(etKeystorePassword.getText().toString(), etContent.getText().toString(), etWalletName.getText().toString(), new WalletManager.ImportWalletListener() {
             @Override
             public void importSuccess(Wallet wallet) {
+                wallet.setStatus(Wallet.STATUS_CAN_NOT_MAKE_COPY);
+
                 getPresenter().addWallet(wallet.getAddress());
                 ApplicationUtil.setCurrentWallet(wallet);
                 ApplicationUtil.addWallet(wallet);

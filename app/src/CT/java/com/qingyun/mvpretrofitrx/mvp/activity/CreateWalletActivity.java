@@ -54,9 +54,16 @@ public class CreateWalletActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_import_by_private_key, R.id.btn_import_by_keystore, R.id.btn_import_by_comm, R.id.btn_create})
+    @OnClick({R.id.btn_back,R.id.btn_import_by_private_key, R.id.btn_import_by_keystore, R.id.btn_import_by_comm, R.id.btn_create})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+
+
+            case R.id.btn_back:
+                finish();
+
+                break;
+
             case R.id.btn_import_by_private_key:
                 startActivity(ImportByPrivatekeyActivity.class);
 

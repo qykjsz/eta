@@ -293,13 +293,14 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
 
     @Override
     public void getLogSuccess(TransferLogResponse transferLogResponse) {
-        tvAsset.setText(transferLogResponse.getUsdtnumber());
+        tvAsset.setText(transferLogResponse.getNumber());
         tvIncomeToday.setText(transferLogResponse.getToday());
         tvUsdt.setText(transferLogResponse.getUsdtnumber());
+
         if (isLoadMore) {
-            list.addAll(transferLogResponse.getOrder());
+            list.addAll(transferLogResponse.getOrder()==null?new ArrayList<TransferLog>():transferLogResponse.getOrder());
         } else {
-            list = transferLogResponse.getOrder();
+            list = transferLogResponse.getOrder()==null?new ArrayList<TransferLog>():transferLogResponse.getOrder();
         }
         if (list == null) list = new ArrayList<>();
         assetWalletLogAdapter.notifyDataSetChanged(list);

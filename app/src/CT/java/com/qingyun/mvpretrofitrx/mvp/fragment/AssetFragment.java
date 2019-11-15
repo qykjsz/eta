@@ -208,8 +208,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
 
         tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
-        if ((SpUtils.getObjectFromShare(getContext(), "is_make_copy")) == null || ((int) SpUtils.getObjectFromShare(getContext(), "is_make_copy")) != 1) {
-            DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.delete_wallet, R.string.beifen, new View.OnClickListener() {
+        if (ApplicationUtil.getCurrentWallet().getStatus()==Wallet.STATUS_NO_MAKE_COPY) {
+            DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.cancel, R.string.beifen, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -389,6 +389,9 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         List<String> newList = new ArrayList<>();
         for (int i = 0; i < assetResponse.getNews().size(); i++) {
             newList.add(assetResponse.getNews().get(i).getName());
+        }
+        if (newList.size()==1){
+            newList.add(newList.get(0));
         }
         marqueeFactory.setData(newList);
         mvInfoList.setMarqueeFactory(marqueeFactory);

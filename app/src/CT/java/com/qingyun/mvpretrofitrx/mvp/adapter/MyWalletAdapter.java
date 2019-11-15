@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.CopyUtils;
 import com.senon.mvpretrofitrx.R;
 
@@ -51,12 +52,19 @@ public class MyWalletAdapter extends BaseAdapter<Wallet, MyWalletAdapter.MyWalle
         });
         holder.tvWalletAddress.setText(getList().get(position).getAddress());
         holder.btnWalletName.setText(getList().get(position).getWalletName());
-        if (getList().get(position).getMakeCopy()){
-            holder.tvMakeCopy.setText(getContext().getText(R.string.had_make_copy));
-        }else {
+        if (getList().get(position).getStatus()==Wallet.STATUS_CAN_NOT_MAKE_COPY){
+            holder.tvMakeCopy.setText(getContext().getText(R.string.cannot_make_copy));
+        }else if (getList().get(position).getStatus()==Wallet.STATUS_NO_MAKE_COPY){
             holder.tvMakeCopy.setText(getContext().getText(R.string.not_make_copy));
+        }else if (getList().get(position).getStatus()==Wallet.STATUS_HANE_MAKE_COPY){
+            holder.tvMakeCopy.setText(getContext().getText(R.string.had_make_copy));
         }
+        if (getList().get(position).getAddress().equals(ApplicationUtil.getCurrentWallet().getAddress())){
+            holder.current.setVisibility(View.VISIBLE);
+        }else {
+            holder.current.setVisibility(View.GONE);
 
+        }
     }
 
     class MyWalletViewHolder extends BaseViewHolder {

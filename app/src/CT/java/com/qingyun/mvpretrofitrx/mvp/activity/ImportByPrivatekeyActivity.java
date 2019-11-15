@@ -128,6 +128,7 @@ public class ImportByPrivatekeyActivity extends BaseActivity<WalletAssetContact.
         WalletManager.importWalletByPrivateKey(etContent.getText().toString(), etWalletName.getText().toString(), etPassword.getText().toString(), new WalletManager.ImportWalletListener() {
             @Override
             public void importSuccess(Wallet wallet) {
+                wallet.setStatus(Wallet.STATUS_CAN_NOT_MAKE_COPY);
                 ApplicationUtil.setCurrentWallet(wallet);
                 ApplicationUtil.addWallet(wallet);
                 getPresenter().addWallet(wallet.getAddress());

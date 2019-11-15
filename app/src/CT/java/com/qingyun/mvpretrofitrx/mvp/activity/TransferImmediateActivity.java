@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
+import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
 import com.warkiz.widget.IndicatorSeekBar;
 import com.warkiz.widget.OnSeekChangeListener;
@@ -67,7 +69,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
     private List<Wallet> coins;
     private Wallet currentCoin;
     private float mGasPrice;
-    private float gasLitmit;
+    private String gasLitmit;
 
     @Override
     protected String getTitleRightText() {
@@ -192,10 +194,14 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
 
     @Override
     public void getNodeSuccess(String node) {
-        WalletManager.config(node, currentCoin.getHyaddress(), false);
+        WalletManager.config(node, currentCoin.getAddress(), false);
+        Log.e("node>>>>",node);
+        Log.e("Hyaddress>>>>",currentCoin.getAddress());
+
         DialogUtils.showPayDialog(getContext(), new DialogUtils.SureListener() {
             @Override
             public void onSure(Object o) {
+                ProgressDialogUtils.getInstances().showDialog();
                 WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
                     @Override
                     public void onSuccess() {
@@ -207,11 +213,15 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                             ToastUtil.showShortToast(R.string.transfer_failure);
 
                         }
+                        ProgressDialogUtils.getInstances().cancel();
+
                     }
 
                     @Override
                     public void onFailure(Exception e) {
                         ToastUtil.showShortToast(R.string.pass_err);
+                        ProgressDialogUtils.getInstances().cancel();
+
                     }
                 });
             }
@@ -254,7 +264,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                                 }
                             }
                         }
-                        gasLitmit = Float.parseFloat(gasPrice.getGasmax());
+                        gasLitmit = gasPrice.getGasmax();
                         seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
                         seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
                         seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {

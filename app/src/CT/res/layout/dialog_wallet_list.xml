@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/color_FFFFFF"
+    android:background="@drawable/bg_ffffff_top_round_6"
     android:layout_height="420dp">
 
 
@@ -36,7 +36,7 @@
         android:padding="@dimen/dp_padding_x_min"
         app:layout_constraintBottom_toBottomOf="@+id/textView76"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView76"
         app:srcCompat="@mipmap/qblb_guanbi" />
 
     <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView

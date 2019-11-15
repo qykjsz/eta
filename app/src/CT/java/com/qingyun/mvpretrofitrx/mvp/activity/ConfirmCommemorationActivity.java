@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.develop.wallet.eth.Wallet;
 import com.develop.wallet.eth.WalletManager;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
@@ -139,7 +140,13 @@ public class ConfirmCommemorationActivity extends BaseActivity {
             }
             if (isSuccess){
                 ToastUtil.showShortToast(R.string.makecopy_success);
-                SpUtils.setObjectToShare(getContext(),1,"is_make_copy");
+                Wallet currentWallet = ApplicationUtil.getCurrentWallet();
+                currentWallet.setStatus(Wallet.STATUS_HANE_MAKE_COPY);
+                ApplicationUtil.setCurrentWallet(currentWallet);
+                ApplicationUtil.deleteWallet(currentWallet);
+                ApplicationUtil.addWallet(currentWallet);
+
+
                 EventBus.getDefault().post(ApplicationUtil.getCurrentWallet());
                 finish();
                 Intent intent = new Intent(getContext(), MainActivity.class);

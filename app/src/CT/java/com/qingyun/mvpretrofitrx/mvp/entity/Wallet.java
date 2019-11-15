@@ -13,7 +13,16 @@ public class Wallet implements Serializable {
     private String have;
     private String number;
     private String usdtnumber;
+    private String address;
 
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getNumber() {
         return number;
