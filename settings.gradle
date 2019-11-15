@@ -4,3 +4,5 @@ include ':app','gallery','lib_ios_dialog',
         'magicindicator',
         'indicatorseekbar',
         'wallet-eth'
+include ':mutilanguagelibrary'
+project(':mutilanguagelibrary').projectDir = "$rootDir/mutilanguagelibrary" as File

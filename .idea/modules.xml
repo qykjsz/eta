@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/library_progress/library_progress.iml" filepath="$PROJECT_DIR$/library_progress/library_progress.iml" />
       <module fileurl="file://$PROJECT_DIR$/magicindicator/magicindicator.iml" filepath="$PROJECT_DIR$/magicindicator/magicindicator.iml" />
       <module fileurl="file://$PROJECT_DIR$/marqueelibrary/marqueelibrary.iml" filepath="$PROJECT_DIR$/marqueelibrary/marqueelibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mutilanguagelibrary/mutilanguagelibrary.iml" filepath="$PROJECT_DIR$/mutilanguagelibrary/mutilanguagelibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/orcameralib/orcameralib.iml" filepath="$PROJECT_DIR$/orcameralib/orcameralib.iml" />
       <module fileurl="file://$PROJECT_DIR$/pager-bottom-tab-strip/pager-bottom-tab-strip.iml" filepath="$PROJECT_DIR$/pager-bottom-tab-strip/pager-bottom-tab-strip.iml" />
       <module fileurl="file://$PROJECT_DIR$/progress/progress.iml" filepath="$PROJECT_DIR$/progress/progress.iml" />
