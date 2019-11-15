@@ -82,7 +82,6 @@ public class InformationFragment extends BaseFragment {
         titles.add("快讯");
         titles.add("文章");
         titles.add("行情");
-
         fragments = new ArrayList<>();
         fragments.add(new FlashFragment());
         fragments.add(new TiteFragment());
