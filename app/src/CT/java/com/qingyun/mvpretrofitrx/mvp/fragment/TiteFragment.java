@@ -37,6 +37,7 @@ import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
 import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.presenter.Timepresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.GlideRoundTransform;
+import com.qingyun.mvpretrofitrx.mvp.utils.TestMain;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.senon.mvpretrofitrx.R;
@@ -54,7 +55,7 @@ import butterknife.Unbinder;
 import ezy.ui.layout.LoadingLayout;
 import io.reactivex.ObservableTransformer;
 
-public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Presenter>  {
+public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Presenter> {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.freash_loading)
@@ -67,6 +68,8 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
     Time.NewsBean newsBean;
     @BindView(R.id.listView)
     ListView listView;
+    @BindView(R.id.tv_nian)
+    TextView tvNian;
     private TiteAdpater mAdapter;
 
 
@@ -92,6 +95,7 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
 
     @Override
     public void init() {
+        tvNian.setText(TestMain.getsetdata());
 //        getPresenter().getContacFlashtList(page - 1 + "");
 //        times = new ArrayList<>();
 //        timeAdapter = new TimeAdapter(getContext(), times);
@@ -114,12 +118,13 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
 //        });
 
     }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if(getUserVisibleHint()) {  //Fragment 可见
-            currentPage= 0;
+        if (getUserVisibleHint()) {  //Fragment 可见
+            currentPage = 0;
             request();
         } else {  //Fragment 不可见
         }
@@ -198,9 +203,9 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
 //        return this.bindUntilEvent(FragmentEvent.PAUSE);
 //    }
 
-    private void request(){
-        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl()+"et_news");
-        params.addBodyParameter("page",currentPage+"");
+    private void request() {
+        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_news");
+        params.addBodyParameter("page", currentPage + "");
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
@@ -212,11 +217,11 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
             public void onAfterSuccessOk(JSONObject object) {
                 JSONObject data = object.getJSONObject("data");
                 JSONArray News = data.getJSONArray("News");
-                List<Time.NewsBean> list = JSON.parseArray(News.toJSONString(),Time.NewsBean.class);
-                if(list.size() > 0){
-                    if(currentPage == 0){
+                List<Time.NewsBean> list = JSON.parseArray(News.toJSONString(), Time.NewsBean.class);
+                if (list.size() > 0) {
+                    if (currentPage == 0) {
                         mAdapter.setDatas(list);
-                    }else{
+                    } else {
                         mAdapter.addData(list);
                     }
                     currentPage++;
@@ -231,7 +236,7 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
         });
     }
 
-    public class TiteAdpater extends FatherAdapter<Time.NewsBean>{
+    public class TiteAdpater extends FatherAdapter<Time.NewsBean> {
 
         public TiteAdpater(Context ctx) {
             super(ctx);
@@ -249,14 +254,16 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent();
-//                    intent.setClass(mContext, ExpressTheDetailsActivity.class);
-//                    intent.putExtra("people", JSON.toJSONString(item));
-//                    startActivity(intent);
+                    newsBean = item;
+                    Intent intent = new Intent();
+                    intent.setClass(getContext(), TheArticleDetailsActivity.class);
+                    intent.putExtra("newsBean", newsBean);
+                    startActivity(intent);
                 }
             });
             return convertView;
         }
+
         private void setUi(final ViewHolder viewHolder, final Time.NewsBean item) {
             Glide.with(mContext).load(item.getImg()).into(viewHolder.ivBack);
             viewHolder.tvName.setText(item.getName());
@@ -267,6 +274,7 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
             TextView tvName;
             ImageView ivBack;
             TextView tvTime;
+
             public ViewHolder(View view) {
                 super(view);
                 tvName = view.findViewById(R.id.tv_name);

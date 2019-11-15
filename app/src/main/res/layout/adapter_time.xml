@@ -7,7 +7,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_time"
-        style="@style/MatchWrap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp">
@@ -17,7 +18,10 @@
             style="@style/MatchWrap"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_toLeftOf="@+id/iv_back"
-            android:textColor="@color/color_333333" />
+            android:textColor="@color/color_333333"
+            android:textSize="14sp"
+            android:maxLines="3"
+            />
 
         <ImageView
             android:id="@+id/iv_back"
@@ -30,10 +34,10 @@
             android:id="@+id/tv_time"
             style="@style/MatchWrap"
             android:layout_alignBottom="@+id/iv_back"
-            android:layout_marginBottom="@dimen/dp_10"
             android:layout_toLeftOf="@+id/iv_back"
             android:textColor="@color/color_98AFD7"
-            android:textSize="@dimen/sp_11" />
+            android:textSize="@dimen/sp_11"
+            android:layout_marginTop="10dp"/>
     </RelativeLayout>
 
     <View
