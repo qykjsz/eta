@@ -606,7 +606,7 @@ public class WalletManager {
     }
 
 
-    public static String sendTransactionByPrivateKey(String fromAddress, String privateKey, String toAddress, String amount,float gasPrice,String gasLitmit) {
+    public static String sendTransactionByPrivateKey(String fromAddress, String privateKey, String toAddress, String amount,float gasPrice,String gasLitmit,int decimal) {
 
         Log.e("privatekey",privateKey);
         Log.e("fromAddress>>>>",fromAddress);
@@ -614,7 +614,9 @@ public class WalletManager {
 
         if (privateKey.startsWith("0x")) privateKey = privateKey.substring(2,privateKey.length());
         ECKeyPair ecKeyPair = ECKeyPair.create(EthUtils.toKeyBigInteger(privateKey));
-        return sendTransaction(fromAddress, ecKeyPair, toAddress, EthUtils.toBigInteger(amount),gasPrice,gasLitmit);
+//        return sendTransaction(fromAddress, ecKeyPair, toAddress, EthUtils.toBigInteger(amount),gasPrice,gasLitmit);
+
+        return sendTransaction(fromAddress, ecKeyPair, toAddress, new BigDecimal(amount).multiply(BigDecimal.TEN.pow(decimal)).toBigInteger(),gasPrice,gasLitmit);
 
 
     }

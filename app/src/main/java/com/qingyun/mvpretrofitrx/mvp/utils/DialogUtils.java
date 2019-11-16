@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,8 +61,21 @@ public class DialogUtils {
                     .bindData(new LayerManager.IDataBinder() {
                         @Override
                         public void bind(AnyLayer anyLayer) {
+                            final EditText etPass =  anyLayer.getView(R.id.et_pass);
                             // TODO 绑定数据
+                            CheckBox checkBox = anyLayer.getView(R.id.btn_visi);
+                            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if (isChecked){
+                                        etPass.setInputType(128);//设置为隐藏密码
+                                    }else {
+                                        etPass.setInputType(129);//设置为隐藏密码
+                                    }
+                                    etPass.setSelection(etPass.getText().toString().length());
 
+                                }
+                            });
                         }
                     })
                     .show();

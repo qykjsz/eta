@@ -100,6 +100,10 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
     }
 
 
+    public SmartRefreshLayout getRefreash() {
+        return refreash;
+    }
+
     public void setTvTitle(String title) {
 
         tvTitle.setText(title);

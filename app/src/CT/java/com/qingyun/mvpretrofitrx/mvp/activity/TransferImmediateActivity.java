@@ -141,13 +141,29 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                 }
                 break;
             case R.id.btn_contact:
+                startActivity(ContactActivity.class);
                 break;
             case R.id.btn_all:
+                tvAmount.setText(tvEthBanlance.getText().toString());
+                tvAmount.setSelection(tvEthBanlance.getText().toString().length());
                 break;
             case R.id.btn_gas_price:
                 getPresenter().getGasPrice();
                 break;
             case R.id.btn_transfer:
+                if (TextUtils.isEmpty(tvAssdrss.getText().toString())){
+                    ToastUtil.showShortToast(R.string.address_must);
+                    return;
+                }
+                if (TextUtils.isEmpty(tvAmount.getText().toString())){
+                    ToastUtil.showShortToast(R.string.amount_must);
+                    return;
+                }
+
+                if (TextUtils.isEmpty(tvMining.getText().toString())){
+                    ToastUtil.showShortToast(R.string.amount_must);
+                    return;
+                }
                 getPresenter().getNode();
 
                 break;
@@ -196,7 +212,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
     public void getNodeSuccess(String node) {
         WalletManager.config(node, currentCoin.getAddress(), false);
         Log.e("node>>>>",node);
-        Log.e("Hyaddress>>>>",currentCoin.getAddress());
+        Log.e("Hyaddress>>>>",currentCoin.getAddress()==null?"----":currentCoin.getAddress());
 
         DialogUtils.showPayDialog(getContext(), new DialogUtils.SureListener() {
             @Override
@@ -206,7 +222,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                     @Override
                     public void onSuccess() {
                         String hash = WalletManager.sendTransactionByPrivateKey(ApplicationUtil.getCurrentWallet().getAddress(),
-                                ApplicationUtil.getCurrentWallet().getPrivateKey(), tvAssdrss.getText().toString(), tvAmount.getText().toString(),mGasPrice,gasLitmit);
+                                ApplicationUtil.getCurrentWallet().getPrivateKey(), tvAssdrss.getText().toString(), tvAmount.getText().toString(),mGasPrice,gasLitmit,currentCoin.getDecimal());
                         if (!TextUtils.isEmpty(hash)) {
                             ToastUtil.showShortToast(R.string.transfer_success);
                         } else {
@@ -267,10 +283,12 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                         gasLitmit = gasPrice.getGasmax();
                         seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
                         seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
+                        tvGas.setText(Float.parseFloat(gasPrice.getGweimin())+currentCoin.getName());
+
                         seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
                             @Override
                             public void onSeeking(SeekParams seekParams) {
-                                tvGas.setText(seekParams.progressFloat+"USDT");
+                                tvGas.setText(seekParams.progressFloat+currentCoin.getName());
                             }
 
                             @Override
@@ -287,7 +305,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                         btnConfirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                tvMining.setText(seekBar.getProgressFloat()+"");
+                                tvMining.setText(seekBar.getProgressFloat()+currentCoin.getName());
                                 mGasPrice = seekBar.getProgressFloat();
                                 anyLayer.dismiss();
                             }

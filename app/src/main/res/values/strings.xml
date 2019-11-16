@@ -250,4 +250,13 @@
     <string name="senior_model">高级模式</string>
     <string name="wallet_manager">钱包管理</string>
     <string name="cannot_make_copy">不可备份</string>
+    <string name="transfer_notify">转账通知</string>
+    <string name="chat_message_notify">聊天消息通知</string>
+    <string name="normal_wallet_transfer_message">普通钱包转账通知</string>
+    <string name="observer_wallet_transfer_message">观察钱包转账通知</string>
+    <string name="receive_chat_message">接收聊天消息通知</string>
+    <string name="vibrate">震动</string>
+    <string name="voice">声音</string>
+    <string name="address_must">地址不能为空</string>
+    <string name="amount_must">数量不能为空</string>
 </resources>

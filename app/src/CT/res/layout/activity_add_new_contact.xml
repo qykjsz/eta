@@ -80,6 +80,8 @@
         android:layout_height="0dp"
         android:hint="@string/choose_wallet_bottom"
         android:text="@string/eth"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:paddingEnd="@dimen/dp_padding_x_min"
         android:background="@color/color_FFFFFF"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="@+id/textView41"
@@ -119,5 +121,35 @@
         app:layout_constraintEnd_toEndOf="@+id/et_address"
         app:layout_constraintTop_toTopOf="@+id/et_address"
         app:srcCompat="@mipmap/icon_scan" />
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/textView39"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        style="@style/line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/textView40"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        style="@style/line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/textView41"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        style="@style/line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 
 </android.support.constraint.ConstraintLayout>

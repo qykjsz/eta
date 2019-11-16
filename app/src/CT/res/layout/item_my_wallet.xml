@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_padding_x_min"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/dp_5"
             android:layout_marginBottom="@dimen/dp_10"
             android:text="TextView"
             android:textColor="#B7BCDC"
@@ -72,11 +72,12 @@
             android:id="@+id/btn_copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
             app:srcCompat="@mipmap/qblb_fuzhi"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_wallet_address"
             app:layout_constraintBottom_toBottomOf="@+id/tv_wallet_address"
-            android:layout_marginEnd="@dimen/dp_padding_x_min"
+            android:layout_marginEnd="@dimen/dp_5"
             tools:layout_editor_absoluteX="168dp"
             tools:layout_editor_absoluteY="16dp" />
 

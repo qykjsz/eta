@@ -92,11 +92,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <CheckBox
                 android:id="@+id/btn_visiable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
+                android:button="@drawable/btn_check_box_eye_2"
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="@+id/textView2"
@@ -104,13 +105,16 @@
 
             <TextView
                 android:id="@+id/tv_asset"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_marginEnd="@dimen/dp_padding_x_min"
+                android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:includeFontPadding="false"
-                android:textColor="@color/color_FFFFFF"
                 android:text="@string/_000"
+                android:textColor="@color/color_FFFFFF"
                 android:textSize="@dimen/sp_32"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -306,6 +310,16 @@
 
             />
 
+
+        <TextView
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            style="@style/line"
+            app:layout_constraintBottom_toBottomOf="@id/btn_export_key_store"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
 
         <TextView
             android:id="@+id/btn_delete_wallet"

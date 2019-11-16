@@ -114,7 +114,7 @@
 
 
     <CheckBox
-
+        android:button="@drawable/skin_btn_check_box_1"
         android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

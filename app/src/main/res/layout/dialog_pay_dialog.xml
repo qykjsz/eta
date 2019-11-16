@@ -24,6 +24,9 @@
     <EditText
         android:id="@+id/et_pass"
         android:layout_width="222dp"
+        android:singleLine="true"
+        android:paddingStart="@dimen/dp_25"
+        android:paddingEnd="@dimen/dp_30"
         android:layout_height="@dimen/et_height"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/dp_padding_x_max"
@@ -82,12 +85,12 @@
         app:layout_constraintStart_toEndOf="@id/btn_sure"
         />
 
-    <ImageView
-
+    <CheckBox
+        android:button="@drawable/btn_check_box_eye_1"
         app:layout_constraintTop_toTopOf="@+id/et_pass"
         app:layout_constraintBottom_toBottomOf="@+id/et_pass"
         app:layout_constraintEnd_toEndOf="@+id/et_pass"
-        android:padding="@dimen/dp_10"
+        android:padding="@dimen/dp_6"
         android:id="@+id/btn_visi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

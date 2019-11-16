@@ -114,6 +114,7 @@ public class ChangeWalletPasswordActivity extends BaseActivity {
             @Override
             public void importSuccess(Wallet wallet) {
                 ToastUtil.showShortToast(R.string.change_password_success);
+                wallet.setStatus(ApplicationUtil.getCurrentWallet().getStatus());
                 ApplicationUtil.setCurrentWallet(wallet);
                 ApplicationUtil.deleteWallet(wallet);
                 ApplicationUtil.addWallet(wallet);

@@ -18,6 +18,27 @@ public class SpUtils {
 
 
 
+    public static boolean setBoolenToShare(Context context, Boolean bool, String key){
+
+        SharedPreferences share = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return share.edit().putBoolean(key,bool).commit();
+
+    }
+
+
+    public static boolean getBoolenToShare(Context context,String key){
+
+        SharedPreferences share = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        return share.getBoolean(key,false);
+
+    }
+
+
+
     public static boolean setObjectToShare(Context context, Object object,
                                            String key,Class clazz){
 
@@ -39,6 +60,8 @@ public class SpUtils {
         return  new Gson().fromJson(json,clazz);
 
     }
+
+
 
     public static boolean setObjectToShare(Context context, Object object,
                                        String key) {
