@@ -184,6 +184,14 @@ public class EthUtils {
         return Convert.toWei(num, Convert.Unit.ETHER).toBigInteger();
     }
 
+
+
+
+    public static BigInteger toBigXMXInteger(String num) {
+        return Convert.toWei(num, Convert.Unit.MWEI).toBigInteger();
+    }
+
+
     public static String toStringNum(BigInteger num) {
         return Convert.fromWei(String.valueOf(num), Convert.Unit.ETHER).toString();
     }
