@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--轮播图-->
+    <item android:drawable="@mipmap/home_banner_on_icon" android:state_enabled="true" />
+    <item android:drawable="@mipmap/home_banner_off_icon" />
+</selector>

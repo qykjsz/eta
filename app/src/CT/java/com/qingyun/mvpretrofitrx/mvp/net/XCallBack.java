@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 
 import org.xutils.common.Callback.CommonCallback;
 import org.xutils.common.util.LogUtil;
@@ -28,7 +29,7 @@ public abstract class XCallBack implements CommonCallback<String> {
     private static Toast toast;
     @Override
     public void onSuccess(String result) {
-        Log.d("post",result);
+        ZLog.showPost("post=="+result);
         JSONObject object = JSON.parseObject(result);
         int code = object.getIntValue("code");
         String msg = object.getString("msg");
@@ -50,16 +51,15 @@ public abstract class XCallBack implements CommonCallback<String> {
 
     @Override
     public void onError(Throwable ex, boolean isOnCallback) {
-        System.out.println("post==进来了----------aaaaaaaaaa---");
         if (ex instanceof HttpException) { // 网络错误
             HttpException httpEx = (HttpException) ex;
             int responseCode = httpEx.getCode();
             String responseMsg = httpEx.getMessage();
             String errorResult = httpEx.getResult();
-            LogUtil.e("post=="+ex.toString()+"网络错误"+responseMsg);
+            ZLog.showPost("post=="+ex.toString()+"网络错误"+responseMsg);
             ToastUtil.showLongToast(responseCode);
         } else { // 其他错误
-            LogUtil.e("post=="+ex.toString()+"失败"+isOnCallback);
+            ZLog.showPost("post=="+ex.toString()+"失败"+isOnCallback);
         }
 
     }

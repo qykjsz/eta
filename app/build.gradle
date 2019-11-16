@@ -190,4 +190,6 @@ dependencies {
     implementation 'org.xutils:xutils:3.3.36'
     implementation 'com.alibaba:fastjson:1.2.20'
     implementation 'com.drawthink:expandable-recyclerview:0.0.3'
+    implementation 'com.android.support:support-v4:latestVersion'
+    implementation 'cn.bingoogolapple:bga-banner:2.2.4'
 }

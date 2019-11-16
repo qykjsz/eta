@@ -10,5 +10,13 @@ public class NewFlashData {
     public String content;//内容
     public long time;//时间
     public String source;//来源
+    public boolean showDes;
 
+    public boolean isShowDes() {
+        return showDes;
+    }
+
+    public void setShowDes(boolean isShowDes) {
+        showDes = isShowDes;
+    }
 }

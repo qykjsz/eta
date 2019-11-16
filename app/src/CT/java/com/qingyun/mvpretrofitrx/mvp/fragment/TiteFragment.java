@@ -149,7 +149,6 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
     @Override
     public void onResume() {
         super.onResume();
-        request();
     }
 
     @Override
@@ -174,7 +173,6 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
         unbinder = ButterKnife.bind(this, rootView);
         mAdapter = new TiteAdpater(mContext);
         listView.setAdapter(mAdapter);
-        request();
         return rootView;
     }
 

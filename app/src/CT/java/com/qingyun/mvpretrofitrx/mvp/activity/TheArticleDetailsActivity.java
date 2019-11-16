@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.qingyun.mvpretrofitrx.mvp.contract.TheArticleDetailsContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.TheArticleDetails;
 import com.qingyun.mvpretrofitrx.mvp.entity.Time;
 import com.qingyun.mvpretrofitrx.mvp.presenter.Timepresenterpresenter;
+import com.qingyun.mvpretrofitrx.mvp.utils.StatusBarUtil;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
@@ -75,7 +77,8 @@ public class TheArticleDetailsActivity extends BaseActivity<TheArticleDetailsCon
     public void init() {
         newsBean = getIntent().getParcelableExtra("newsBean");
         getPresenter().getTheArticleDetails(newsBean.getId() + "");
-
+        /**设置系统状态栏字体颜色为黑色*/
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     @Override

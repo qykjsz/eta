@@ -2,16 +2,100 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/wo_top_bg">
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@mipmap/wo_top_bg"
+        >
+        <View
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#197CFF"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/hq_dbg"
+            android:orientation="vertical">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="资产"
+               android:textSize="12sp"
+               android:textColor="@color/color_999999"
+               android:layout_marginTop="15dp"
+               android:layout_marginLeft="30dp"
+               />
+
+
+            <LinearLayout
+                android:id="@+id/ll_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最新价"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_999999"
+                    android:layout_gravity="center"
+                    />
+                <ImageView
+                    android:id="@+id/iv_money_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/hq_sjian"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="涨跌幅"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_999999"
+                    android:layout_gravity="center"
+                    />
+                <ImageView
+                    android:id="@+id/iv_range_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/hq_sjian"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
         style="@style/MatchMatch.Vertical"
         android:layout_marginTop="@dimen/dp_20"
-        android:background="@drawable/bg_ffffff_top_round_25">
+        android:background="@drawable/bg_ffffff_top_round_25"
+        android:visibility="gone"
+       >
 
         <RelativeLayout
             style="@style/MatchWrap"
-            android:layout_marginTop="@dimen/dp_5">
+            android:layout_marginTop="@dimen/dp_5"
+            >
 
             <TextView
                 style="@style/WrapWrap"
@@ -56,8 +140,11 @@
 
                     </android.support.v7.widget.RecyclerView>
                 </RelativeLayout>
-
-
-
     </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:divider="@null"></ListView>
 </LinearLayout>

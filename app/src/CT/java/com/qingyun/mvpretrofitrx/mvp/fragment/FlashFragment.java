@@ -2,14 +2,22 @@ package com.qingyun.mvpretrofitrx.mvp.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +42,7 @@ import com.qingyun.mvpretrofitrx.mvp.presenter.Flashpresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.TestMain;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
 import com.qingyun.mvpretrofitrx.mvp.view.DottedLineView;
+import com.qingyun.mvpretrofitrx.mvp.view.ExpandCollapseAnimation;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.senon.mvpretrofitrx.R;
@@ -175,60 +184,6 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         return this.bindUntilEvent(FragmentEvent.PAUSE);
     }
 
-
-
-    public class NewFlashAdapter extends FatherAdapter<NewFlashData> {
-        public NewFlashAdapter(Context ctx) {
-            super(ctx);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.item_new_flash, parent, false);
-                new ViewHolder(convertView);
-            }
-            ViewHolder viewHolder = (ViewHolder) convertView.getTag();
-            final NewFlashData item = getItem(position);
-            setUi(viewHolder, item);
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setClass(mContext, ExpressTheDetailsActivity.class);
-                    intent.putExtra("people", JSON.toJSONString(item));
-                    startActivity(intent);
-                }
-            });
-            return convertView;
-        }
-        private void setUi(final ViewHolder viewHolder, final NewFlashData item) {
-            viewHolder.tv_time.setText(TimeUtils.getTime(item.time, TimeUtils.DEL_FORMAT_DATE_mm));
-            viewHolder.tv_title.setText(item.title);
-            viewHolder.tv_content.setText(item.content);
-            viewHolder.tv_source.setText("来源："+item.source);
-//            viewHolder.vertical_line.setLineAttribute(0xff0000ff,5,new float[]{10,2,5,5});
-        }
-
-        public class ViewHolder extends SuperViewHolder {
-            public TextView tv_time;//时间
-            public TextView tv_title;//标题
-            public TextView tv_content;//内容
-            public TextView tv_source;//来源
-            public TextView tv_see;//查看
-            public DottedLineView vertical_line;
-            public ViewHolder(View view) {
-                super(view);
-                tv_time = view.findViewById(R.id.tv_time);
-                tv_title = view.findViewById(R.id.tv_title);
-                tv_content = view.findViewById(R.id.tv_content);
-                tv_source = view.findViewById(R.id.tv_source);
-                tv_see = view.findViewById(R.id.tv_see);
-                vertical_line = view.findViewById(R.id.vertical_line);
-            }
-        }
-    }
-
     private void request(){
         RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl()+"et_newsflash");
         params.addBodyParameter("page",currentPage+"");
@@ -243,7 +198,6 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             public void onAfterSuccessOk(JSONObject object) {
                 JSONObject data = object.getJSONObject("data");
                 JSONArray News = data.getJSONArray("News");
-                System.out.println("进来了-------------");
                 List<NewFlashData> list = JSON.parseArray(News.toJSONString(),NewFlashData.class);
                 if(list.size() > 0){
                     if(currentPage == 0){
@@ -270,7 +224,83 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             currentPage= 0;
             request();
         } else {  //Fragment 不可见
-            System.out.println("进来了-------------444444444444");
         }
     }
+
+
+    public class NewFlashAdapter extends FatherAdapter<NewFlashData> {
+        ViewHolder viewHolder;
+        public NewFlashAdapter(Context ctx) {
+            super(ctx);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.item_new_flash, parent, false);
+                new ViewHolder(convertView);
+            }
+             viewHolder = (ViewHolder) convertView.getTag();
+            final NewFlashData item = getItem(position);
+            setUi(viewHolder, item,position);
+
+            return convertView;
+        }
+        private void setUi(final ViewHolder viewHolder, final NewFlashData item, final int position) {
+            viewHolder.tv_time.setText(TimeUtils.getTime(item.time, TimeUtils.DEL_FORMAT_DATE_mm));
+            viewHolder.tv_title.setText(item.title);
+            viewHolder.tv_content.setText(item.content);
+            viewHolder.tv_source.setText("来源："+item.source);
+            viewHolder.tv_content.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    item.showDes = !item.showDes;
+                    if (item.showDes) {
+                        getData().get(position).setShowDes(true);
+                        viewHolder.tv_content.setEllipsize(TextUtils.TruncateAt.END);//收起
+                        viewHolder.tv_content.setLines(4);
+//                        tvShowMore.setText("展开");
+                    } else {
+                        getData().get(position).setShowDes(false);
+                        viewHolder.tv_content.setEllipsize(null);//展开
+                        viewHolder.tv_content.setSingleLine(false);//这个方法是必须设置的，否则无法展开
+//                        tvShowMore.setText("收起");
+                    }
+                }
+            });
+            viewHolder.tv_see.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(mContext, ExpressTheDetailsActivity.class);
+                    intent.putExtra("people", JSON.toJSONString(item));
+                    startActivity(intent);
+                }
+            });
+//            getLastIndexForLimit(viewHolder.tv_content,4,item.content);
+//            viewHolder.vertical_line.setLineAttribute(0xff0000ff,5,new float[]{10,2,5,5});
+        }
+        private boolean isShowDes;
+        public class ViewHolder extends SuperViewHolder {
+            public TextView tv_time;//时间
+            public TextView tv_title;//标题
+            public TextView tv_content;//内容
+            public TextView tv_source;//来源
+            public TextView tv_see;//查看
+            public DottedLineView vertical_line;
+            public ViewHolder(View view) {
+                super(view);
+                tv_time = view.findViewById(R.id.tv_time);
+                tv_title = view.findViewById(R.id.tv_title);
+                tv_content = view.findViewById(R.id.tv_content);
+                tv_source = view.findViewById(R.id.tv_source);
+                tv_see = view.findViewById(R.id.tv_see);
+                tv_see = view.findViewById(R.id.tv_see);
+                vertical_line = view.findViewById(R.id.vertical_line);
+            }
+        }
+
+    }
+
+
 }

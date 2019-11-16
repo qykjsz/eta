@@ -1,48 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/dp_10"
-    android:paddingBottom="@dimen/dp_10">
+   android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/iv_img"
         android:layout_width="@dimen/dp_44"
         android:layout_height="@dimen/dp_44"
-        android:src="@mipmap/qbgl_eos" />
+        android:src="@mipmap/qbgl_eos"
+        android:layout_marginLeft="20dp"/>
 
     <TextView
         android:id="@+id/tv_name"
-        style="@style/WrapWrap"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/dp_14"
         android:layout_toRightOf="@+id/iv_img"
         android:maxLength="5"
         android:text="ETH"
-        android:textSize="20sp" />
+        android:textSize="18sp"
+        android:layout_marginLeft="14.5dp"
+        android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center|left"
+           >
 
     <TextView
         android:id="@+id/tv_shangmoney"
         style="@style/WrapWrap"
-        android:layout_marginStart="@dimen/dp_55"
-        android:layout_marginTop="@dimen/dp_5"
         android:layout_toRightOf="@+id/tv_name"
-        android:text="73.8399"
-        android:textSize="@dimen/sp_16" />
+        android:text="73.856456464"
+        android:textSize="@dimen/sp_16"
+        android:maxEms="6"
+        android:ellipsize="end"
+        android:singleLine="true"
+        />
 
     <TextView
         android:id="@+id/tv_xiamoney"
         style="@style/WrapWrap"
         android:layout_below="@+id/tv_shangmoney"
-        android:layout_marginStart="@dimen/dp_55"
-        android:layout_marginTop="@dimen/dp_5"
         android:layout_toRightOf="@+id/tv_name"
         android:maxLength="4"
         android:text="$ 3.8399"
         android:textColor="@color/color_98AFD7"
-        android:textSize="@dimen/dp_12" />
-
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+        </LinearLayout>
     <TextView
 
         android:id="@+id/tv_zb"
@@ -57,5 +75,16 @@
         android:paddingEnd="@dimen/dp_5"
         android:text="+65654"
         android:textColor="@color/color_FFFFFF"
-        android:textSize="12sp" />
-</RelativeLayout>
+        android:textSize="12sp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#EBEBEB"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"/>
+</LinearLayout>
