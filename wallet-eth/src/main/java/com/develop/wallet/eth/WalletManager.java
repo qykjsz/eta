@@ -598,15 +598,27 @@ public class WalletManager {
      * @return
      */
     public static String sendTransactionByPrivateKey(String fromAddress, String privateKey, String toAddress, String amount) {
-        ECKeyPair ecKeyPair = ECKeyPair.create(EthUtils.toKeyBigInteger(privateKey));
+        Log.e("privatekey",privateKey);
+        Log.e("fromAddress>>>>",fromAddress);
+        Log.e("toAddress>>>>",toAddress);
+        ECKeyPair ecKeyPair = ECKeyPair.create(EthUtils.toKeyBigInteger("e851d34bfb21bbc5ff0c33c8b5fad841faa2b9bc63f4cdd42651092394e4f6a9"));
         return sendTransaction(fromAddress, ecKeyPair, toAddress, EthUtils.toBigInteger(amount));
     }
 
 
-    public static String sendTransactionByPrivateKey(String fromAddress, String privateKey, String toAddress, String amount,float gasPrice,float gasLitmit) {
+    public static String sendTransactionByPrivateKey(String fromAddress, String privateKey, String toAddress, String amount,float gasPrice,String gasLitmit) {
+
+        Log.e("privatekey",privateKey);
+        Log.e("fromAddress>>>>",fromAddress);
+        Log.e("toAddress>>>>",toAddress);
+
+        if (privateKey.startsWith("0x")) privateKey = privateKey.substring(2,privateKey.length());
         ECKeyPair ecKeyPair = ECKeyPair.create(EthUtils.toKeyBigInteger(privateKey));
         return sendTransaction(fromAddress, ecKeyPair, toAddress, EthUtils.toBigInteger(amount),gasPrice,gasLitmit);
+
+
     }
+
 
 
 
@@ -670,7 +682,7 @@ public class WalletManager {
     /**
      * 发送转账交易
      */
-    private static String sendTransaction(String fromAddress, ECKeyPair ecKeyPair, String toAddress, BigInteger amount,float gasPrice,float gasLitmit) {
+    private static String sendTransaction(String fromAddress, ECKeyPair ecKeyPair, String toAddress, BigInteger amount,float gasPrice,String gasLitmit) {
         // noce
         BigInteger nonce = getNonce(fromAddress);
         String hash = sendTransaction(fromAddress, ecKeyPair, toAddress, amount, nonce, 0,gasPrice,gasLitmit);
@@ -680,7 +692,7 @@ public class WalletManager {
 
 
 
-    private static int maxResetCount = 100;
+    private static int maxResetCount =20;
 
     private static String sendTransaction(String fromAddress, ECKeyPair ecKeyPair, String toAddress, BigInteger amount, BigInteger nonce, int resetCount) {
         try {
@@ -697,8 +709,10 @@ public class WalletManager {
             String data = FunctionEncoder.encode(function);
 //
 ////            智能合约事物
-//            BigInteger GAS_PRICE = Convert.toWei(BigDecimal.valueOf(5), Convert.Unit.GWEI).toBigInteger();
-//            BigInteger GAS_LIMIT = Convert.toWei(BigDecimal.valueOf(60000), Convert.Unit.GWEI).toBigInteger();
+            BigInteger GAS_PRICE = Convert.toWei(BigDecimal.valueOf(5), Convert.Unit.GWEI).toBigInteger();
+            BigInteger GAS_LIMIT = Convert.toWei(BigDecimal.valueOf(60000), Convert.Unit.GWEI).toBigInteger();
+            Log.e("GAS_PRICE>>>>",GAS_PRICE.toString());
+            Log.e("GAS_LIMIT>>>>",GAS_LIMIT.toString());
             RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, GAS_PRICE, GAS_LIMIT, tokenAddres, data);
 
             //通过私钥获取凭证  当然也可以根据其他的获取 其他方式详情请看web3j
@@ -735,11 +749,12 @@ public class WalletManager {
     }
 
 
-    private static String sendTransaction(String fromAddress, ECKeyPair ecKeyPair, String toAddress, BigInteger amount, BigInteger nonce, int resetCount,float gasPrice,float gasLitmit) {
+    private static String sendTransaction(String fromAddress, ECKeyPair ecKeyPair, String toAddress, BigInteger amount, BigInteger nonce, int resetCount,float gasPrice,String gasLitmit) {
         try {
 //            PersonalUnlockAccount personalUnlockAccount = getAdmin().personalUnlockAccount(fromAddress, "").send();
 //            if (personalUnlockAccount.accountUnlocked()) {
 //            }
+//            amount = new BigInteger("100000");
             List inputParameters = Arrays.asList(new Address(toAddress), new Uint256(amount));
             List outputParameters = Arrays.asList(new TypeReference<Address>() {
             }, new TypeReference<Bool>() {
@@ -751,7 +766,15 @@ public class WalletManager {
 
 //            智能合约事物
             BigInteger GAS_PRICE = Convert.toWei(BigDecimal.valueOf(gasPrice), Convert.Unit.GWEI).toBigInteger();
-            BigInteger GAS_LIMIT = Convert.toWei(BigDecimal.valueOf(gasLitmit), Convert.Unit.GWEI).toBigInteger();
+//            BigInteger GAS_LIMIT = Convert.toWei(BigDecimal.valueOf(gasLitmit), Convert.Unit.GWEI).toBigInteger();
+            BigInteger GAS_LIMIT =new BigInteger(gasLitmit);
+//            GAS_PRICE = new BigInteger("7000000000");
+//            GAS_LIMIT = new BigInteger("50000");
+
+            Log.e("GAS_PRICE>>>>",GAS_PRICE.toString());
+            Log.e("GAS_LIMIT>>>>",GAS_LIMIT.toString());
+            Log.e("amount>>>>",amount.toString());
+
             RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, GAS_PRICE, GAS_LIMIT, tokenAddres, data);
 
             //通过私钥获取凭证  当然也可以根据其他的获取 其他方式详情请看web3j
@@ -770,16 +793,20 @@ public class WalletManager {
             }
             //事物的HASH
             String transactionHash = ethSendTransaction.getTransactionHash();
+
+            if (ethSendTransaction!=null&&ethSendTransaction.getError()!=null)
+            Log.e("error>>>>",ethSendTransaction.getError().getMessage());
             // nonce +1 重试
             log(String.format("sendTransaction: hash = %s, nonce = %s", transactionHash, String.valueOf(nonce)));
-            if (transactionHash == null) {
-                if (resetCount < maxResetCount) {
-                    nonce = nonce.add(BigInteger.valueOf(1));
-                    resetCount += 1;
-                    log(String.format("sendTransaction reset: count = %s, nonce = %s", String.valueOf(resetCount), String.valueOf(nonce)));
-                    return sendTransaction(fromAddress, ecKeyPair, toAddress, amount, nonce, resetCount++,gasPrice,gasLitmit);
-                }
-            }
+//            if (transactionHash == null) {
+//                if (resetCount < maxResetCount) {
+//                    nonce = nonce.add(BigInteger.valueOf(1));
+//                    resetCount += 1;
+//                    log(String.format("sendTransaction reset: count = %s, nonce = %s", String.valueOf(resetCount), String.valueOf(nonce)));
+//                    return sendTransaction(fromAddress, ecKeyPair, toAddress, amount, nonce, resetCount++,gasPrice,gasLitmit);
+//                }
+//            }
+            Log.e("Hash>>>>",transactionHash);
             return transactionHash;
         } catch (Exception e) {
             e.printStackTrace();

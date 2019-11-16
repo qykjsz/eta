@@ -16,8 +16,20 @@ public class Wallet implements Serializable {
     private String walletName;
     private String coinType;
     private Boolean isMakeCopy;
+    private int status;
+
+    public static final int STATUS_NO_MAKE_COPY = 0;
+    public static final int STATUS_HANE_MAKE_COPY = 1;
+    public static final int STATUS_CAN_NOT_MAKE_COPY = 2;
 
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public Boolean getMakeCopy() {
         if (isMakeCopy==null){
