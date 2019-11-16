@@ -79,6 +79,7 @@ public class SystemSettingsActivity extends BaseActivity {
             case R.id.btn_up_down:
                 break;
             case R.id.btn_push:
+                startActivity(PushAndNotifyActivity.class);
                 break;
         }
     }

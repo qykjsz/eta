@@ -12,6 +12,10 @@ import io.reactivex.ObservableTransformer;
 public class ContactsModel<T> extends BaseModel {
 
 
+    public void getWalletInfo(Context context,String walletAddress, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getWalletInfo(walletAddress), observerListener,transformer);
+
+    }
 
 
     public void addContacts(Context context,String contacts,String name,String remarks,String wallettype,String address, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){

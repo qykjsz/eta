@@ -21,8 +21,7 @@
         android:id="@+id/btn_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp_padding_x_min"
-
+        android:padding="@dimen/dp_padding_x_min"
         app:layout_constraintBottom_toBottomOf="@+id/textView25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView25"

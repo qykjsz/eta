@@ -25,6 +25,7 @@ public class GetMoneyActivity extends BaseActivity {
     ImageView ivCode;
     @BindView(R.id.tv_address)
     TextView tvAddress;
+    private Bitmap bitmap;
 
     @Override
     protected String getTitleRightText() {
@@ -64,7 +65,7 @@ public class GetMoneyActivity extends BaseActivity {
 
     @Override
     public void init() {
-        Bitmap bitmap = ZXingUtils.createQRImage(ApplicationUtil.getCurrentWallet().getAddress(), DensityUtil.dip2px(getApplicationContext(), 180), DensityUtil.dip2px(getApplicationContext(), 180));
+        bitmap = ZXingUtils.createQRImage(ApplicationUtil.getCurrentWallet().getAddress(), DensityUtil.dip2px(getApplicationContext(), 180), DensityUtil.dip2px(getApplicationContext(), 180));
         ivCode.setImageBitmap(bitmap);
         tvAddress.setText(ApplicationUtil.getCurrentWallet().getAddress());
     }
@@ -80,7 +81,8 @@ public class GetMoneyActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_save_code:
-                FileUtils.save(getContext(),ivCode);
+                FileUtils.savePicture(getContext(),bitmap , System.currentTimeMillis() + ".png");
+
                 break;
             case R.id.btn_copy_address:
                 CopyUtils.copy(getContext(),tvAddress.getText().toString());

@@ -8,6 +8,7 @@ import com.qingyun.mvpretrofitrx.mvp.adapter.ContactAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.contract.ContactsContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ContactsPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
@@ -120,6 +121,11 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
         list = contactList;
         contactAdapter.notifyDataSetChanged(list);
         refreashView(list, rcy);
+    }
+
+    @Override
+    public void getWalletInfoSuccess(AssetResponse assetResponse) {
+
     }
 
     @Override

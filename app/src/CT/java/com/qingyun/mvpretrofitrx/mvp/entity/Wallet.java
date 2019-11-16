@@ -14,7 +14,15 @@ public class Wallet implements Serializable {
     private String number;
     private String usdtnumber;
     private String address;
+    private int decimal;
 
+    public int getDecimal() {
+        return decimal;
+    }
+
+    public void setDecimal(int decimal) {
+        this.decimal = decimal;
+    }
 
     public String getAddress() {
         return address;

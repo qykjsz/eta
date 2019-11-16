@@ -1,21 +1,27 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
+import io.reactivex.functions.Consumer;
 
 import static com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils.IS_WITHDRAW;
 
@@ -57,7 +63,8 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
 
     @Override
     public void init() {
-        zbarview.setDelegate(this);
+
+
     }
 
     @Override

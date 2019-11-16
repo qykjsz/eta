@@ -1,11 +1,12 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,9 +28,8 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IndicatorUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
-import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.senon.mvpretrofitrx.R;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 
@@ -50,7 +50,6 @@ import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
@@ -71,12 +70,16 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     TextView tvUsdt;
     @BindView(R.id.et_search)
     EditText etSearch;
+    @BindView(R.id.btn_visiable)
+    CheckBox btnVisiable;
     private List<BaseFragment> fragments;
     private List<String> titles;
     private Wallet asset;
     private int type;
     private AssetWalletLogAdapter assetWalletLogAdapter;
     private List<TransferLog> list;
+    private static final String INVISIABLE_STR="****";
+    private TransferLogResponse transferLogResponse;
 
     @Override
     protected String getTitleRightText() {
@@ -121,8 +124,18 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
         fragments.add(new EmptyFragment());
         fragments.add(new EmptyFragment());
         fragments.add(new EmptyFragment());
-
+        btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(), "is_asset_visiable"));
+        btnVisiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SpUtils.setBoolenToShare(getContext(), isChecked, "is_asset_visiable");
+                refreashAsset(isChecked);
+            }
+        });
         mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getSupportFragmentManager());
+        viewPager.setAdapter(mainViewPagerAdapter);
+//        IndicatorUtils.initMagicIndicator3(viewPager,titles,getActivity(),magicIndicator3,0,0);
+        IndicatorUtils.initMagicIndicator3(magicIndicator3,viewPager,titles,getActivity());
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -134,12 +147,15 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
                 page = 0;
                 switch (i) {
                     case 0:
+                        isLoadMore=false;
                         type = 3;
                         break;
                     case 1:
+                        isLoadMore=false;
                         type = 1;
                         break;
                     case 2:
+                        isLoadMore=false;
                         type = 2;
                         break;
                 }
@@ -152,8 +168,6 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
 
             }
         });
-        viewPager.setAdapter(mainViewPagerAdapter);
-        IndicatorUtils.initMagicIndicator3(magicIndicator3, viewPager, titles, getActivity());
 
         list = new ArrayList<>();
         assetWalletLogAdapter = new AssetWalletLogAdapter(getContext(), list);
@@ -161,8 +175,8 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
             @Override
             public void onItemClick(List list, int position) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(IntentUtils.TRANSFER_LOG,((TransferLog)list.get(position)));
-                startActivity(BusinessDetailActivity.class,bundle);
+                bundle.putSerializable(IntentUtils.TRANSFER_LOG, ((TransferLog) list.get(position)));
+                startActivity(BusinessDetailActivity.class, bundle);
             }
         });
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -174,6 +188,22 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
 
         addSearch();
     }
+
+
+    private void refreashAsset(boolean visiable){
+        if (visiable){
+            if (transferLogResponse!=null)
+                tvAsset.setText(transferLogResponse.getNumber());
+            tvUsdt.setText(transferLogResponse.getUsdtnumber());
+            tvIncomeToday.setText(transferLogResponse.getToday());
+        }else {
+            tvIncomeToday.setText(INVISIABLE_STR);
+            tvAsset.setText(INVISIABLE_STR);
+            tvUsdt.setText(INVISIABLE_STR);
+
+        }
+    }
+
 
     private void addSearch() {
 
@@ -211,11 +241,10 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
 
                     @Override
                     public void onNext(String s) {
-                        if (s!=null)
-                        {
-                            getPresenter().searchLogByHash(ApplicationUtil.getCurrentWallet().getAddress(),s,asset.getName());
-                        }else {
-                            page=1;
+                        if (s != null) {
+                            getPresenter().searchLogByHash(ApplicationUtil.getCurrentWallet().getAddress(), s, asset.getName());
+                        } else {
+                            page = 1;
                             getPresenter().getLog(ApplicationUtil.getCurrentWallet().getAddress(), asset.getName(), type, page);
 
                         }
@@ -293,14 +322,13 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
 
     @Override
     public void getLogSuccess(TransferLogResponse transferLogResponse) {
-        tvAsset.setText(transferLogResponse.getNumber());
-        tvIncomeToday.setText(transferLogResponse.getToday());
-        tvUsdt.setText(transferLogResponse.getUsdtnumber());
+        this.transferLogResponse = transferLogResponse;
+        refreashAsset(btnVisiable.isChecked());
 
         if (isLoadMore) {
-            list.addAll(transferLogResponse.getOrder()==null?new ArrayList<TransferLog>():transferLogResponse.getOrder());
+            list.addAll(transferLogResponse.getOrder() == null ? new ArrayList<TransferLog>() : transferLogResponse.getOrder());
         } else {
-            list = transferLogResponse.getOrder()==null?new ArrayList<TransferLog>():transferLogResponse.getOrder();
+            list = transferLogResponse.getOrder() == null ? new ArrayList<TransferLog>() : transferLogResponse.getOrder();
         }
         if (list == null) list = new ArrayList<>();
         assetWalletLogAdapter.notifyDataSetChanged(list);

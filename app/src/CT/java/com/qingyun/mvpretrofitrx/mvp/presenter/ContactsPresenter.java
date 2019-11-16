@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.qingyun.mvpretrofitrx.mvp.contract.CoinContact;
 import com.qingyun.mvpretrofitrx.mvp.contract.ContactsContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.model.CoinModel;
@@ -20,6 +21,27 @@ public class ContactsPresenter extends ContactsContact.Presenter {
     public ContactsPresenter(Context context) {
         this.model = new ContactsModel();
         this.context = context;
+    }
+
+
+
+    @Override
+    public void getWalletInfo(String walletAddress) {
+        model.getWalletInfo(context,walletAddress,getView().bindLifecycle(), new ObserverResponseListener<AssetResponse>() {
+
+            @Override
+            public void onNext(AssetResponse assetResponse) {
+                if(getView() != null){
+                    getView().getWalletInfoSuccess(assetResponse);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+
     }
 
 

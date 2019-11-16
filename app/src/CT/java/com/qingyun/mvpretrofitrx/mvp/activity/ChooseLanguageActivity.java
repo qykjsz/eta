@@ -126,7 +126,7 @@ public class ChooseLanguageActivity extends BaseActivity {
                 choose = 2;
                 YoYo.with(Techniques.BounceIn)
                         .duration(700)
-                        .playOn(ivChinese);
+                        .playOn(traditionalChinese);
                 traditionalChinese.setVisibility(View.VISIBLE);
 
                 break;
@@ -134,7 +134,7 @@ public class ChooseLanguageActivity extends BaseActivity {
                 choose = 3;
                 YoYo.with(Techniques.BounceIn)
                         .duration(700)
-                        .playOn(ivChinese);
+                        .playOn(ivEnglish);
                 ivEnglish.setVisibility(View.VISIBLE);
 
                 break;
@@ -142,7 +142,7 @@ public class ChooseLanguageActivity extends BaseActivity {
                 choose = 4;
                 YoYo.with(Techniques.BounceIn)
                         .duration(700)
-                        .playOn(ivChinese);
+                        .playOn(ivKorea);
                 ivKorea.setVisibility(View.VISIBLE);
 
                 break;

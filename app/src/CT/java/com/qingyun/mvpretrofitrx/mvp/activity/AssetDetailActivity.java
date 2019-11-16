@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.develop.wallet.eth.Wallet;
 import com.develop.wallet.eth.WalletManager;
-import com.develop.wallet.eth.WalletUtils;
 import com.qingyun.mvpretrofitrx.mvp.adapter.ProportionAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
@@ -19,6 +20,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Proportion;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.CopyUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
@@ -46,11 +48,14 @@ public class AssetDetailActivity extends BaseActivity {
     RecyclerView rcyProportion;
     @BindView(R.id.progress)
     MultistageProgress progress;
+    @BindView(R.id.btn_visiable)
+    CheckBox btnVisiable;
     private AssetResponse assetResponse;
     private List<Proportion> proportionList;
     private ProportionAdapter proportionAdapter;
     private int[] colors;
     private float[] weight;
+    private static final String INVISIABLE_STR="****";
 
     @Override
     protected String getTitleRightText() {
@@ -89,11 +94,9 @@ public class AssetDetailActivity extends BaseActivity {
 
     @Override
     public void init() {
-        AssetResponse assetResponse = (AssetResponse) getIntent().getSerializableExtra(ASSET_RESPONSE);
+        assetResponse = (AssetResponse) getIntent().getSerializableExtra(ASSET_RESPONSE);
         tvPublishKey.setText(ApplicationUtil.getCurrentWallet().getPublicKey());
         tvWalletName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
-        tvIncomeToday.setText(assetResponse.getToday());
-        tvAsset.setText(assetResponse.getAllnumber());
 
         proportionList = assetResponse.getProportion();
         proportionAdapter = new ProportionAdapter(getContext(), proportionList);
@@ -103,6 +106,16 @@ public class AssetDetailActivity extends BaseActivity {
         rcyProportion.setLayoutManager(linearLayoutManager);
         rcyProportion.setAdapter(proportionAdapter);
 
+        btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(), "is_asset_visiable"));
+        btnVisiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SpUtils.setBoolenToShare(getContext(), isChecked, "is_asset_visiable");
+
+                refreashAsset(isChecked);
+            }
+        });
+        refreashAsset(btnVisiable.isChecked());
 
         colors = new int[assetResponse.getProportion().size()];
         for (int i = 0; i < colors.length; i++) {
@@ -127,11 +140,11 @@ public class AssetDetailActivity extends BaseActivity {
             colors[i] = color;
         }
         weight = new float[assetResponse.getProportion().size()];
-//        boolean all0 = true;
-//        for (int i=0;i<assetResponse.getProportion().size();i++){
-//            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
-//            if (weight[i]!=0) all0 = false;
-//        }
+        boolean all0 = true;
+        for (int i=0;i<assetResponse.getProportion().size();i++){
+            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
+            if (weight[i]!=0) all0 = false;
+        }
 //        if (all0){
 //            colors[0] = getResources().getColor(R.color.color_F8F8FF);
 //
@@ -142,6 +155,19 @@ public class AssetDetailActivity extends BaseActivity {
 
 
     }
+
+    private void refreashAsset(boolean visiable){
+        if (visiable){
+            if (assetResponse!=null)
+                tvAsset.setText(assetResponse.getAllnumber());
+            tvIncomeToday.setText(assetResponse.getToday());
+        }else {
+            tvIncomeToday.setText(INVISIABLE_STR);
+            tvAsset.setText(INVISIABLE_STR);
+
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,21 +211,21 @@ public class AssetDetailActivity extends BaseActivity {
                     @Override
                     public void onSure(Object o) {
                         ProgressDialogUtils.getInstances().showDialog();
-                       WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
-                           @Override
-                           public void onSuccess() {
-                               startActivity(ExportPrivateKeyActivity.class);
-                               ProgressDialogUtils.getInstances().cancel();
+                        WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
+                            @Override
+                            public void onSuccess() {
+                                startActivity(ExportPrivateKeyActivity.class);
+                                ProgressDialogUtils.getInstances().cancel();
 
-                           }
+                            }
 
-                           @Override
-                           public void onFailure(Exception e) {
-                               ToastUtil.showShortToast(R.string.pass_err);
-                               ProgressDialogUtils.getInstances().cancel();
+                            @Override
+                            public void onFailure(Exception e) {
+                                ToastUtil.showShortToast(R.string.pass_err);
+                                ProgressDialogUtils.getInstances().cancel();
 
-                           }
-                       });
+                            }
+                        });
 
                     }
                 });

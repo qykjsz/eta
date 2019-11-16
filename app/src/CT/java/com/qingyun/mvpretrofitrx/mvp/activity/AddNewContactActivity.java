@@ -6,11 +6,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.ContactsContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
+import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ContactsPresenter;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.senon.mvpretrofitrx.R;
 
@@ -80,11 +85,15 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_save, R.id.btn_scan})
+    @OnClick({R.id.btn_save, R.id.btn_scan,R.id.tv_bottom})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
                 getPresenter().addContacts(SystemUtil.getMyUUID(),etName.getText().toString(),etRemark.getText().toString(),tvBottom.getText().toString(),etAddress.getText().toString());
+                break;
+            case R.id.tv_bottom:
+//                getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
+                startActivity(ChooseBottomLsvelActivity.class);
                 break;
             case R.id.btn_scan:
                 break;
@@ -99,6 +108,16 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
     @Override
     public void getContactListSuccess(List<Contact> contactList) {
 
+    }
+
+    @Override
+    public void getWalletInfoSuccess(AssetResponse assetResponse) {
+        DialogUtils.showCoinChooseDialog(getActivity(), assetResponse.getGlod(), new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(List list, int position) {
+                tvBottom.setText(((Wallet)list.get(position)).getName());
+            }
+        });
     }
 
     @Override

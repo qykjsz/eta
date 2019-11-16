@@ -17,6 +17,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetModle;
+import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.senon.mvpretrofitrx.R;
 
@@ -122,6 +123,7 @@ public class FindFragment extends BaseFragment {
 
     @OnClick(R.id.btn_scan)
     public void onViewClicked() {
-         startActivity(ScanActivity.class);
+        ScanUtil.start( getActivity());
+
     }
 }

@@ -22,6 +22,7 @@ import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.senon.mvpretrofitrx.R;
 
 import org.web3j.abi.Utils;
@@ -134,8 +135,7 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
                 startActivity(TransferImmediateActivity.class,bundle);
                 break;
             case R.id.btn_transfer_scan:
-
-                startActivity(ScanActivity.class);
+                ScanUtil.start( getActivity());
                 break;
             case R.id.btn_transfer_contact:
                 startActivity(ContactActivity.class);

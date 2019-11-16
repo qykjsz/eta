@@ -260,8 +260,8 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
         //设置状态栏透明
         StatusBarUtil.setTranslucentStatus(this);
 
-        if (AppUtils.getPackageName(BaseActivity.this).equals("com.qingyun.cet")){
-            if (!StatusBarUtil.setStatusBarDarkTheme(BaseActivity.this,false)){
+        if (haveHeader()){
+            if (!StatusBarUtil.setStatusBarDarkTheme(BaseActivity.this,true)){
 //                StatusBarUtil.setStatusBarColor(this,0x55000000);
             }
         }

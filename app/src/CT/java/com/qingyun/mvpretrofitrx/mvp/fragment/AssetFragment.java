@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +24,8 @@ import com.develop.wallet.eth.WalletManager;
 import com.gongwen.marqueen.SimpleMF;
 import com.gongwen.marqueen.SimpleMarqueeView;
 import com.gongwen.marqueen.util.OnItemClickListener;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
 import com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetDetailActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
@@ -36,6 +41,7 @@ import com.qingyun.mvpretrofitrx.mvp.adapter.AssetModleAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.CoinTypeAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MyWalletAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.ProportionAdapter;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
@@ -51,12 +57,14 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
 import com.senon.mvpretrofitrx.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -72,6 +80,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.functions.Consumer;
 import per.goweii.anylayer.AnimHelper;
 import per.goweii.anylayer.AnyLayer;
 import per.goweii.anylayer.LayerManager;
@@ -100,7 +109,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     @BindView(R.id.btn_scan)
     ImageView btnScan;
     @BindView(R.id.btn_visiable)
-    ImageView btnVisiable;
+    CheckBox btnVisiable;
     @BindView(R.id.tv_asset)
     TextView tvAsset;
     @BindView(R.id.tv_income_today)
@@ -127,6 +136,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     private List<Proportion> proportionList;
     private float[] weight;
     private int[] colors;
+    private static final String INVISIABLE_STR="****";
 
     @Override
     public int getLayoutId() {
@@ -146,6 +156,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void init() {
+        getRefreash().setEnableLoadMore(false);
         EventBus.getDefault().register(this);
         refreashData();
         modleList = new ArrayList<>();
@@ -185,7 +196,15 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rcyProportion.setLayoutManager(linearLayoutManager);
         rcyProportion.setAdapter(proportionAdapter);
+        btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(),"is_asset_visiable"));
+        btnVisiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SpUtils.setBoolenToShare(getContext(),isChecked,"is_asset_visiable");
 
+                refreashAsset(isChecked);
+            }
+        });
     }
 
 
@@ -198,6 +217,13 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         Intent intent = new Intent(getContext(), c);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    protected void refresh() {
+        super.refresh();
+        if (ApplicationUtil.getCurrentWallet() != null)
+            getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
     }
 
     @Override
@@ -253,7 +279,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         unbinder.unbind();
     }
 
-    @OnClick({R.id.btn_add_coin, R.id.ly_asset, R.id.btn_transfer, R.id.btn_get_money, R.id.btn_shan_dui, R.id.btn_packet, R.id.btn_scan, R.id.btn_visiable, R.id.btn_more_info})
+    @OnClick({R.id.btn_add_coin, R.id.ly_asset, R.id.btn_transfer, R.id.btn_get_money, R.id.btn_shan_dui, R.id.btn_packet, R.id.btn_scan, R.id.btn_more_info})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_add_coin:
@@ -281,9 +307,10 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             case R.id.btn_packet:
                 break;
             case R.id.btn_scan:
-                startActivity(ScanActivity.class);
-                break;
-            case R.id.btn_visiable:
+
+
+                ScanUtil.start( getActivity());
+
                 break;
             case R.id.btn_more_info:
 
@@ -375,13 +402,25 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 .show();
     }
 
+
+     private void refreashAsset(boolean visiable){
+        if (visiable){
+            if (assetResponse!=null)
+                tvAsset.setText(assetResponse.getAllnumber());
+            tvIncomeToday.setText(assetResponse.getToday());
+        }else {
+            tvIncomeToday.setText(INVISIABLE_STR);
+            tvAsset.setText(INVISIABLE_STR);
+
+        }
+    }
+
     @Override
     public void getWalletInfoSuccess(AssetResponse assetResponse) {
         this.assetResponse = assetResponse;
         assetList = assetResponse.getGlod();
-        tvAsset.setText(assetResponse.getAllnumber());
         assetAdapter.notifyDataSetChanged(assetList);
-        tvIncomeToday.setText(assetResponse.getToday());
+        refreashAsset(btnVisiable.isChecked());
         refreashView(assetList, rcyWallet);
 
 
@@ -432,11 +471,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             colors[i] = color;
         }
         weight = new float[assetResponse.getProportion().size()];
-//        boolean all0 = true;
-//        for (int i=0;i<assetResponse.getProportion().size();i++){
-//            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
-//            if (weight[i]!=0) all0 = false;
-//        }
+        boolean all0 = true;
+        for (int i=0;i<assetResponse.getProportion().size();i++){
+            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
+            if (weight[i]!=0) all0 = false;
+        }
 //        if (all0){
 //            colors[0] = getResources().getColor(R.color.color_F8F8FF);
 //
