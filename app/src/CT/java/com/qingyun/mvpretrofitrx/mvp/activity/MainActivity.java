@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity {
         }
         fragments.add(new InformationFragment());
         fragments.add(new FindFragment());
-       // fragments.add(new ChatFragment());
+        fragments.add(new ChatFragment());
         fragments.add(new MineFragment());
 
 
@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity {
                 .addItem(R.mipmap.foot_1,R.mipmap.foot_01, getResources().getString(R.string.asset),getResources().getColor(R.color.main_blue))
                 .addItem(R.mipmap.foot_2,R.mipmap.foot_02, getResources().getString(R.string.zixun),getResources().getColor(R.color.main_blue))
                 .addItem(R.mipmap.foot_3,R.mipmap.foot_03, getResources().getString(R.string.find),getResources().getColor(R.color.main_blue))
-              //  .addItem(R.mipmap.foot_4,R.mipmap.foot_04, getResources().getString(R.string.chat),getResources().getColor(R.color.main_blue))
+                .addItem(R.mipmap.foot_4,R.mipmap.foot_04, getResources().getString(R.string.chat),getResources().getColor(R.color.main_blue))
                 .addItem(R.mipmap.foot_5, R.mipmap.foot_05,getResources().getString(R.string.mine),getResources().getColor(R.color.main_blue))
                 .build();
 

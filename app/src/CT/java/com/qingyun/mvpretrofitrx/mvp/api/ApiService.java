@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.api;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.AssetReviewResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
@@ -26,7 +27,10 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -113,4 +117,9 @@ public interface ApiService {
 
     @POST("get_jiedian")
     Observable <BaseResponse<NodeResponse>>getNodeList();
+
+
+    @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
+    @POST("et_allassets")
+    Observable<BaseResponse<AssetReviewResponse>> getAssetsReview(@Body RequestBody route);
 }

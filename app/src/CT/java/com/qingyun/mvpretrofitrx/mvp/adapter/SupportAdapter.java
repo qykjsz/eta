@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qingyun.mvpretrofitrx.mvp.entity.Content;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.senon.mvpretrofitrx.R;
@@ -23,7 +25,7 @@ import drawthink.expandablerecyclerview.holder.BaseViewHolder;
 public class SupportAdapter extends BaseRecyclerViewAdapter<Item, Content, SupportAdapter.SupportViewHolder> {
 
     private Context ctx;
-    private List datas;
+    private List<RecyclerViewData> datas;
     private LayoutInflater mInflater;
 
     public SupportAdapter(Context ctx, List<RecyclerViewData> datas) {
@@ -52,6 +54,12 @@ public class SupportAdapter extends BaseRecyclerViewAdapter<Item, Content, Suppo
     @Override
     public void onBindGroupHolder(SupportViewHolder holder, int groupPos, int position, Item groupData) {
         holder.tvParent.setText(groupData.getName());
+//        if (datas.get(groupPos).getGroupItem().isExpand()){
+//            Glide.with(ctx).load(R.mipmap.help_jt).into(holder.iv_more);
+//        }else {
+//            Glide.with(ctx).load(R.mipmap.help_yjt).into(holder.iv_more);
+//
+//        }
 
     }
 
@@ -69,10 +77,12 @@ public class SupportAdapter extends BaseRecyclerViewAdapter<Item, Content, Suppo
     class SupportViewHolder extends BaseViewHolder {
         TextView tvChild;
         TextView tvParent;
+        ImageView iv_more;
         public SupportViewHolder(Context ctx, View itemView, int viewType) {
             super(ctx, itemView, viewType);
             tvChild = itemView.findViewById(R.id.tv_child);
             tvParent = itemView.findViewById(R.id.tv_parent);
+            iv_more = itemView.findViewById(R.id.iv_more);
 
         }
 

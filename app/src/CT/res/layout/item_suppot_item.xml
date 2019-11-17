@@ -11,7 +11,6 @@
         android:id="@+id/tv_parent"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_49"
-        android:drawableEnd="@mipmap/wd_gd_icon"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/dp_padding_x_min"
         android:paddingEnd="@dimen/dp_padding_x_min"
@@ -20,4 +19,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_more"
+        app:layout_constraintTop_toTopOf="@+id/tv_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:src="@mipmap/help_yjt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </android.support.constraint.ConstraintLayout>
