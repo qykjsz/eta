@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
+import android.Manifest;
 import android.graphics.Outline;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.ScanQrCodeActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.SearchActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.SelectTheAppAdapter;
 import com.qingyun.mvpretrofitrx.mvp.api.Api;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
@@ -52,9 +55,10 @@ import cc.shinichi.library.ImagePreview;
 import cc.shinichi.library.tool.utility.image.ImageUtil;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.http.PATCH;
 
-public class FindFragment extends BaseFragment {
+public class FindFragment extends BaseFragment implements EasyPermissions.PermissionCallbacks{
 //    @BindView(R.id.serachview)
 //    SearchView serachview;
     Unbinder unbinder;
@@ -68,7 +72,8 @@ public class FindFragment extends BaseFragment {
 //    RecyclerView rcyModle;
 //    private List<AssetModle> modleList;
 //    SelectTheAppAdapter selectTheAppAdapter;
-
+    @BindView(R.id.iv_image)
+    ImageView imageView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
@@ -76,7 +81,25 @@ public class FindFragment extends BaseFragment {
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
-
+    private static final int PERMISSIONS_CAMERA = 2;
+    @OnClick({R.id.tv_search,R.id.iv_scan})
+    public void onViewClicked(View view){
+        switch (view.getId()){
+            case R.id.tv_search:
+                startActivity(SearchActivity.class);
+                break;
+            case R.id.iv_scan:
+                String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+                if (EasyPermissions.hasPermissions(mContext, perms)) {
+                    //已有权限
+                    startActivity(ScanQrCodeActivity.class);
+                } else {
+                    // 没有权限
+                    EasyPermissions.requestPermissions(getActivity(), "请开起相机权限，以正常使用", PERMISSIONS_CAMERA, perms);
+                }
+                break;
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -147,6 +170,9 @@ public class FindFragment extends BaseFragment {
         });
 
         mCubeBanner.setClipToOutline(true);
+//        Glide.with(FindFragment.this)
+//                .load("https://pics1.baidu.com/feed/63d9f2d3572c11dfe2ef0608ec83a0d5f703c20d.jpeg?token=95b0062fec43ef4e12b46b3e186b0061&s=5E12C20908DAAECA04A89DC30100A0A3")
+//                .into(imageView);
 
     }
     @BindView(R.id.banner)
@@ -285,5 +311,15 @@ public class FindFragment extends BaseFragment {
                 }
             }
         }
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        startActivity(ScanQrCodeActivity.class);
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
     }
 }

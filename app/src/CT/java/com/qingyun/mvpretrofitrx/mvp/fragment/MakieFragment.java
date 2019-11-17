@@ -129,16 +129,18 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
     //获取动态 价格 涨跌幅排序 start 1.按价格降序 2.按价格升序 3.按涨跌降序 4.按涨跌升序
     private void requestTrends(int start){
         if(list.size() > 0){
-            RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl()+"et_quotationsort");
+            JSONObject object = new JSONObject();
             stringList = new ArrayList<>();
             for(int i = 0; i < list.size(); i++){
-                stringList.add("{name="+list.get(i).getName()+"}");
+                stringList.add(list.get(i).getName());
             }
-            String nameList = stringList.toString().replace(" ","");
-            ZLog.showPost("post==="+nameList+"==="+start);
+            String[] strings = new String[list.size()];
+            stringList.toArray(strings);
+            object.put("allglods",strings);
+            object.put("sort",start+"");
+            ZLog.showPost("post"+object.toJSONString());
 
-            params.addBodyParameter("allglods->name",nameList);
-            params.addBodyParameter("sort",start+"");
+            RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl()+"et_quotationsort",object);
             x.http().post(params, new XCallBack() {
                 @Override
                 public void onAfterFinished() {

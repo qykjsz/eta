@@ -64,6 +64,7 @@
            android:layout_marginRight="15dp">
 
            <TextView
+               android:id="@+id/tv_search"
                android:layout_width="0dp"
                android:layout_weight="1"
                android:layout_height="35dp"
@@ -78,6 +79,7 @@
               />
 
            <ImageView
+               android:id="@+id/iv_scan"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_alignParentRight="true"
@@ -186,7 +188,8 @@
                 android:textColor="#999999"
                 android:textSize="12sp"
                 android:layout_marginRight="15dp"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                />
 
 
         </RelativeLayout>
@@ -222,5 +225,11 @@
 
     </LinearLayout>
    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"/>
 
 </LinearLayout>
