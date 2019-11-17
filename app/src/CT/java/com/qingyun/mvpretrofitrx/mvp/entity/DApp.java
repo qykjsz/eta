@@ -9,7 +9,6 @@ public class DApp {
     public String name;//名称
     public String img;//图片
     public String url;//跳转连接
-
     public void setName(String name) {
         this.name = name;
     }

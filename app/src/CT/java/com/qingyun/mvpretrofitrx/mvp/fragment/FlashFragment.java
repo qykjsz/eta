@@ -80,6 +80,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
     ListView listView;
 
     private NewFlashAdapter mAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
@@ -135,6 +136,13 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         request();
         mAdapter = new NewFlashAdapter(mContext);
         listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mAdapter.mSelectedPos = position;
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -184,9 +192,9 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         return this.bindUntilEvent(FragmentEvent.PAUSE);
     }
 
-    private void request(){
-        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl()+"et_newsflash");
-        params.addBodyParameter("page",currentPage+"");
+    private void request() {
+        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_newsflash");
+        params.addBodyParameter("page", currentPage + "");
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
@@ -198,11 +206,11 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             public void onAfterSuccessOk(JSONObject object) {
                 JSONObject data = object.getJSONObject("data");
                 JSONArray News = data.getJSONArray("News");
-                List<NewFlashData> list = JSON.parseArray(News.toJSONString(),NewFlashData.class);
-                if(list.size() > 0){
-                    if(currentPage == 0){
+                List<NewFlashData> list = JSON.parseArray(News.toJSONString(), NewFlashData.class);
+                if (list.size() > 0) {
+                    if (currentPage == 0) {
                         mAdapter.setDatas(list);
-                    }else{
+                    } else {
                         mAdapter.addData(list);
                     }
                     currentPage++;
@@ -220,8 +228,8 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {  //Fragment 可见
-            currentPage= 0;
+        if (getUserVisibleHint()) {  //Fragment 可见
+            currentPage = 0;
             request();
         } else {  //Fragment 不可见
         }
@@ -230,6 +238,8 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
 
     public class NewFlashAdapter extends FatherAdapter<NewFlashData> {
         ViewHolder viewHolder;
+        public int mSelectedPos = -1;//smSelectedPos是用户选择条目的变量
+
         public NewFlashAdapter(Context ctx) {
             super(ctx);
         }
@@ -240,34 +250,43 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
                 convertView = mInflater.inflate(R.layout.item_new_flash, parent, false);
                 new ViewHolder(convertView);
             }
-             viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
             final NewFlashData item = getItem(position);
-            setUi(viewHolder, item,position);
+            setUi(viewHolder, item, position);
 
             return convertView;
         }
+
         private void setUi(final ViewHolder viewHolder, final NewFlashData item, final int position) {
             viewHolder.tv_time.setText(TimeUtils.getTime(item.time, TimeUtils.DEL_FORMAT_DATE_mm));
             viewHolder.tv_title.setText(item.title);
             viewHolder.tv_content.setText(item.content);
-            viewHolder.tv_source.setText("来源："+item.source);
-            viewHolder.tv_content.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    item.showDes = !item.showDes;
-                    if (item.showDes) {
-                        getData().get(position).setShowDes(true);
-                        viewHolder.tv_content.setEllipsize(TextUtils.TruncateAt.END);//收起
-                        viewHolder.tv_content.setLines(4);
-//                        tvShowMore.setText("展开");
-                    } else {
-                        getData().get(position).setShowDes(false);
-                        viewHolder.tv_content.setEllipsize(null);//展开
-                        viewHolder.tv_content.setSingleLine(false);//这个方法是必须设置的，否则无法展开
-//                        tvShowMore.setText("收起");
-                    }
-                }
-            });
+            viewHolder.tv_source.setText("来源：" + item.source);
+            if (mSelectedPos == position) {
+                viewHolder.tv_content.setEllipsize(null);//展开
+                viewHolder.tv_content.setSingleLine(false);//这个方法是必须设置的，否则无法展开
+            } else {
+                viewHolder.tv_content.setEllipsize(TextUtils.TruncateAt.END);//收起
+                viewHolder.tv_content.setLines(4);
+
+            }
+//            viewHolder.tv_content.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    item.showDes = !item.showDes;
+//                    if (item.showDes) {
+//                        getData().get(position).setShowDes(true);
+//                        viewHolder.tv_content.setEllipsize(TextUtils.TruncateAt.END);//收起
+//                        viewHolder.tv_content.setLines(4);
+////                        tvShowMore.setText("展开");
+//                    } else {
+//                        getData().get(position).setShowDes(false);
+//                        viewHolder.tv_content.setEllipsize(null);//展开
+//                        viewHolder.tv_content.setSingleLine(false);//这个方法是必须设置的，否则无法展开
+////                        tvShowMore.setText("收起");
+//                    }
+//                }
+//            });
             viewHolder.tv_see.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -280,7 +299,9 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
 //            getLastIndexForLimit(viewHolder.tv_content,4,item.content);
 //            viewHolder.vertical_line.setLineAttribute(0xff0000ff,5,new float[]{10,2,5,5});
         }
+
         private boolean isShowDes;
+
         public class ViewHolder extends SuperViewHolder {
             public TextView tv_time;//时间
             public TextView tv_title;//标题
@@ -288,6 +309,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             public TextView tv_source;//来源
             public TextView tv_see;//查看
             public DottedLineView vertical_line;
+
             public ViewHolder(View view) {
                 super(view);
                 tv_time = view.findViewById(R.id.tv_time);
