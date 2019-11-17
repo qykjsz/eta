@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.ScanQrCodeActivity;
@@ -55,6 +56,7 @@ import cc.shinichi.library.ImagePreview;
 import cc.shinichi.library.tool.utility.image.ImageUtil;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.http.PATCH;
 
@@ -72,8 +74,6 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 //    RecyclerView rcyModle;
 //    private List<AssetModle> modleList;
 //    SelectTheAppAdapter selectTheAppAdapter;
-    @BindView(R.id.iv_image)
-    ImageView imageView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
@@ -170,10 +170,6 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         });
 
         mCubeBanner.setClipToOutline(true);
-//        Glide.with(FindFragment.this)
-//                .load("https://pics1.baidu.com/feed/63d9f2d3572c11dfe2ef0608ec83a0d5f703c20d.jpeg?token=95b0062fec43ef4e12b46b3e186b0061&s=5E12C20908DAAECA04A89DC30100A0A3")
-//                .into(imageView);
-
     }
     @BindView(R.id.banner)
     //轮播图
@@ -295,11 +291,12 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 TextView tv_name = view.findViewById(R.id.tv_name);
                 final DApp data = dApps.get(i);
                 if (null != data) {
-                    Glide.with(mContext).load(data.getImg()).into(image);
-                    RequestOptions options = RequestOptions.circleCropTransform();//圆形图片  好多的图片形式都是这么设置的
-                    options.placeholder(R.mipmap.app_icon);//占位图
-                    Glide.with(this).load(data.getImg())
-                            .apply(options).into(image);
+                    RequestOptions requestOptions = new RequestOptions();
+//        requestOptions.placeholder(R.mipmap.app_icon);
+                    requestOptions.circleCropTransform();
+                    requestOptions.transforms( new RoundedCorners(20));
+                    Glide.with(mContext).load(data.getImg()).apply(requestOptions).into(image);
+                    ZLog.showPost("post==="+data.getImg());
                     tv_name.setText(data.name);
                     image.setOnClickListener(new View.OnClickListener() {
                         @Override

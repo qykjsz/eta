@@ -19,6 +19,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.qingyun.mvpretrofitrx.mvp.api.Api;
 import com.qingyun.mvpretrofitrx.mvp.base.FatherAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.SuperViewHolder;
@@ -26,6 +28,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.DApp;
 import com.qingyun.mvpretrofitrx.mvp.entity.SearchData;
 import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
 import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
+import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.senon.mvpretrofitrx.R;
 
 import org.xutils.http.RequestParams;
@@ -230,7 +233,11 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         private void setUi(final ViewHolder viewHolder, final SearchData item) {
             viewHolder.tv_name.setText(item.name);
             viewHolder.tv_introduce.setText(item.text);
-            Glide.with(mContext).load(item.img).into(viewHolder.iv_image);
+            RequestOptions requestOptions = new RequestOptions();
+//        requestOptions.placeholder(R.mipmap.app_icon);
+            requestOptions.circleCropTransform();
+            requestOptions.transforms( new RoundedCorners(20));
+            Glide.with(mContext).load(item.img).apply(requestOptions).into(viewHolder.iv_image);
         }
 
         public class ViewHolder extends SuperViewHolder {
