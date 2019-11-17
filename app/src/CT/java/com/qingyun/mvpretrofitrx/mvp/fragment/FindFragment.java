@@ -1,9 +1,11 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +29,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.ScanQrCodeActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.SearchActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.WebActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.SelectTheAppAdapter;
 import com.qingyun.mvpretrofitrx.mvp.api.Api;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
@@ -40,6 +43,8 @@ import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.utils.GlideRoundTransform;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.senon.mvpretrofitrx.R;
 
 import org.xutils.http.RequestParams;
@@ -74,6 +79,12 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 //    RecyclerView rcyModle;
 //    private List<AssetModle> modleList;
 //    SelectTheAppAdapter selectTheAppAdapter;
+    @BindView(R.id.srl)
+    RefreshLayout mSmartRefreshLayout;
+    List<DApp> dApps;
+    @BindView(R.id.container_browse)
+    View mBrowse;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
@@ -168,8 +179,16 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 30);
             }
         });
-
         mCubeBanner.setClipToOutline(true);
+
+        mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                request();
+                requestBannerImage();
+            }
+        });
+        mSmartRefreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
     }
     @BindView(R.id.banner)
     //轮播图
@@ -204,6 +223,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
+                mSmartRefreshLayout.finishRefresh();//刷新完成
             }
 
             @Override
@@ -233,6 +253,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 
             @Override
             public void onAfterSuccessErr(JSONObject object, String msg) {
+                mSmartRefreshLayout.finishRefresh(false);//结束刷新（刷新失败）
             }
         });
     }
@@ -242,7 +263,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
-
+                mSmartRefreshLayout.finishRefresh();//刷新完成
             }
 
             @Override
@@ -256,13 +277,11 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 
             @Override
             public void onAfterSuccessErr(JSONObject object, String msg) {
-
+                mSmartRefreshLayout.finishRefresh(false);//结束刷新（刷新失败）
             }
         });
     }
-    List<DApp> dApps;
-    @BindView(R.id.container_browse)
-     View mBrowse;
+
     private List<DApp> parseData(JSONArray userList) {
         dApps = new ArrayList<>();
         if (userList.size() > 0) {
@@ -301,7 +320,9 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     image.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            Intent intent = new Intent(mContext,WebActivity.class);
+                            intent.putExtra("url",data.url);
+                            startActivity(intent);
                         }
                     });
                     ll_products.addView(view);//将item_fans_header_image_list设置进LinearLayout下

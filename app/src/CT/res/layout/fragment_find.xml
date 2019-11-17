@@ -98,13 +98,34 @@
 
 
 
-
+       <com.scwang.smartrefresh.layout.SmartRefreshLayout
+           android:id="@+id/srl"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_below="@+id/rl"
+           >
+       <com.scwang.smartrefresh.layout.header.ClassicsHeader
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           app:srlAccentColor="#333333"
+           app:srlClassicsSpinnerStyle="Translate"
+           app:srlDrawableArrowSize="20dp"
+           app:srlDrawableMarginRight="20dp"
+           app:srlDrawableProgressSize="20dp"
+           app:srlDrawableSize="20dp"
+           app:srlEnableLastTime="true"
+           app:srlFinishDuration="500"
+           app:srlPrimaryColor="#FFF"
+           app:srlTextSizeTime="10dp"
+           app:srlTextSizeTitle="16sp"
+           app:srlTextTimeMarginTop="2dp"
+           />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/rl"
+
         >
 
         <RelativeLayout
@@ -224,5 +245,6 @@
         </RelativeLayout>
 
     </LinearLayout>
+       </com.scwang.smartrefresh.layout.SmartRefreshLayout>
    </RelativeLayout>
 </LinearLayout>
