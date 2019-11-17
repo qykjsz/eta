@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -92,6 +93,13 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                findViewById(R.id.ll).setVisibility(View.GONE);
+                requestSearchList(mGradViewAdapter.getData().get(position).name);
             }
         });
         findViewById(R.id.tv_finish).setOnClickListener(this);
