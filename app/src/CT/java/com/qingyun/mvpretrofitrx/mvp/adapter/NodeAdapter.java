@@ -32,8 +32,6 @@ public class NodeAdapter extends BaseAdapter<Node, NodeAdapter.NodeViewHolder> {
 
     @Override
     protected void onItemReset(NodeViewHolder holder) {
-        holder.ivChoose.setVisibility(View.GONE);
-        holder.tvName.setTextColor(getContext().getResources().getColor(R.color.color_main_text));
 
 
     }
@@ -41,8 +39,7 @@ public class NodeAdapter extends BaseAdapter<Node, NodeAdapter.NodeViewHolder> {
 
     @Override
     protected void onItemSelect(NodeViewHolder holder) {
-        holder.ivChoose.setVisibility(View.VISIBLE);
-        holder.tvName.setTextColor(getContext().getResources().getColor(R.color.main_blue));
+
 
 
     }
@@ -52,6 +49,14 @@ public class NodeAdapter extends BaseAdapter<Node, NodeAdapter.NodeViewHolder> {
         holder.tvName.setText(getList().get(position).getName());
         holder.tvNode.setText(getList().get(position).getUrl());
         holder.tvSpeed.setText(getList().get(position).getSpeed());
+        if (position==0){
+            holder.ivChoose.setVisibility(View.VISIBLE);
+            holder.tvName.setTextColor(getContext().getResources().getColor(R.color.main_blue));
+        }else {
+            holder.ivChoose.setVisibility(View.GONE);
+            holder.tvName.setTextColor(getContext().getResources().getColor(R.color.color_main_text));
+
+        }
 
     }
 

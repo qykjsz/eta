@@ -112,42 +112,42 @@ public class ChooseLanguageActivity extends BaseActivity {
 
     @OnClick({R.id.btn_chinese, R.id.btn_traditional_chinese, R.id.btn_english, R.id.btn_korea})
     public void onViewClicked(View view) {
-        resetView();
-        switch (view.getId()) {
-            case R.id.btn_chinese:
-                choose = 1;
-                YoYo.with(Techniques.BounceIn)
-                        .duration(700)
-                        .playOn(ivChinese);
-                ivChinese.setVisibility(View.VISIBLE);
-
-                break;
-            case R.id.btn_traditional_chinese:
-                choose = 2;
-                YoYo.with(Techniques.BounceIn)
-                        .duration(700)
-                        .playOn(traditionalChinese);
-                traditionalChinese.setVisibility(View.VISIBLE);
-
-                break;
-            case R.id.btn_english:
-                choose = 3;
-                YoYo.with(Techniques.BounceIn)
-                        .duration(700)
-                        .playOn(ivEnglish);
-                ivEnglish.setVisibility(View.VISIBLE);
-
-                break;
-            case R.id.btn_korea:
-                choose = 4;
-                YoYo.with(Techniques.BounceIn)
-                        .duration(700)
-                        .playOn(ivKorea);
-                ivKorea.setVisibility(View.VISIBLE);
-
-                break;
-
-        }
+//        resetView();
+//        switch (view.getId()) {
+//            case R.id.btn_chinese:
+//                choose = 1;
+//                YoYo.with(Techniques.BounceIn)
+//                        .duration(700)
+//                        .playOn(ivChinese);
+//                ivChinese.setVisibility(View.VISIBLE);
+//
+//                break;
+//            case R.id.btn_traditional_chinese:
+//                choose = 2;
+//                YoYo.with(Techniques.BounceIn)
+//                        .duration(700)
+//                        .playOn(traditionalChinese);
+//                traditionalChinese.setVisibility(View.VISIBLE);
+//
+//                break;
+//            case R.id.btn_english:
+//                choose = 3;
+//                YoYo.with(Techniques.BounceIn)
+//                        .duration(700)
+//                        .playOn(ivEnglish);
+//                ivEnglish.setVisibility(View.VISIBLE);
+//
+//                break;
+//            case R.id.btn_korea:
+//                choose = 4;
+//                YoYo.with(Techniques.BounceIn)
+//                        .duration(700)
+//                        .playOn(ivKorea);
+//                ivKorea.setVisibility(View.VISIBLE);
+//
+//                break;
+//
+//        }
     }
 
     private void resetView() {

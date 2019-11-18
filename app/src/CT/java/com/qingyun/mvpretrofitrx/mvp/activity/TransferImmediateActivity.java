@@ -112,7 +112,11 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
         EventBus.getDefault().register(this);
         String address = getIntent().getStringExtra(IntentUtils.TRANSFER_ADDRESS);
         currentCoin = (Wallet) getIntent().getSerializableExtra(IntentUtils.ASSET);
-
+        String coin_name = getIntent().getStringExtra(IntentUtils.TRANSFER_COIN_NAME);
+        if (!TextUtils.isEmpty(coin_name)){
+            currentCoin = new Wallet();
+            currentCoin.setName(coin_name);
+        }
         if (address != null)
             tvAssdrss.setText(address);
         getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
@@ -186,6 +190,12 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
         this.coins = assetResponse.getGlod();
         if (currentCoin == null && coins != null && coins.size() > 1) {
             currentCoin = coins.get(0);
+        }else {
+            for (int i=0;i<coins.size();i++){
+                if (coins.get(i).getName().equals(currentCoin.getName())){
+                    currentCoin = coins.get(i);
+                }
+            }
         }
         if (currentCoin != null) {
             refreashData();

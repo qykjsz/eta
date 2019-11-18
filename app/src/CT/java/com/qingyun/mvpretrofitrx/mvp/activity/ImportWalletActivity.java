@@ -6,6 +6,7 @@ import android.view.View;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.ButterKnife;
@@ -64,10 +65,12 @@ public class ImportWalletActivity extends BaseActivity {
                 startActivity(ImportByPrivatekeyActivity.class);
                 break;
             case R.id.btn_ob_wallet:
-                startActivity(ObserveWalletActivity.class);
+                ToastUtil.showShortToast(R.string.not_open);
+//                startActivity(ObserveWalletActivity.class);
                 break;
             case R.id.btn_cool_wallet:
-                startActivity(ImportByCoolWalletActivity.class);
+                ToastUtil.showShortToast(R.string.not_open);
+//                startActivity(ImportByCoolWalletActivity.class);
                 break;
             case R.id.btn_import_by_keystore:
                 startActivity(ImportByKeystoreActivity.class);

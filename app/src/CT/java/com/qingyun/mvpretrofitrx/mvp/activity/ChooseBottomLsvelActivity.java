@@ -61,8 +61,8 @@ public class ChooseBottomLsvelActivity extends BaseActivity {
     @Override
     public void init() {
         list = new ArrayList<>();
-        list.add(new CoinType(R.mipmap.dc_eos,0,CoinType.EOS,getResources().getString(R.string.bottom_name_eos)));
         list.add(new CoinType(R.mipmap.dc_eth,0,CoinType.ETH,getResources().getString(R.string.bottom_name_eth)));
+        list.add(new CoinType(R.mipmap.dc_eos,0,CoinType.EOS,getResources().getString(R.string.bottom_name_eos)));
         list.add(new CoinType(R.mipmap.dc_iost,0,CoinType.IOST,getResources().getString(R.string.bottom_name_iost)));
         list.add(new CoinType(R.mipmap.dc_tron,0,CoinType.Tron,getResources().getString(R.string.bottom_name_tron)));
         list.add(new CoinType(R.mipmap.dc_binance,0,CoinType.BINANCE,getResources().getString(R.string.bottom_name_binance)));
@@ -75,7 +75,7 @@ public class ChooseBottomLsvelActivity extends BaseActivity {
         bottomLevelAdapterp.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
-                if (position==1){
+                if (position==0){
                     finish();
                 }else {
                     ToastUtil.showShortToast(R.string.not_open);
