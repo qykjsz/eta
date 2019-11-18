@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
+import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
@@ -43,12 +44,14 @@ public class AssetWalletLogAdapter extends BaseAdapter<TransferLog, AssetWalletL
     @Override
     protected void viewHolderBind(AssetWalletLogViewHolder holder, int position) {
         if (getList().get(position).getType().equals("1")){
-            holder.tvCoinName.setText(getContext().getResources().getString(R.string.transfer_in));
+            holder.tvCoinName.setText(getContext().getResources().getString(R.string.transfer_in)+getList().get(position).getName());
+            holder.tvCoinName.setTextColor(getContext().getResources().getColor(R.color.main_blue));
+
 
         }else
         {
-            holder.tvCoinName.setText(getContext().getResources().getString(R.string.transfer_out));
-
+            holder.tvCoinName.setText(getContext().getResources().getString(R.string.transfer_out)+getList().get(position).getName());
+            holder.tvCoinName.setTextColor(getContext().getResources().getColor(R.color.color_00C176));
         }
         holder.tvAmount.setText(getList().get(position).getAmount());
         if (getList().get(position).getStatus().equals("1")){
@@ -65,7 +68,7 @@ public class AssetWalletLogAdapter extends BaseAdapter<TransferLog, AssetWalletL
     class AssetWalletLogViewHolder extends BaseViewHolder {
 
         @BindView(R.id.tv_coin_name)
-        TextView tvCoinName;
+        BoldTextView tvCoinName;
         @BindView(R.id.tv_amount)
         TextView tvAmount;
         @BindView(R.id.tv_status)

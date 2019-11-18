@@ -259,4 +259,6 @@
     <string name="voice">声音</string>
     <string name="address_must">地址不能为空</string>
     <string name="amount_must">数量不能为空</string>
+    <string name="business_log">交易记录</string>
+    <string name="start_yanzheng">开始验证</string>
 </resources>

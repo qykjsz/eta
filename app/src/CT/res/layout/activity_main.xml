@@ -42,5 +42,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tab"
+        style="@style/line"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1" />
 
 </android.support.constraint.ConstraintLayout>

@@ -80,6 +80,9 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.CoinUnitActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.WalletManagerActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.PushAndNotifyActivity"/>
+
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AssetReviewActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessLogActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ScanQrCodeActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.SearchActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.WebActivity"/>
