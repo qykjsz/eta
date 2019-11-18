@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -109,6 +110,13 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
 
     @Override
     public void init() {
+        if (ApplicationUtil.getWallet()==null){
+            finish();
+            Intent intent = new Intent(getContext(), ChooseBottomLevelActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return;
+        }
         EventBus.getDefault().register(this);
         String address = getIntent().getStringExtra(IntentUtils.TRANSFER_ADDRESS);
         currentCoin = (Wallet) getIntent().getSerializableExtra(IntentUtils.ASSET);

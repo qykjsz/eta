@@ -12,9 +12,12 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.fragment.AssetFragment;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.LocalManageUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.senon.mvpretrofitrx.R;
@@ -73,12 +76,15 @@ public class SplashActivity extends BaseActivity {
         }
         LocalManageUtil.saveLocal(getActivity(), choose);
 
-
+        final Wallet wallet =  ApplicationUtil.getCurrentWallet();
         loadOneTimeGif(getContext(), R.mipmap.et, iv, new GifListener() {
             @Override
             public void gifPlayComplete() {
-                startActivity(MainActivity.class);
-
+                if (wallet ==null){
+                    startActivity(ChooseBottomLevelActivity.class);
+                }else {
+                   startActivity(MainActivity.class);
+                }
             }
         });
 //        Glide.with(this).load(R.mipmap.et).listener(new RequestListener() {

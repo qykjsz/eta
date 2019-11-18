@@ -88,7 +88,8 @@ public class NoticeDetailActivity extends BaseActivity<NoticContact.View,NoticCo
         tvTime.setText(noticeDetail.getTime());
         tvTitle1.setText(noticeDetail.getName());
 //        \URLEncoder.encode(data, "utf-8")
-        wb.loadData(noticeDetail.getText(), "text/html",  "utf-8");
+        wb.loadData(noticeDetail.getText(), "text/html;charset=UTF-8","UTF-8");
+//        wb.loadData(noticeDetail.getText(), "text/html",  "utf-8");
 
     }
 
