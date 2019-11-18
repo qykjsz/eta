@@ -265,7 +265,7 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
         private void setUi(final ViewHolder viewHolder, final Time.NewsBean item) {
             Glide.with(mContext).load(item.getImg()).into(viewHolder.ivBack);
             viewHolder.tvName.setText(item.getName());
-            viewHolder.tvTime.setText("来源：ET APP  " + item.getTime());
+            viewHolder.tvTime.setText(/*"来源：ET APP  " + */item.getTime());
         }
 
         public class ViewHolder extends SuperViewHolder {
