@@ -14,11 +14,13 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -54,6 +56,7 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import butterknife.BindView;
@@ -139,11 +142,18 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mAdapter.mSelectedPos = position;
-                mAdapter.notifyDataSetChanged();
+                set = mAdapter.getSet();
+                if (!set.contains(position) && mAdapter.getSet().size() < 10) {//如果没有选中就选中
+                    mAdapter.add(position);
+                } else {//如果选中了就取消选中
+                    mAdapter.remove(position);
+                }
+//                shuliang.setText(adpter001.getSet().size()+"/10");
             }
         });
     }
+
+    private HashSet<Integer> set;//保存多选状态下的变量
 
     @Override
     protected void loadMore() {
@@ -214,6 +224,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
                         mAdapter.addData(list);
                     }
                     currentPage++;
+
                 }
             }
 
@@ -238,14 +249,15 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
 
     public class NewFlashAdapter extends FatherAdapter<NewFlashData> {
         ViewHolder viewHolder;
-        public int mSelectedPos = -1;//smSelectedPos是用户选择条目的变量
+        private HashSet<Integer> set;//保存多选状态下的变量
 
         public NewFlashAdapter(Context ctx) {
             super(ctx);
+            set = new HashSet<>();
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.item_new_flash, parent, false);
                 new ViewHolder(convertView);
@@ -253,7 +265,6 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             viewHolder = (ViewHolder) convertView.getTag();
             final NewFlashData item = getItem(position);
             setUi(viewHolder, item, position);
-
             return convertView;
         }
 
@@ -262,32 +273,8 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             viewHolder.tv_title.setText(item.title);
             viewHolder.tv_content.setText(item.content);
             viewHolder.tv_source.setText("来源：" + item.source);
-            if (mSelectedPos == position) {
-                viewHolder.tv_content.setEllipsize(null);//展开
-                viewHolder.tv_content.setSingleLine(false);//这个方法是必须设置的，否则无法展开
-            } else {
-                viewHolder.tv_content.setEllipsize(TextUtils.TruncateAt.END);//收起
-                viewHolder.tv_content.setLines(4);
 
-            }
-//            viewHolder.tv_content.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    item.showDes = !item.showDes;
-//                    if (item.showDes) {
-//                        getData().get(position).setShowDes(true);
-//                        viewHolder.tv_content.setEllipsize(TextUtils.TruncateAt.END);//收起
-//                        viewHolder.tv_content.setLines(4);
-////                        tvShowMore.setText("展开");
-//                    } else {
-//                        getData().get(position).setShowDes(false);
-//                        viewHolder.tv_content.setEllipsize(null);//展开
-//                        viewHolder.tv_content.setSingleLine(false);//这个方法是必须设置的，否则无法展开
-////                        tvShowMore.setText("收起");
-//                    }
-//                }
-//            });
-            viewHolder.tv_see.setOnClickListener(new View.OnClickListener() {
+            viewHolder.iv_icon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
@@ -296,11 +283,41 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
                     startActivity(intent);
                 }
             });
-//            getLastIndexForLimit(viewHolder.tv_content,4,item.content);
-//            viewHolder.vertical_line.setLineAttribute(0xff0000ff,5,new float[]{10,2,5,5});
+            if (set.contains(position)) {
+                viewHolder.tv_content.setEllipsize(null);//展开
+                viewHolder.tv_content.setSingleLine(false);
+                viewHolder.tv_see.setVisibility(View.GONE);
+            } else {
+                viewHolder.tv_content.setEllipsize(TextUtils.TruncateAt.END);//收起
+                viewHolder.tv_content.setLines(4);
+                viewHolder.tv_see.setVisibility(View.VISIBLE);
+            }
+
         }
 
-        private boolean isShowDes;
+        //多选之添加
+        public void add(int position) {
+            set.add(position);
+            this.notifyDataSetChanged();
+        }
+
+        //多选之删除
+        public void remove(int position) {
+            set.remove(position);
+            this.notifyDataSetChanged();
+        }
+
+        //获取存储的set集合
+        public HashSet<Integer> getSet() {
+            return set;
+        }
+
+        //清空set集合
+        public void clear() {
+            set.clear();
+            this.notifyDataSetChanged();
+        }
+
 
         public class ViewHolder extends SuperViewHolder {
             public TextView tv_time;//时间
@@ -309,6 +326,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             public TextView tv_source;//来源
             public TextView tv_see;//查看
             public DottedLineView vertical_line;
+            public ImageView iv_icon;
 
             public ViewHolder(View view) {
                 super(view);
@@ -317,7 +335,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
                 tv_content = view.findViewById(R.id.tv_content);
                 tv_source = view.findViewById(R.id.tv_source);
                 tv_see = view.findViewById(R.id.tv_see);
-                tv_see = view.findViewById(R.id.tv_see);
+                iv_icon = view.findViewById(R.id.iv_icon);
                 vertical_line = view.findViewById(R.id.vertical_line);
             }
         }

@@ -1,250 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/MatchMatch.Vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/color_FFFFFF"
     android:orientation="vertical">
 
-   <!-- <RelativeLayout
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/dp_103"
+         android:background="@mipmap/zz_top_bg"
+         android:orientation="horizontal"
+         android:paddingTop="15dp">
+
+         <ImageView
+             android:id="@+id/btn_scan"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_marginTop="@dimen/dp_25"
+             android:layout_marginEnd="@dimen/dp_10"
+             android:src="@mipmap/sy_sao" />
+
+         <android.support.v7.widget.SearchView
+             android:id="@+id/serachview"
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/dp_31"
+             android:layout_marginStart="@dimen/dp_15"
+             android:layout_marginTop="@dimen/dp_20"
+             android:layout_marginEnd="@dimen/dp_10"
+             android:layout_toLeftOf="@+id/btn_scan"
+             android:background="@drawable/yuan"
+             app:iconifiedByDefault="false"
+             app:queryHint="搜索DApp或输入链接进入玩耍"
+             />
+     </RelativeLayout>
+
+
+
+     <LinearLayout
+         style="@style/MatchMatch.Vertical"
+         android:layout_marginTop="-18dp"
+         android:background="@drawable/bg_ffffff_top_round_25"
+         >-->
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_103"
-        android:background="@mipmap/zz_top_bg"
-        android:orientation="horizontal"
-        android:paddingTop="15dp">
-
-        <ImageView
-            android:id="@+id/btn_scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_25"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:src="@mipmap/sy_sao" />
-
-        <android.support.v7.widget.SearchView
-            android:id="@+id/serachview"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_31"
-            android:layout_marginStart="@dimen/dp_15"
-            android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:layout_toLeftOf="@+id/btn_scan"
-            android:background="@drawable/yuan"
-            app:iconifiedByDefault="false"
-            app:queryHint="搜索DApp或输入链接进入玩耍"
-            />
-    </RelativeLayout>
-
-
-
-    <LinearLayout
-        style="@style/MatchMatch.Vertical"
-        android:layout_marginTop="-18dp"
-        android:background="@drawable/bg_ffffff_top_round_25"
-        >-->
-
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       >
-
-       <RelativeLayout
-           android:id="@+id/rl"
-           android:layout_width="match_parent"
-           android:layout_height="120dp"
-           android:background="@mipmap/wo_top_bg">
-       <LinearLayout
-           android:id="@+id/ll"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="40dp"
-           android:orientation="horizontal"
-           android:gravity="center"
-           android:layout_marginLeft="15dp"
-           android:layout_marginRight="15dp">
-
-           <TextView
-               android:id="@+id/tv_search"
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:layout_height="35dp"
-               android:text="搜索DApp或输入链接进入玩耍"
-               android:drawableLeft="@mipmap/fx_spusuo"
-               android:drawablePadding="10dp"
-               android:textSize="14sp"
-               android:textColor="@color/white"
-               android:background="@drawable/bg_shap"
-               android:gravity="center|left"
-               android:paddingLeft="15dp"
-              />
-
-           <ImageView
-               android:id="@+id/iv_scan"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentRight="true"
-               android:background="@mipmap/sy_sao"
-               android:layout_marginLeft="15dp"/>
-       </LinearLayout>
-
-       <View
-           android:id="@+id/view"
-           android:layout_width="match_parent"
-           android:layout_height="30dp"
-           android:background="@drawable/bg_ffffff_top_round_25"
-           android:layout_marginTop="90dp"
-           />
-       </RelativeLayout>
-
-
-
-       <com.scwang.smartrefresh.layout.SmartRefreshLayout
-           android:id="@+id/srl"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:layout_below="@+id/rl"
-           >
-       <com.scwang.smartrefresh.layout.header.ClassicsHeader
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           app:srlAccentColor="#333333"
-           app:srlClassicsSpinnerStyle="Translate"
-           app:srlDrawableArrowSize="20dp"
-           app:srlDrawableMarginRight="20dp"
-           app:srlDrawableProgressSize="20dp"
-           app:srlDrawableSize="20dp"
-           app:srlEnableLastTime="true"
-           app:srlFinishDuration="500"
-           app:srlPrimaryColor="#FFF"
-           app:srlTextSizeTime="10dp"
-           app:srlTextSizeTitle="16sp"
-           app:srlTextTimeMarginTop="2dp"
-           />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        >
+        android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/rl"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-           >
+            android:layout_height="120dp"
+            android:background="@mipmap/wo_top_bg">
 
-            <cn.bingoogolapple.bgabanner.BGABanner
-                android:id="@+id/banner"
-                style="@style/BannerDefaultStyle"
-                android:background="@color/white"
-                app:banner_transitionEffect="defaultEffect"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                style="@style/WrapWrap"
-                android:text="我的DApp"
-                android:textColor="@color/color_FF333333"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
-
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/fx_01"
-                android:text="猎鱼达人"
-                android:textColor="@color/color_333333"
-                android:textSize="11sp"
-                android:drawablePadding="5dp"
-                android:gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/fa_02"
-                android:text="即可金服"
-                android:textColor="@color/color_333333"
-                android:textSize="11sp"
-                android:drawablePadding="5dp"
-                android:layout_marginLeft="27.5dp"/>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="15dp">
-
-            <TextView
-                style="@style/WrapWrap"
-                android:text="精选DApp"
-                android:textColor="@color/color_FF333333"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
-
-
-
-            <TextView
-                style="@style/WrapWrap"
-                android:layout_alignParentRight="true"
-                android:text="官方精选，不容错过"
-                android:textColor="#999999"
-                android:textSize="12sp"
-                android:layout_marginRight="15dp"
-                android:layout_centerInParent="true"
-                />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_recently_browse_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@color/white">
-
-            <HorizontalScrollView
-                android:id="@+id/container_browse"
+            <LinearLayout
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:scrollbars="none">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/ll_browse"
+                <TextView
+                    android:id="@+id/tv_search"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:showDividers="middle">
-                    <!--android:divider="@drawable/divider_h_ten"-->
+                    android:background="@drawable/bg_shap"
+                    android:drawableLeft="@mipmap/fx_spusuo"
+                    android:drawablePadding="10dp"
+                    android:gravity="center|left"
+                    android:paddingLeft="15dp"
+                    android:text="搜索DApp或输入链接进入玩耍"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
-                </LinearLayout>
-            </HorizontalScrollView>
+                <ImageView
+                    android:id="@+id/iv_scan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="@mipmap/sy_sao" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="90dp"
+                android:background="@drawable/bg_ffffff_top_round_25" />
         </RelativeLayout>
 
-    </LinearLayout>
-       </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-   </RelativeLayout>
-</LinearLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl"
+            android:background="@color/white">
+
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srlAccentColor="#333333"
+                app:srlClassicsSpinnerStyle="Translate"
+                app:srlDrawableArrowSize="20dp"
+                app:srlDrawableMarginRight="20dp"
+                app:srlDrawableProgressSize="20dp"
+                app:srlDrawableSize="20dp"
+                app:srlEnableLastTime="true"
+                app:srlFinishDuration="500"
+                app:srlPrimaryColor="#FFF"
+                app:srlTextSizeTime="10dp"
+                app:srlTextSizeTitle="16sp"
+                app:srlTextTimeMarginTop="2dp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp">
+
+                        <cn.bingoogolapple.bgabanner.BGABanner
+                            android:id="@+id/banner"
+                            style="@style/BannerDefaultStyle"
+                            android:background="@color/white"
+                            app:banner_transitionEffect="defaultEffect" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp">
+
+                        <TextView
+                            style="@style/WrapWrap"
+                            android:text="最近使用"
+                            android:textColor="@color/color_FF333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_buyu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="9dp"
+                            android:drawableTop="@mipmap/fx_01"
+                            android:gravity="center"
+                            android:text="猎鱼达人"
+                            android:textColor="@color/color_333333"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="22dp"
+                            android:drawablePadding="9dp"
+                            android:drawableTop="@mipmap/fa_02"
+                            android:text="即可金服"
+                            android:textColor="@color/color_333333"
+                            android:textSize="11sp" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_recently_browse_item"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white">
+
+                            <HorizontalScrollView
+                                android:id="@+id/container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:scrollbars="none">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_container"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal"
+                                    android:showDividers="middle">
+                                    <!--android:divider="@drawable/divider_h_ten"-->
+
+                                </LinearLayout>
+                            </HorizontalScrollView>
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="30dp">
+
+                        <TextView
+                            style="@style/WrapWrap"
+                            android:text="精选DApp"
+                            android:textColor="@color/color_FF333333"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            style="@style/WrapWrap"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="15dp"
+                            android:text="官方精选，不容错过"
+                            android:textColor="#999999"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <com.qingyun.mvpretrofitrx.mvp.view.GridViewMeasure
+                        android:id="@+id/gridView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:listSelector="@android:color/transparent"
+                        android:numColumns="5"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="10dp"
+                        android:verticalSpacing="15dp" />
+
+                    <!--        <RelativeLayout
+                                android:id="@+id/rl_recently_browse_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:background="@color/white"
+                                android:visibility="gone">
+
+                                <HorizontalScrollView
+                                    android:id="@+id/container_browse"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:scrollbars="none">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_browse"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal"
+                                        android:showDividers="middle">
+                                        &lt;!&ndash;android:divider="@drawable/divider_h_ten"&ndash;&gt;
+
+                                    </LinearLayout>
+                                </HorizontalScrollView>
+                            </RelativeLayout>-->
+
+
+                        <com.qingyun.mvpretrofitrx.mvp.view.TabScrollView
+                            android:id="@+id/tabscrollview"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:background="@color/white"></com.qingyun.mvpretrofitrx.mvp.view.TabScrollView>
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/viewpager"
+                            android:layout_width="match_parent"
+                            android:layout_height="500dp"
+                            >
+                        </android.support.v4.view.ViewPager>
+
+                    </LinearLayout>
+
+            </ScrollView>
+
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/back"
-        android:layout_margin="15dp"
+        android:padding="19dp"
         />
 
     <TextView
