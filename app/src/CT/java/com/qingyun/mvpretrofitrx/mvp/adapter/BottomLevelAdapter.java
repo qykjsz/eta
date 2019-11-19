@@ -47,6 +47,12 @@ public class BottomLevelAdapter extends BaseAdapter<CoinType, BottomLevelAdapter
         holder.tvName.setText(getList().get(position).getCoinType());
         holder.tvBottom.setText(getList().get(position).getName());
         holder.ivPic.setImageResource(getList().get(position).getResId());
+        if (position!=0){
+            holder.itemView.setEnabled(false);
+        }else {
+            holder.itemView.setEnabled(true);
+
+        }
 
     }
 

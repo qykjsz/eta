@@ -12,6 +12,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.qingyun.mvpretrofitrx.mvp.utils.JsOperation;
 import com.senon.mvpretrofitrx.R;
 
 
@@ -25,7 +26,6 @@ public class WebActivity extends Activity {
 
     private WebView webView;
     private String linkUrl;//链接地址
-
 
 
     @Override
@@ -53,7 +53,7 @@ public class WebActivity extends Activity {
         webView.getSettings().setDomStorageEnabled(true);
         // 开启 Application Caches 功能
         webView.getSettings().setAppCacheEnabled(true);
-
+        webView.addJavascriptInterface(new JsOperation(WebActivity.this, webView), "client");//设置js调用的java类
 
 //        webView.setWebChromeClient(new MyWebChromeClient());
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开

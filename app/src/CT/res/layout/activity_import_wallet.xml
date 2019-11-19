@@ -121,12 +121,12 @@
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_70"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:background="@mipmap/sy_yykuang_02"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
+                android:background="@mipmap/sy_zc_dk"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_private_key">
+                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_keystore">
 
 
                 <ImageView
@@ -143,8 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/obser_wallet"
                     android:layout_marginTop="@dimen/dp_2"
+                    android:text="@string/obser_wallet"
 
                     app:layout_constraintStart_toEndOf="@+id/imageView151"
                     app:layout_constraintTop_toTopOf="@+id/imageView151" />
@@ -153,9 +153,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_2"
                     android:text="@string/obser_wallet_tips"
                     android:textColor="@color/color_text_2"
-                    android:layout_marginBottom="@dimen/dp_2"
 
                     android:textSize="@dimen/sp_10"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView151"
@@ -178,7 +178,7 @@
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_70"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:background="@mipmap/sy_yykuang_02"
+                android:background="@mipmap/sy_zc_dk"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -289,14 +289,15 @@
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/btn_import_by_comm"
                 android:layout_width="@dimen/dp_0"
+                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_private_key"
                 android:layout_height="@dimen/dp_70"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:background="@mipmap/sy_yykuang_02"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
+                android:background="@mipmap/sy_yykuang_02"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_cool_wallet">
+                tools:layout_editor_absoluteY="429dp">
 
 
                 <ImageView
@@ -313,8 +314,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/import_comm"
                     android:layout_marginTop="@dimen/dp_2"
+                    android:text="@string/import_comm"
 
                     app:layout_constraintStart_toEndOf="@+id/imageView154"
                     app:layout_constraintTop_toTopOf="@+id/imageView154" />
@@ -322,11 +323,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginStart="24dp"
                     android:text="@string/import_comm_tips"
                     android:textColor="@color/color_text_2"
                     android:textSize="@dimen/sp_10"
-                    android:layout_marginBottom="@dimen/dp_2"
 
                     app:layout_constraintBottom_toBottomOf="@+id/imageView154"
                     app:layout_constraintStart_toEndOf="@+id/imageView154" />

@@ -232,7 +232,6 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         if (ApplicationUtil.getCurrentWallet() != null)
             getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
 
-
         tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
         if (ApplicationUtil.getCurrentWallet().getStatus()==Wallet.STATUS_NO_MAKE_COPY) {
             DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.cancel, R.string.beifen, new View.OnClickListener() {

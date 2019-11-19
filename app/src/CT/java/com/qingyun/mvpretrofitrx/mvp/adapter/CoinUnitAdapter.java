@@ -32,19 +32,24 @@ public class CoinUnitAdapter extends BaseAdapter<CoinUnit, CoinUnitAdapter.CoinU
 
     @Override
     protected void onItemReset(CoinUnitViewHolder holder) {
-        holder.tvName.setTextColor(getContext().getResources().getColor(R.color.color_main_text));
-        holder.ivVisiable.setVisibility(View.GONE);
+
     }
 
     @Override
     protected void onItemSelect(CoinUnitViewHolder holder) {
-        holder.tvName.setTextColor(getContext().getResources().getColor(R.color.main_blue));
-        holder.ivVisiable.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     protected void viewHolderBind(CoinUnitViewHolder holder, int position) {
         holder.tvName.setText(getList().get(position).getName());
+        if (position==0){
+            holder.tvName.setTextColor(getContext().getResources().getColor(R.color.main_blue));
+            holder.ivVisiable.setVisibility(View.VISIBLE);
+        }else {
+            holder.tvName.setTextColor(getContext().getResources().getColor(R.color.color_main_text));
+            holder.ivVisiable.setVisibility(View.GONE);
+        }
 
     }
 

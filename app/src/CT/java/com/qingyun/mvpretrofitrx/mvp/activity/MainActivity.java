@@ -92,12 +92,12 @@ public class MainActivity extends BaseActivity {
         setRootViewFitsSystemWindows(this, false);
         initNavigation();
         fragments = new ArrayList<>();
-        if (ApplicationUtil.getCurrentWallet()==null){
-            fragments.add(new ChooseBottomLevelFragment());
+//        if (ApplicationUtil.getCurrentWallet()==null){
+//            fragments.add(new ChooseBottomLevelFragment());
 
-        }else {
+//        }else {
             fragments.add(new AssetFragment());
-        }
+//        }
         fragments.add(new InformationFragment());
         fragments.add(new FindFragment());
         fragments.add(new ChatFragment());

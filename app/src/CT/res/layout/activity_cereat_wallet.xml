@@ -123,111 +123,6 @@
             </android.support.constraint.ConstraintLayout>
 
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/btn_create_wallet"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="@dimen/dp_70"
-                android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:background="@mipmap/sy_yykuang_02"
-                android:layout_marginEnd="@dimen/dp_padding_x_min"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_private_key">
-
-
-                <ImageView
-                    android:id="@+id/imageView151"
-                    android:layout_width="@dimen/dp_44"
-                    android:layout_height="@dimen/dp_44"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:src="@mipmap/cj_fc_02"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/obser_wallet"
-                    app:layout_constraintStart_toEndOf="@+id/imageView151"
-                    app:layout_constraintTop_toTopOf="@+id/imageView151" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/obser_wallet_tips"
-                    android:textColor="@color/color_text_2"
-                    android:textSize="@dimen/sp_10"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView151"
-                    app:layout_constraintStart_toEndOf="@+id/imageView151" />
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_padding_x_min"
-                    android:src="@mipmap/wd_gd_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/btn_visi_model"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="@dimen/dp_70"
-                android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:background="@mipmap/sy_yykuang_02"
-                android:layout_marginEnd="@dimen/dp_padding_x_min"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_create_wallet">
-
-
-                <ImageView
-                    android:id="@+id/imageView152"
-                    android:layout_width="@dimen/dp_44"
-                    android:layout_height="@dimen/dp_44"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:src="@mipmap/cj_lqb_03"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/static_wallet"
-                    app:layout_constraintStart_toEndOf="@+id/imageView152"
-                    app:layout_constraintTop_toTopOf="@+id/imageView152" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/static_wallet_tips"
-                    android:textColor="@color/color_text_2"
-                    android:textSize="@dimen/sp_10"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView152"
-                    app:layout_constraintStart_toEndOf="@+id/imageView152" />
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_padding_x_min"
-                    android:src="@mipmap/wd_gd_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
-
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/btn_import_by_keystore"
@@ -287,12 +182,12 @@
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_70"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:background="@mipmap/sy_yykuang_02"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
+                android:background="@mipmap/sy_yykuang_02"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_visi_model">
+                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_private_key">
 
 
                 <ImageView
@@ -334,16 +229,124 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/btn_create_wallet"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_70"
+                android:layout_marginStart="@dimen/dp_padding_x_min"
+                android:background="@mipmap/sy_zc_dk"
+                android:layout_marginEnd="@dimen/dp_padding_x_min"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_keystore">
+
+
+                <ImageView
+                    android:id="@+id/imageView151"
+                    android:layout_width="@dimen/dp_44"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:src="@mipmap/cj_fc_02"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/obser_wallet"
+                    app:layout_constraintStart_toEndOf="@+id/imageView151"
+                    app:layout_constraintTop_toTopOf="@+id/imageView151" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/obser_wallet_tips"
+                    android:textColor="@color/color_text_2"
+                    android:textSize="@dimen/sp_10"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView151"
+                    app:layout_constraintStart_toEndOf="@+id/imageView151" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    android:src="@mipmap/wd_gd_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/btn_visi_model"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_70"
+                android:layout_marginStart="@dimen/dp_padding_x_min"
+                android:background="@mipmap/sy_zc_dk"
+                android:layout_marginEnd="@dimen/dp_padding_x_min"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_create_wallet">
+
+
+                <ImageView
+                    android:id="@+id/imageView152"
+                    android:layout_width="@dimen/dp_44"
+                    android:layout_height="@dimen/dp_44"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:src="@mipmap/cj_lqb_03"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/static_wallet"
+                    app:layout_constraintStart_toEndOf="@+id/imageView152"
+                    app:layout_constraintTop_toTopOf="@+id/imageView152" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/static_wallet_tips"
+                    android:textColor="@color/color_text_2"
+                    android:textSize="@dimen/sp_10"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView152"
+                    app:layout_constraintStart_toEndOf="@+id/imageView152" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    android:src="@mipmap/wd_gd_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+
             <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
                 android:id="@+id/textView83"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:layout_marginTop="@dimen/dp_25"
+                android:layout_marginTop="@dimen/dp_30"
                 android:text="@string/create_wallet"
                 android:textSize="@dimen/sp_18"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_keystore" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_visi_model" />
 
 
 

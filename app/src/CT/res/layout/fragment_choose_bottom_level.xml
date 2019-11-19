@@ -253,10 +253,9 @@
                 android:id="@+id/btn_visi_model"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_70"
-
                 android:layout_marginBottom="@dimen/dp_20"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:background="@mipmap/sy_yykuang_02"
+                android:background="@mipmap/sy_zc_dk"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

@@ -46,7 +46,9 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyCommemorationActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ConfirmCommemorationActivity" />
-        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TransferImmediateActivity" />
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TransferImmediateActivity"
+            android:exported="true"
+            />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ContactActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AddNewContactActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity" />
@@ -86,6 +88,7 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ScanQrCodeActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.SearchActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.WebActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLevelActivity"/>
     </application>
 
 </manifest>

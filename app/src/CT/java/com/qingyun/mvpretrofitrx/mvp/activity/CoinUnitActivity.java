@@ -65,13 +65,13 @@ public class CoinUnitActivity extends BaseActivity {
     @Override
     public void init() {
         list = new ArrayList<>();
-        list.add(new CoinUnit("AUD"));
+        list.add(new CoinUnit("USD"));
         list.add(new CoinUnit("CNY"));
         list.add(new CoinUnit("EOS"));
         list.add(new CoinUnit("EUR"));
         list.add(new CoinUnit("GBP"));
         list.add(new CoinUnit("MYR"));
-        list.add(new CoinUnit("USD"));
+        list.add(new CoinUnit("ADU"));
 
         coinUnitAdapter = new CoinUnitAdapter(getContext(), list);
         coinUnitAdapter.setDefaultSelectItem(0);
