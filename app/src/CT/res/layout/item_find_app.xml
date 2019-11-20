@@ -10,13 +10,20 @@
         android:layout_marginLeft="20dp"
         >
 
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@mipmap/fx_logo_k">
 
-    <ImageView
-        android:id="@+id/iv_image"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_gravity="center"
-        android:scaleType="center"/>
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:scaleType="center"/>
+        </RelativeLayout>
+
 
     <TextView
         android:id="@+id/tv_name"

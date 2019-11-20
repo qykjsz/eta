@@ -13,8 +13,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -62,6 +64,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.RecentlyAppData;
 import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
 import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.utils.GlideRoundTransform;
+import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.qingyun.mvpretrofitrx.mvp.view.TabScrollView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
@@ -100,7 +103,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     GridView gridView;
     @BindView(R.id.banner)
     //轮播图
-            BGABanner mCubeBanner;
+    BGABanner mCubeBanner;
     //Banner轮播图的List
     private List<String> bannerList;
     private FindGridViewAdapter mAdapter;
@@ -131,24 +134,9 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     EasyPermissions.requestPermissions(getActivity(), "请开起相机权限，以正常使用", PERMISSIONS_CAMERA, perms);
                 }
                 break;
-//            case R.id.ll_buyu:
-//                if (checkPackInfo("com.example.et")) {//程序已安装
-//                    Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
-//                    if (intent != null) {
-////            intent.putExtra("type", "110");//传递数据
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        mContext.startActivity(intent);
-//                    }
-//                } else {//未安装 跳转下载地址
-//                    Intent intent = new Intent();
-//                    intent.setAction("android.intent.action.VIEW");
-//                    Uri content_url = Uri.parse("http://www.baidu.com");
-//                    intent.setData(content_url);
-//                    mContext.startActivity(intent);
-//                }
-//                break;
         }
     }
+
 
     /**
      * 检查包是否存在
@@ -193,7 +181,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         requestBannerImage();
         request();
         requestGameList();
-        requestGetRecentlyApp();
+        getUuid();
         mCubeBanner.setAdapter(new BGABanner.Adapter<ImageView, String>() {
             @Override
             public void fillBannerItem(BGABanner banner, ImageView itemView, String model, int position) {
@@ -217,7 +205,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 request();
                 requestBannerImage();
                 requestGameList();
-                requestGetRecentlyApp();
+                getUuid();
             }
         });
         mSmartRefreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
@@ -240,7 +228,15 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 EventBus.getDefault().postSticky(new MessageEvent(index, ""));
             }
         });
-
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                requestGetUUid(mAdapter.getData().get(position).id);
+                Intent intent = new Intent(mContext, WebActivity.class);
+                intent.putExtra("url", mAdapter.getData().get(position).getUrl());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
 
@@ -259,10 +255,27 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         return null;
     }
 
-//    @OnClick(R.id.btn_scan)
-//    public void onViewClicked() {
-//         startActivity(ScanActivity.class);
-//    }
+    private void requestGetUUid(String id) {
+        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appnew");
+        params.addBodyParameter("appid", id);
+        params.addBodyParameter("contacts", uuId);
+        x.http().post(params, new XCallBack() {
+            @Override
+            public void onAfterFinished() {
+
+            }
+
+            @Override
+            public void onAfterSuccessOk(JSONObject object) {
+
+            }
+
+            @Override
+            public void onAfterSuccessErr(JSONObject object, String msg) {
+
+            }
+        });
+    }
 
     /**
      * 轮播图请求以及设置
@@ -307,8 +320,9 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         });
     }
 
+
     /**
-     * GridView 请求
+     * 精选DAPP
      */
     private void request() {
         RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_app");
@@ -322,8 +336,8 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
             public void onAfterSuccessOk(JSONObject object) {
                 JSONArray array = object.getJSONArray("data");
                 if (array.size() > 0) {
-                    List<DApp> list = JSON.parseArray(array.toJSONString(), DApp.class);
-                    mAdapter.setDatas(list);
+                    List<DApp> dAppList = JSON.parseArray(array.toJSONString(), DApp.class);
+                    mAdapter.setDatas(dAppList);
                 }
             }
 
@@ -347,6 +361,9 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 
     }
 
+    /**
+     * 游戏分类
+     */
     private List<Fragment> fragments;
     int position = 0; //地标
     private FindFragmentPageAdapter findFragmentPageAdapter;
@@ -359,9 +376,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     TextView tab;
     View tabs[];
 
-    /**
-     * 游戏分类
-     */
+
     private void requestGameList() {
         RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appantype");
         x.http().post(params, new XCallBack() {
@@ -416,12 +431,24 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     @Override
     public void onResume() {
         super.onResume();
-        requestGetRecentlyApp();
+        getUuid();
+    }
+    String uuId;
+    //获取设备号
+    private void getUuid() {
+        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+            @Override
+            public void requestSuccess(String uuid) {
+                uuId = uuid;
+                requestGetRecentlyApp(uuid);
+            }
+        });
     }
 
-    private void requestGetRecentlyApp() {
+    //最近使用
+    private void requestGetRecentlyApp(String uuid) {
         RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appnews");
-        params.addBodyParameter("contacts", getSerialNumber());
+        params.addBodyParameter("contacts", uuid);
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
@@ -444,6 +471,9 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         });
     }
 
+    /**
+     * 最近使用
+     */
     private List<RecentlyAppData> recentlyAppDataList;
     @BindView(R.id.container)
     View mAppItem;
@@ -491,7 +521,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                                 if (checkPackInfo("com.example.et")) {//程序已安装
                                     Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
                                     if (intent != null) {
-                    //            intent.putExtra("data", "");//传递数据
+                                        //            intent.putExtra("data", "");//传递数据
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         mContext.startActivity(intent);
                                     }
@@ -518,25 +548,5 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 }
             }
         }
-    }
-
-    @SuppressLint({"NewApi", "MissingPermission"})
-    public String getSerialNumber() {
-        String serial = "";
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {//9.0+
-                serial = Build.getSerial();
-            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {//8.0+
-                serial = Build.SERIAL;
-            } else {//8.0-
-                Class<?> c = Class.forName("android.os.SystemProperties");
-                Method get = c.getMethod("get", String.class);
-                serial = (String) get.invoke(c, "ro.serialno");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("post", "读取设备序列号异常：" + e.toString());
-        }
-        return serial;
     }
 }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@mipmap/kxfx_bg1">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/kxfx_kx1"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="15dp"
+            android:textSize="11sp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_000000"
+        android:textSize="14sp"
+        android:layout_marginTop="21dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_999999"
+        android:textSize="11sp"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        />
+    <TextView
+        android:id="@+id/tv_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#98AFD7"
+        android:textSize="11sp"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="27dp"
+        android:text="来源"
+        android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            
+            <ImageView
+                android:id="@+id/iv_qr_code"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分享来自Etoken"
+                android:textSize="12sp"
+                android:textColor="#1758FB"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您的通用数字钱包"
+                android:textSize="12sp"
+                android:textColor="#1758FB"
+                android:layout_marginTop="8dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/kxfx_di"
+        />
+    </LinearLayout>
+</RelativeLayout>

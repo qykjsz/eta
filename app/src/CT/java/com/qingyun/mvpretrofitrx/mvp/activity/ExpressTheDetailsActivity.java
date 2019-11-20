@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -11,6 +12,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewFlashData;
 import com.qingyun.mvpretrofitrx.mvp.entity.News;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ZXingUtils;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
@@ -23,6 +25,10 @@ public class ExpressTheDetailsActivity extends BaseActivity {
     TextView tvTitle1;
     @BindView(R.id.tv_content)
     TextView tvContent;
+    @BindView(R.id.tv_source)
+    TextView tv_source;
+    @BindView(R.id.iv_qr_code)
+    ImageView iv_qr_code;
     private NewFlashData news;
 
     @Override
@@ -48,7 +54,8 @@ public class ExpressTheDetailsActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_express_the_details;
+//        return R.layout.activity_express_the_details;
+        return R.layout.layout_express_details;
     }
 
     @Override
@@ -69,6 +76,8 @@ public class ExpressTheDetailsActivity extends BaseActivity {
             tvTime.setText(TimeUtils.getTime(news.time, TimeUtils.DEL_FORMAT_DATE_mm));
             tvTitle1.setText(news.title);
             tvContent.setText(news.content);
+            tv_source.setText("来源："+news.source);
+            iv_qr_code.setImageBitmap(ZXingUtils.createQRImage(news.url,700,700));
 
         }
 

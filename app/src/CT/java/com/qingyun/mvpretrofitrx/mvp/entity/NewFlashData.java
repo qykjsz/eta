@@ -11,7 +11,7 @@ public class NewFlashData {
     public long time;//时间
     public String source;//来源
     public boolean showDes;
-
+    public String url;//二维码地址
     public boolean isShowDes() {
         return showDes;
     }
