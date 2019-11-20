@@ -159,38 +159,19 @@
 
                     </RelativeLayout>
 
-                    <LinearLayout
+                   <!-- <LinearLayout
                         android:id="@+id/ll_buyu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawablePadding="9dp"
-                            android:drawableTop="@mipmap/fx_01"
-                            android:gravity="center"
-                            android:text="猎鱼达人"
-                            android:textColor="@color/color_333333"
-                            android:textSize="11sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="22dp"
-                            android:drawablePadding="9dp"
-                            android:drawableTop="@mipmap/fa_02"
-                            android:text="即可金服"
-                            android:textColor="@color/color_333333"
-                            android:textSize="11sp" />
+                        android:orientation="horizontal">-->
 
                         <RelativeLayout
                             android:id="@+id/rl_recently_browse_item"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/white">
+                            android:background="@color/white"
+                            android:layout_marginTop="15dp">
 
                             <HorizontalScrollView
                                 android:id="@+id/container"
@@ -214,9 +195,7 @@
 
 
                         </RelativeLayout>
-
-
-                    </LinearLayout>
+                  <!--  </LinearLayout>-->
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -249,11 +228,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@color/white"
-                        android:gravity="center"
                         android:listSelector="@android:color/transparent"
                         android:numColumns="5"
                         android:paddingBottom="20dp"
-                        android:paddingLeft="15dp"
+                        android:paddingLeft="20dp"
                         android:paddingRight="15dp"
                         android:paddingTop="10dp"
                         android:verticalSpacing="15dp" />

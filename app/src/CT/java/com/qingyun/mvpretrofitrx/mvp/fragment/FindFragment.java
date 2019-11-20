@@ -94,7 +94,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     @BindView(R.id.srl)
     RefreshLayout mSmartRefreshLayout;
     List<DApp> dApps;
-//    @BindView(R.id.container_browse)
+    //    @BindView(R.id.container_browse)
 //    View mBrowse;
     @BindView(R.id.gridView)
     GridView gridView;
@@ -115,7 +115,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 
     private static final int PERMISSIONS_CAMERA = 2;
 
-    @OnClick({R.id.tv_search, R.id.iv_scan, R.id.ll_buyu})
+    @OnClick({R.id.tv_search, R.id.iv_scan})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_search:
@@ -131,22 +131,22 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     EasyPermissions.requestPermissions(getActivity(), "请开起相机权限，以正常使用", PERMISSIONS_CAMERA, perms);
                 }
                 break;
-            case R.id.ll_buyu:
-                if (checkPackInfo("com.example.et")) {//程序已安装
-                    Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
-                    if (intent != null) {
-//            intent.putExtra("type", "110");//传递数据
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
-                    }
-                } else {//未安装 跳转下载地址
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse("http://www.baidu.com");
-                    intent.setData(content_url);
-                    mContext.startActivity(intent);
-                }
-                break;
+//            case R.id.ll_buyu:
+//                if (checkPackInfo("com.example.et")) {//程序已安装
+//                    Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
+//                    if (intent != null) {
+////            intent.putExtra("type", "110");//传递数据
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        mContext.startActivity(intent);
+//                    }
+//                } else {//未安装 跳转下载地址
+//                    Intent intent = new Intent();
+//                    intent.setAction("android.intent.action.VIEW");
+//                    Uri content_url = Uri.parse("http://www.baidu.com");
+//                    intent.setData(content_url);
+//                    mContext.startActivity(intent);
+//                }
+//                break;
         }
     }
 
@@ -229,15 +229,15 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
             public void onItemSelect(int index, View itemView) {
 //                FindViewPageFragment.setData(index);
                 //动态设置字体大小
-                for(int i = 0; i < tabs.length; i++){
-                    if(i == index){
-                        ((TextView)tabs[i]).setTextSize(16);
-                    }else{
-                        ((TextView)tabs[i]).setTextSize(13);
+                for (int i = 0; i < tabs.length; i++) {
+                    if (i == index) {
+                        ((TextView) tabs[i]).setTextSize(16);
+                    } else {
+                        ((TextView) tabs[i]).setTextSize(13);
 
                     }
                 }
-                EventBus.getDefault().postSticky(new MessageEvent(index,""));
+                EventBus.getDefault().postSticky(new MessageEvent(index, ""));
             }
         });
 
@@ -358,6 +358,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     public static List<JSONArray> list;
     TextView tab;
     View tabs[];
+
     /**
      * 游戏分类
      */
@@ -388,9 +389,9 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                         tabs[i] = tab;
                         position++;
                         JSONArray apps = obj.getJSONArray("apps");
-                        if(apps.size() > 0){
+                        if (apps.size() > 0) {
                             list.add(apps);
-                        }else{
+                        } else {
                             list.add(null);
                         }
 
@@ -418,9 +419,9 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         requestGetRecentlyApp();
     }
 
-    private void requestGetRecentlyApp(){
-        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl()+"et_appnews");
-        params.addBodyParameter("contacts",getSerialNumber());
+    private void requestGetRecentlyApp() {
+        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appnews");
+        params.addBodyParameter("contacts", getSerialNumber());
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
@@ -443,9 +444,10 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         });
     }
 
-   private List<RecentlyAppData> recentlyAppDataList;
+    private List<RecentlyAppData> recentlyAppDataList;
     @BindView(R.id.container)
     View mAppItem;
+
     private List<RecentlyAppData> parseRecentlyAppData(JSONArray userList) {
         recentlyAppDataList = new ArrayList<>();
         if (userList.size() > 0) {
@@ -480,14 +482,36 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     RequestOptions requestOptions = new RequestOptions();
 //        requestOptions.placeholder(R.mipmap.app_icon);
                     requestOptions.circleCropTransform();
-                    requestOptions.transforms( new RoundedCorners(20));
+                    requestOptions.transforms(new RoundedCorners(20));
                     Glide.with(mContext).load(data.getImg()).apply(requestOptions).into(image);
                     image.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(mContext,WebActivity.class);
-                            intent.putExtra("url",data.getUrl());
-                            mContext.startActivity(intent);
+                            if (data.getId().equals("1")) {//跳转ETAPP
+                                if (checkPackInfo("com.example.et")) {//程序已安装
+                                    Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
+                                    if (intent != null) {
+                    //            intent.putExtra("data", "");//传递数据
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        mContext.startActivity(intent);
+                                    }
+                                } else {//未安装 跳转下载地址
+                                    Intent intent = new Intent();
+                                    intent.setAction("android.intent.action.VIEW");
+                                    Uri content_url = Uri.parse("http://www.baidu.com");
+                                    intent.setData(content_url);
+                                    mContext.startActivity(intent);
+                                }
+                            } else if (data.getId().equals("2")) {//跳转指定H5
+                                Intent intent = new Intent(mContext, WebActivity.class);
+                                intent.putExtra("url", "https://ceshi.etac.io/dist");
+                                mContext.startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(mContext, WebActivity.class);
+                                intent.putExtra("url", data.getUrl());
+                                mContext.startActivity(intent);
+                            }
+
                         }
                     });
                     ll_products.addView(view);
