@@ -418,7 +418,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 mTabScrollView.setOnPageChangeListener(findFragmentPageAdapter);//绑定Adapter
                 mViewPager.setCurrentItem(module);//绑定模式
                 mTabScrollView.outerClickForMove(module);//手动
-//                mTabScrollView.setWrapContentViewPagerUnable(mViewPager);
+                mTabScrollView.setWrapContentViewPagerUnable(mViewPager);
             }
 
             @Override
