@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -11,11 +12,13 @@ import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewFlashData;
 import com.qingyun.mvpretrofitrx.mvp.entity.News;
+import com.qingyun.mvpretrofitrx.mvp.utils.SaveImgUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZXingUtils;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class ExpressTheDetailsActivity extends BaseActivity {
 
@@ -29,6 +32,8 @@ public class ExpressTheDetailsActivity extends BaseActivity {
     TextView tv_source;
     @BindView(R.id.iv_qr_code)
     ImageView iv_qr_code;
+    @BindView(R.id.rl)
+    RelativeLayout rl;
     private NewFlashData news;
 
     @Override
@@ -80,6 +85,10 @@ public class ExpressTheDetailsActivity extends BaseActivity {
             iv_qr_code.setImageBitmap(ZXingUtils.createQRImage(news.url,700,700));
 
         }
-
+    }
+    @OnClick({R.id.tv_save_image})
+    public void onViewClicked() {
+        SaveImgUtil savePhoto = new SaveImgUtil(ExpressTheDetailsActivity.this);
+        savePhoto.SaveBitmapFromView(rl);
     }
 }
