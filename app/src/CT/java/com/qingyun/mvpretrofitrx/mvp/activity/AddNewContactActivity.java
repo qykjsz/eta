@@ -89,7 +89,13 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
-                getPresenter().addContacts(SystemUtil.getMyUUID(),etName.getText().toString(),etRemark.getText().toString(),tvBottom.getText().toString(),etAddress.getText().toString());
+                SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+                    @Override
+                    public void requestSuccess(String uuid) {
+                        getPresenter().addContacts(uuid,etName.getText().toString(),etRemark.getText().toString(),tvBottom.getText().toString(),etAddress.getText().toString());
+
+                    }
+                });
                 break;
             case R.id.tv_bottom:
 //                getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());

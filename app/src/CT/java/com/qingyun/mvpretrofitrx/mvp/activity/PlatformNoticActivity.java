@@ -80,8 +80,13 @@ public class PlatformNoticActivity extends BaseActivity<NoticContact.View,NoticC
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.addItemDecoration(DividerHelper.getMyDivider(getContext()));
         rcy.setAdapter(platformNoticAdapter);
+        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+            @Override
+            public void requestSuccess(String uuid) {
+                getPresenter().getNoticeList(page,uuid);
 
-        getPresenter().getNoticeList(page, SystemUtil.getMyUUID());
+            }
+        });
     }
 
     @Override

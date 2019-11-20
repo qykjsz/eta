@@ -61,14 +61,14 @@ public class ChooseBottomLsvelActivity extends BaseActivity {
     @Override
     public void init() {
         list = new ArrayList<>();
-        list.add(new CoinType(R.mipmap.dc_eth,0,CoinType.ETH,getResources().getString(R.string.bottom_name_eth)));
-        list.add(new CoinType(R.mipmap.dc_eos,0,CoinType.EOS,getResources().getString(R.string.bottom_name_eos)));
-        list.add(new CoinType(R.mipmap.dc_iost,0,CoinType.IOST,getResources().getString(R.string.bottom_name_iost)));
-        list.add(new CoinType(R.mipmap.dc_tron,0,CoinType.Tron,getResources().getString(R.string.bottom_name_tron)));
-        list.add(new CoinType(R.mipmap.dc_binance,0,CoinType.BINANCE,getResources().getString(R.string.bottom_name_binance)));
-        list.add(new CoinType(R.mipmap.dc_bos,0,CoinType.BOS,getResources().getString(R.string.bottom_name_bos)));
-        list.add(new CoinType(R.mipmap.dc_cosmos,0,CoinType.COSMOS,getResources().getString(R.string.bottom_name_cosmos)));
-        list.add(new CoinType(R.mipmap.dc_mk,0,CoinType.MOAC,getResources().getString(R.string.bottom_name_mk)));
+        list.add(new CoinType(R.mipmap.qbgl_eth_xz,0,CoinType.ETH,getResources().getString(R.string.bottom_name_eth)));
+        list.add(new CoinType(R.mipmap.qbgl_eos_xz,0,CoinType.EOS,getResources().getString(R.string.bottom_name_eos)));
+        list.add(new CoinType(R.mipmap.qbgl_iost_xz,0,CoinType.IOST,getResources().getString(R.string.bottom_name_iost)));
+        list.add(new CoinType(R.mipmap.qbgl_tron_xz,0,CoinType.Tron,getResources().getString(R.string.bottom_name_tron)));
+        list.add(new CoinType(R.mipmap.qbgl_binance_xz,0,CoinType.BINANCE,getResources().getString(R.string.bottom_name_binance)));
+        list.add(new CoinType(R.mipmap.qbgl_bos_xz,0,CoinType.BOS,getResources().getString(R.string.bottom_name_bos)));
+        list.add(new CoinType(R.mipmap.qbgl_cosmos_xz,0,CoinType.COSMOS,getResources().getString(R.string.bottom_name_cosmos)));
+        list.add(new CoinType(R.mipmap.qbgl_moac_xz,0,CoinType.MOAC,getResources().getString(R.string.bottom_name_mk)));
 
 
         bottomLevelAdapterp = new BottomLevelAdapter(getContext(),list);

@@ -68,7 +68,12 @@ public class NoticeDetailActivity extends BaseActivity<NoticContact.View,NoticCo
     @Override
     public void init() {
         id = getIntent().getIntExtra(IntentUtils.NEW_ID,0);
-        getPresenter().getNoticeDetail(id, SystemUtil.getMyUUID());
+        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+            @Override
+            public void requestSuccess(String uuid) {
+                getPresenter().getNoticeDetail(id, uuid);
+            }
+        });
     }
 
     @Override
