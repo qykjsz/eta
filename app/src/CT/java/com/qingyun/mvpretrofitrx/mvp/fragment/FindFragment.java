@@ -225,6 +225,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 
                     }
                 }
+                //数据传递
                 EventBus.getDefault().postSticky(new MessageEvent(index, ""));
             }
         });
@@ -409,7 +410,6 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                         } else {
                             list.add(null);
                         }
-
                     }
                 }
                 findFragmentPageAdapter = new FindFragmentPageAdapter(mContext, tabs, fragments, getChildFragmentManager(), mViewPager, module);
@@ -418,7 +418,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 mTabScrollView.setOnPageChangeListener(findFragmentPageAdapter);//绑定Adapter
                 mViewPager.setCurrentItem(module);//绑定模式
                 mTabScrollView.outerClickForMove(module);//手动
-                mTabScrollView.setWrapContentViewPagerUnable(mViewPager);
+//                mTabScrollView.setWrapContentViewPagerUnable(mViewPager);
             }
 
             @Override
@@ -534,7 +534,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                                 }
                             } else if (data.getId().equals("2")) {//跳转指定H5
                                 Intent intent = new Intent(mContext, WebActivity.class);
-                                intent.putExtra("url", "https://ceshi.etac.io/dist");
+                                intent.putExtra("url", "https://ceshi.etac.io/dist/?"+uuId);
                                 mContext.startActivity(intent);
                             } else {
                                 Intent intent = new Intent(mContext, WebActivity.class);

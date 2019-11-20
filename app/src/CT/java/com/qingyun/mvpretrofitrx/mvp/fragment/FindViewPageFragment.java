@@ -89,20 +89,30 @@ public class FindViewPageFragment extends BaseFragment {
         return R.layout.fragment_find_viewpage;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    int index;
+    @Subscribe(sticky = true)
     public void getEventBusMsg(MessageEvent event) {
+        index = event.getId();
         JSONArray jsonArray = new JSONArray(FindFragment.list.get(event.getId()));
         gameData = JSON.parseArray(jsonArray.toJSONString(), GameData.class);
         if(gameData != null && gameData.size() > 0){
             mAdapter.setDatas(gameData);
+            mAdapter.notifyDataSetChanged();
         }else{
             mAdapter.clear();
         }
     }
 
-
+    /**解决点击0坐标与最后坐标错位问题*/
     public void doRefresh() {
-
+        JSONArray jsonArray = new JSONArray(FindFragment.list.get(index));
+        gameData = JSON.parseArray(jsonArray.toJSONString(), GameData.class);
+        if(gameData != null && gameData.size() > 0){
+            mAdapter.setDatas(gameData);
+            mAdapter.notifyDataSetChanged();
+        }else{
+            mAdapter.clear();
+        }
     }
 
 
@@ -138,45 +148,45 @@ public class FindViewPageFragment extends BaseFragment {
     protected String getTitleText() {
         return null;
     }
-
-    JSONArray jsonArray;
-    /**
-     * 游戏分类
-     */
-    private void requestGameList() {
-        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appantype");
-        x.http().post(params, new XCallBack() {
-            @Override
-            public void onAfterFinished() {
-
-            }
-
-            @Override
-            public void onAfterSuccessOk(JSONObject object) {
-                JSONArray data = object.getJSONArray("data");
-                if (data.size() > 0) {
-                    for (int i = 0; i < data.size(); i++) {
-                        JSONObject obj = data.getJSONObject(i);
-                        JSONArray apps = obj.getJSONArray("apps");
-                        if(apps.size() > 0){
-                            list.add(apps);
-                            jsonArray = new JSONArray(list.get(0));
-                            gameData = JSON.parseArray(jsonArray.toJSONString(), GameData.class);
-                            mAdapter.setDatas(gameData);
-                        }else{
-                            list.add(null);
-                        }
-
-                    }
-                }
-            }
-
-            @Override
-            public void onAfterSuccessErr(JSONObject object, String msg) {
-
-            }
-        });
-    }
+//
+//    JSONArray jsonArray;
+//    /**
+//     * 游戏分类
+//     */
+//    private void requestGameList() {
+//        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appantype");
+//        x.http().post(params, new XCallBack() {
+//            @Override
+//            public void onAfterFinished() {
+//
+//            }
+//
+//            @Override
+//            public void onAfterSuccessOk(JSONObject object) {
+//                JSONArray data = object.getJSONArray("data");
+//                if (data.size() > 0) {
+//                    for (int i = 0; i < data.size(); i++) {
+//                        JSONObject obj = data.getJSONObject(i);
+//                        JSONArray apps = obj.getJSONArray("apps");
+//                        if(apps.size() > 0){
+//                            list.add(apps);
+//                            jsonArray = new JSONArray(list.get(0));
+//                            gameData = JSON.parseArray(jsonArray.toJSONString(), GameData.class);
+//                            mAdapter.setDatas(gameData);
+//                        }else{
+//                            list.add(null);
+//                        }
+//
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onAfterSuccessErr(JSONObject object, String msg) {
+//
+//            }
+//        });
+//    }
 
 
     public class FindViewPageAdapter extends FatherAdapter<GameData> {

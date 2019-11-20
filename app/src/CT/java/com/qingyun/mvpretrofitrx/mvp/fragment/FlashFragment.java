@@ -43,6 +43,7 @@ import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.presenter.Flashpresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.TestMain;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.qingyun.mvpretrofitrx.mvp.view.DottedLineView;
 import com.qingyun.mvpretrofitrx.mvp.view.ExpandCollapseAnimation;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
@@ -143,7 +144,7 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 set = mAdapter.getSet();
-                if (!set.contains(position) && mAdapter.getSet().size() < 10) {//如果没有选中就选中
+                if (!set.contains(position) /*&& mAdapter.getSet().size() < 50*/) {//如果没有选中就选中，设置最多只能打开多少
                     mAdapter.add(position);
                 } else {//如果选中了就取消选中
                     mAdapter.remove(position);
