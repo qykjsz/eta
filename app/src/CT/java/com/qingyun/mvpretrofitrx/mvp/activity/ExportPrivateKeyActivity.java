@@ -74,7 +74,9 @@ public class ExportPrivateKeyActivity extends BaseActivity {
         fragments.add(new ExportPriviteKeyQrcodeFragment());
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getContext(),fragments,getSupportFragmentManager());
         viewPager.setAdapter(mainViewPagerAdapter);
-        IndicatorUtils.initMagicIndicator3(magicIndicator3,viewPager,titles,getActivity());
+//        IndicatorUtils.initMagicIndicator3(magicIndicator3,viewPager,titles,getActivity());
+        IndicatorUtils.initMagicIndicator3(viewPager,titles,getActivity(),magicIndicator3,0,0);
+
     }
 
     @Override

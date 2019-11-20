@@ -89,7 +89,6 @@ public class CommonPagerTitleView extends FrameLayout implements IMeasurablePage
     public void setContentView(View contentView) {
         setContentView(contentView, null);
     }
-
     public void setContentView(View contentView, FrameLayout.LayoutParams lp) {
         removeAllViews();
         if (contentView != null) {

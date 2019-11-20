@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -300,10 +301,14 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 startActivity(GetMoneyActivity.class);
                 break;
             case R.id.btn_shan_dui:
-                startActivity(QuickExchangeActivity.class);
+                ToastUtil.showShortToast(R.string.not_open);
+
+//                startActivity(QuickExchangeActivity.class);
 
                 break;
             case R.id.btn_packet:
+//                ToastUtil.showShortToast(R.string.not_open);
+                startActivity(CreateWalletActivity.class);
                 break;
             case R.id.btn_scan:
 
@@ -426,6 +431,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         SimpleMF<String> marqueeFactory = new SimpleMF(getContext());
         List<String> newList = new ArrayList<>();
         for (int i = 0; i < assetResponse.getNews().size(); i++) {
+            if (!TextUtils.isEmpty(assetResponse.getNews().get(i).getName()))
             newList.add(assetResponse.getNews().get(i).getName());
         }
         if (newList.size()==1){

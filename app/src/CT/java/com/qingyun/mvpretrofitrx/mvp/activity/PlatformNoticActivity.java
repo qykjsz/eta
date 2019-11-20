@@ -94,9 +94,9 @@ public class PlatformNoticActivity extends BaseActivity<NoticContact.View,NoticC
     @Override
     public void getNoticeListSuccess(PlatformNoticResponse platformNoticResponse) {
         if (isLoadMore){
-            list.addAll(platformNoticResponse.getNews());
+            list.addAll(platformNoticResponse.getNews()==null?new ArrayList<PlatformNotic>():platformNoticResponse.getNews());
         }else {
-            list = platformNoticResponse.getNews();
+            list = platformNoticResponse.getNews()==null?new ArrayList<PlatformNotic>():platformNoticResponse.getNews();
         }
         platformNoticAdapter.notifyDataSetChanged(list);
         refreashView(list,rcy);

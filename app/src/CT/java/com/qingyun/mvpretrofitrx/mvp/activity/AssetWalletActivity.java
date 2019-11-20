@@ -134,8 +134,8 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
         });
         mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getSupportFragmentManager());
         viewPager.setAdapter(mainViewPagerAdapter);
-//        IndicatorUtils.initMagicIndicator3(viewPager,titles,getActivity(),magicIndicator3,0,0);
-        IndicatorUtils.initMagicIndicator3(magicIndicator3,viewPager,titles,getActivity());
+        IndicatorUtils.initMagicIndicator3(viewPager,titles,getActivity(),magicIndicator3,0,0);
+//        IndicatorUtils.initMagicIndicator3(magicIndicator3,viewPager,titles,getActivity());
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

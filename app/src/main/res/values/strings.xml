@@ -260,5 +260,8 @@
     <string name="address_must">地址不能为空</string>
     <string name="amount_must">数量不能为空</string>
     <string name="business_log">交易记录</string>
-    <string name="start_yanzheng">开始验证</string>
+    <string name="start_yanzheng">敬请期待</string>
+    <string name="computing_super">叠加灵活算力</string>
+    <string name="input_amount">输入数量（数量不能大于200）</string>
+    <string name="permission_need_open">需要申请对应权限才能使用此功能</string>
 </resources>
