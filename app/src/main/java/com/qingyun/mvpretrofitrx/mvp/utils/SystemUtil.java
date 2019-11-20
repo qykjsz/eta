@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.utils;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -14,10 +15,15 @@ import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import com.senon.mvpretrofitrx.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.UUID;
+
+import io.reactivex.functions.Consumer;
 
 
 public class SystemUtil {
@@ -165,6 +171,47 @@ public class SystemUtil {
         //    Log.e("uuid",uniqueId);
             return uniqueId;
         }
+
+    }
+
+
+    public interface  RequestPermissionListener{
+        void requestSuccess(String uuid);
+    }
+    @SuppressLint("HardwareIds")
+    public static void getMyUUID(Activity activity, final RequestPermissionListener requestPermissionListener) {
+
+        RxPermissions rxPermissions = new RxPermissions(activity);
+        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+
+            String tmDevice, tmSerial, tmPhone, androidId;
+            String uniqueId;
+
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                if (aBoolean) {
+                    final TelephonyManager tm = (TelephonyManager) ApplicationUtil.getContext().getSystemService(Context.TELEPHONY_SERVICE);
+                    if (ActivityCompat.checkSelfPermission(ApplicationUtil.getContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissionListener.requestSuccess("");
+                    } else {
+                        tmDevice = "" + tm.getDeviceId();
+                        tmSerial = "" + tm.getSimSerialNumber();
+                        androidId = "" + Settings.Secure.getString(ApplicationUtil.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+                        UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
+                        uniqueId = deviceUuid.toString();
+                        uniqueId = uniqueId.replace("-", "_");
+                        //    Log.e("uuid",uniqueId);
+                        requestPermissionListener.requestSuccess(uniqueId);
+                    }
+
+                } else {
+                    uniqueId = "";
+                    //只要有一个权限被拒绝，就会执行
+                    ToastUtil.showShortToast(R.string.permission_need_open);
+                }
+            }
+        });
+
 
     }
 }

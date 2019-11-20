@@ -92,7 +92,7 @@ public class IndicatorUtils {
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 CommonPagerTitleView commonPagerTitleView = new CommonPagerTitleView(activity);
-                commonPagerTitleView.setContentView(R.layout.simple_pager_title_layout);
+                commonPagerTitleView.setContentView(R.layout.simple_pager_title_layout1);
 
                 final TextView titleText = (TextView) commonPagerTitleView.findViewById(R.id.tv);
                 titleText.setText(titles.get(index));
