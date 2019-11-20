@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -126,11 +127,24 @@ public class FindViewPageFragment extends BaseFragment {
     public BaseView createView() {
         return null;
     }
+    private long lastClickTime = 0;
 
     @Override
     public void init() {
         mAdapter = new FindViewPageAdapter(mContext);
         listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                long now = System.currentTimeMillis();
+                if(now - lastClickTime > 3000) {
+                    lastClickTime = now;
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra("url",mAdapter.getData().get(position).url);
+                    mContext.startActivity(intent);
+                }
+            }
+        });
 //        requestGameList();
     }
 
@@ -148,49 +162,9 @@ public class FindViewPageFragment extends BaseFragment {
     protected String getTitleText() {
         return null;
     }
-//
-//    JSONArray jsonArray;
-//    /**
-//     * 游戏分类
-//     */
-//    private void requestGameList() {
-//        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appantype");
-//        x.http().post(params, new XCallBack() {
-//            @Override
-//            public void onAfterFinished() {
-//
-//            }
-//
-//            @Override
-//            public void onAfterSuccessOk(JSONObject object) {
-//                JSONArray data = object.getJSONArray("data");
-//                if (data.size() > 0) {
-//                    for (int i = 0; i < data.size(); i++) {
-//                        JSONObject obj = data.getJSONObject(i);
-//                        JSONArray apps = obj.getJSONArray("apps");
-//                        if(apps.size() > 0){
-//                            list.add(apps);
-//                            jsonArray = new JSONArray(list.get(0));
-//                            gameData = JSON.parseArray(jsonArray.toJSONString(), GameData.class);
-//                            mAdapter.setDatas(gameData);
-//                        }else{
-//                            list.add(null);
-//                        }
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onAfterSuccessErr(JSONObject object, String msg) {
-//
-//            }
-//        });
-//    }
 
 
     public class FindViewPageAdapter extends FatherAdapter<GameData> {
-
         public FindViewPageAdapter(Context ctx) {
             super(ctx);
         }
@@ -204,14 +178,17 @@ public class FindViewPageFragment extends BaseFragment {
             ViewHolder viewHolder = (ViewHolder) convertView.getTag();
             final GameData item = getItem(position);
             setUi(viewHolder, item);
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra("url", item.url);
-                    mContext.startActivity(intent);
-                }
-            });
+//            convertView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    long now = System.currentTimeMillis();
+//                    if(now - lastClickTime >2000) {
+//                        Intent intent = new Intent(mContext, WebActivity.class);
+//                        intent.putExtra("url", item.url);
+//                        mContext.startActivity(intent);
+//                    }
+//                }
+//            });
             return convertView;
         }
 

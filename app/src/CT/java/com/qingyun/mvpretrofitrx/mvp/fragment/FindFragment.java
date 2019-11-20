@@ -107,7 +107,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     //Banner轮播图的List
     private List<String> bannerList;
     private FindGridViewAdapter mAdapter;
-
+    private long lastClickTime = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
@@ -232,13 +232,20 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                requestGetUUid(mAdapter.getData().get(position).id);
-                Intent intent = new Intent(mContext, WebActivity.class);
-                intent.putExtra("url", mAdapter.getData().get(position).getUrl());
-                mContext.startActivity(intent);
+                lastClickTimes = 0;
+                long now = System.currentTimeMillis();
+                if(now - lastClickTimes >3000){
+                    lastClickTimes = now;
+                    requestGetUUid(mAdapter.getData().get(position).id);
+                    Intent intent = new Intent(mContext, WebActivity.class);
+                    intent.putExtra("url", mAdapter.getData().get(position).getUrl());
+                    mContext.startActivity(intent);
+                }
             }
         });
     }
+
+    private long lastClickTimes = 0;
 
 
     @Override
@@ -517,29 +524,33 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     image.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (data.getId().equals("1")) {//跳转ETAPP
-                                if (checkPackInfo("com.example.et")) {//程序已安装
-                                    Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
-                                    if (intent != null) {
-                                        //            intent.putExtra("data", "");//传递数据
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            long now = System.currentTimeMillis();
+                            if(now - lastClickTime >3000) {
+                                lastClickTime = now;
+                                if (data.getId().equals("1")) {//跳转ETAPP
+                                    if (checkPackInfo("com.example.et")) {//程序已安装
+                                        Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
+                                        if (intent != null) {
+                                            //            intent.putExtra("data", "");//传递数据
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            mContext.startActivity(intent);
+                                        }
+                                    } else {//未安装 跳转下载地址
+                                        Intent intent = new Intent();
+                                        intent.setAction("android.intent.action.VIEW");
+                                        Uri content_url = Uri.parse("http://www.baidu.com");
+                                        intent.setData(content_url);
                                         mContext.startActivity(intent);
                                     }
-                                } else {//未安装 跳转下载地址
-                                    Intent intent = new Intent();
-                                    intent.setAction("android.intent.action.VIEW");
-                                    Uri content_url = Uri.parse("http://www.baidu.com");
-                                    intent.setData(content_url);
+                                } else if (data.getId().equals("2")) {//跳转指定H5
+                                    Intent intent = new Intent(mContext, WebActivity.class);
+                                    intent.putExtra("url", "https://ceshi.etac.io/dist/?" + uuId);
+                                    mContext.startActivity(intent);
+                                } else {
+                                    Intent intent = new Intent(mContext, WebActivity.class);
+                                    intent.putExtra("url", data.getUrl());
                                     mContext.startActivity(intent);
                                 }
-                            } else if (data.getId().equals("2")) {//跳转指定H5
-                                Intent intent = new Intent(mContext, WebActivity.class);
-                                intent.putExtra("url", "https://ceshi.etac.io/dist/?"+uuId);
-                                mContext.startActivity(intent);
-                            } else {
-                                Intent intent = new Intent(mContext, WebActivity.class);
-                                intent.putExtra("url", data.getUrl());
-                                mContext.startActivity(intent);
                             }
 
                         }
