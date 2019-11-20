@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/dp_padding_x_max"
         android:gravity="center"
         android:layout_marginEnd="@dimen/dp_padding_x_min"
-        android:text="@string/input_pay_password_"
+        android:text="@string/wallet_password"
         android:textSize="@dimen/sp_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

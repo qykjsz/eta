@@ -2,6 +2,8 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -53,24 +55,42 @@ public class WebActivity extends Activity {
         webView.getSettings().setDomStorageEnabled(true);
         // 开启 Application Caches 功能
         webView.getSettings().setAppCacheEnabled(true);
-        webView.addJavascriptInterface(new JsOperation(WebActivity.this, webView), "client");//设置js调用的java类
+        // webView.addJavascriptInterface(new JsOperation(WebActivity.this, webView), "client");//设置js调用的java类
 
 //        webView.setWebChromeClient(new MyWebChromeClient());
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                // TODO Auto-generated method stub
-                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-//                view.loadUrl(url);
+                Uri uri = Uri.parse(url);
+                // 如果url的协议 = 预先约定的 js 协议
+                // 就解析往下解析参数
+                if (uri.getScheme().equals("js")) {
 
-                if (Build.VERSION.SDK_INT < 26) {
-                    view.loadUrl(url);
+                    if (uri.getAuthority().equals("webview")) {
+                        String address = uri.getQueryParameter("address");
+                        Intent intent = new Intent();
+                        intent.setClass(WebActivity.this, TransferImmediateActivity.class);
+                        intent.putExtra("transfer_address", address);
+                        intent.putExtra("coin_name", "HOPE");
+                        startActivity(intent);
+
+                    }
+
                     return true;
                 }
-                view.loadUrl(url);
-                return false;
+//                if (Build.VERSION.SDK_INT < 26) {
+//
+//                    view.loadUrl(url);
+//                    return true;
+//                }
+//                view.loadUrl(url);
+//
+//                return false;
+                return super.shouldOverrideUrlLoading(view, url);
             }
+
+
         });
 
         webView.setWebChromeClient(new WebChromeClient() {
@@ -80,6 +100,8 @@ public class WebActivity extends Activity {
                 super.onGeolocationPermissionsShowPrompt(origin, callback);
             }
         });
+
+
     }
 
     @Override

@@ -94,7 +94,12 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
     @Override
     protected void onResume() {
         super.onResume();
-        getPresenter().getContactList(SystemUtil.getMyUUID());
+        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+            @Override
+            public void requestSuccess(String uuid) {
+                getPresenter().getContactList(uuid);
+            }
+        });
 
     }
 

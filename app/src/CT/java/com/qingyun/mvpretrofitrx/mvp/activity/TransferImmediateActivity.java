@@ -40,6 +40,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 import butterknife.BindView;
@@ -176,6 +178,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                     ToastUtil.showShortToast(R.string.amount_must);
                     return;
                 }
+
                 getPresenter().getNode();
 
                 break;
@@ -283,6 +286,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                         final TextView btnConfirm = anyLayer.getView(R.id.textView53);
 
                         final IndicatorSeekBar seekBar = anyLayer.getView(R.id.sb);
+//                        seekBar.setDecimalScale(currentCoin.getDecimal());
                         GasPrice gasPrice = null;
                         if (currentCoin.getName().equals("ETH"))
                         {
@@ -299,9 +303,15 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                             }
                         }
                         gasLitmit = gasPrice.getGasmax();
-                        seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
-                        seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
-                        tvGas.setText(Float.parseFloat(gasPrice.getGweimin())+currentCoin.getName());
+                        BigInteger gweiMin = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
+                        BigInteger gweiMax = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
+
+//                        seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
+//                        seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
+
+                        seekBar.setMin(gweiMin.floatValue());
+                        seekBar.setMax(gweiMax.floatValue());
+                        tvGas.setText(gweiMin+currentCoin.getName());
 
                         seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
                             @Override
@@ -324,7 +334,8 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                             @Override
                             public void onClick(View v) {
                                 tvMining.setText(seekBar.getProgressFloat()+currentCoin.getName());
-                                mGasPrice = seekBar.getProgressFloat();
+//                                mGasPrice = seekBar.getProgressFloat();
+                                mGasPrice = new BigDecimal(seekBar.getProgressFloat()).multiply(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger().floatValue();
                                 anyLayer.dismiss();
                             }
                         });

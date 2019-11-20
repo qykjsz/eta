@@ -147,6 +147,7 @@ public class FileUtils {
             bm.compress(Bitmap.CompressFormat.JPEG, 90, bos);
             bos.flush();
             bos.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
