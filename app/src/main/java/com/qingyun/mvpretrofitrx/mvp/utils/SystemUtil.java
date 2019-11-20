@@ -182,7 +182,7 @@ public class SystemUtil {
     public static void getMyUUID(Activity activity, final RequestPermissionListener requestPermissionListener) {
 
         RxPermissions rxPermissions = new RxPermissions(activity);
-        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+        rxPermissions.request(Manifest.permission.READ_PHONE_STATE).subscribe(new Consumer<Boolean>() {
 
             String tmDevice, tmSerial, tmPhone, androidId;
             String uniqueId;

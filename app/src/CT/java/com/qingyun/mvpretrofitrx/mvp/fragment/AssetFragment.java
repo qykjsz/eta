@@ -302,9 +302,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 break;
             case R.id.btn_shan_dui:
                 ToastUtil.showShortToast(R.string.not_open);
-
 //                startActivity(QuickExchangeActivity.class);
-
                 break;
             case R.id.btn_packet:
 //                ToastUtil.showShortToast(R.string.not_open);
