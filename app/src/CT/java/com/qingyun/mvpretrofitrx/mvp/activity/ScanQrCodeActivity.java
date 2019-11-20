@@ -46,8 +46,9 @@ public class ScanQrCodeActivity extends Activity implements QRCodeView.Delegate 
         Log.i("post---", "result:" + result);
         vibrate();
         if (result != null) {
-            Intent intent = new Intent();
+            Intent intent = new Intent(ScanQrCodeActivity.this,WebActivity.class);
             intent.putExtra("url", result);
+            intent.putExtra("title","");
             startActivity(intent);
         }
     }

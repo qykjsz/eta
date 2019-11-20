@@ -141,6 +141,7 @@ public class FindViewPageFragment extends BaseFragment {
                     lastClickTime = now;
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra("url",mAdapter.getData().get(position).url);
+                    intent.putExtra("title",mAdapter.getData().get(position).name);
                     mContext.startActivity(intent);
                 }
             }

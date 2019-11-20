@@ -115,17 +115,18 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.ll_dapp:
-                startActivity(tv_app_name.getText().toString());
+                startActivity(tv_app_name.getText().toString(),"");
                 break;
             case R.id.ll_link:
-                startActivity(tv_link.getText().toString());
+                startActivity(tv_link.getText().toString(),"");
                 break;
         }
     }
 
-    private void startActivity(String url) {
+    private void startActivity(String url,String title) {
         Intent intent = new Intent(SearchActivity.this, WebActivity.class);
         intent.putExtra("url", url);
+        intent.putExtra("title",title);
         startActivity(intent);
     }
 
@@ -232,7 +233,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(item.url);
+                    startActivity(item.url,item.name);
                 }
             });
             return convertView;

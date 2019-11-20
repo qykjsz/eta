@@ -222,7 +222,6 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                         ((TextView) tabs[i]).setTextSize(16);
                     } else {
                         ((TextView) tabs[i]).setTextSize(13);
-
                     }
                 }
                 //数据传递
@@ -239,6 +238,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     requestGetUUid(mAdapter.getData().get(position).id);
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra("url", mAdapter.getData().get(position).getUrl());
+                    intent.putExtra("title",mAdapter.getData().get(position).getName());
                     mContext.startActivity(intent);
                 }
             }
@@ -538,17 +538,20 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                                     } else {//未安装 跳转下载地址
                                         Intent intent = new Intent();
                                         intent.setAction("android.intent.action.VIEW");
-                                        Uri content_url = Uri.parse("http://www.baidu.com");
+                                        Uri content_url = Uri.parse(data.getUrl());
                                         intent.setData(content_url);
                                         mContext.startActivity(intent);
                                     }
                                 } else if (data.getId().equals("2")) {//跳转指定H5
                                     Intent intent = new Intent(mContext, WebActivity.class);
-                                    intent.putExtra("url", "https://ceshi.etac.io/dist/?" + uuId);
+                                    intent.putExtra("url", data.getUrl()+"?" + uuId);
+                                    ZLog.showPost("post===url==="+data.getUrl()+"?" + uuId);
+                                    intent.putExtra("title",data.getName());
                                     mContext.startActivity(intent);
                                 } else {
                                     Intent intent = new Intent(mContext, WebActivity.class);
                                     intent.putExtra("url", data.getUrl());
+                                    intent.putExtra("title",data.getName());
                                     mContext.startActivity(intent);
                                 }
                             }

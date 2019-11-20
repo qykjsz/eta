@@ -13,6 +13,7 @@ import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.utils.JsOperation;
 import com.senon.mvpretrofitrx.R;
@@ -36,9 +37,17 @@ public class WebActivity extends Activity {
         setContentView(R.layout.activity_my_webview);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         linkUrl = getIntent().getStringExtra("url");
+        String title = getIntent().getStringExtra("title");
+        ((TextView)findViewById(R.id.tv_title)).setText(title);
         webView = findViewById(R.id.webview);
         initWebView();
         webView.loadUrl(linkUrl);
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

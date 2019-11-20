@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -83,7 +84,7 @@ public class ExpressTheDetailsActivity extends BaseActivity {
             tvContent.setText(news.content);
             tv_source.setText("来源："+news.source);
             iv_qr_code.setImageBitmap(ZXingUtils.createQRImage(news.url,700,700));
-
+            tvContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         }
     }
     @OnClick({R.id.tv_save_image})
