@@ -9,9 +9,6 @@ import org.web3j.utils.Convert;
 
 import java.math.BigInteger;
 
-/**
- * @author Angus
- */
 public class EthUtils {
 
     /**
@@ -130,7 +127,6 @@ public class EthUtils {
     public static String getPrivateKey(ECKeyPair ecKeyPair) {
         if (containsHexPrefix(toKeyString(ecKeyPair.getPrivateKey()))){
             return toKeyString(ecKeyPair.getPrivateKey());
-
         }else {
             return "0x"+toKeyString(ecKeyPair.getPrivateKey());
         }

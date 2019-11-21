@@ -4,9 +4,6 @@ import org.web3j.crypto.WalletFile;
 
 import java.io.Serializable;
 
-/**
- * @author Angus
- */
 public class Wallet implements Serializable {
     private String mnemonic;
     private String address;

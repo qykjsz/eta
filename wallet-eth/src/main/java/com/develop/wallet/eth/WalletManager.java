@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -64,16 +65,14 @@ import io.github.novacrypto.bip39.SeedCalculator;
 import io.github.novacrypto.bip39.wordlists.English;
 import io.github.novacrypto.hashing.Sha256;
 
-/**
- * @author Angus
- */
+
 public class WalletManager {
 
     public static boolean DEBUG = true;
     /**
      * 代币合约地址
      */
-    public static String tokenAddres = "0x2F5961e307Ea42f4633f8D6624DFae298f6bBf62";
+    public static String tokenAddres = "";
 
     /**
      * 区块链服务器地址
@@ -171,6 +170,7 @@ public class WalletManager {
     public static Wallet generateWalletAddress(String walletName) {
         try {
             String mnemonic = MnemonicUtils.generateMnemonic();
+            Log.e("mnemonic>>>>>>>",mnemonic);
             ECKeyPair ecKeyPair = WalletUtils.generateBip32ECKeyPair(mnemonic);
             String address = EthUtils.getAddress(ecKeyPair);
             String privateKey = EthUtils.getPrivateKey(ecKeyPair);
@@ -259,6 +259,8 @@ public class WalletManager {
 
 
 
+
+
     /**
      * 导出Keystore
      *
@@ -312,6 +314,9 @@ public class WalletManager {
                 ObjectMapper objectMapper = new ObjectMapper();
                 WalletFile walletFile = null;
                 try {
+
+//                   解决用keystore导入苹果创建账号时候无法验证bug
+//                    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     walletFile = objectMapper.readValue(wallet.getKeystore(), WalletFile.class);
                     boolean success = decrypt(password, walletFile);
                     if (success){
@@ -427,9 +432,9 @@ public class WalletManager {
 
                 try {
                     ECKeyPair keyPair = org.web3j.crypto.Wallet.decrypt(password, walletFile);
-                    String privateKey = keyPair.getPrivateKey().toString(16);
-                    String publicKey = keyPair.getPublicKey().toString(16);
-                    String address = "0x" + Keys.getAddress(publicKey);
+                    String address = EthUtils.getAddress(keyPair);
+                    String privateKey = EthUtils.getPrivateKey(keyPair);
+                    String publicKey = EthUtils.getPublicKey(keyPair);
 //            WalletFile walletFile = WalletUtils.createWalletFile(password, keyPair, false);
                     Wallet wallet = new Wallet(null, address, privateKey, publicKey,keystore);
                     wallet.setWalletName(name);
@@ -467,17 +472,21 @@ public class WalletManager {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                byte[] seed =  MnemonicUtils.generateSeed(menmory,passwd);
-                ECKeyPair ecKeyPair = ECKeyPair.create(Sha256.sha256(seed));
-                String privateKey = ecKeyPair.getPrivateKey().toString(16);
-                String publicKey = ecKeyPair.getPublicKey().toString(16);
-                String address = "0x" + Keys.getAddress(publicKey);
+//                byte[] seed =  MnemonicUtils.generateSeed(menmory,passwd);
+                ECKeyPair ecKeyPair = WalletUtils.generateBip32ECKeyPair(menmory);
+                String address = EthUtils.getAddress(ecKeyPair);
+                String privateKey = EthUtils.getPrivateKey(ecKeyPair);
+                String publicKey = EthUtils.getPublicKey(ecKeyPair);
+
+//                ECKeyPair ecKeyPair = ECKeyPair.create(Sha256.sha256(seed));
+//                String privateKey = ecKeyPair.getPrivateKey().toString(16);
+//                String publicKey = ecKeyPair.getPublicKey().toString(16);
+//                String address = "0x" + Keys.getAddress(publicKey);
                 String json = null;
                 WalletFile walletFile = null;
                 try {
                     walletFile = WalletUtils.createWalletFile(passwd, ecKeyPair, false);
                     json = WalletUtils.objectMapper.writeValueAsString(walletFile);
-
                     Wallet wallet = new Wallet(menmory, address, privateKey, publicKey,json);
                     wallet.setWalletName(name);
                     Message message = new Message();
@@ -612,6 +621,7 @@ public class WalletManager {
         Log.e("toAddress>>>>",toAddress);
 
         if (privateKey.startsWith("0x")) privateKey = privateKey.substring(2,privateKey.length());
+        Log.e("privateKey>>>>",privateKey);
         ECKeyPair ecKeyPair = ECKeyPair.create(EthUtils.toKeyBigInteger(privateKey));
 //        return sendTransaction(fromAddress, ecKeyPair, toAddress, EthUtils.toBigInteger(amount),gasPrice,gasLitmit);
 
@@ -764,7 +774,6 @@ public class WalletManager {
             //创建交易  注意金额 保留小数点后8位 要转化为整数 比如0.00000001 转化为1
             Function function = new Function("transfer", inputParameters, outputParameters);
             String data = FunctionEncoder.encode(function);
-
 //            智能合约事物
             BigInteger GAS_PRICE = Convert.toWei(BigDecimal.valueOf(gasPrice), Convert.Unit.GWEI).toBigInteger();
 //            BigInteger GAS_LIMIT = Convert.toWei(BigDecimal.valueOf(gasLitmit), Convert.Unit.GWEI).toBigInteger();
@@ -775,9 +784,12 @@ public class WalletManager {
             Log.e("GAS_PRICE>>>>",GAS_PRICE.toString());
             Log.e("GAS_LIMIT>>>>",GAS_LIMIT.toString());
             Log.e("amount>>>>",amount.toString());
-
-            RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, GAS_PRICE, GAS_LIMIT, tokenAddres, data);
-
+            RawTransaction rawTransaction;
+            if (TextUtils.isEmpty(tokenAddres)){
+                rawTransaction = RawTransaction.createEtherTransaction(nonce, GAS_PRICE, GAS_LIMIT, toAddress, amount);
+            }else {
+                 rawTransaction = RawTransaction.createTransaction(nonce, GAS_PRICE, GAS_LIMIT, tokenAddres, data);
+            }
             //通过私钥获取凭证  当然也可以根据其他的获取 其他方式详情请看web3j
             Credentials credentials = Credentials.create(ecKeyPair);
 

@@ -35,9 +35,7 @@ import java.util.List;
 import static org.web3j.crypto.Keys.ADDRESS_LENGTH_IN_HEX;
 import static org.web3j.crypto.Keys.PRIVATE_KEY_LENGTH_IN_HEX;
 
-/**
- * @author Angus
- */
+
 public class WalletUtils {
     public static final ObjectMapper objectMapper = new ObjectMapper();
 
