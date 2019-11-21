@@ -345,7 +345,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                     @Override
                     public void bind(final AnyLayer anyLayer) {
                         // TODO 绑定数据
-                        ImageView addWallet = anyLayer.getView(R.id.btn_aa_wallet);
+                        final ImageView addWallet = anyLayer.getView(R.id.btn_aa_wallet);
                         RecyclerView recyclerView = anyLayer.getView(R.id.recyclerView2);
                         RecyclerView rcyWallet = anyLayer.getView(R.id.rcy_wallet);
                         List<CoinType> list = new ArrayList<>();
@@ -380,7 +380,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                         coinTypeAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(List list, int position) {
-
+                                if(position == 1){
+                                    addWallet.setVisibility(View.VISIBLE);
+                                }else{
+                                    addWallet.setVisibility(View.GONE);
+                                }
                                 tv_wallet_name.setText(((CoinType) list.get(position)).getCoinType());
                                 List<Wallet> mlist = (List<Wallet>) ApplicationUtil.getWalletBuyCoinType(((CoinType) list.get(position)).getCoinType());
                                 myWalletAdapter.notifyDataSetChanged(mlist);
