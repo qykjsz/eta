@@ -66,6 +66,7 @@ import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.utils.GlideRoundTransform;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
+import com.qingyun.mvpretrofitrx.mvp.view.MyViewPager;
 import com.qingyun.mvpretrofitrx.mvp.view.TabScrollView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;

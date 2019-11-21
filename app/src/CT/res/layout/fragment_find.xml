@@ -121,7 +121,8 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:fillViewport="true">
 
 
                 <LinearLayout
@@ -271,12 +272,14 @@
                             android:id="@+id/tabscrollview"
                             android:layout_width="match_parent"
                             android:layout_height="44dp"
-                            android:background="@color/white"></com.qingyun.mvpretrofitrx.mvp.view.TabScrollView>
+                            android:background="@color/white">
+
+                        </com.qingyun.mvpretrofitrx.mvp.view.TabScrollView>
 
                         <android.support.v4.view.ViewPager
                             android:id="@+id/viewpager"
                             android:layout_width="match_parent"
-                            android:layout_height="650dp"
+                            android:layout_height="1000dp"
                             >
                         </android.support.v4.view.ViewPager>
 

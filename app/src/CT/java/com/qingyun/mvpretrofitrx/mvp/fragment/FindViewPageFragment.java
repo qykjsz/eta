@@ -173,7 +173,7 @@ public class FindViewPageFragment extends BaseFragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.item_search, parent, false);
+                convertView = mInflater.inflate(R.layout.item_searchs, parent, false);
                 new ViewHolder(convertView);
             }
             ViewHolder viewHolder = (ViewHolder) convertView.getTag();
@@ -201,21 +201,21 @@ public class FindViewPageFragment extends BaseFragment {
             requestOptions.circleCropTransform();
             requestOptions.transforms( new RoundedCorners(20));
             Glide.with(mContext).load(item.img).apply(requestOptions).into(viewHolder.iv_image);
-            viewHolder.iv_icon.setVisibility(View.GONE);
+//            viewHolder.iv_icon.setVisibility(View.GONE);
         }
 
         public class ViewHolder extends SuperViewHolder {
             TextView tv_name;//名称
             TextView tv_introduce;//简介
             ImageView iv_image;//图片
-            ImageView iv_icon;//icon
+//            ImageView iv_icon;//icon
 
             public ViewHolder(View view) {
                 super(view);
                 iv_image = view.findViewById(R.id.iv_image);
                 tv_name = view.findViewById(R.id.tv_name);
                 tv_introduce = view.findViewById(R.id.tv_introduce);
-                iv_icon = view.findViewById(R.id.iv_icon);
+//                iv_icon = view.findViewById(R.id.iv_icon);
             }
         }
     }
