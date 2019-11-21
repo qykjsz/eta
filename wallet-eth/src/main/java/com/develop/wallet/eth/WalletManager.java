@@ -829,6 +829,7 @@ public class WalletManager {
 
 
 
+
     /**
      * 获取代币余额
      *
@@ -992,4 +993,7 @@ public class WalletManager {
             System.out.println("WalletManager->" + message);
         }
     }
+
+
+
 }
