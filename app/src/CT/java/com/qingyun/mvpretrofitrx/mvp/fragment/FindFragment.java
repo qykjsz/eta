@@ -386,7 +386,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 
 
     private void requestGameList() {
-        RequestParams params = HttpParamsUtils.getX3Params(/*Api.returnEtUrl() +*/ "https://et2.etac.io/api/et_appantype");
+        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appantype");
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
@@ -545,7 +545,6 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                                 } else if (data.getId().equals("2")) {//跳转指定H5
                                     Intent intent = new Intent(mContext, WebActivity.class);
                                     intent.putExtra("url", data.getUrl()+"?" + uuId);
-                                    ZLog.showPost("post===url==="+data.getUrl()+"?" + uuId);
                                     intent.putExtra("title",data.getName());
                                     mContext.startActivity(intent);
                                 } else {
