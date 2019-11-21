@@ -386,7 +386,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
 
 
     private void requestGameList() {
-        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appantype");
+        RequestParams params = HttpParamsUtils.getX3Params(/*Api.returnEtUrl() +*/ "https://et2.etac.io/api/et_appantype");
         x.http().post(params, new XCallBack() {
             @Override
             public void onAfterFinished() {
