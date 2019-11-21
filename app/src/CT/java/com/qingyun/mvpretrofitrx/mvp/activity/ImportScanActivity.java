@@ -5,11 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 
+import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
+import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.ImportScanResult;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
@@ -20,19 +28,49 @@ import cn.bingoogolapple.qrcode.zxing.ZXingView;
  * ClassExplain：扫一扫
  */
 
-public class ScanQrCodeActivity extends Activity implements QRCodeView.Delegate {
+public class ImportScanActivity extends BaseActivity implements QRCodeView.Delegate {
 
     private ZXingView mZBarView;
 
 
+
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_qr_code);
+    protected String getTitleRightText() {
+        return null;
+    }
+
+    @Override
+    protected String getTitleLeftText() {
+        return null;
+    }
+
+    @Override
+    protected String getTitleText() {
+        return null;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_scan_qr_code;
+    }
+
+    @Override
+    public BasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
+    public BaseView createView() {
+        return null;
+    }
+
+    @Override
+    public void init() {
         mZBarView = findViewById(R.id.zbarview);
         mZBarView.setDelegate(this);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -46,10 +84,11 @@ public class ScanQrCodeActivity extends Activity implements QRCodeView.Delegate 
         Log.i("post---", "result:" + result);
         vibrate();
         if (result != null) {
-            Intent intent = new Intent(ScanQrCodeActivity.this,WebActivity.class);
-            intent.putExtra("url", result);
-            intent.putExtra("title","");
-            startActivity(intent);
+            vibrate();
+            Log.e("----------", result);
+            EventBus.getDefault().post(new ImportScanResult(result));
+            finish();
+
         }
     }
 

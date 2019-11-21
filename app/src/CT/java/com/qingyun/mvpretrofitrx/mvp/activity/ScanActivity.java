@@ -1,35 +1,37 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
-import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageView;
 
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
+
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
-import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
-import io.reactivex.functions.Consumer;
 
-import static com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils.IS_WITHDRAW;
+/**
+ * Date 2019/1/18.
+ * Created by Sam
+ * ClassExplain：扫一扫
+ */
 
 public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
 
-    @BindView(R.id.zbarview)
-    ZXingView zbarview;
-    private boolean isWithdraw;
+    private ZXingView mZBarView;
+    private ImageView ivback;
+
+
 
     @Override
     protected String getTitleRightText() {
@@ -48,7 +50,7 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_scan;
+        return R.layout.activity_scan_qr_code;
     }
 
     @Override
@@ -63,61 +65,79 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
 
     @Override
     public void init() {
-
-
+        mZBarView = findViewById(R.id.zbarview);
+        mZBarView.setDelegate(this);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-        isWithdraw = getIntent().getBooleanExtra(IS_WITHDRAW,false);
-    }
 
     @Override
     public void onScanQRCodeSuccess(String result) {
+        Log.i("post---", "result:" + result);
         vibrate();
-        Log.e("----------",result);
-        if (TextUtils.isEmpty(result)) return;
+        if (result != null) {
+            vibrate();
+            Log.e("----------", result);
+            if (TextUtils.isEmpty(result)) return;
 
-        Bundle bundle = new Bundle();
-        bundle.putString(IntentUtils.TRANSFER_ADDRESS,result);
-        startActivity(TransferImmediateActivity.class,bundle);
-        zbarview.startSpot();
-        finish();
+            Bundle bundle = new Bundle();
+            bundle.putString(IntentUtils.TRANSFER_ADDRESS, result);
+            startActivity(TransferImmediateActivity.class, bundle);
+            mZBarView.startSpot();
+            finish();
+        }
     }
 
     @Override
     public void onScanQRCodeOpenCameraError() {
-        Toast.makeText(this, "错误", Toast.LENGTH_SHORT).show();
     }
 
+    private static final int REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY = 666;
+
+    /**
+     * 解析本地图片二维码。返回二维码图片里的内容 或 null
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mZBarView.showScanRect();
+//        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY) {
+//            final String picturePath = BGAPhotoPickerActivity.getSelectedPhotos(data).get(0);
+//            mZBarView.decodeQRCode(picturePath);
+//        }
+    }
+
+    /**
+     * 震动方法
+     */
+    private void vibrate() {
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        vibrator.vibrate(200);
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        zbarview.startCamera();//打开相机
-        zbarview.showScanRect();//显示扫描框
-        zbarview.startSpot();//开始识别二维码
-        //mQRCodeView.openFlashlight();//开灯
-        //mQRCodeView.closeFlashlight();//关灯
+        mZBarView.startCamera(); // 打开后置摄像头开始预览，但是并未开始识别
+//        mZBarView.startCamera(Camera.CameraInfo.CAMERA_FACING_FRONT); // 打开前置摄像头开始预览，但是并未开始识别
+        mZBarView.startSpotAndShowRect(); // 显示扫描框，并开始识别
     }
 
     @Override
     protected void onStop() {
-        zbarview.stopCamera();
+        mZBarView.stopCamera(); // 关闭摄像头预览，并且隐藏扫描框
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        zbarview.onDestroy();
+        mZBarView.onDestroy(); // 销毁二维码扫描控件
         super.onDestroy();
-    }
-
-    private void vibrate() {
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        vibrator.vibrate(200);
     }
 }

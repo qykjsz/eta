@@ -12,12 +12,17 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.ContactsContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
+import com.qingyun.mvpretrofitrx.mvp.entity.ImportScanResult;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ContactsPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.senon.mvpretrofitrx.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -75,7 +80,7 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
 
     @Override
     public void init() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -102,6 +107,7 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
                 startActivity(ChooseBottomLsvelActivity.class);
                 break;
             case R.id.btn_scan:
+                startActivity(ImportScanActivity.class);
                 break;
         }
     }
@@ -125,6 +131,12 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
             }
         });
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreashWallet(ImportScanResult importScanResult) {
+        etAddress.setText(importScanResult.getAddress());
+    }
+
 
     @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {

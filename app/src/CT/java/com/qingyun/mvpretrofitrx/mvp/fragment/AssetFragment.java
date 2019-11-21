@@ -422,6 +422,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         this.assetResponse = assetResponse;
         assetList = assetResponse.getGlod();
         assetAdapter.notifyDataSetChanged(assetList);
+        btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(),"is_asset_visiable"));
         refreashAsset(btnVisiable.isChecked());
         refreashView(assetList, rcyWallet);
 
@@ -479,6 +480,13 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
             if (weight[i]!=0) all0 = false;
         }
+
+//        weight[0] = 50;
+//        weight[1] = 20;
+//        weight[2] = 10;
+//        weight[3] = 10;
+//        weight[4] = 10;
+
 //        if (all0){
 //            colors[0] = getResources().getColor(R.color.color_F8F8FF);
 //

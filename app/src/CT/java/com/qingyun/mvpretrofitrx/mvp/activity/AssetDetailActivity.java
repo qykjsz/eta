@@ -95,7 +95,7 @@ public class AssetDetailActivity extends BaseActivity {
     @Override
     public void init() {
         assetResponse = (AssetResponse) getIntent().getSerializableExtra(ASSET_RESPONSE);
-        tvPublishKey.setText(ApplicationUtil.getCurrentWallet().getPublicKey());
+        tvPublishKey.setText(ApplicationUtil.getCurrentWallet().getAddress());
         tvWalletName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
 
         proportionList = assetResponse.getProportion();

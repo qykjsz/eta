@@ -125,7 +125,7 @@ public class ChangeWalletPasswordActivity extends BaseActivity {
 
             @Override
             public void importFailure(Exception e) {
-                ToastUtil.showShortToast(e.toString());
+                ToastUtil.showShortToast(R.string.pass_err);
                 ProgressDialogUtils.getInstances().cancel();
 
             }
