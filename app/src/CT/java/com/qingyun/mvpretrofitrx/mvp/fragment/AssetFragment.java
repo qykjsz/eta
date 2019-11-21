@@ -448,6 +448,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             public void onItemClickListener(TextView mView, String mData, int mPosition) {
 //                Intent intent = new Intent(getContext(), InformActivity.class);
 //                startActivity(intent);
+
                 startActivity(PlatformNoticActivity.class);
             }
         });
