@@ -18,6 +18,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.AssetWalletLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
@@ -143,6 +144,11 @@ public class AssetWalletLogFragment extends BaseFragment<WalletAssetContact.View
 
     @Override
     public void getGasPriceSuccess(List<GasPrice> gasPrices) {
+
+    }
+
+    @Override
+    public void getVersionSuccess(VersionInfo versionInfo) {
 
     }
 

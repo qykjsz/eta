@@ -13,6 +13,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
@@ -135,6 +136,11 @@ public class BusinessLogActivity extends BaseActivity<WalletAssetContact.View, W
 
     @Override
     public void getGasPriceSuccess(List<GasPrice> gasPrices) {
+
+    }
+
+    @Override
+    public void getVersionSuccess(VersionInfo versionInfo) {
 
     }
 

@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.fragment;
 import android.Manifest;
 import android.animation.Animator;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -53,7 +54,9 @@ import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.Proportion;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
+import com.qingyun.mvpretrofitrx.mvp.utils.AppUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
@@ -157,6 +160,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void init() {
+        getPresenter().getVersion();
         getRefreash().setEnableLoadMore(false);
         EventBus.getDefault().register(this);
         refreashData();
@@ -409,7 +413,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     }
 
 
-     private void refreashAsset(boolean visiable){
+    private void refreashAsset(boolean visiable){
         if (visiable){
             if (assetResponse!=null)
                 tvAsset.setText(assetResponse.getAllnumber());
@@ -435,7 +439,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         List<String> newList = new ArrayList<>();
         for (int i = 0; i < assetResponse.getNews().size(); i++) {
             if (!TextUtils.isEmpty(assetResponse.getNews().get(i).getName()))
-            newList.add(assetResponse.getNews().get(i).getName());
+                newList.add(assetResponse.getNews().get(i).getName());
         }
         if (newList.size()==1){
             newList.add(newList.get(0));
@@ -448,7 +452,6 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             public void onItemClickListener(TextView mView, String mData, int mPosition) {
 //                Intent intent = new Intent(getContext(), InformActivity.class);
 //                startActivity(intent);
-                startActivity(PlatformNoticActivity.class);
             }
         });
 
@@ -528,6 +531,51 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void getGasPriceSuccess(List<GasPrice> gasPrices) {
+
+    }
+
+    @Override
+    public void getVersionSuccess(final VersionInfo versionInfo) {
+        if (!versionInfo.getName().equals( AppUtils.getAppVersionName(getContext()))){
+            AnyLayer anyLayer = AnyLayer.with(getContext())
+                    .contentView(R.layout.dialog_new_version)
+                    .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
+                    .gravity(Gravity.CENTER)
+                    .cancelableOnTouchOutside(false)
+                    .cancelableOnClickKeyBack(false)
+                    .bindData(new LayerManager.IDataBinder() {
+                        @Override
+                        public void bind(final AnyLayer anyLayer) {
+
+                            TextView updata = anyLayer.getView(R.id.btn_updata);
+                            TextView tvContent = anyLayer.getView(R.id.tv_content);
+                            TextView tvVersion = anyLayer.getView(R.id.tv_version);
+                            ImageView cancel = anyLayer.getView(R.id.btn_close);
+                            updata.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (TextUtils.isEmpty(versionInfo.getDownload())) return;
+                                    Intent intent = new Intent();
+                                    intent.setData(Uri.parse(versionInfo.getDownload()));//Url 就是你要打开的网址
+                                    intent.setAction(Intent.ACTION_VIEW);
+                                    startActivity(intent); //启动浏览器
+                                }
+                            });
+                            cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                }
+                            });
+                            tvVersion.setText(versionInfo.getName());
+                            if (!TextUtils.isEmpty(versionInfo.getRemark()))
+                                tvContent.setText(versionInfo.getRemark().replace("\\n", "\n"));
+
+                        }
+                    });
+            anyLayer.show();
+
+        }
 
     }
 

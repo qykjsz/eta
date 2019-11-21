@@ -55,7 +55,7 @@ public class AssetReviewAdapter extends BaseRecyclerViewAdapter<Assets, Wallet, 
 
     @Override
     public void onBindGroupHolder(AssetReviewViewHolder holder, int groupPos, int position, Assets groupData) {
-        holder.tvAssetReviewAddress.setText(groupData.getAddress());
+        holder.tvAssetReviewAddress.setText(groupData.getAddress().substring(0,5)+"****"+groupData.getAddress().substring(groupData.getAddress().length()-5,groupData.getAddress().length()));
     }
 
     @Override

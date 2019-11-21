@@ -65,14 +65,12 @@ import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
 import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.utils.GlideRoundTransform;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
-import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
-import com.qingyun.mvpretrofitrx.mvp.view.MyViewPager;
+
 import com.qingyun.mvpretrofitrx.mvp.view.TabScrollView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.senon.mvpretrofitrx.R;
-
 import org.greenrobot.eventbus.EventBus;
 import org.xutils.http.RequestParams;
 import org.xutils.x;

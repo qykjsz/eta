@@ -38,6 +38,8 @@ public class IntentUtils {
     public static final String TRANSFER_LOG = "transfer_log";
     public static final String ITEM = "item";
     public static final String TRANSFER_COIN_NAME = "coin_name";
+    public static final String WALLET_ADDRESS = "wallet_address";
+    public static final String WALLET = "wallet";
 
     public static String NEW_ID="news_id";
 }

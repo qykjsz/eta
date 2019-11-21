@@ -21,6 +21,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.TheArticleDetails;
 import com.qingyun.mvpretrofitrx.mvp.entity.Time;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 
 import java.util.List;
@@ -122,4 +123,7 @@ public interface ApiService {
     @Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
     @POST("et_allassets")
     Observable<BaseResponse<AssetReviewResponse>> getAssetsReview(@Body RequestBody route);
+
+    @POST("api_update")
+    Observable <BaseResponse<VersionInfo>> getVersion(@Query("type")String type);
 }

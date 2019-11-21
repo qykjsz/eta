@@ -7,6 +7,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public interface WalletAssetContact {
         void getNodeSuccess(String node);
         void searchLogByHashSuccess(TransferLog transferLog);
         void getGasPriceSuccess(List<GasPrice> gasPrices);
+        void getVersionSuccess(VersionInfo versionInfo);
 
     }
 
@@ -33,6 +35,7 @@ public interface WalletAssetContact {
         public abstract void getNode();
         public abstract void searchLogByHash(String address,String hash,String glod);
         public abstract void getGasPrice();
+        public abstract void getVersion();
 
     }
 }
