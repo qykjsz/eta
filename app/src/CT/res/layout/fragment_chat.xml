@@ -32,7 +32,7 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/transfer"
+            android:text="@string/chat"
             android:textColor="@color/color_FFFFFF"
             android:textSize="@dimen/sp_17"
             app:layout_constraintBottom_toBottomOf="@+id/btn_back"

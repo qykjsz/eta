@@ -33,7 +33,7 @@ public class Api {
         } else {
             Log.e("---------------", "release");
 
-            baseUrl = "https://et2.etac.io/api/";
+            baseUrl = "https://etoken.etac.io/api/";
 
         }
         BaseApi baseApi = new BaseApi();

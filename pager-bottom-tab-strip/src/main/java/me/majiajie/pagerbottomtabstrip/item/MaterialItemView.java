@@ -116,7 +116,7 @@ public class MaterialItemView extends BaseTabItem {
                 } else {
                     mIcon.setTranslationY(-mTranslation * mAnimatorValue);
                 }
-                mLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f + mAnimatorValue * 2f);
+                mLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f - mAnimatorValue * 1f);
             }
         });
     }
@@ -152,10 +152,10 @@ public class MaterialItemView extends BaseTabItem {
             } else {
                 mIcon.setTranslationY(-mTranslation);
             }
-            mLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f);
+            mLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f);
         } else { // 布局还未测量并且未选中，保持未选中状态
             mIcon.setTranslationY(0);
-            mLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f);
+            mLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10f);
         }
 
         // 切换颜色

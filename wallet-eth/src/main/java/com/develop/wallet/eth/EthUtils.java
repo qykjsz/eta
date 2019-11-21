@@ -128,7 +128,12 @@ public class EthUtils {
      * @return
      */
     public static String getPrivateKey(ECKeyPair ecKeyPair) {
-        return toKeyString(ecKeyPair.getPrivateKey());
+        if (containsHexPrefix(toKeyString(ecKeyPair.getPrivateKey()))){
+            return toKeyString(ecKeyPair.getPrivateKey());
+
+        }else {
+            return "0x"+toKeyString(ecKeyPair.getPrivateKey());
+        }
     }
 
     /**

@@ -220,7 +220,6 @@ public class WalletManager {
      */
     public static Wallet generateWalletKeystore(String password, String mnemonic,File destination) {
         try {
-
             Wallet wallet =  WalletUtils.generateBip32WalletFile(password,destination,mnemonic);
 //            Wallet wallet = WalletUtils.generateBip32Wallet(password, mnemonic);
             if (wallet != null) {

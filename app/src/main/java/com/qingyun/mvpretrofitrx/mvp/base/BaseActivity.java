@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.github.jokar.multilanguages.library.MultiLanguage;
 import com.qingyun.mvpretrofitrx.mvp.utils.AppUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
@@ -297,7 +298,9 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
 
 
     public void setIvTitleRight(int resid, View.OnClickListener onClickListener) {
-        ivTitleRight.setImageResource(resid);
+        ivTitleRight.setVisibility(View.VISIBLE);
+//        ivTitleRight.setImageResource(resid);
+        Glide.with(getContext()).load(resid).into(ivTitleRight);
         ivTitleRight.setOnClickListener(onClickListener);
     }
 

@@ -50,6 +50,7 @@ android {
         }
         CT {
             applicationId 'com.qingyun.et'
+            versionName '1.0.0'
         }
     }
 }

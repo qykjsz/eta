@@ -13,6 +13,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
+import com.qingyun.mvpretrofitrx.mvp.entity.ImportScanResult;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
@@ -20,6 +21,10 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -76,12 +81,14 @@ public class ImportByKeystoreActivity extends BaseActivity<WalletAssetContact.Vi
 
     @Override
     public void init() {
+        EventBus.getDefault().register(this);
         setIvTitleRight(R.mipmap.icon_scan, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(ImportScanActivity.class);
             }
         });
+
 
     }
 
@@ -170,6 +177,11 @@ public class ImportByKeystoreActivity extends BaseActivity<WalletAssetContact.Vi
     @Override
     public void getGasPriceSuccess(List<GasPrice> gasPrices) {
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreashWallet(ImportScanResult importScanResult) {
+        etContent.setText(importScanResult.getAddress());
     }
 
     @Override

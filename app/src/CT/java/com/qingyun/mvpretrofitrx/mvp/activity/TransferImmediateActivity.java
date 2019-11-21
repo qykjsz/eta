@@ -303,20 +303,27 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                             }
                         }
                         gasLitmit = gasPrice.getGasmax();
-                        BigInteger gweiMin = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
-                        BigInteger gweiMax = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
+//                        BigInteger gweiMin = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
+//                        BigInteger gweiMax = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
 
 //                        seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
 //                        seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
 
-                        seekBar.setMin(gweiMin.floatValue());
-                        seekBar.setMax(gweiMax.floatValue());
-                        tvGas.setText(gweiMin+currentCoin.getName());
+                        final String gasMin = gasPrice.getGasmin();
+                        String gaswei = gasPrice.getGweimin();
+                        final String decimal = "1000000000";
+                        seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
+                        seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
+                        BigDecimal gas = new BigDecimal(gasMin).multiply(new BigDecimal(gaswei)).divide(new BigDecimal(decimal));
+                        tvGas.setText(gas.toString()+getResources().getString(R.string.eth));
 
+                        final GasPrice finalGasPrice = gasPrice;
                         seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
+                            BigDecimal gas;
                             @Override
                             public void onSeeking(SeekParams seekParams) {
-                                tvGas.setText(seekParams.progressFloat+currentCoin.getName());
+                                gas = new BigDecimal(gasMin).multiply(new BigDecimal(seekParams.progressFloat+"")).divide(new BigDecimal(decimal),8,BigDecimal.ROUND_DOWN);
+                                tvGas.setText(gas+getResources().getString(R.string.eth));
                             }
 
                             @Override
@@ -333,9 +340,9 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                         btnConfirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                tvMining.setText(seekBar.getProgressFloat()+currentCoin.getName());
+                                tvMining.setText(tvGas.getText().toString());
 //                                mGasPrice = seekBar.getProgressFloat();
-                                mGasPrice = new BigDecimal(seekBar.getProgressFloat()).multiply(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger().floatValue();
+                                mGasPrice = seekBar.getProgressFloat();
                                 anyLayer.dismiss();
                             }
                         });

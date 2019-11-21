@@ -112,13 +112,16 @@
 
                     <TextView
                         android:id="@+id/tv_asset"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
+                        android:singleLine="true"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
                         android:includeFontPadding="false"
                         android:text="@string/_000"
                         android:textColor="@color/color_FFFFFF"
                         android:textSize="@dimen/sp_32"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView2"
                         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
