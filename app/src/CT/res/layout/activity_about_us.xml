@@ -41,7 +41,7 @@
             android:id="@+id/textView57"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="关于此App的简介"
+            android:text="EToken是一款易用的数字资产钱包,作为专业数字资产钱包，安全放心、简单易用；支持ETH 多币种钱包转账、收款等管理与兑换，以及基于智能合约的币币兑换和丰富的 DApp，让区块链技术更好地融入你的生活。"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/dp_27"
             android:layout_marginTop="@dimen/dp_8"
@@ -50,7 +50,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView48" />
+            app:layout_constraintTop_toBottomOf="@+id/textView48"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"/>
 
     </android.support.constraint.ConstraintLayout>
 

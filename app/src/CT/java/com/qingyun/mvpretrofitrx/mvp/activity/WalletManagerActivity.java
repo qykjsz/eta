@@ -45,7 +45,8 @@ public class WalletManagerActivity extends BaseActivity {
     TextView tvWalletName;
     @BindView(R.id.rcy_wallet)
     RecyclerView rcyWallet;
-
+    @BindView(R.id.btn_aa_wallet)
+    ImageView btn_aa_wallet;
     @Override
     protected String getTitleRightText() {
         return null;
@@ -109,6 +110,11 @@ public class WalletManagerActivity extends BaseActivity {
         coinTypeAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
+                if(position == 1){
+                    btn_aa_wallet.setVisibility(View.VISIBLE);
+                }else{
+                    btn_aa_wallet.setVisibility(View.GONE);
+                }
                 tvWalletName.setText(((CoinType) list.get(position)).getCoinType());
                 List<Wallet> mlist = (List<Wallet>) ApplicationUtil.getWalletBuyCoinType(((CoinType) list.get(position)).getCoinType());
                 myWalletAdapter.notifyDataSetChanged(mlist);
