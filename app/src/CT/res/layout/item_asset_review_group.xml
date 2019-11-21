@@ -15,7 +15,6 @@
         android:singleLine="true"
         android:id="@+id/tv_asset_review_address"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="middle"/>
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>
