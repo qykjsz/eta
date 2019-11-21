@@ -17,6 +17,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
 import com.qingyun.mvpretrofitrx.mvp.entity.Proportion;
 import com.senon.mvpretrofitrx.R;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import butterknife.BindView;
@@ -74,7 +75,7 @@ public class ProportionAdapter extends BaseAdapter<Proportion, ProportionAdapter
     @Override
     protected void viewHolderBind(ProportionViewHolder holder, int position) {
         holder.tvName.setText(getList().get(position).getName());
-        holder.tvPercent.setText(getList().get(position).getBili());
+        holder.tvPercent.setText(new BigDecimal(getList().get(position).getBili()).multiply(new BigDecimal("100")).toString()+"%");
         holder.ivDot.setBackground(getBackgroundDrawable(colors[position],getContext().getResources().getDimension(R.dimen.dp_4)));
     }
 

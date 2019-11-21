@@ -23,6 +23,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
@@ -73,6 +74,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
     private Wallet currentCoin;
     private float mGasPrice;
     private String gasLitmit;
+    private List<GasPrice> gasPrices;
 
     @Override
     protected String getTitleRightText() {
@@ -130,7 +132,6 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
         if (address != null)
             tvAssdrss.setText(address);
         getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
-
     }
 
     @Override
@@ -162,7 +163,93 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                 tvAmount.setSelection(tvEthBanlance.getText().toString().length());
                 break;
             case R.id.btn_gas_price:
-                getPresenter().getGasPrice();
+                AnyLayer.with(getContext())
+                        .contentView(R.layout.dialog_gas_price)
+                        .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
+                        .gravity(Gravity.BOTTOM)
+                        .onClickToDismiss(R.id.imageView2)
+                        .bindData(new LayerManager.IDataBinder() {
+                            @Override
+                            public void bind(final AnyLayer anyLayer) {
+                                final TextView tvGas = anyLayer.getView(R.id.tv_gas);
+                                final TextView btnConfirm = anyLayer.getView(R.id.textView53);
+
+                                final IndicatorSeekBar seekBar = anyLayer.getView(R.id.sb);
+//                        seekBar.setDecimalScale(currentCoin.getDecimal());
+                                GasPrice gasPrice = null;
+                                if (currentCoin.getName().equals("ETH"))
+                                {
+                                    for (int i=0;i<gasPrices.size();i++){
+                                        if ( gasPrices.get(i).getName().equals("ETH")){
+                                            gasPrice = gasPrices.get(i);
+                                        }
+                                    }
+                                }else {
+                                    for (int i=0;i<gasPrices.size();i++){
+                                        if ( gasPrices.get(i).getName().equals("other")){
+                                            gasPrice = gasPrices.get(i);
+                                        }
+                                    }
+                                }
+                                gasLitmit = gasPrice.getGasmax();
+//                        BigInteger gweiMin = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
+//                        BigInteger gweiMax = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
+
+//                        seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
+//                        seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
+
+                                final String gasMin = gasPrice.getGasmin();
+                                String gaswei = gasPrice.getGweimin();
+                                final String decimal = "1000000000";
+                                seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
+                                seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
+                                BigDecimal gas = new BigDecimal(gasMin).multiply(new BigDecimal(gaswei)).divide(new BigDecimal(decimal));
+                                tvGas.setText(gas.toString()+getResources().getString(R.string.eth));
+
+                                final GasPrice finalGasPrice = gasPrice;
+                                seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
+                                    BigDecimal gas;
+                                    @Override
+                                    public void onSeeking(SeekParams seekParams) {
+                                        gas = new BigDecimal(gasMin).multiply(new BigDecimal(seekParams.progressFloat+"")).divide(new BigDecimal(decimal),8,BigDecimal.ROUND_DOWN);
+                                        tvGas.setText(gas+getResources().getString(R.string.eth));
+                                    }
+
+                                    @Override
+                                    public void onStartTrackingTouch(IndicatorSeekBar seekBar) {
+
+                                    }
+
+                                    @Override
+                                    public void onStopTrackingTouch(IndicatorSeekBar seekBar) {
+
+                                    }
+                                });
+
+                                btnConfirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        tvMining.setText(tvGas.getText().toString());
+//                                mGasPrice = seekBar.getProgressFloat();
+                                        mGasPrice = seekBar.getProgressFloat();
+                                        anyLayer.dismiss();
+                                    }
+                                });
+                            }
+                        })
+
+                        .contentAnim(new LayerManager.IAnim() {
+                            @Override
+                            public Animator inAnim(View content) {
+                                return AnimHelper.createBottomAlphaInAnim(content);
+                            }
+
+                            @Override
+                            public Animator outAnim(View content) {
+                                return AnimHelper.createBottomAlphaOutAnim(content);
+                            }
+                        })
+                        .show();
                 break;
             case R.id.btn_transfer:
                 if (TextUtils.isEmpty(tvAssdrss.getText().toString())){
@@ -199,6 +286,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
     @Override
     public void getWalletInfoSuccess(AssetResponse assetResponse) {
         this.coins = assetResponse.getGlod();
+        getPresenter().getGasPrice();
         if (currentCoin == null && coins != null && coins.size() > 1) {
             currentCoin = coins.get(0);
         }else {
@@ -273,93 +361,34 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
 
     @Override
     public void getGasPriceSuccess(final List<GasPrice> gasPrices) {
+        this.gasPrices = gasPrices;
+        GasPrice gasPrice = null;
+        if (currentCoin.getName().equals("ETH"))
+        {
+            for (int i=0;i<gasPrices.size();i++){
+                if ( gasPrices.get(i).getName().equals("ETH")){
+                    gasPrice = gasPrices.get(i);
+                }
+            }
+        }else {
+            for (int i=0;i<gasPrices.size();i++){
+                if ( gasPrices.get(i).getName().equals("other")){
+                    gasPrice = gasPrices.get(i);
+                }
+            }
+        }
+        gasLitmit = gasPrice.getGasmax();
+        final String gasMin = gasPrice.getGasmin();
+        String gaswei = gasPrice.getGweimin();
+        final String decimal = "1000000000";
+        BigDecimal gas = new BigDecimal(gasMin).multiply(new BigDecimal(gaswei)).divide(new BigDecimal(decimal));
+        mGasPrice = new BigDecimal(gasPrice.getGweidefault()).floatValue();
 
-        AnyLayer.with(getContext())
-                .contentView(R.layout.dialog_gas_price)
-                .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
-                .gravity(Gravity.BOTTOM)
-                .onClickToDismiss(R.id.imageView2)
-                .bindData(new LayerManager.IDataBinder() {
-                    @Override
-                    public void bind(final AnyLayer anyLayer) {
-                        final TextView tvGas = anyLayer.getView(R.id.tv_gas);
-                        final TextView btnConfirm = anyLayer.getView(R.id.textView53);
+        tvMining.setText(gas.toString()+getResources().getString(R.string.eth));
+    }
 
-                        final IndicatorSeekBar seekBar = anyLayer.getView(R.id.sb);
-//                        seekBar.setDecimalScale(currentCoin.getDecimal());
-                        GasPrice gasPrice = null;
-                        if (currentCoin.getName().equals("ETH"))
-                        {
-                            for (int i=0;i<gasPrices.size();i++){
-                                if ( gasPrices.get(i).getName().equals("ETH")){
-                                    gasPrice = gasPrices.get(i);
-                                }
-                            }
-                        }else {
-                            for (int i=0;i<gasPrices.size();i++){
-                                if ( gasPrices.get(i).getName().equals("other")){
-                                    gasPrice = gasPrices.get(i);
-                                }
-                            }
-                        }
-                        gasLitmit = gasPrice.getGasmax();
-//                        BigInteger gweiMin = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
-//                        BigInteger gweiMax = new BigDecimal(gasPrice.getGweimin()).divide(BigDecimal.TEN.pow(currentCoin.getDecimal())).toBigInteger();
+    @Override
+    public void getVersionSuccess(VersionInfo versionInfo) {
 
-//                        seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
-//                        seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
-
-                        final String gasMin = gasPrice.getGasmin();
-                        String gaswei = gasPrice.getGweimin();
-                        final String decimal = "1000000000";
-                        seekBar.setMin(Float.parseFloat(gasPrice.getGweimin()));
-                        seekBar.setMax(Float.parseFloat(gasPrice.getGweimax()));
-                        BigDecimal gas = new BigDecimal(gasMin).multiply(new BigDecimal(gaswei)).divide(new BigDecimal(decimal));
-                        tvGas.setText(gas.toString()+getResources().getString(R.string.eth));
-
-                        final GasPrice finalGasPrice = gasPrice;
-                        seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
-                            BigDecimal gas;
-                            @Override
-                            public void onSeeking(SeekParams seekParams) {
-                                gas = new BigDecimal(gasMin).multiply(new BigDecimal(seekParams.progressFloat+"")).divide(new BigDecimal(decimal),8,BigDecimal.ROUND_DOWN);
-                                tvGas.setText(gas+getResources().getString(R.string.eth));
-                            }
-
-                            @Override
-                            public void onStartTrackingTouch(IndicatorSeekBar seekBar) {
-
-                            }
-
-                            @Override
-                            public void onStopTrackingTouch(IndicatorSeekBar seekBar) {
-
-                            }
-                        });
-
-                        btnConfirm.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                tvMining.setText(tvGas.getText().toString());
-//                                mGasPrice = seekBar.getProgressFloat();
-                                mGasPrice = seekBar.getProgressFloat();
-                                anyLayer.dismiss();
-                            }
-                        });
-                    }
-                })
-
-                .contentAnim(new LayerManager.IAnim() {
-                    @Override
-                    public Animator inAnim(View content) {
-                        return AnimHelper.createBottomAlphaInAnim(content);
-                    }
-
-                    @Override
-                    public Animator outAnim(View content) {
-                        return AnimHelper.createBottomAlphaOutAnim(content);
-                    }
-                })
-                .show();
     }
 }

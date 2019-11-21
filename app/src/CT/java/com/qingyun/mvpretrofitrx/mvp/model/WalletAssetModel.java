@@ -38,8 +38,15 @@ public class WalletAssetModel<T> extends BaseModel {
 
     }
 
-    public void getGasPrice(Context context,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+      public void getGasPrice(Context context,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
         subscribe(context, Api.getApiService().getGasPrice(), observerListener,transformer);
+
+    }
+
+
+
+    public void getVersion(Context context,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getVersion("android"), observerListener,transformer);
 
     }
 

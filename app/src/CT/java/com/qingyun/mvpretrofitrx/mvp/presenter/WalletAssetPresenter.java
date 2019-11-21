@@ -7,6 +7,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.model.WalletAssetModel;
 import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
 
@@ -123,6 +124,24 @@ public class WalletAssetPresenter extends WalletAssetContact.Presenter {
             public void onNext(List<GasPrice>  gasPriceList) {
                 if(getView() != null){
                     getView().getGasPriceSuccess(gasPriceList);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getVersion() {
+        model.getVersion(context,getView().bindLifecycle(), new ObserverResponseListener<VersionInfo>() {
+
+            @Override
+            public void onNext(VersionInfo versionInfo) {
+                if(getView() != null){
+                    getView().getVersionSuccess(versionInfo);
                 }
             }
 

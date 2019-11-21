@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,27 +16,36 @@ import com.qingyun.mvpretrofitrx.mvp.adapter.ProportionAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.Proportion;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
+import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
+import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.CopyUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.ObservableTransformer;
 
 import static com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils.ASSET_RESPONSE;
 
-public class AssetDetailActivity extends BaseActivity {
+public class AssetDetailActivity extends BaseActivity<WalletAssetContact.View,WalletAssetContact.Presenter> implements WalletAssetContact.View {
     @BindView(R.id.tv_income_today)
     TextView tvIncomeToday;
     @BindView(R.id.tv_wallet_name)
@@ -56,6 +66,7 @@ public class AssetDetailActivity extends BaseActivity {
     private int[] colors;
     private float[] weight;
     private static final String INVISIABLE_STR="****";
+    private Wallet wallet;
 
     @Override
     protected String getTitleRightText() {
@@ -66,6 +77,7 @@ public class AssetDetailActivity extends BaseActivity {
     protected String getTitleLeftText() {
         return null;
     }
+
 
     @Override
     protected String getTitleText() {
@@ -83,22 +95,28 @@ public class AssetDetailActivity extends BaseActivity {
     }
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public WalletAssetContact.Presenter createPresenter() {
+        return new WalletAssetPresenter(this);
     }
 
     @Override
-    public BaseView createView() {
-        return null;
+    public WalletAssetContact.View createView() {
+        return this;
     }
+
 
     @Override
     public void init() {
-        assetResponse = (AssetResponse) getIntent().getSerializableExtra(ASSET_RESPONSE);
-        tvPublishKey.setText(ApplicationUtil.getCurrentWallet().getAddress());
-        tvWalletName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
 
-        proportionList = assetResponse.getProportion();
+        wallet = (Wallet) getIntent().getSerializableExtra(IntentUtils.WALLET);
+        if (wallet==null){
+            wallet = ApplicationUtil.getCurrentWallet();
+        }
+        getPresenter().getWalletInfo(wallet.getAddress());
+        tvPublishKey.setText(wallet.getAddress());
+        tvWalletName.setText(wallet.getWalletName());
+
+        proportionList = new ArrayList<>();
         proportionAdapter = new ProportionAdapter(getContext(), proportionList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //调整RecyclerView的排列方向
@@ -115,43 +133,42 @@ public class AssetDetailActivity extends BaseActivity {
                 refreashAsset(isChecked);
             }
         });
-        refreashAsset(btnVisiable.isChecked());
 
-        colors = new int[assetResponse.getProportion().size()];
-        for (int i = 0; i < colors.length; i++) {
-            int color = getResources().getColor(R.color.green);
-            switch (i) {
-                case 0:
-                    color = getResources().getColor(R.color.color_FFFFFF);
-                    break;
-                case 1:
-                    color = getResources().getColor(R.color.color_93AEFC);
-
-                    break;
-                case 2:
-                    color = getResources().getColor(R.color.color_FFB632);
-
-                    break;
-                case 3:
-                    color = getResources().getColor(R.color.color_EA566D);
-
-                    break;
-            }
-            colors[i] = color;
-        }
-        weight = new float[assetResponse.getProportion().size()];
-        boolean all0 = true;
-        for (int i=0;i<assetResponse.getProportion().size();i++){
-            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
-            if (weight[i]!=0) all0 = false;
-        }
-//        if (all0){
-//            colors[0] = getResources().getColor(R.color.color_F8F8FF);
+//        colors = new int[assetResponse.getProportion().size()];
+//        for (int i = 0; i < colors.length; i++) {
+//            int color = getResources().getColor(R.color.green);
+//            switch (i) {
+//                case 0:
+//                    color = getResources().getColor(R.color.color_FFFFFF);
+//                    break;
+//                case 1:
+//                    color = getResources().getColor(R.color.color_93AEFC);
 //
+//                    break;
+//                case 2:
+//                    color = getResources().getColor(R.color.color_FFB632);
+//
+//                    break;
+//                case 3:
+//                    color = getResources().getColor(R.color.color_EA566D);
+//
+//                    break;
+//            }
+//            colors[i] = color;
 //        }
-        progress.setProgress(0);
-        progress.setColors(colors, weight);
-        progress.invalidate();
+//        weight = new float[assetResponse.getProportion().size()];
+//        boolean all0 = true;
+//        for (int i=0;i<assetResponse.getProportion().size();i++){
+//            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
+//            if (weight[i]!=0) all0 = false;
+//        }
+////        if (all0){
+////            colors[0] = getResources().getColor(R.color.color_F8F8FF);
+////
+////        }
+//        progress.setProgress(0);
+//        progress.setColors(colors, weight);
+//        progress.invalidate();
 
 
     }
@@ -216,13 +233,12 @@ public class AssetDetailActivity extends BaseActivity {
                             public void onSuccess() {
                                 startActivity(ExportPrivateKeyActivity.class);
                                 ProgressDialogUtils.getInstances().cancel();
-
                             }
 
                             @Override
                             public void onFailure(Exception e) {
+                                ToastUtil.showShortToast(e.toString());
                                 ToastUtil.showShortToast(R.string.pass_err);
-                                ProgressDialogUtils.getInstances().cancel();
 
                             }
                         });
@@ -308,4 +324,95 @@ public class AssetDetailActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void getWalletInfoSuccess(AssetResponse assetResponse) {
+
+        this.assetResponse = assetResponse;
+        refreashAsset(btnVisiable.isChecked());
+
+        proportionList = assetResponse.getProportion();
+        proportionAdapter.notifyDataSetChanged(proportionList);
+
+
+        colors = new int[assetResponse.getProportion().size()];
+        for (int i=0;i<colors.length;i++){
+            int color = getResources().getColor(R.color.green);
+            switch (i)
+            {
+                case 0:
+                    color = getResources().getColor(R.color.color_FFFFFF);
+                    break;
+                case 1:
+                    color = getResources().getColor(R.color.color_93AEFC);
+
+                    break;
+                case 2:
+                    color = getResources().getColor(R.color.color_FFB632);
+
+                    break;
+                case 3:
+                    color = getResources().getColor(R.color.color_EA566D);
+
+                    break;
+            }
+            colors[i] = color;
+        }
+        weight = new float[assetResponse.getProportion().size()];
+        boolean all0 = true;
+        for (int i=0;i<assetResponse.getProportion().size();i++){
+            weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
+            if (weight[i]!=0) all0 = false;
+        }
+
+//        weight[0] = 50;
+//        weight[1] = 20;
+//        weight[2] = 10;
+//        weight[3] = 10;
+//        weight[4] = 10;
+
+//        if (all0){
+//            colors[0] = getResources().getColor(R.color.color_F8F8FF);
+//
+//        }
+        progress.setProgress(0);
+        progress.setColors(colors,weight);
+        progress.invalidate();
+
+
+    }
+
+    @Override
+    public void addWalletSuccess() {
+
+    }
+
+    @Override
+    public void getLogSuccess(TransferLogResponse transferLogResponse) {
+
+    }
+
+    @Override
+    public void getNodeSuccess(String node) {
+
+    }
+
+    @Override
+    public void searchLogByHashSuccess(TransferLog transferLog) {
+
+    }
+
+    @Override
+    public void getGasPriceSuccess(List<GasPrice> gasPrices) {
+
+    }
+
+    @Override
+    public void getVersionSuccess(VersionInfo versionInfo) {
+
+    }
+
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+        return this.bindToLifecycle();
+    }
 }

@@ -7,6 +7,15 @@ public class GasPrice {
     private String gasmax;
     private String gweimin;
     private String gweimax;
+    private String gweidefault;
+
+    public String getGweidefault() {
+        return gweidefault;
+    }
+
+    public void setGweidefault(String gweidefault) {
+        this.gweidefault = gweidefault;
+    }
 
     public String getName() {
         return name;

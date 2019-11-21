@@ -70,7 +70,7 @@ public class ImportScanActivity extends BaseActivity implements QRCodeView.Deleg
         mZBarView = findViewById(R.id.zbarview);
         mZBarView.setDelegate(this);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

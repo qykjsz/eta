@@ -18,6 +18,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinType;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.ArrayList;
@@ -90,7 +91,9 @@ public class WalletManagerActivity extends BaseActivity {
             @Override
             public void onItemClick(List list, int position) {
 //                ApplicationUtil.setCurrentWallet((Wallet) list.get(position));
-
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentUtils.WALLET, ((Wallet) list.get(position)));
+                startActivity(AssetDetailActivity.class, bundle);
             }
         });
 

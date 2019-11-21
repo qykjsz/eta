@@ -23,7 +23,7 @@
     <string name="shan_dui">闪兑</string>
     <string name="ziyuan">资源</string>
     <string name="vote">投票</string>
-    <string name="b_business">投票</string>
+    <string name="b_business">币买卖</string>
     <string name="more_modle">更多工具</string>
     <string name="dollar">$</string>
     <string name="transfer_zhijie">直接转账</string>
@@ -114,7 +114,7 @@
     <string name="wallet_list">钱包列表</string>
     <string name="current">当前</string>
     <string name="not_make_copy">未备份</string>
-    <string name="cumtomer_login">访客登录</string>
+    <string name="cumtomer_login">安全模式</string>
     <string name="import_wallet">导入钱包</string>
     <string name="import_private_key">私钥导入</string>
     <string name="import_private_key_tips">通过输入明文私钥或扫描二维码进行导入</string>
@@ -249,7 +249,7 @@
     <string name="recommend">推荐</string>
     <string name="senior_model">高级模式</string>
     <string name="wallet_manager">钱包管理</string>
-    <string name="cannot_make_copy">不可备份</string>
+    <string name="cannot_make_copy">请做好备份</string>
     <string name="transfer_notify">转账通知</string>
     <string name="chat_message_notify">聊天消息通知</string>
     <string name="normal_wallet_transfer_message">普通钱包转账通知</string>
@@ -267,4 +267,7 @@
     <string name="wallet_password">钱包密码</string>
     <string name="save_success">保存成功</string>
     <string name="personal_center">个人中心</string>
+    <string name="updata_content">更新内容</string>
+    <string name="find_new_version">发现新版本</string>
+    <string name="updata">更新</string>
 </resources>

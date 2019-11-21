@@ -17,6 +17,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
@@ -177,6 +178,11 @@ public class TransferActivity extends BaseActivity<WalletAssetContact.View,Walle
 
     @Override
     public void getGasPriceSuccess(List<GasPrice> gasPrices) {
+
+    }
+
+    @Override
+    public void getVersionSuccess(VersionInfo versionInfo) {
 
     }
 

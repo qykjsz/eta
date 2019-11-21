@@ -27,15 +27,15 @@ public class Api {
     }
 
     private Api() {
-        if (ApplicationUtil.isApkInDebug(ApplicationUtil.getContext())) {
-            baseUrl = "https://et2.etac.io/api/";
-            Log.e("---------------", "debug");
-        } else {
-            Log.e("---------------", "release");
+//        if (ApplicationUtil.isApkInDebug(ApplicationUtil.getContext())) {
+//            baseUrl = "https://et2.etac.io/api/";
+//            Log.e("---------------", "debug");
+//        } else {
+//            Log.e("---------------", "release");
 
             baseUrl = "https://etoken.etac.io/api/";
 
-        }
+//        }
         BaseApi baseApi = new BaseApi();
         apiService = baseApi.getRetrofit(baseUrl).create(ApiService.class);
     }
