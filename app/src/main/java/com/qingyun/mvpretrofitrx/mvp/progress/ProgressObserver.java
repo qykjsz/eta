@@ -122,6 +122,8 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
 
             } catch (IOException IOe) {
                 IOe.printStackTrace();
+            }catch (Exception e1){
+                ToastUtil.showShortToast("服务器错误");
             }
         }
 

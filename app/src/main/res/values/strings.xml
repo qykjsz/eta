@@ -270,4 +270,5 @@
     <string name="updata_content">更新内容</string>
     <string name="find_new_version">发现新版本</string>
     <string name="updata">更新</string>
+    <string name="import_err">导入失败</string>
 </resources>

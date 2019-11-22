@@ -17,6 +17,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ContactsPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.senon.mvpretrofitrx.R;
 
@@ -107,7 +108,8 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
                 startActivity(ChooseBottomLsvelActivity.class);
                 break;
             case R.id.btn_scan:
-                startActivity(ImportScanActivity.class);
+                ScanUtil.startImportScan(getActivity());
+
                 break;
         }
     }

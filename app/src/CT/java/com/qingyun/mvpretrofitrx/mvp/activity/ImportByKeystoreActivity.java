@@ -19,6 +19,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
@@ -84,10 +85,11 @@ public class ImportByKeystoreActivity extends BaseActivity<WalletAssetContact.Vi
     public void init() {
         EventBus.getDefault().register(this);
         setIvTitleRight(R.mipmap.icon_scan, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(ImportScanActivity.class);
-            }
+                    @Override
+                    public void onClick(View v) {
+                        ScanUtil.startImportScan(getActivity());
+
+                    }
         });
 
 
@@ -140,7 +142,7 @@ public class ImportByKeystoreActivity extends BaseActivity<WalletAssetContact.Vi
 
             @Override
             public void importFailure(Exception e) {
-                ToastUtil.showShortToast(e.toString());
+                ToastUtil.showShortToast(R.string.import_err);
                 ProgressDialogUtils.getInstances().cancel();
 
             }

@@ -450,6 +450,11 @@ public class WalletManager {
                     message.obj = e;
                     handler.sendMessage(message);
 
+                }catch (Exception e){
+                    Message message = new Message();
+                    message.what=2;
+                    message.obj = e;
+                    handler.sendMessage(message);
                 }
 
             }
@@ -465,7 +470,11 @@ public class WalletManager {
     public static void importWalletByMemoryWord(final String passwd, final String menmory, final String name, final ImportWalletListener importWalletListener){
         mImportWalletListener = importWalletListener;
 
-//        List mnemonicList = Arrays.asList(menmory.split(" "));
+        List mnemonicList = Arrays.asList(menmory.split(" "));
+        if (mnemonicList.size()!=12){
+            importWalletListener.importFailure(new Exception("助记词必须是12个"));
+            return;
+        }
 //        byte[] seed = new SeedCalculator()
 //                .withWordsFromWordList(English.INSTANCE)
 //                .calculateSeed(mnemonicList, passwd);
@@ -530,7 +539,16 @@ public class WalletManager {
 
     public static void importWalletByPrivateKey(final String privateKey, final String name, final String passwd, final ImportWalletListener importWalletListener){
 
+
        mImportWalletListener = importWalletListener;
+        if (privateKey.startsWith("0x")&&privateKey.length()!=66){
+            mImportWalletListener.importFailure(new Exception("私钥格式错误"));
+            return;
+        }
+        if (!privateKey.startsWith("0x")&&privateKey.length()!=64){
+            mImportWalletListener.importFailure(new Exception("私钥格式错误"));
+            return;
+        }
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

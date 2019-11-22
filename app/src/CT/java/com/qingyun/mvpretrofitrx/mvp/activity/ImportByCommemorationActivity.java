@@ -21,6 +21,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.TransferLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.presenter.WalletAssetPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
@@ -93,7 +94,8 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
         setIvTitleRight(R.mipmap.icon_scan, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ImportScanActivity.class);
+                ScanUtil.startImportScan(getActivity());
+
             }
         });
 
