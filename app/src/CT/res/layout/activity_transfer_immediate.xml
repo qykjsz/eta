@@ -31,6 +31,7 @@
         android:id="@+id/tv_assdrss"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:layout_marginTop="@dimen/dp_18"
         android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:background="@color/transparent"
@@ -54,6 +55,7 @@
         android:id="@+id/tv_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:singleLine="true"
 
         android:layout_marginTop="@dimen/dp_padding_x_min"
         android:background="@color/transparent"

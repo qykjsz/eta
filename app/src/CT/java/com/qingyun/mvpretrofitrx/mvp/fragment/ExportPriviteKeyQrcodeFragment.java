@@ -45,7 +45,12 @@ public class ExportPriviteKeyQrcodeFragment extends BaseFragment {
 
     @Override
     public void init() {
-        bitmap = ZXingUtils.createQRImage(ApplicationUtil.getCurrentWallet().getPrivateKey(), DensityUtil.dip2px(getContext(), 180), DensityUtil.dip2px(getContext(), 180));
+        String  privateKey = ApplicationUtil.getCurrentWallet().getPrivateKey();
+        if (privateKey.startsWith("0x")) {
+            privateKey = privateKey.substring(2,privateKey.length());
+        }
+
+        bitmap = ZXingUtils.createQRImage(privateKey, DensityUtil.dip2px(getContext(), 180), DensityUtil.dip2px(getContext(), 180));
 
 
     }

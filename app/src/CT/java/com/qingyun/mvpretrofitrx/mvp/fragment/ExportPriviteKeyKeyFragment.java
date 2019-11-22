@@ -40,7 +40,12 @@ public class ExportPriviteKeyKeyFragment extends BaseFragment {
 
     @Override
     public void init() {
-        tvPrivateKey.setText(ApplicationUtil.getCurrentWallet().getPrivateKey());
+        String  privateKey = ApplicationUtil.getCurrentWallet().getPrivateKey();
+        if (privateKey.startsWith("0x")) {
+            privateKey = privateKey.substring(2,privateKey.length());
+        }
+
+        tvPrivateKey.setText(privateKey);
 
     }
 

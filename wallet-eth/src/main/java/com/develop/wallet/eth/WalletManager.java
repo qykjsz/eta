@@ -316,7 +316,7 @@ public class WalletManager {
                 try {
 
 //                   解决用keystore导入苹果创建账号时候无法验证bug
-//                    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     walletFile = objectMapper.readValue(wallet.getKeystore(), WalletFile.class);
                     boolean success = decrypt(password, walletFile);
                     if (success){

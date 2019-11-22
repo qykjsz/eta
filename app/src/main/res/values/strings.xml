@@ -114,7 +114,7 @@
     <string name="wallet_list">钱包列表</string>
     <string name="current">当前</string>
     <string name="not_make_copy">未备份</string>
-    <string name="cumtomer_login">安全模式</string>
+    <string name="cumtomer_login">资产保护中</string>
     <string name="import_wallet">导入钱包</string>
     <string name="import_private_key">私钥导入</string>
     <string name="import_private_key_tips">通过输入明文私钥或扫描二维码进行导入</string>

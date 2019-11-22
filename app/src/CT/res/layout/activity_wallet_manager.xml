@@ -72,18 +72,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_18"
+            android:layout_marginTop="@dimen/dp_padding_x_min"
             android:text="@string/eth_cn"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_aa_wallet"
             app:layout_constraintStart_toEndOf="@+id/recyclerView2"
-            app:layout_constraintTop_toTopOf="@+id/btn_aa_wallet" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/btn_aa_wallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_padding_x_min"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_wallet_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_wallet_name"
             app:srcCompat="@mipmap/qblb_tianjia" />
 
         <android.support.v7.widget.RecyclerView

@@ -8,6 +8,7 @@ import com.qingyun.mvpretrofitrx.mvp.adapter.ContactAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.contract.ContactsContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.Address;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ContactsPresenter;
@@ -26,12 +27,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
 
+import static com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils.IS_FROM_TRANSFER;
+
 public class ContactActivity extends BaseActivity<ContactsContact.View, ContactsContact.Presenter> implements ContactsContact.View {
 
     ContactAdapter contactAdapter;
     @BindView(R.id.rcy)
     RecyclerView rcy;
     private List<Contact> list;
+    private boolean isFromTransfer;
 
     @Override
     protected String getTitleRightText() {
@@ -73,14 +77,21 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
     @Override
     public void init() {
         list = new ArrayList<>();
+        isFromTransfer = getIntent().getBooleanExtra(IS_FROM_TRANSFER,false);
         contactAdapter = new ContactAdapter(getContext(), list);
         contactAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
 //                EventBus.getDefault().post((Contact)list.get(position));
-                Bundle bundle = new Bundle();
-                bundle.putString(IntentUtils.TRANSFER_ADDRESS,((Contact)list.get(position)).getAddress());
-                startActivity(TransferImmediateActivity.class,bundle);
+                if (isFromTransfer){
+                    finish();
+                    EventBus.getDefault().post(((Contact)list.get(position)));
+                }else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(IntentUtils.TRANSFER_ADDRESS,((Contact)list.get(position)).getAddress());
+                    startActivity(TransferImmediateActivity.class,bundle);
+                }
+
             }
         });
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));

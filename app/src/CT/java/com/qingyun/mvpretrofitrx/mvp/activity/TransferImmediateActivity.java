@@ -76,6 +76,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
     private String gasLitmit;
     private List<GasPrice> gasPrices;
 
+
     @Override
     protected String getTitleRightText() {
         return null;
@@ -156,13 +157,19 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                 }
                 break;
             case R.id.btn_contact:
-                startActivity(ContactActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(IntentUtils.IS_FROM_TRANSFER,true);
+                startActivity(ContactActivity.class,bundle);
                 break;
             case R.id.btn_all:
                 tvAmount.setText(tvEthBanlance.getText().toString());
                 tvAmount.setSelection(tvEthBanlance.getText().toString().length());
                 break;
             case R.id.btn_gas_price:
+                if (gasPrices==null){
+                    ToastUtil.showShortToast(R.string.requst_err);
+                    return;
+                }
                 AnyLayer.with(getContext())
                         .contentView(R.layout.dialog_gas_price)
                         .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
@@ -277,6 +284,14 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
         tvAssdrss.setText(contact.getAddress());
     }
 
+
+
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void getAddress(Contact contact) {
+//        tvAssdrss.setText(contact.getAddress());
+//    }
+//
 
     @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {

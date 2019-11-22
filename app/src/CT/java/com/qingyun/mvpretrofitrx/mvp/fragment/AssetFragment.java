@@ -1,12 +1,10 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
-import android.Manifest;
 import android.animation.Animator;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,19 +13,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.develop.wallet.eth.Wallet;
-import com.develop.wallet.eth.WalletManager;
 import com.gongwen.marqueen.SimpleMF;
 import com.gongwen.marqueen.SimpleMarqueeView;
 import com.gongwen.marqueen.util.OnItemClickListener;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetDetailActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
@@ -35,15 +31,12 @@ import com.qingyun.mvpretrofitrx.mvp.activity.CreateWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.PlatformNoticActivity;
-import com.qingyun.mvpretrofitrx.mvp.activity.QuickExchangeActivity;
-import com.qingyun.mvpretrofitrx.mvp.activity.ScanActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.TransferActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.AssetModleAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.CoinTypeAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MyWalletAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.ProportionAdapter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.contract.WalletAssetContact;
@@ -61,6 +54,7 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
@@ -68,23 +62,29 @@ import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
 import com.senon.mvpretrofitrx.R;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
-import io.reactivex.functions.Consumer;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
 import per.goweii.anylayer.AnimHelper;
 import per.goweii.anylayer.AnyLayer;
 import per.goweii.anylayer.LayerManager;
@@ -133,14 +133,18 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     MultistageProgress progress;
     @BindView(R.id.rcy_proportion)
     RecyclerView rcyProportion;
+    @BindView(R.id.et_search)
+    EditText etSearch;
     private List<AssetModle> modleList;
     private List<com.qingyun.mvpretrofitrx.mvp.entity.Wallet> assetList;
+    private List<com.qingyun.mvpretrofitrx.mvp.entity.Wallet> searchList;
+
     private ProportionAdapter proportionAdapter;
     private AssetResponse assetResponse;
     private List<Proportion> proportionList;
     private float[] weight;
     private int[] colors;
-    private static final String INVISIABLE_STR="****";
+    private static final String INVISIABLE_STR = "****";
 
     @Override
     public int getLayoutId() {
@@ -200,11 +204,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rcyProportion.setLayoutManager(linearLayoutManager);
         rcyProportion.setAdapter(proportionAdapter);
-        btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(),"is_asset_visiable"));
+        btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(), "is_asset_visiable"));
         btnVisiable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SpUtils.setBoolenToShare(getContext(),isChecked,"is_asset_visiable");
+                SpUtils.setBoolenToShare(getContext(), isChecked, "is_asset_visiable");
 
                 refreashAsset(isChecked);
             }
@@ -237,7 +241,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
 
         tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
-        if (ApplicationUtil.getCurrentWallet().getStatus()==Wallet.STATUS_NO_MAKE_COPY) {
+        if (ApplicationUtil.getCurrentWallet().getStatus() == Wallet.STATUS_NO_MAKE_COPY) {
             DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.cancel, R.string.beifen, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -314,7 +318,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             case R.id.btn_scan:
 
 
-                ScanUtil.start( getActivity());
+                ScanUtil.start(getActivity());
 
                 break;
             case R.id.btn_more_info:
@@ -383,9 +387,9 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                         coinTypeAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(List list, int position) {
-                                if(position == 1){
+                                if (position == 1) {
                                     addWallet.setVisibility(View.VISIBLE);
-                                }else{
+                                } else {
                                     addWallet.setVisibility(View.GONE);
                                 }
                                 tv_wallet_name.setText(((CoinType) list.get(position)).getCoinType());
@@ -412,12 +416,12 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     }
 
 
-    private void refreashAsset(boolean visiable){
-        if (visiable){
-            if (assetResponse!=null)
+    private void refreashAsset(boolean visiable) {
+        if (visiable) {
+            if (assetResponse != null)
                 tvAsset.setText(assetResponse.getAllnumber());
             tvIncomeToday.setText(assetResponse.getToday());
-        }else {
+        } else {
             tvIncomeToday.setText(INVISIABLE_STR);
             tvAsset.setText(INVISIABLE_STR);
 
@@ -429,7 +433,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         this.assetResponse = assetResponse;
         assetList = assetResponse.getGlod();
         assetAdapter.notifyDataSetChanged(assetList);
-        btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(),"is_asset_visiable"));
+        btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(), "is_asset_visiable"));
         refreashAsset(btnVisiable.isChecked());
         refreashView(assetList, rcyWallet);
 
@@ -440,7 +444,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             if (!TextUtils.isEmpty(assetResponse.getNews().get(i).getName()))
                 newList.add(assetResponse.getNews().get(i).getName());
         }
-        if (newList.size()==1){
+        if (newList.size() == 1) {
             newList.add(newList.get(0));
         }
         marqueeFactory.setData(newList);
@@ -461,10 +465,9 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
 
         colors = new int[assetResponse.getProportion().size()];
-        for (int i=0;i<colors.length;i++){
+        for (int i = 0; i < colors.length; i++) {
             int color = getResources().getColor(R.color.green);
-            switch (i)
-            {
+            switch (i) {
                 case 0:
                     color = getResources().getColor(R.color.color_FFFFFF);
                     break;
@@ -485,9 +488,9 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         }
         weight = new float[assetResponse.getProportion().size()];
         boolean all0 = true;
-        for (int i=0;i<assetResponse.getProportion().size();i++){
+        for (int i = 0; i < assetResponse.getProportion().size(); i++) {
             weight[i] = Float.parseFloat(assetResponse.getProportion().get(i).getBili());
-            if (weight[i]!=0) all0 = false;
+            if (weight[i] != 0) all0 = false;
         }
 
 //        weight[0] = 50;
@@ -501,12 +504,13 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 //
 //        }
         progress.setProgress(0);
-        progress.setColors(colors,weight);
+        progress.setColors(colors, weight);
         progress.invalidate();
 //        int[] colors = new int[assetResponse.getProportion().];
 //        int[] colors = new int[]{assetResponse.getProportion()};
 //        float[] weights;
 //        progress.setColors(colors,weights);
+        addSearch();
     }
 
     @Override
@@ -537,7 +541,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void getVersionSuccess(final VersionInfo versionInfo) {
-        if (!versionInfo.getName().equals( AppUtils.getAppVersionName(getContext()))){
+        if (!versionInfo.getName().equals(AppUtils.getAppVersionName(getContext()))) {
             AnyLayer anyLayer = AnyLayer.with(getContext())
                     .contentView(R.layout.dialog_new_version)
                     .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
@@ -578,6 +582,81 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
         }
 
+    }
+
+
+    private void addSearch() {
+
+        RxTextView.textChanges(etSearch)//当EditText发生改变
+                //每500毫秒发射一次
+                //仅在过了一段指定的时间还没发射数据时才发射一个数据
+                //如果原始Observable在这个新生成的Observable终止之前发射了另一个数据， debounce 会抑制(suppress)这个数据项。
+                .debounce(1000, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+
+                .subscribeOn(AndroidSchedulers.mainThread())//内容监听操作需要在主线程操作
+                .filter(new Predicate<CharSequence>() {
+                    @Override
+                    public boolean test(CharSequence charSequence) throws Exception {
+                        return charSequence.length() >=0;
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .switchMap(new Function<CharSequence, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(CharSequence charSequence) throws Exception {
+                        Observable<String> just = Observable.just(charSequence.toString());
+                        return just;
+
+                    }
+                })
+
+//
+                .retry()//凡是请求出错就重试（例如超时、数据解析异常等），直到正确为止。（如果不retry的话就会调用onError。onError会导致整个订阅链条死掉，无法触发下一次了）
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        if (TextUtils.isEmpty(s)){
+                            assetAdapter.notifyDataSetChanged(assetList);
+                            refreashView(assetList,rcyWallet);
+                            return;
+                        }
+                        searchList = new ArrayList<>();
+                        for (int i = 0;i<assetList.size();i++){
+                            if (assetList.get(i).getName().toLowerCase().contains(s.toLowerCase())){
+                                searchList.add(assetList.get(i));
+                            }
+                        }
+                        KeyboardUtils.hideKeyboard(etSearch);
+
+
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                assetAdapter.notifyDataSetChanged(searchList);
+                                refreashView(searchList,rcyWallet);
+
+                            }
+                        },300);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
