@@ -129,6 +129,8 @@ public class ApplicationUtil extends Application implements Application.Activity
             wallets =  walletMap.get(wallet.getCoinType());
             if (wallets==null){
                 wallets = new ArrayList<>();
+            }else {
+                deleteWallet(wallet);
             }
             wallets.add(wallet);
         }
