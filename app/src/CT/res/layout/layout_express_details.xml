@@ -105,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:text="分享来自Etoken"
                         android:textColor="#1758FB"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
                         android:layout_marginTop="8dp"
                         android:text="您的通用数字钱包"
                         android:textColor="#1758FB"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 

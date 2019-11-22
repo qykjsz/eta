@@ -272,16 +272,19 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
             viewHolder.tvName.setText(item.getName());
             viewHolder.tvShangmoney.setText(item.getShangmoney());
             viewHolder.tvXiamoney.setText(getContext().getString(R.string.test1) + item.getXiamoney());
-            viewHolder.tvZb.setText(item.getZd() + "%");
+//            viewHolder.tvZb.setText(item.getZd() + "%");
             Glide.with(getContext()).load(item.getImg()).into(viewHolder.ivImg);
             double s_zd = Double.parseDouble(item.getZd());
 
             if (s_zd > 0) {//你输入的是正数
                 viewHolder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_E04159));
+                viewHolder.tvZb.setText("+"+item.getZd() + "%");
             } else if (s_zd < 0) {//你输入的是负数
                 viewHolder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_00B794));
+                viewHolder.tvZb.setText(item.getZd() + "%");
             } else if (item.getZd().equals("0")) {
                 viewHolder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_999999));
+                viewHolder.tvZb.setText(item.getZd() + "%");
             }
         }
 

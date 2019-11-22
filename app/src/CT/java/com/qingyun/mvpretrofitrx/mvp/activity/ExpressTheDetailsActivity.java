@@ -83,7 +83,7 @@ public class ExpressTheDetailsActivity extends BaseActivity {
             tvTitle1.setText(news.title);
             tvContent.setText(news.content);
             tv_source.setText("来源："+news.source);
-            iv_qr_code.setImageBitmap(ZXingUtils.createQRImage(news.url,700,700));
+            iv_qr_code.setImageBitmap(ZXingUtils.createQRImage(news.url,900,900));
             tvContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         }
     }

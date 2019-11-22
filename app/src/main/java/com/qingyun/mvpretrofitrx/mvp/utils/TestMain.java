@@ -37,22 +37,23 @@ public class TestMain {
         int month = cal.get(Calendar.MONTH) + 1;
         //方式一
         Date date = new Date();
-        if (getWeekOfDate(date).equals("星期日")){
+        SimpleDateFormat dateFm = new SimpleDateFormat("EEEE");
+        String currSun = dateFm.format(date);
+        if (currSun.equals("星期日")){
             return s="Sunday"+",  "+month+"月"+year+"年";
-        }else if (getWeekOfDate(date).equals("星期一")){
+        }else if (currSun.equals("星期一")){
              return s="Monday"+",  "+month+"月"+year+"年";
-        }else if (getWeekOfDate(date).equals("星期二")){
+        }else if (currSun.equals("星期二")){
              return s="Tuesday"+",  "+month+"月"+year+"年";
-        }else if (getWeekOfDate(date).equals("星期三")){
+        }else if (currSun.equals("星期三")){
              return s="Wednesday"+",  "+month+"月"+year+"年";
-        }else if (getWeekOfDate(date).equals("星期四")){
+        }else if (currSun.equals("星期四")){
              return s="Thursday"+",  "+month+"月"+year+"年";
-        }else if (getWeekOfDate(date).equals("星期五")){
+        }else if (currSun.equals("星期五")){
              return s="Friday"+",  "+month+"月"+year+"年";
-        }else if (getWeekOfDate(date).equals("星期六")){
-             return s="Saturday"+",  "+month+"月"+year+"年";
+        }else if (currSun.equals("星期六")){
+             return s ="Saturday"+",  "+month+"月"+year+"年";
         }
-
         return s;
     }
 }

@@ -99,10 +99,7 @@ public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Pre
     public void init() {
         tvNian.setText(TestMain.getsetdata());
 
-        Date date = new Date();
-        SimpleDateFormat dateFm = new SimpleDateFormat("EEEE");
-        String currSun = dateFm.format(date);
-        System.out.println("post===当前日期"+currSun);
+
 //        getPresenter().getContacFlashtList(page - 1 + "");
 //        times = new ArrayList<>();
 //        timeAdapter = new TimeAdapter(getContext(), times);
