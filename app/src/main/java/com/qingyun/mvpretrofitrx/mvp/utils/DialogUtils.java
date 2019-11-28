@@ -20,7 +20,11 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 
 import com.qingyun.mvpretrofitrx.mvp.adapter.CoinChooseAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.CoinRateChooseAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.CurrencyChooseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
+import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
+import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.senon.mvpretrofitrx.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -114,13 +118,11 @@ public class DialogUtils {
                          * create()方法参数一是上下文，在activity中传activity.this，在fragment中传fragment.this。参数二为请求码，用于结果回调onActivityResult中判断
                          * selectPicture()方法参数分别为 是否裁剪、裁剪后图片的宽(单位px)、裁剪后图片的高、宽比例、高比例。都不传则默认为裁剪，宽200，高200，宽高比例为1：1。
                          */
-
                         RxPermissions rxPermissions=new RxPermissions(context);
                         rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
                             @Override
                             public void accept(Boolean aBoolean) throws Exception {
                                 if (aBoolean){
-
                                     com.luck.picture.lib.PictureSelector.create(context).openCamera(PictureMimeType.ofImage())
                                             .selectionMode(PictureConfig.SINGLE)
                                             .isCamera(false)
@@ -217,7 +219,6 @@ public class DialogUtils {
 //                    @Override
 //                    public void bind(AnyLayer anyLayer) {
 //                        // TODO 绑定数据
-//
 //                    }
 //                })
 //                .show();
@@ -230,7 +231,6 @@ public class DialogUtils {
                 .contentView(R.layout.dialog_confirm)
                 .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
                 .gravity(Gravity.CENTER)
-
                 .bindData(new LayerManager.IDataBinder() {
                     @Override
                     public void bind(final AnyLayer anyLayer) {
@@ -313,6 +313,88 @@ public class DialogUtils {
     }
 
 
+
+
+
+
+    public static void showCurrencyChooseDialog(final Activity context, final List<CurrencyRate> coins, final BaseAdapter.OnItemClickListener onItemClickListener) {
+        AnyLayer.with(context)
+                .contentView(R.layout.dialog_choose_coin)
+                .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+                .gravity(Gravity.BOTTOM)
+
+                .bindData(new LayerManager.IDataBinder() {
+                    @Override
+                    public void bind(final AnyLayer anyLayer) {
+                        RecyclerView recyclerView =  anyLayer.getView(R.id.rcy);
+                        CurrencyChooseAdapter coinChooseAdapter = new CurrencyChooseAdapter(context,coins);
+                        coinChooseAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(List list, int position) {
+                                onItemClickListener.onItemClick(list,position);
+                                anyLayer.dismiss();
+                            }
+                        });
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        recyclerView.addItemDecoration(DividerHelper.getMyDivider(context));
+                        recyclerView.setAdapter(coinChooseAdapter);
+                    }
+                })
+                .onClickToDismiss(R.id.cancel)
+                .contentAnim(new LayerManager.IAnim() {
+                    @Override
+                    public Animator inAnim(View content) {
+                        return AnimHelper.createBottomAlphaInAnim(content);
+                    }
+
+                    @Override
+                    public Animator outAnim(View content) {
+                        return AnimHelper.createBottomAlphaOutAnim(content);
+                    }
+                })
+                .show();
+    }
+
+
+
+
+    public static void showCoinRateChooseDialog(final Activity context, final List<CoinTypeRate> coins, final BaseAdapter.OnItemClickListener onItemClickListener) {
+        AnyLayer.with(context)
+                .contentView(R.layout.dialog_choose_coin)
+                .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+                .gravity(Gravity.BOTTOM)
+
+                .bindData(new LayerManager.IDataBinder() {
+                    @Override
+                    public void bind(final AnyLayer anyLayer) {
+                        RecyclerView recyclerView =  anyLayer.getView(R.id.rcy);
+                        CoinRateChooseAdapter coinChooseAdapter = new CoinRateChooseAdapter(context,coins);
+                        coinChooseAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(List list, int position) {
+                                onItemClickListener.onItemClick(list,position);
+                                anyLayer.dismiss();
+                            }
+                        });
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        recyclerView.addItemDecoration(DividerHelper.getMyDivider(context));
+                        recyclerView.setAdapter(coinChooseAdapter);
+                    }
+                })
+                .onClickToDismiss(R.id.cancel)
+                .contentAnim(new LayerManager.IAnim() {
+                    @Override
+                    public Animator inAnim(View content) {
+                        return AnimHelper.createBottomAlphaInAnim(content);
+                    }
+
+                    @Override
+                    public Animator outAnim(View content) {
+                        return AnimHelper.createBottomAlphaOutAnim(content);
+                    }
+                })
+                .show();
+    }
 
 
 

@@ -45,7 +45,7 @@ public class GetMoneyActivity extends BaseActivity {
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.get_money);
+        return getResources().getString(R.string.qr_code);
     }
 
 
@@ -87,7 +87,6 @@ public class GetMoneyActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_save_code:
-
                 RxPermissions rxPermissions=new RxPermissions(getActivity());
                 rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
                     @Override
@@ -101,8 +100,6 @@ public class GetMoneyActivity extends BaseActivity {
                         }
                     }
                 });
-
-
                 break;
             case R.id.btn_copy_address:
                 CopyUtils.copy(getContext(),tvAddress.getText().toString());

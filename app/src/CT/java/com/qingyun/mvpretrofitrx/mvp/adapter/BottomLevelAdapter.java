@@ -48,9 +48,10 @@ public class BottomLevelAdapter extends BaseAdapter<CoinType, BottomLevelAdapter
         holder.tvBottom.setText(getList().get(position).getName());
         holder.ivPic.setImageResource(getList().get(position).getResId());
         if (position!=0){
-            holder.itemView.setEnabled(false);
+            holder.itemView.setBackground(getContext().getResources().getDrawable(R.mipmap.sy_zc_dk));
         }else {
-            holder.itemView.setEnabled(true);
+//            holder.itemView.setEnabled(true);
+            holder.itemView.setBackgroundColor(getContext().getResources().getColor(R.color.transparent));
 
         }
 

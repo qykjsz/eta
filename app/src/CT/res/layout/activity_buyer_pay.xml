@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <android.support.constraint.ConstraintLayout
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="@dimen/dp_0"
+        android:background="@mipmap/mj_szje_dk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView134"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_25"
+            android:text="@string/pay_to_business"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            android:textColor="@color/color_text_1"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintEnd_toStartOf="@+id/imageView11"
+            app:layout_constraintStart_toStartOf="@+id/textView134"
+            app:layout_constraintTop_toBottomOf="@+id/textView134" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="@dimen/dp_44"
+            android:layout_height="@dimen/dp_44"
+            android:layout_marginTop="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/app_icon" />
+
+        <TextView
+            android:id="@+id/textView136"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_32"
+            android:text="@string/pay_amount"
+            app:layout_constraintStart_toStartOf="@+id/tv_to"
+            app:layout_constraintTop_toBottomOf="@+id/tv_to" />
+
+        <TextView
+            android:id="@+id/tv_price_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="HK$"
+            android:textSize="@dimen/sp_23"
+            app:layout_constraintStart_toStartOf="@+id/textView136"
+            app:layout_constraintTop_toBottomOf="@+id/textView136" />
+
+        <EditText
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:background="@color/transparent"
+            android:hint="@string/_000"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/sp_23"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_price_name"
+            app:layout_constraintStart_toEndOf="@+id/tv_price_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_price_name" />
+
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:hint="@string/_000"
+            android:textSize="@dimen/sp_23"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_coin_img"
+            app:layout_constraintStart_toStartOf="@+id/tv_price"
+            app:layout_constraintTop_toTopOf="@+id/iv_coin_img" />
+
+        <TextView
+            android:id="@+id/btn_pay"
+            style="@style/main_btn"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_25"
+            android:layout_height="@dimen/dp_44"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_49"
+            android:text="@string/confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_coin_img" />
+
+        <TextView
+            android:id="@+id/btn_reset_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:drawableEnd="@mipmap/wd_gd_icon"
+            android:drawablePadding="@dimen/dp_10"
+            android:text="@string/re_setting"
+            android:textColor="@color/main_blue"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_price"
+            app:layout_constraintEnd_toEndOf="@+id/imageView11"
+            app:layout_constraintTop_toTopOf="@+id/tv_price" />
+
+        <TextView
+            android:id="@+id/btn_reset_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:drawableEnd="@mipmap/wd_gd_icon"
+            android:drawablePadding="@dimen/dp_10"
+            android:text="@string/re_setting"
+            android:textColor="@color/main_blue"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_amount"
+            app:layout_constraintEnd_toEndOf="@+id/btn_reset_price"
+            app:layout_constraintTop_toTopOf="@+id/tv_amount" />
+
+        <ImageView
+            android:id="@+id/iv_coin_img"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_20"
+            app:layout_constraintStart_toStartOf="@+id/tv_price_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price"
+            app:srcCompat="@mipmap/usdt_icon_x" />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/tv_to"
+            android:layout_marginTop="@dimen/dp_padding_x_min"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            style="@style/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_25"
+            />
+
+
+        <TextView
+            android:id="@+id/textView108"
+            style="@style/line"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/iv_coin_img"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_1"
+            style="@style/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_25"
+            />
+
+        <TextView
+            android:id="@+id/tv_coin_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:text="@string/eth"
+            android:textSize="@dimen/sp_23"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_amount"
+            app:layout_constraintStart_toEndOf="@+id/tv_amount"
+            app:layout_constraintTop_toTopOf="@+id/tv_amount" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

@@ -1,45 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_70"
     android:background="@drawable/btn_item"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
-        <ImageView
-            android:id="@+id/iv_pic"
-            android:layout_width="@dimen/dp_44"
-            android:layout_height="@dimen/dp_44"
-            android:layout_marginStart="@dimen/dp_20"
-            android:src="@mipmap/dc_eth"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_20"
-            android:text="@string/eth"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
-            app:layout_constraintStart_toEndOf="@+id/iv_pic"
-            app:layout_constraintTop_toTopOf="@+id/iv_pic" />
-
-
-        <TextView
-            android:id="@+id/tv_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_padding_x_min"
-            android:text="@string/eos_bottom_level"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_80"
+            app:layout_constraintTop_toBottomOf="@+id/textView83"
+            app:fp_shadowColor="@color/shadow_color"
+            app:fp_shadowRadius="@dimen/dp_8"
+            app:fp_shadowRoundRadius="@dimen/dp_7"
+            app:fp_shadowShape="fp_round_rectangle"
+            app:fp_round_corner="fp_corner_all"
+            app:fp_shadowSide="fp_all"
+            >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/iv_pic"
+                            android:layout_width="@dimen/dp_44"
+                            android:layout_height="@dimen/dp_44"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:src="@mipmap/dc_eth"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:text="@string/eth"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
+                            app:layout_constraintStart_toEndOf="@+id/iv_pic"
+                            app:layout_constraintTop_toTopOf="@+id/iv_pic" />
 
 
+                        <TextView
+                            android:id="@+id/tv_bottom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dp_padding_x_min"
+                            android:text="@string/eos_bottom_level"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+
+
+
+                </android.support.constraint.ConstraintLayout>
+
+        </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
 
 
 

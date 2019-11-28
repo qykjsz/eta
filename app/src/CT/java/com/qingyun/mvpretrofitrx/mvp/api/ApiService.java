@@ -5,7 +5,10 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetReviewResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
+import com.qingyun.mvpretrofitrx.mvp.entity.BusinessPayLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
+import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
@@ -126,4 +129,18 @@ public interface ApiService {
 
     @POST("api_update")
     Observable <BaseResponse<VersionInfo>> getVersion(@Query("type")String type);
+
+    @POST("give_et_money")
+    Observable<BaseResponse<List<CurrencyRate>>> getCurrencyRate();
+
+    @POST("give_et_fimoney")
+    Observable<BaseResponse<List<CoinTypeRate>>>  getCoinTypeRate();
+
+    @POST("api_shoporder")
+    Observable <BaseResponse<BusinessPayLogResponse>> getBusinessPayLog(@Query("address")String address, @Query("page")int page);
+
+    @POST("api_shop")
+    Observable <BaseResponse<NormalResponse>>addBusinessPayLog(@Query("from")String from, @Query("to")String to,@Query("hash") String hash,
+                                                               @Query("money")String money,@Query("moneyid") String moneyid,
+                                                               @Query("fimoney")String fimoney,@Query("fimoneyid") String fimoneyid);
 }

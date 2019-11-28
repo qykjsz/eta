@@ -48,23 +48,24 @@
         android:text="@string/confirm"
         android:background="@drawable/bg_item"
         android:textColor="@color/main_blue"
-        app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancel"
         app:layout_constraintTop_toBottomOf="@+id/et_pass" />
 
     <TextView
         android:id="@+id/btn_cancel"
         android:layout_width="0dp"
         android:layout_height="@dimen/setting_item_height"
+
+        android:background="@drawable/bg_item"
         android:gravity="center"
         android:text="@string/cancel"
         android:textColor="@color/color_666666"
-        android:background="@drawable/bg_item"
         app:layout_constraintBottom_toBottomOf="@+id/btn_sure"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_sure"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_sure"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_sure" />
 
     <TextView
@@ -82,7 +83,7 @@
         android:background="@color/color_line"
         app:layout_constraintTop_toTopOf="@+id/btn_sure"
         app:layout_constraintBottom_toBottomOf="@+id/btn_sure"
-        app:layout_constraintStart_toEndOf="@id/btn_sure"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel"
         />
 
     <CheckBox

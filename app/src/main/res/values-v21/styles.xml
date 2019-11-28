@@ -19,13 +19,13 @@
     </style>
 
 
+
+
     <style name="SplashTheme" parent="TranslucentTheme">
-        <item name="android:windowBackground">@color/color_bg</item>
+        <item name="android:windowBackground">@mipmap/et_qdy</item>
         <!-- 隐藏状态栏 -->
         <item name="android:windowFullscreen">true</item>
         <!-- 隐藏标题栏 -->
         <item name="android:windowNoTitle">true</item>
     </style>
-
-
 </resources>

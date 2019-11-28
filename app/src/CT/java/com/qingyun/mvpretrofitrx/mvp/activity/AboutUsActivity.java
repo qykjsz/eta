@@ -3,15 +3,15 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.adapter.ItemAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.AboutUsContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.presenter.AboutUsPresenter;
+import com.qingyun.mvpretrofitrx.mvp.utils.AppUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
@@ -25,11 +25,13 @@ import io.reactivex.ObservableTransformer;
 /***
  * 帮助中心
  */
-public class AboutUsActivity extends BaseActivity<AboutUsContact.View,AboutUsContact.Presenter> implements AboutUsContact.View {
+public class AboutUsActivity extends BaseActivity<AboutUsContact.View, AboutUsContact.Presenter> implements AboutUsContact.View {
 
 
     @BindView(R.id.rcy)
     RecyclerView rcy;
+    @BindView(R.id.textView48)
+    TextView textView48;
 
     private ItemAdapter itemAdapter;
     private List<Item> list;
@@ -78,20 +80,20 @@ public class AboutUsActivity extends BaseActivity<AboutUsContact.View,AboutUsCon
     @Override
     public void init() {
         list = new ArrayList<>();
-        itemAdapter = new ItemAdapter(getContext(),list);
+        itemAdapter = new ItemAdapter(getContext(), list);
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.addItemDecoration(DividerHelper.getMyDivider(getContext()));
         itemAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
-                Bundle bundle  = new Bundle();
-                bundle.putSerializable(IntentUtils.ITEM,(Item)list.get(position));
-                startActivity(MyWebViewActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentUtils.ITEM, (Item) list.get(position));
+                startActivity(MyWebViewActivity.class, bundle);
             }
         });
         rcy.setAdapter(itemAdapter);
         getPresenter().getAboutUsList();
-
+        textView48.setText(getResources().getString(R.string.app_name)+"("+ AppUtils.getAppVersionName(getContext()) +")");
     }
 
     @Override

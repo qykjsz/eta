@@ -11,9 +11,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 
+import com.google.gson.Gson;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.BusinessPayEntity;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
 
@@ -83,14 +85,23 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
         vibrate();
         if (result != null) {
             vibrate();
-            Log.e("----------", result);
-            if (TextUtils.isEmpty(result)) return;
 
-            Bundle bundle = new Bundle();
-            bundle.putString(IntentUtils.TRANSFER_ADDRESS, result);
-            startActivity(TransferImmediateActivity.class, bundle);
-            mZBarView.startSpot();
-            finish();
+            try {
+                BusinessPayEntity businessPayEntity= new Gson().fromJson(result, BusinessPayEntity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentUtils.BUSINESS_PAY_ENTITY, businessPayEntity);
+                startActivity(BuyerPayActivity.class, bundle);
+                mZBarView.startSpot();
+                finish();
+            }catch (Exception e){
+                Bundle bundle = new Bundle();
+                bundle.putString(IntentUtils.TRANSFER_ADDRESS, result);
+                startActivity(TransferImmediateActivity.class, bundle);
+                mZBarView.startSpot();
+                finish();
+            }
+
+
         }
     }
 

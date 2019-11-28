@@ -82,7 +82,6 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.CoinUnitActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.WalletManagerActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.PushAndNotifyActivity"/>
-
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AssetReviewActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessLogActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ScanQrCodeActivity"/>
@@ -90,6 +89,10 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.WebActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLevelActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ImportScanActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.SettingPriceActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BuyerPayActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyLogActivity"/>
     </application>
 
 </manifest>

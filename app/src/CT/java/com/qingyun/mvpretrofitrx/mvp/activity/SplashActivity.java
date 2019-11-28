@@ -1,7 +1,9 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
@@ -76,17 +78,17 @@ public class SplashActivity extends BaseActivity {
         }
         LocalManageUtil.saveLocal(getActivity(), choose);
 
-        final Wallet wallet =  ApplicationUtil.getCurrentWallet();
-        loadOneTimeGif(getContext(), R.mipmap.et, iv, new GifListener() {
-            @Override
-            public void gifPlayComplete() {
-                if (wallet ==null){
-                    startActivity(ChooseBottomLevelActivity.class);
-                }else {
-                   startActivity(MainActivity.class);
-                }
-            }
-        });
+//        final Wallet wallet =  ApplicationUtil.getCurrentWallet();
+//        loadOneTimeGif(getContext(), R.mipmap.et, iv, new GifListener() {
+//            @Override
+//            public void gifPlayComplete() {
+//                if (wallet ==null){
+//                    startActivity(ChooseBottomLevelActivity.class);
+//                }else {
+//                   startActivity(MainActivity.class);
+//                }
+//            }
+//        });
 //        Glide.with(this).load(R.mipmap.et).listener(new RequestListener() {
 //
 //
@@ -108,6 +110,22 @@ public class SplashActivity extends BaseActivity {
 //            }
 //
 //        }).into(iv);
+
+        if (!this.isTaskRoot()) {
+            Intent mainIntent = getIntent();
+            String action = mainIntent.getAction();
+            if (mainIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && action.equals(Intent.ACTION_MAIN)) {finish()
+            ;return;}}
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+            }
+        },1000);
     }
 
 

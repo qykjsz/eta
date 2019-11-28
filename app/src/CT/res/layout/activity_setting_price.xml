@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="@dimen/dp_0"
+        android:background="@mipmap/szje_dk"
+        android:layout_height="wrap_content">
+
+
+
+        <TextView
+            android:id="@+id/textView111"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_25"
+            android:text="@string/setting_price"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+            android:id="@+id/btn_huobi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="HK$"
+            android:textSize="@dimen/dp_23"
+            app:layout_constraintStart_toStartOf="@+id/textView111"
+            app:layout_constraintTop_toBottomOf="@+id/textView111" />
+
+        <EditText
+            android:id="@+id/et_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_padding_x_min"
+            android:background="@color/transparent"
+            android:hint="@string/_000"
+            android:inputType="numberDecimal"
+            android:textSize="@dimen/sp_23"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_huobi"
+            app:layout_constraintStart_toEndOf="@+id/btn_huobi"
+            app:layout_constraintTop_toTopOf="@+id/btn_huobi" />
+
+        <TextView
+            android:id="@+id/textView121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_25"
+            android:text="≈"
+            app:layout_constraintStart_toStartOf="@+id/btn_huobi"
+            app:layout_constraintTop_toBottomOf="@+id/et_price" />
+
+        <TextView
+            android:id="@+id/et_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:text="@string/_000"
+            app:layout_constraintBottom_toBottomOf="@+id/textView121"
+            app:layout_constraintStart_toEndOf="@+id/textView121"
+            app:layout_constraintTop_toTopOf="@+id/textView121" />
+
+        <TextView
+            android:id="@+id/tv_coin_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_25"
+            android:text="@string/eth"
+            android:drawableEnd="@mipmap/fh_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/et_amount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/et_amount"
+            app:layout_constraintTop_toTopOf="@+id/et_amount" />
+
+        <ImageView
+            android:id="@+id/iv_coin_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/tv_coin_type"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_coin_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/dp_45"
+            app:srcCompat="@mipmap/usdt_icon_x"
+            tools:layout_editor_absoluteX="346dp"
+            tools:layout_editor_absoluteY="180dp" />
+
+
+        <TextView
+            android:id="@+id/btn_confirm"
+            style="@style/main_btn"
+            android:layout_width="@dimen/dp_0"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_40"
+            android:text="@string/confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_coin_type" />
+
+        <TextView
+            android:id="@+id/btn_currency"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/dp_padding_x_min"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@mipmap/fh_icon"
+            android:layout_marginEnd="@dimen/dp_25"
+            app:layout_constraintBottom_toBottomOf="@+id/et_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/et_price"
+            app:layout_constraintTop_toTopOf="@+id/et_price" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

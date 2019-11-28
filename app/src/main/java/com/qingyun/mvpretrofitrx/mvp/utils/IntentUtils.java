@@ -41,6 +41,7 @@ public class IntentUtils {
     public static final String WALLET_ADDRESS = "wallet_address";
     public static final String WALLET = "wallet";
     public static final String IS_FROM_TRANSFER = "is_from_transfer";
+    public static final String BUSINESS_PAY_ENTITY = "business_pay_entity";
 
     public static String NEW_ID="news_id";
 }

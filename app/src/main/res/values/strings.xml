@@ -271,4 +271,15 @@
     <string name="find_new_version">发现新版本</string>
     <string name="updata">更新</string>
     <string name="import_err">导入失败</string>
+    <string name="business_get_money">商家收款</string>
+    <string name="etoken_scan_to_pay">Etoken扫码，向我付款</string>
+    <string name="get_money_log">收款记录</string>
+    <string name="pay_amount">付款金额</string>
+    <string name="pay_to_business">付款给商家</string>
+    <string name="re_setting">重设</string>
+    <string name="business_get_money_log">收款记录</string>
+    <string name="status_reving">审核中</string>
+    <string name="business">商家</string>
+    <string name="business_code">商家收款</string>
+    <string name="need_updata">请更新到最新版本</string>
 </resources>

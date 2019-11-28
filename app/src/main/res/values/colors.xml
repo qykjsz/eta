@@ -98,5 +98,7 @@
     <color name="color_FFB61A">#FFB61A</color>
     <color name="color_CDD6FD">#CDD6FD</color>
     <color name="color_000000">#000000</color>
+    <color name="color_24CE94">#24CE94</color>
+    <color name="shadow_color">#10002796</color>
 
 </resources>

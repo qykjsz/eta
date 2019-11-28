@@ -297,24 +297,49 @@ public class AssetDetailActivity extends BaseActivity<WalletAssetContact.View,Wa
                 }, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean haveWallet = false;
-                        ApplicationUtil.deleteWallet(ApplicationUtil.getCurrentWallet());
-                        if (ApplicationUtil.getWallet().entrySet() != null && ApplicationUtil.getWallet().entrySet().size() > 0) {
-                            for (Map.Entry<String, List<Wallet>> entry : ApplicationUtil.getWallet().entrySet()) {
-                                if (entry.getValue() != null && entry.getValue().size() > 0) {
-                                    haveWallet = true;
-                                    ApplicationUtil.setCurrentWallet(entry.getValue().get(0));
-                                    break;
-                                }
+
+                        DialogUtils.showPayDialog(getContext(), new DialogUtils.SureListener() {
+                            @Override
+                            public void onSure(Object o) {
+                                ProgressDialogUtils.getInstances().showDialog();
+                                WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
+                                    @Override
+                                    public void onSuccess() {
+                                        boolean haveWallet = false;
+                                        ApplicationUtil.deleteWallet(ApplicationUtil.getCurrentWallet());
+                                        if (ApplicationUtil.getWallet().entrySet() != null && ApplicationUtil.getWallet().entrySet().size() > 0) {
+                                            for (Map.Entry<String, List<Wallet>> entry : ApplicationUtil.getWallet().entrySet()) {
+                                                if (entry.getValue() != null && entry.getValue().size() > 0) {
+                                                    haveWallet = true;
+                                                    ApplicationUtil.setCurrentWallet(entry.getValue().get(0));
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        if (haveWallet == false) {
+                                            ApplicationUtil.setCurrentWallet(null);
+                                        }
+                                        Intent intent = new Intent(getContext(), MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        ProgressDialogUtils.getInstances().cancel();
+
+                                        ToastUtil.showShortToast(R.string.pass_err);
+
+                                    }
+                                });
+
                             }
-                        }
-                        if (haveWallet == false) {
-                            ApplicationUtil.setCurrentWallet(null);
-                        }
-                        Intent intent = new Intent(getContext(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
+                        });
+
+
+
                     }
                 });
                 break;

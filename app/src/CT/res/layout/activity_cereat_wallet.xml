@@ -68,166 +68,231 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.constraint.ConstraintLayout
+
+            <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginStart="@dimen/dp_padding_x_min"
                 app:layout_constraintTop_toBottomOf="@+id/textView82"
                 android:layout_marginTop="@dimen/dp_padding_x_min"
                 android:id="@+id/btn_import_by_private_key"
-                android:layout_width="@dimen/dp_0"
-                android:background="@mipmap/sy_yykuang_02"
-                android:layout_height="@dimen/dp_70"
-                android:layout_marginStart="@dimen/dp_padding_x_min"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="91dp">
+                app:fp_shadowColor="@color/shadow_color"
+                app:fp_shadowRadius="@dimen/dp_8"
+                app:fp_shadowRoundRadius="@dimen/dp_7"
+                app:fp_shadowShape="fp_round_rectangle"
+                app:fp_round_corner="fp_corner_all"
+                app:fp_shadowSide="fp_all"
+                >
 
-
-                <ImageView
-                    android:id="@+id/imageView15"
-                    android:layout_width="@dimen/dp_44"
-                    android:layout_height="@dimen/dp_44"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:src="@mipmap/cj_sy_01"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/import_private_key"
-                    app:layout_constraintStart_toEndOf="@+id/imageView15"
-                    app:layout_constraintTop_toTopOf="@+id/imageView15" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/import_private_key_tips"
-                    android:textColor="@color/color_text_2"
-                    android:textSize="@dimen/sp_10"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-                    app:layout_constraintStart_toEndOf="@+id/imageView15" />
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_padding_x_min"
-                    android:src="@mipmap/wd_gd_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <android.support.constraint.ConstraintLayout
+                    app:layout_constraintTop_toBottomOf="@+id/textView82"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                   >
+
+
+                    <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="@dimen/dp_44"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:src="@mipmap/cj_sy_01"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/import_private_key"
+                        android:layout_marginTop="@dimen/dp_2"
+                        app:layout_constraintStart_toEndOf="@+id/imageView15"
+                        app:layout_constraintTop_toTopOf="@+id/imageView15" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:layout_marginBottom="@dimen/dp_2"
+                        android:text="@string/import_private_key_tips"
+                        android:textColor="@color/color_text_2"
+                        android:textSize="@dimen/sp_10"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView15"
+                        app:layout_constraintStart_toEndOf="@+id/imageView15" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        android:src="@mipmap/wd_gd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
 
 
 
-            <android.support.constraint.ConstraintLayout
+            </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
+
+
+            <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginStart="@dimen/dp_padding_x_min"
+                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_comm"
                 android:id="@+id/btn_import_by_keystore"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="@dimen/dp_70"
-                android:layout_marginStart="@dimen/dp_padding_x_min"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="@mipmap/sy_yykuang_02"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_comm">
+                app:fp_shadowColor="@color/shadow_color"
+                app:fp_shadowRadius="@dimen/dp_8"
+                app:fp_shadowRoundRadius="@dimen/dp_7"
+                app:fp_shadowShape="fp_round_rectangle"
+
+                app:fp_round_corner="fp_corner_all"
+                app:fp_shadowSide="fp_all"
+                >
 
 
-                <ImageView
-                    android:id="@+id/imageView153"
-                    android:layout_width="@dimen/dp_44"
-                    android:layout_height="@dimen/dp_44"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:src="@mipmap/cj_key_05"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/import_keystore"
-                    app:layout_constraintStart_toEndOf="@+id/imageView153"
-                    app:layout_constraintTop_toTopOf="@+id/imageView153" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/import_keystore_tips"
-                    android:textColor="@color/color_text_2"
-                    android:textSize="@dimen/sp_10"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView153"
-                    app:layout_constraintStart_toEndOf="@+id/imageView153" />
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_padding_x_min"
-                    android:src="@mipmap/wd_gd_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_70"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_import_by_comm">
 
 
-            <android.support.constraint.ConstraintLayout
+                    <ImageView
+                        android:id="@+id/imageView153"
+                        android:layout_width="@dimen/dp_44"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:src="@mipmap/cj_key_05"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/import_keystore"
+                        android:layout_marginTop="@dimen/dp_2"
+
+                        app:layout_constraintStart_toEndOf="@+id/imageView153"
+                        app:layout_constraintTop_toTopOf="@+id/imageView153" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/import_keystore_tips"
+                        android:layout_marginBottom="@dimen/dp_2"
+                        android:textColor="@color/color_text_2"
+                        android:textSize="@dimen/sp_10"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView153"
+                        app:layout_constraintStart_toEndOf="@+id/imageView153" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        android:src="@mipmap/wd_gd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+
+
+
+
+            </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
+
+
+
+
+            <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginStart="@dimen/dp_padding_x_min"
+                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_private_key"
                 android:id="@+id/btn_import_by_comm"
-                android:layout_width="@dimen/dp_0"
-                android:layout_height="@dimen/dp_70"
-                android:layout_marginStart="@dimen/dp_padding_x_min"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
-                android:background="@mipmap/sy_yykuang_02"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_import_by_private_key">
+                app:fp_shadowColor="@color/shadow_color"
+                app:fp_shadowRadius="@dimen/dp_8"
+                app:fp_shadowRoundRadius="@dimen/dp_7"
+                app:fp_shadowShape="fp_round_rectangle"
 
+                app:fp_round_corner="fp_corner_all"
+                app:fp_shadowSide="fp_all"
+                >
 
-                <ImageView
-                    android:id="@+id/imageView154"
-                    android:layout_width="@dimen/dp_44"
-                    android:layout_height="@dimen/dp_44"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:src="@mipmap/cj_zjc_04"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/import_comm"
-                    app:layout_constraintStart_toEndOf="@+id/imageView154"
-                    app:layout_constraintTop_toTopOf="@+id/imageView154" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/import_comm_tips"
-                    android:textColor="@color/color_text_2"
-                    android:textSize="@dimen/sp_10"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView154"
-                    app:layout_constraintStart_toEndOf="@+id/imageView154" />
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_padding_x_min"
-                    android:src="@mipmap/wd_gd_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_import_by_private_key">
+
+
+                    <ImageView
+                        android:id="@+id/imageView154"
+                        android:layout_width="@dimen/dp_44"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:src="@mipmap/cj_zjc_04"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/import_comm"
+                        android:layout_marginTop="@dimen/dp_2"
+
+                        app:layout_constraintStart_toEndOf="@+id/imageView154"
+                        app:layout_constraintTop_toTopOf="@+id/imageView154" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/import_comm_tips"
+                        android:layout_marginBottom="@dimen/dp_2"
+                        android:textColor="@color/color_text_2"
+                        android:textSize="@dimen/sp_10"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView154"
+                        app:layout_constraintStart_toEndOf="@+id/imageView154" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        android:src="@mipmap/wd_gd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+            </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
 
 
 
@@ -258,6 +323,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_2"
+
                     android:text="@string/obser_wallet"
                     app:layout_constraintStart_toEndOf="@+id/imageView151"
                     app:layout_constraintTop_toTopOf="@+id/imageView151" />
@@ -268,6 +335,7 @@
                     android:layout_marginStart="@dimen/dp_20"
                     android:text="@string/obser_wallet_tips"
                     android:textColor="@color/color_text_2"
+                    android:layout_marginBottom="@dimen/dp_2"
                     android:textSize="@dimen/sp_10"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView151"
                     app:layout_constraintStart_toEndOf="@+id/imageView151" />
@@ -312,6 +380,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_20"
                     android:text="@string/static_wallet"
+                    android:layout_marginTop="@dimen/dp_2"
+
                     app:layout_constraintStart_toEndOf="@+id/imageView152"
                     app:layout_constraintTop_toTopOf="@+id/imageView152" />
 
@@ -322,6 +392,7 @@
                     android:text="@string/static_wallet_tips"
                     android:textColor="@color/color_text_2"
                     android:textSize="@dimen/sp_10"
+                    android:layout_marginBottom="@dimen/dp_2"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView152"
                     app:layout_constraintStart_toEndOf="@+id/imageView152" />
 
@@ -350,58 +421,80 @@
 
 
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/btn_create"
+
+
+            <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="@dimen/dp_0"
-                android:layout_height="@dimen/dp_70"
+                android:layout_height="@dimen/dp_80"
+                app:layout_constraintTop_toBottomOf="@+id/textView83"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                android:background="@mipmap/sy_yykuang_02"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView83">
+                app:fp_shadowColor="@color/shadow_color"
+                app:fp_shadowRadius="@dimen/dp_8"
+                app:fp_shadowRoundRadius="@dimen/dp_7"
+                app:fp_round_corner="fp_corner_all"
+                app:fp_shadowShape="fp_round_rectangle"
+                app:fp_shadowSide="fp_all"
+                >
 
 
-                <ImageView
-                    android:id="@+id/iv_pic"
-                    android:layout_width="@dimen/dp_44"
-                    android:layout_height="@dimen/dp_44"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:src="@mipmap/cj_no_06"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/not_wallet"
-                    app:layout_constraintStart_toEndOf="@+id/iv_pic"
-                    app:layout_constraintTop_toTopOf="@+id/iv_pic" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:text="@string/create_wallet"
-                    android:textColor="@color/color_text_2"
-                    android:textSize="@dimen/sp_10"
-                    app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
-                    app:layout_constraintStart_toEndOf="@+id/iv_pic" />
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_padding_x_min"
-                    android:src="@mipmap/wd_gd_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/btn_create"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_ffffff_round_7"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView83">
+
+
+                    <ImageView
+                        android:id="@+id/iv_pic"
+                        android:layout_width="@dimen/dp_44"
+                        android:layout_height="@dimen/dp_44"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:src="@mipmap/cj_no_06"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/not_wallet"
+                        android:layout_marginTop="@dimen/dp_2"
+                        app:layout_constraintStart_toEndOf="@+id/iv_pic"
+                        app:layout_constraintTop_toTopOf="@+id/iv_pic" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:text="@string/create_wallet"
+                        android:textColor="@color/color_text_2"
+                        android:textSize="@dimen/sp_10"
+                        android:layout_marginBottom="@dimen/dp_2"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
+                        app:layout_constraintStart_toEndOf="@+id/iv_pic" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        android:src="@mipmap/wd_gd_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+
+
+
+            </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
 
         </android.support.constraint.ConstraintLayout>
 

@@ -396,7 +396,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
         final String gasMin = gasPrice.getGasmin();
         String gaswei = gasPrice.getGweimin();
         final String decimal = "1000000000";
-        BigDecimal gas = new BigDecimal(gasMin).multiply(new BigDecimal(gaswei)).divide(new BigDecimal(decimal));
+        BigDecimal gas = new BigDecimal(gasMin).multiply(new BigDecimal(gasPrice.getGweidefault())).divide(new BigDecimal(decimal));
         mGasPrice = new BigDecimal(gasPrice.getGweidefault()).floatValue();
 
         tvMining.setText(gas.toString()+getResources().getString(R.string.eth));

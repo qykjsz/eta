@@ -144,9 +144,9 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
         } else if (e instanceof HttpException) {
             ToastUtil.showLongToast("请求超时");
         }
-//        else {
-//            ToastUtil.showLongToast("请求失败");
-//        }
+        else {
+            ToastUtil.showLongToast("请求失败");
+        }
     }
 
     @Override

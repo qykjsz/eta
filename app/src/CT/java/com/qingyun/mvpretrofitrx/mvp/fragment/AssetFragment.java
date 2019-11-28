@@ -27,6 +27,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetDetailActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.CreateWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity;
@@ -167,6 +168,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         getRefreash().setEnableLoadMore(false);
         EventBus.getDefault().register(this);
         refreashData();
+        getPresenter().getVersion();
         modleList = new ArrayList<>();
         modleList.add(new AssetModle(R.mipmap.sy_ziyuan, R.string.ziyuan));
         modleList.add(new AssetModle(R.mipmap.sy_toupiao, R.string.vote));
@@ -175,7 +177,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
         assetModleAdapter = new AssetModleAdapter(getContext(), modleList);
         rcyModle.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        rcyModle.addItemDecoration(new GridSpacingItemDecoration(4, getResources().getDimensionPixelSize(R.dimen.dp_5), false));
+//        rcyModle.addItemDecoration(new GridSpacingItemDecoration(4, getResources().getDimensionPixelSize(R.dimen.dp_5), false));
         rcyModle.setAdapter(assetModleAdapter);
         refreashView(modleList, rcyModle);
 
@@ -308,7 +310,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 startActivity(GetMoneyActivity.class);
                 break;
             case R.id.btn_shan_dui:
-                ToastUtil.showShortToast(R.string.not_open);
+                startActivity(BusinessGetMoneyActivity.class);
+//                ToastUtil.showShortToast(R.string.not_open);
 //                startActivity(QuickExchangeActivity.class);
                 break;
             case R.id.btn_packet:
@@ -541,6 +544,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void getVersionSuccess(final VersionInfo versionInfo) {
+        if (!ApplicationUtil.isApkInDebug(ApplicationUtil.getContext()))
         if (!versionInfo.getName().equals(AppUtils.getAppVersionName(getContext()))) {
             AnyLayer anyLayer = AnyLayer.with(getContext())
                     .contentView(R.layout.dialog_new_version)
@@ -569,7 +573,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                             cancel.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-
+                                    ToastUtil.showShortToast(R.string.need_updata);
                                 }
                             });
                             tvVersion.setText(versionInfo.getName());
@@ -586,13 +590,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
 
     private void addSearch() {
-
         RxTextView.textChanges(etSearch)//当EditText发生改变
                 //每500毫秒发射一次
                 //仅在过了一段指定的时间还没发射数据时才发射一个数据
                 //如果原始Observable在这个新生成的Observable终止之前发射了另一个数据， debounce 会抑制(suppress)这个数据项。
                 .debounce(1000, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
-
                 .subscribeOn(AndroidSchedulers.mainThread())//内容监听操作需要在主线程操作
                 .filter(new Predicate<CharSequence>() {
                     @Override

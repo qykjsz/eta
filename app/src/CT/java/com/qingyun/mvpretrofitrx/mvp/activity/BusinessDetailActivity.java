@@ -132,7 +132,6 @@ public class BusinessDetailActivity extends BaseActivity<BusinessDetailContact.V
                 break;
             case R.id.btn_business_no:
                 CopyUtils.copy(getContext(),tvBusinessNo.getText().toString());
-
                 break;
         }
     }
