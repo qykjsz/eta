@@ -51,6 +51,7 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
     @BindView(R.id.checkBox)
     CheckBox checkBox;
     private ProgressDialogHandler mProgressDialogHandler;
+    private Wallet wallet;
 
     @Override
     protected String getTitleRightText() {
@@ -129,15 +130,12 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
                             Looper.prepare();//增加部分
 
 
-                            Wallet wallet = WalletManager.generateWalletAddress(etWalletName.getText().toString());
+                            wallet = WalletManager.generateWalletAddress(etWalletName.getText().toString());
                             wallet = WalletManager.generateWalletKeystore(etPassword.getText().toString(), wallet.getMnemonic(),getContext().getFilesDir());
                             Log.e("------------", wallet.getAddress());
                             Log.e("------------", wallet.getPrivateKey());
                             wallet.setWalletName(etWalletName.getText().toString());
                             wallet.setStatus(Wallet.STATUS_NO_MAKE_COPY);
-                            ApplicationUtil.setCurrentWallet(wallet);
-                            ApplicationUtil.addWallet(wallet);
-                            EventBus.getDefault().post(wallet);
 //                Wallet wallet1 = WalletManager.generateWalletKeystore(etPassword.getText().toString(), wallet.getMnemonic());
                             handler.sendEmptyMessage(1);
                             Looper.loop();//增加部分
@@ -155,9 +153,6 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
         });
 
 
-
-
-
     }
 
 
@@ -165,7 +160,7 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
-                getPresenter().addWallet(ApplicationUtil.getCurrentWallet().getAddress());
+                getPresenter().addWallet(wallet.getAddress());
 
 //               LoadingUtils.loadingDismiss();
 //               ToastUtil.showShortToast(R.string.create_wallet_success);
@@ -210,6 +205,9 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
     public void addWalletSuccess() {
         LoadingUtils.loadingDismiss();
         ToastUtil.showShortToast(R.string.create_wallet_success);
+        ApplicationUtil.setCurrentWallet(wallet);
+        ApplicationUtil.addWallet(wallet);
+        EventBus.getDefault().post(wallet);
         finish();
         startActivity(MakeCopyWalletActivity.class);
     }

@@ -6,100 +6,146 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <android.support.constraint.ConstraintLayout
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="@dimen/dp_0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
+        app:fp_round_corner="fp_corner_all"
         android:layout_height="@dimen/dp_343"
-        android:background="@mipmap/sk_yykuang_01"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:fp_shadowColor="@color/shadow_color"
+        app:fp_shadowRadius="@dimen/shadow_radius"
+        app:fp_shadowRoundRadius="@dimen/dp_7"
+        app:fp_shadowShape="fp_round_rectangle"
+        app:fp_shadowSide="fp_all"
+
+        >
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_ffffff_round_7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_45"
+                android:text="@string/scan_to_pay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_code"
+                android:layout_width="@dimen/dp_179"
+                android:layout_height="@dimen/dp_179"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView44"
+                app:srcCompat="@mipmap/app_icon" />
+
+            <TextView
+                android:id="@+id/btn_save_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/save_img"
+                android:textColor="@color/main_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_code" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
+
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <TextView
-            android:id="@+id/textView44"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_45"
-            android:text="@string/scan_to_pay"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_code"
-            android:layout_width="@dimen/dp_179"
-            android:layout_height="@dimen/dp_179"
-            android:layout_marginTop="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView44"
-            app:srcCompat="@mipmap/app_icon" />
-
-        <TextView
-            android:id="@+id/btn_save_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/save_img"
-            android:textColor="@color/main_blue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_code" />
-
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="@dimen/dp_0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
+        app:fp_round_corner="fp_corner_all"
         android:layout_height="@dimen/dp_193"
-        android:background="@mipmap/sk_yykuang_02"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:fp_shadowColor="@color/shadow_color"
+        app:fp_shadowRadius="@dimen/dp_8"
+        app:fp_shadowRoundRadius="@dimen/dp_7"
+        app:fp_shadowShape="fp_round_rectangle"
+        app:fp_shadowSide="fp_all"
 
+        >
 
-        <TextView
-            android:id="@+id/textView50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_30"
-            android:text="@string/get_money_address"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_marginTop="@dimen/sp_12"
-            android:layout_marginEnd="@dimen/dp_20"
-            android:gravity="center"
-            android:textColor="@color/main_blue"
-            android:text="@string/formate_address"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_ffffff_round_7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView50" />
-
-        <TextView
-            android:id="@+id/btn_copy_address"
-            style="@style/main_btn"
-            android:layout_width="@dimen/dp_0"
-            android:layout_marginBottom="@dimen/dp_20"
-            android:text="@string/copy_get_money_address"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
 
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_30"
+                android:text="@string/get_money_address"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/sp_12"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center"
+                android:textColor="@color/main_blue"
+                android:text="@string/formate_address"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+            <TextView
+                android:id="@+id/btn_copy_address"
+                style="@style/main_btn"
+                android:layout_width="@dimen/dp_0"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:text="@string/copy_get_money_address"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+
+    </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
 
 </android.support.constraint.ConstraintLayout>

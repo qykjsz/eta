@@ -60,7 +60,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_transfer">
 
         <LinearLayout
-            android:layout_marginTop="@dimen/dp_padding_y_min"
+            android:layout_marginTop="@dimen/dp_padding_x_min"
             android:id="@+id/m_header"
             android:layout_width="match_parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_160"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginEnd="@dimen/dp_padding_x_min"
                 android:background="@mipmap/qb_bg"
                 app:layout_constraintEnd_toEndOf="parent"

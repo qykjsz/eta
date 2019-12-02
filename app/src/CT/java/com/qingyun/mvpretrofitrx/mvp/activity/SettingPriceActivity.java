@@ -60,17 +60,16 @@ public class SettingPriceActivity extends BaseActivity<BusinessPayContact.View, 
     private CoinTypeRate coinTypeRate;
     private CurrencyRate currencyRate;
     private BigDecimal amount;
+    private int digits = 2;
 
     @Override
     protected String getTitleRightText() {
         return null;
     }
-
     @Override
     protected String getTitleLeftText() {
         return null;
     }
-
     @Override
     public boolean haveHeader() {
         return true;
@@ -216,6 +215,16 @@ public class SettingPriceActivity extends BaseActivity<BusinessPayContact.View, 
                         {
                             charSequence=null;
                             etPrice.setText(charSequence);
+                        }
+
+                        if (charSequence.toString().contains(".")) {
+                            if (charSequence.length() - 1 - charSequence.toString().indexOf(".") > digits) {
+                                charSequence = charSequence.toString().subSequence(0,
+                                        charSequence.toString().indexOf(".") + digits + 1);
+                                etPrice.setText(charSequence);
+                                etPrice.setSelection(charSequence.length()); //光标移到最后
+
+                            }
                         }
                         return charSequence.length() >=0;
                     }

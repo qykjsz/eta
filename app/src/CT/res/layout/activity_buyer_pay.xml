@@ -70,6 +70,7 @@
 
         <EditText
             android:id="@+id/tv_price"
+            android:maxLength="15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
@@ -86,6 +87,7 @@
             android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLength="15"
             android:background="@color/transparent"
             android:hint="@string/_000"
             android:textSize="@dimen/sp_23"

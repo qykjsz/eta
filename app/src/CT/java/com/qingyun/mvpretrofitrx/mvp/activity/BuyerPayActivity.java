@@ -67,6 +67,7 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
     private CurrencyRate currencyRate;
     private CoinTypeRate coinTypeRate;
     private BigDecimal amount;
+    private int digits = 2;
 
     @Override
     protected String getTitleRightText() {
@@ -117,7 +118,6 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
             tvPrice.setEnabled(false);
             tvCoinName.setText(businessPayEntity.getCoinName());
             Glide.with(getActivity()).load(businessPayEntity.getImg()).into(ivCoinImg);
-
 
         } else {
             btnResetPrice.setVisibility(View.VISIBLE);
@@ -195,9 +195,9 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
             public void onItemClick(List list, int position) {
                 coinTypeRate = (CoinTypeRate) list.get(position);
                 Glide.with(getContext()).load(coinTypeRate.getImg()).into(ivCoinImg);
+                tvCoinName.setText(coinTypeRate.getName());
                 if (!TextUtils.isEmpty(tvPrice.getText().toString()) && currencyRate != null && coinTypeRate != null) {
                     amount = new BigDecimal(tvPrice.getText().toString()).multiply(new BigDecimal(currencyRate.getRate())).divide(new BigDecimal(coinTypeRate.getRate()), 4, RoundingMode.DOWN);
-                    tvCoinName.setText(coinTypeRate.getName());
                     tvAmount.setText(amount.setScale(4, RoundingMode.DOWN).toString());
 
                 }
@@ -220,6 +220,16 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
                             charSequence = null;
                             tvPrice.setText(charSequence);
                         }
+                        if (charSequence.toString().contains(".")) {
+                            if (charSequence.length() - 1 - charSequence.toString().indexOf(".") > digits) {
+                                charSequence = charSequence.toString().subSequence(0,
+                                        charSequence.toString().indexOf(".") + digits + 1);
+                                tvPrice.setText(charSequence);
+                                tvPrice.setSelection(charSequence.length()); //光标移到最后
+
+                            }
+                        }
+
                         return charSequence.length() >= 0;
                     }
                 })
@@ -279,10 +289,9 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
     }
 
     @Override
-    public void getNodeSuccess(String node) {
-        WalletManager.config(node, businessPayEntity.getToken(), false);
+    public void getNodeSuccess(final String node) {
         Log.e("node>>>>", node);
-        Log.e("Hyaddress>>>>", businessPayEntity.getToken() == null ? "----" : businessPayEntity.getToken());
+//        Log.e("Hyaddress>>>>", businessPayEntity.getToken() == null ? "----" : businessPayEntity.getToken());
 
         DialogUtils.showPayDialog(getContext(), new DialogUtils.SureListener() {
             @Override
@@ -293,9 +302,15 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
                     public void onSuccess() {
                         String hash;
                         if (TextUtils.isEmpty(businessPayEntity.getAmount())) {
+                            WalletManager.config(node, coinTypeRate.getAddress(), false);
+                            Log.e("Hyaddress>>>>",coinTypeRate.getAddress()== null ? "----" :coinTypeRate.getAddress());
+
                             hash = WalletManager.sendTransactionByPrivateKey(ApplicationUtil.getCurrentWallet().getAddress(),
                                     ApplicationUtil.getCurrentWallet().getPrivateKey(), businessPayEntity.getAdddress(), tvAmount.getText().toString(), new BigDecimal(coinTypeRate.getGasprice()).floatValue(), coinTypeRate.getGaslimit(), Integer.parseInt(coinTypeRate.getDecimal()));
                         } else {
+                            WalletManager.config(node, businessPayEntity.getToken(), false);
+                            Log.e("Hyaddress>>>>", businessPayEntity.getToken() == null ? "----" : businessPayEntity.getToken());
+
                             hash = WalletManager.sendTransactionByPrivateKey(ApplicationUtil.getCurrentWallet().getAddress(),
                                     ApplicationUtil.getCurrentWallet().getPrivateKey(), businessPayEntity.getAdddress(), tvAmount.getText().toString(), new BigDecimal(businessPayEntity.getGasprice()).floatValue(), businessPayEntity.getGaslimit(), Integer.parseInt(businessPayEntity.getDecimal()));
                         }

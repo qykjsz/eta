@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:maxHeight="@dimen/dp_300"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_ffffff_top_round_25">
+   >
 
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="@dimen/dp_44"
-        android:gravity="center_vertical"
+        android:gravity="center"
+        android:background="@drawable/bg_ffffff_top_round_25"
         android:text="@string/coin_choose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -24,6 +25,7 @@
         android:id="@+id/rcy"
         app:layout_constraintBottom_toTopOf="@+id/cancel"
         android:layout_width="@dimen/dp_0"
+        android:background="@color/color_FFFFFF"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -45,9 +47,11 @@
     <TextView
         android:id="@+id/cancel"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/cancel"
         android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/rcy"
         android:background="@drawable/bg_item"
         android:textColor="@color/main_blue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,13 +59,13 @@
         android:layout_height="@dimen/dp_44" />
 
 
-    <TextView
-        app:layout_constraintTop_toBottomOf="@+id/rcy"
-        android:layout_width="@dimen/dp_0"
-        android:layout_height="@dimen/dp_1"
-        style="@style/line"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <!--<TextView-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/rcy"-->
+        <!--android:layout_width="@dimen/dp_0"-->
+        <!--android:layout_height="@dimen/dp_1"-->
+        <!--style="@style/line"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
 
-        />
+        <!--/>-->
 </android.support.constraint.ConstraintLayout>

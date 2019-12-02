@@ -434,5 +434,6 @@
     <dimen name="replace_size">@dimen/sp_21</dimen>
     <dimen name="change_pay_password_margin">@dimen/dp_24</dimen>
     <dimen name="itemOffset">10dp</dimen>
+    <dimen name="shadow_radius" >@dimen/dp_8</dimen>
 
 </resources>

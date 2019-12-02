@@ -92,7 +92,9 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.SettingPriceActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BuyerPayActivity"/>
+        <activity android:name="com.zbar.lib.CaptureActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyLogActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLsvelToCreateActivity"/>
     </application>
 
 </manifest>

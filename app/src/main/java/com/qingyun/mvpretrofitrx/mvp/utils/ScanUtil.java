@@ -23,7 +23,6 @@ public class ScanUtil {
                 if (aBoolean){
                     Intent intent = new Intent(activity,ScanActivity.class);
                     activity.startActivity(intent);
-
                 }else{
                     //只要有一个权限被拒绝，就会执行
                     ToastUtil.showShortToast(R.string.camera_permission_required);

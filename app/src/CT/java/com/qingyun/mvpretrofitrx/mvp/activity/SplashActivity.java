@@ -78,7 +78,7 @@ public class SplashActivity extends BaseActivity {
         }
         LocalManageUtil.saveLocal(getActivity(), choose);
 
-//        final Wallet wallet =  ApplicationUtil.getCurrentWallet();
+        final Wallet wallet =  ApplicationUtil.getCurrentWallet();
 //        loadOneTimeGif(getContext(), R.mipmap.et, iv, new GifListener() {
 //            @Override
 //            public void gifPlayComplete() {
@@ -121,9 +121,18 @@ public class SplashActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+                if (wallet ==null){
+                    Intent intent = new Intent(SplashActivity.this,ChooseBottomLevelActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+                    finish();
+                }else {
+                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+                    finish();
+                }
+
             }
         },1000);
     }

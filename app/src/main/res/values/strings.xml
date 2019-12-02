@@ -145,7 +145,7 @@
     <string name="visi_modle">访客模式</string>
     <string name="use_account_to_login">使用固定账号登录</string>
     <string name="eos_bottom_level">EOS底层</string>
-    <string name="tips_create_wallet">·我已仔细阅读并同意 服务及隐私条款 \n·密码用于保护私钥和交易授权，强度非常重要\n ·App不存储密码，也无法帮您找回，请务必牢</string>
+    <string name="tips_create_wallet">·我已仔细阅读并同意 服务及隐私条款 \n·密码用于保护私钥和交易授权，强度非常重要\n·App不存储密码，也无法帮您找回，请务必牢</string>
     <string name="set_wallet_name">设置钱包名</string>
     <string name="input_wallet_name">请输入钱包名</string>
     <string name="set_password">设置密码</string>
@@ -282,4 +282,6 @@
     <string name="business">商家</string>
     <string name="business_code">商家收款</string>
     <string name="need_updata">请更新到最新版本</string>
+    <string name="scan">扫一扫</string>
+    <string name="scan_real_wallet_address">请输入正确的钱包地址</string>
 </resources>

@@ -15,7 +15,7 @@
         app:fp_round_corner="fp_corner_all"
         app:layout_constraintBottom_toBottomOf="parent"
         app:fp_shadowColor="@color/shadow_color"
-        app:fp_shadowRadius="@dimen/dp_8"
+        app:fp_shadowRadius="@dimen/shadow_radius"
         app:fp_shadowRoundRadius="@dimen/dp_7"
         app:fp_shadowShape="fp_round_rectangle"
         app:fp_shadowSide="fp_all"

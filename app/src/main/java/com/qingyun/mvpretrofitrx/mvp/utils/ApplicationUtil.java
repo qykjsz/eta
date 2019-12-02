@@ -117,6 +117,7 @@ public class ApplicationUtil extends Application implements Application.Activity
 
 
     public static void addWallet(Wallet wallet) {
+        deleteWallet(wallet);
         Map<String,List<Wallet>> walletMap = null;
         List<Wallet> wallets = null;
         if (SpUtils.getObjectFromShare(getContext(),"wallet")==null){
@@ -129,8 +130,6 @@ public class ApplicationUtil extends Application implements Application.Activity
             wallets =  walletMap.get(wallet.getCoinType());
             if (wallets==null){
                 wallets = new ArrayList<>();
-            }else {
-                deleteWallet(wallet);
             }
             wallets.add(wallet);
         }
@@ -139,7 +138,9 @@ public class ApplicationUtil extends Application implements Application.Activity
     }
 
     public static void deleteWallet(Wallet wallet){
+        if (wallet==null) return;
         Map<String, List<Wallet>> walletMap = (Map<String, List<Wallet>>) SpUtils.getObjectFromShare(getContext(), "wallet");
+        if (walletMap==null||walletMap.size()<=0)return;
         List<Wallet> wallets = walletMap.get(wallet.getCoinType());
         for (int i = 0;i<wallets.size();i++){
             if (wallets.get(i).getAddress().equals(wallet.getAddress())){

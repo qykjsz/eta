@@ -57,7 +57,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/ly_asset"
             android:layout_width="@dimen/dp_0"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_padding_x_min"
             android:layout_height="@dimen/dp_180"
             android:layout_marginStart="@dimen/dp_padding_x_min"
             android:layout_marginEnd="@dimen/dp_padding_x_min"

@@ -36,12 +36,13 @@
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="@dimen/dp_padding_x_min"
         android:layout_marginTop="@dimen/dp_45"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20"
-        app:wlyHorizontalSpacing="10dp"
-        app:wlyVerticalSpacing="10dp"
+        app:wlyHorizontalSpacing="@dimen/dp_10"
+        app:wlyVerticalSpacing="@dimen/dp_10"
         app:wlyGravity="top"
 
         >

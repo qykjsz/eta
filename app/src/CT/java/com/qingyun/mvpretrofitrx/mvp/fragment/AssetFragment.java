@@ -28,6 +28,7 @@ import com.qingyun.mvpretrofitrx.mvp.activity.AddCoinActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetDetailActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.AssetWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLsvelToCreateActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.CreateWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity;
@@ -64,6 +65,7 @@ import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.zbar.lib.CaptureActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -316,13 +318,13 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 break;
             case R.id.btn_packet:
 //                ToastUtil.showShortToast(R.string.not_open);
-                startActivity(CreateWalletActivity.class);
+                startActivity(ChooseBottomLsvelToCreateActivity.class);
                 break;
             case R.id.btn_scan:
 
 
                 ScanUtil.start(getActivity());
-
+//                startActivity(CaptureActivity.class);
                 break;
             case R.id.btn_more_info:
 

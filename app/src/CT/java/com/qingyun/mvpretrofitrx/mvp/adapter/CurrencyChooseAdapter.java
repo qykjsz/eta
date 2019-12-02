@@ -4,12 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
 import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
-import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
@@ -18,15 +18,13 @@ import butterknife.BindView;
 
 public class CurrencyChooseAdapter extends BaseAdapter<CurrencyRate, CurrencyChooseAdapter.CoinChooseViewHolder> {
 
-
-
     public CurrencyChooseAdapter(Context context, List<CurrencyRate> list) {
         super(context, list);
     }
 
     @Override
     protected CoinChooseViewHolder getViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_coin_choose, parent, false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_currency_choose, parent, false);
         return new CoinChooseViewHolder(view);
     }
 
@@ -50,6 +48,7 @@ public class CurrencyChooseAdapter extends BaseAdapter<CurrencyRate, CurrencyCho
 
         @BindView(R.id.tv_name)
         TextView tvName;
+
         public CoinChooseViewHolder(View itemView) {
             super(itemView);
         }

@@ -8,7 +8,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_103"
-
         android:background="@mipmap/zz_top_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
