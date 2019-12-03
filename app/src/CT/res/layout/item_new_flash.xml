@@ -6,9 +6,19 @@
     >
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp">
+
+
+
+    <LinearLayout
         android:layout_width="20dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
+
        >
         <com.qingyun.mvpretrofitrx.mvp.view.DottedLineView
             android:layout_width="2dp"
@@ -42,7 +52,6 @@
         android:orientation="vertical"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="15dp"
         >
 
         <TextView
@@ -114,5 +123,6 @@
 
     </LinearLayout>
 
+    </LinearLayout>
 
 </LinearLayout>

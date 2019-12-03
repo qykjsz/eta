@@ -140,7 +140,7 @@ public class IndicatorUtils {
                 LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
                 linePagerIndicator.setMode(LinePagerIndicator.MODE_EXACTLY);
                 linePagerIndicator.setLineWidth(UIUtil.dip2px(context, indiW));
-                linePagerIndicator.setYOffset(140);
+                linePagerIndicator.setYOffset(context.getResources().getDimension(R.dimen.dp_65));
                 linePagerIndicator.setLineHeight(activity.getResources().getDimensionPixelSize(R.dimen.dp_2));
                 linePagerIndicator.setColors(activity.getResources().getColor(R.color.color_FFFFFF));
                 return linePagerIndicator;
