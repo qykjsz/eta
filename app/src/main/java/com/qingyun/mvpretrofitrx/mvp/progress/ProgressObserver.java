@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import com.google.gson.JsonSyntaxException;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
@@ -102,8 +103,17 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
 //    }
 
     @Override
+
     public void onError(Throwable e) {
         dismissProgressDialog();
+//        if (e instanceof JsonSyntaxException){
+//            ((JsonSyntaxException)e).
+//            String s = body.string();
+//            Gson gson = new Gson();
+//            BaseResponse bad = gson.fromJson(s, BaseResponse.class);
+//            ToastUtil.showShortToast(bad.getMsg());
+//        }
+
         if (e instanceof com.jakewharton.retrofit2.adapter.rxjava2.HttpException) {
             ResponseBody body = ((com.jakewharton.retrofit2.adapter.rxjava2.HttpException) e).response().errorBody();
             //token失效

@@ -17,6 +17,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ContactsPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.senon.mvpretrofitrx.R;
@@ -42,6 +43,7 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
     TextView tvBottom;
     @BindView(R.id.et_address)
     EditText etAddress;
+    private Contact contact;
 
     @Override
     protected String getTitleRightText() {
@@ -82,6 +84,14 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
     @Override
     public void init() {
         EventBus.getDefault().register(this);
+
+        contact = (Contact) getIntent().getSerializableExtra(IntentUtils.CONTACT);
+        if (contact!=null){
+            etName.setText(contact.getName());
+            etRemark.setText(contact.getRemarks());
+            etAddress.setText(contact.getAddress());
+            tvBottom.setText(contact.getWallettype());
+        }
     }
 
     @Override
@@ -98,7 +108,13 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
                 SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
                     @Override
                     public void requestSuccess(String uuid) {
-                        getPresenter().addContacts(uuid,etName.getText().toString(),etRemark.getText().toString(),tvBottom.getText().toString(),etAddress.getText().toString());
+                        if (contact==null){
+                            getPresenter().addContacts(uuid,etName.getText().toString(),etRemark.getText().toString(),tvBottom.getText().toString(),etAddress.getText().toString());
+
+                        }else {
+                            getPresenter().editContacts(contact.getId(),uuid,etName.getText().toString(),etRemark.getText().toString(),tvBottom.getText().toString(),etAddress.getText().toString());
+
+                        }
 
                     }
                 });
@@ -132,6 +148,17 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
                 tvBottom.setText(((Wallet)list.get(position)).getName());
             }
         });
+    }
+
+    @Override
+    public void editContactsSuccess() {
+        finish();
+
+    }
+
+    @Override
+    public void deleteContactsSuccess() {
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

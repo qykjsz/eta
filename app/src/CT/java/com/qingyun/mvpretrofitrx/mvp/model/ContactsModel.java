@@ -27,4 +27,15 @@ public class ContactsModel<T> extends BaseModel {
         subscribe(context, Api.getApiService().getContactList(contacts), observerListener,transformer);
 
     }
+
+    public void editContacts(Context context,String contactsid,String contacts,String name,String remarks,String wallettype,String address, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().editContacts(contactsid,contacts, name, remarks, wallettype, address), observerListener,transformer);
+
+    }
+
+
+    public void deleteContacts(Context context,String contactsid,String contacts, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().deleteContacts(contactsid,contacts), observerListener,transformer);
+
+    }
 }

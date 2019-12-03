@@ -177,7 +177,8 @@ public class AssetDetailActivity extends BaseActivity<WalletAssetContact.View,Wa
         if (visiable){
             if (assetResponse!=null)
                 tvAsset.setText(assetResponse.getAllnumber());
-            tvIncomeToday.setText(assetResponse.getToday());
+            tvIncomeToday.setText(assetResponse.getToday().startsWith("-")?assetResponse.getToday():"+"+assetResponse.getToday());
+
         }else {
             tvIncomeToday.setText(INVISIABLE_STR);
             tvAsset.setText(INVISIABLE_STR);

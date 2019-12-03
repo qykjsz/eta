@@ -425,7 +425,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         if (visiable) {
             if (assetResponse != null)
                 tvAsset.setText(assetResponse.getAllnumber());
-            tvIncomeToday.setText(assetResponse.getToday());
+            tvIncomeToday.setText(assetResponse.getToday().startsWith("-")?assetResponse.getToday():"+"+assetResponse.getToday());
         } else {
             tvIncomeToday.setText(INVISIABLE_STR);
             tvAsset.setText(INVISIABLE_STR);

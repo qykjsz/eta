@@ -284,4 +284,7 @@
     <string name="need_updata">请更新到最新版本</string>
     <string name="scan">扫一扫</string>
     <string name="scan_real_wallet_address">请输入正确的钱包地址</string>
+    <string name="price_not_null">必须设置价格</string>
+    <string name="price_not_zrio">价格不能为0</string>
+    <string name="sure_to_delete_contact">确定删除联系人？</string>
 </resources>

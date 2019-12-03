@@ -196,7 +196,7 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
             if (transferLogResponse!=null)
                 tvAsset.setText(transferLogResponse.getNumber());
             tvUsdt.setText(transferLogResponse.getUsdtnumber());
-            tvIncomeToday.setText(transferLogResponse.getToday());
+            tvIncomeToday.setText(transferLogResponse.getToday().startsWith("-")?transferLogResponse.getToday():"+"+transferLogResponse.getToday());
         }else {
             tvIncomeToday.setText(INVISIABLE_STR);
             tvAsset.setText(INVISIABLE_STR);
@@ -287,7 +287,8 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getDetail(TransferLogResponse transferLogResponse) {
         tvAsset.setText(transferLogResponse.getUsdtnumber());
-        tvIncomeToday.setText(transferLogResponse.getToday());
+        tvIncomeToday.setText(transferLogResponse.getToday().startsWith("-")?transferLogResponse.getToday():"+"+transferLogResponse.getToday());
+
 
     }
 

@@ -22,6 +22,7 @@ import com.qingyun.mvpretrofitrx.mvp.presenter.BusinessPayPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
 
@@ -61,6 +62,7 @@ public class SettingPriceActivity extends BaseActivity<BusinessPayContact.View, 
     private CurrencyRate currencyRate;
     private BigDecimal amount;
     private int digits = 2;
+    private BigDecimal price;
 
     @Override
     protected String getTitleRightText() {
@@ -121,6 +123,16 @@ public class SettingPriceActivity extends BaseActivity<BusinessPayContact.View, 
                 getPresenter().getCoinTypeRate();
                 break;
             case R.id.btn_confirm:
+                if (TextUtils.isEmpty(etPrice.getText().toString()))
+                {
+                    ToastUtil.showShortToast(R.string.price_not_null);
+                    return;
+                }
+                    price = new BigDecimal(etPrice.getText().toString());
+                if (price.doubleValue()==0){
+                    ToastUtil.showShortToast(R.string.price_not_zrio);
+                    return;
+                }
                 BusinessPayEntity businessPayEntity = new BusinessPayEntity();
                 businessPayEntity.setAdddress(ApplicationUtil.getCurrentWallet().getAddress());
                 businessPayEntity.setAmount(etAmount.getText().toString());
