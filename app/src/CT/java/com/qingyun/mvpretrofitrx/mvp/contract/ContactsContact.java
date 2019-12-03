@@ -15,6 +15,8 @@ public interface ContactsContact {
         void addContactsSuccess();
         void getContactListSuccess(List<Contact> contactList);
         void getWalletInfoSuccess(AssetResponse assetResponse);
+        void editContactsSuccess();
+        void deleteContactsSuccess();
 
     }
 
@@ -22,6 +24,8 @@ public interface ContactsContact {
         public abstract void addContacts(String imei,String name,String remarks,String wallettype,String address);
         public abstract void getContactList(String contacts);
         public abstract void getWalletInfo(String walletAddress);
+        public abstract void editContacts(String id,String contacts,String name,String remarks,String wallettype,String address);
+        public abstract void deleteContacts(String id,String contacts);
 
     }
 }

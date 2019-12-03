@@ -95,8 +95,8 @@ final class CameraConfigurationManager {
 		}
 
 		if (cameraResolution == null) {
-			cameraResolution = new Point((screenResolution.x >> 3) << 3,
-					(screenResolution.y >> 3) << 3);
+			cameraResolution = new Point((screenResolution.x >> 4) << 4,
+					(screenResolution.y >> 4) << 4);
 		}
 
 		return cameraResolution;

@@ -23,7 +23,6 @@
         app:fp_shadowRoundRadius="@dimen/dp_7"
         app:fp_shadowShape="fp_round_rectangle"
         app:fp_shadowSide="fp_all"
-
         >
 
 
@@ -118,7 +117,7 @@
 
             <TextView
                 android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginTop="@dimen/sp_12"

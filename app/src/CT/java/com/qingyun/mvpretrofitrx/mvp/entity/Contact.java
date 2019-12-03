@@ -1,11 +1,22 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
+    private String id;
     private String name;
     private String remarks;
     private String wallettype;
     private String address;
     private String time;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

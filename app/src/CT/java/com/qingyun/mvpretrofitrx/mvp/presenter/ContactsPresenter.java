@@ -44,6 +44,42 @@ public class ContactsPresenter extends ContactsContact.Presenter {
 
     }
 
+    @Override
+    public void editContacts(String id, String contacts, String name, String remarks, String wallettype, String address) {
+        model.editContacts(context,id,contacts,  name,  remarks,  wallettype,  address,getView().bindLifecycle(), new ObserverResponseListener<Object>() {
+
+            @Override
+            public void onNext(Object o) {
+                if(getView() != null){
+                    getView().editContactsSuccess();
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void deleteContacts(String id, String contacts) {
+        model.deleteContacts(context,id,contacts, getView().bindLifecycle(), new ObserverResponseListener<Object>() {
+
+            @Override
+            public void onNext(Object o) {
+                if(getView() != null){
+                    getView().deleteContactsSuccess();
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
 
     @Override
     public void addContacts(String imei, String name, String remarks, String wallettype, String address) {

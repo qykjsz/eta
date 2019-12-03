@@ -122,6 +122,8 @@ public final class CameraManager {
 	public void openLight() {
 		if (camera != null) {
 			parameter = camera.getParameters();
+//			parameter.setPreviewSize(1920, 1080);
+//			parameter.setPictureSize(1920, 1080);//如果不设置会按照系统默认配置最低160x120分辨率
 			parameter.setFlashMode(Parameters.FLASH_MODE_TORCH);
 			camera.setParameters(parameter);
 		}
@@ -130,6 +132,8 @@ public final class CameraManager {
 	public void offLight() {
 		if (camera != null) {
 			parameter = camera.getParameters();
+//			parameter.setPreviewSize(1920, 1080);
+//			parameter.setPictureSize(1920, 1080);//如果不设置会按照系统默认配置最低160x120分辨率
 			parameter.setFlashMode(Parameters.FLASH_MODE_OFF);
 			camera.setParameters(parameter);
 		}

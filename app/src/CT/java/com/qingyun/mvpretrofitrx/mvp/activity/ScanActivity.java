@@ -18,15 +18,15 @@ public class  ScanActivity extends CaptureActivity {
     @Override
     protected boolean onScanSuccess(String result) {
 
+        if (result.contains("version") ){
+            ToastUtil.showShortToast(R.string.scan_real_wallet_address);
+            return false;
+        }
 
             try {
                 BusinessPayEntity businessPayEntity= new Gson().fromJson(result, BusinessPayEntity.class);
                 Bundle bundle = new Bundle();
-                if (businessPayEntity.getPrice()==null)
-                {
-                    ToastUtil.showShortToast(R.string.scan_real_wallet_address);
-                    return false;
-                }
+
                 bundle.putSerializable(IntentUtils.BUSINESS_PAY_ENTITY, businessPayEntity);
                 startActivity(BuyerPayActivity.class, bundle);
                 finish();

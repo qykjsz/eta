@@ -267,6 +267,11 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                     ToastUtil.showShortToast(R.string.amount_must);
                     return;
                 }
+                BigDecimal price = new BigDecimal(tvAmount.getText().toString());
+                if (price.doubleValue()==0){
+                    ToastUtil.showShortToast(R.string.price_not_zrio);
+                    return;
+                }
 
                 if (TextUtils.isEmpty(tvMining.getText().toString())){
                     ToastUtil.showShortToast(R.string.amount_must);

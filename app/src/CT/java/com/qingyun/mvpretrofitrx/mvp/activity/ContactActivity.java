@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.qingyun.mvpretrofitrx.mvp.adapter.ContactAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
@@ -11,7 +12,11 @@ import com.qingyun.mvpretrofitrx.mvp.contract.ContactsContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.Address;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
+import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ContactsPresenter;
+import com.qingyun.mvpretrofitrx.mvp.utils.AppUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
@@ -94,6 +99,41 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
 
             }
         });
+        contactAdapter.setDeleteListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(final List list, final int position) {
+                DialogUtils.showConfirmDialog(getActivity(), 0, R.string.sure_to_delete_contact, R.string.cancel, R.string.confirm, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Contact contact = (Contact) list.get(position);
+                        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+                            @Override
+                            public void requestSuccess(String uuid) {
+                                getPresenter().deleteContacts(contact.getId(), uuid);
+                                contactAdapter.getViewBinderHelper().closeLayout(position+"");
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        contactAdapter.setEditListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(List list, int position) {
+                contactAdapter.getViewBinderHelper().closeLayout(position+"");
+                Contact contact = (Contact) list.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(IntentUtils.CONTACT,contact);
+                startActivity(AddNewContactActivity.class,bundle);
+            }
+        });
+
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.addItemDecoration(DividerHelper.getMyDivider(getContext()));
         rcy.setAdapter(contactAdapter);
@@ -101,6 +141,7 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
 
 
     }
+
 
     @Override
     protected void onResume() {
@@ -112,6 +153,17 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
             }
         });
 
+    }
+
+    @Override
+    protected void refresh() {
+        super.refresh();
+        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+            @Override
+            public void requestSuccess(String uuid) {
+                getPresenter().getContactList(uuid);
+            }
+        });
     }
 
     @Override
@@ -141,6 +193,22 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
 
     @Override
     public void getWalletInfoSuccess(AssetResponse assetResponse) {
+
+    }
+
+    @Override
+    public void editContactsSuccess() {
+
+    }
+
+    @Override
+    public void deleteContactsSuccess() {
+        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+            @Override
+            public void requestSuccess(String uuid) {
+                getPresenter().getContactList(uuid);
+            }
+        });
 
     }
 

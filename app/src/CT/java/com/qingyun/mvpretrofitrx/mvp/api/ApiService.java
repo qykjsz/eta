@@ -74,6 +74,16 @@ public interface ApiService {
     @POST("et_addcontacts")
     Observable<BaseResponse<Object>> addContacts(@Query("contacts") String contacts, @Query("name") String name, @Query("remarks") String remarks, @Query("wallettype") String wallettype, @Query("address") String address);
 
+
+    @POST("et_upcontacts")
+    Observable<BaseResponse<Object>> editContacts(@Query("contactsid") String contactsid,@Query("contacts") String contacts, @Query("name") String name, @Query("remarks") String remarks, @Query("wallettype") String wallettype, @Query("address") String address);
+
+    @POST("et_delcontacts")
+    Observable<BaseResponse<Object>> deleteContacts(@Query("contactsid") String contactsid,@Query("contacts") String contacts);
+
+
+
+
     @POST("et_contactsall")
     Observable<BaseResponse<List<Contact>>> getContactList(@Query("contacts") String contacts);
 

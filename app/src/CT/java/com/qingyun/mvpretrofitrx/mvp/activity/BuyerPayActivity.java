@@ -143,6 +143,16 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_pay:
+                if (TextUtils.isEmpty(tvPrice.getText().toString()))
+                {
+                    ToastUtil.showShortToast(R.string.price_not_null);
+                    return;
+                }
+                    BigDecimal price = new BigDecimal(tvPrice.getText().toString());
+                    if (price.doubleValue()==0){
+                        ToastUtil.showShortToast(R.string.price_not_zrio);
+                        return;
+                    }
                 getPresenter().getNode();
 
                 break;
@@ -170,7 +180,9 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
 
                 currencyRate = (CurrencyRate) list.get(position);
                 tvPriceName.setText(currencyRate.getName());
+
                 if (!TextUtils.isEmpty(tvPrice.getText().toString()) && currencyRate != null && coinTypeRate != null) {
+
                     amount = new BigDecimal(tvPrice.getText().toString()).multiply(new BigDecimal(currencyRate.getRate())).divide(new BigDecimal(coinTypeRate.getRate()), 4, RoundingMode.DOWN);
                     tvAmount.setText(amount.setScale(4, RoundingMode.DOWN).toString());
 
