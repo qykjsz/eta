@@ -58,7 +58,7 @@ public class FindViewPageFragment extends BaseFragment {
     FindViewPageAdapter mAdapter ;
     Unbinder unbinder;
     @BindView(R.id.listView)
-    ListViewForScrollView listView;
+    ListView listView;
     public List<JSONArray> list = new ArrayList<>();
     List<GameData> gameData;
     public static FindViewPageFragment getInstance() {

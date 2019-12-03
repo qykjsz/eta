@@ -54,17 +54,22 @@ import ezy.ui.layout.LoadingLayout;
 import io.reactivex.ObservableTransformer;
 
 public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.Presenter> implements MakieContact.View {
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+//    @BindView(R.id.recyclerView)
+//    RecyclerView recyclerView;
     Unbinder unbinder;
-    private List<Quotation> quotations;
-    MakieAdapter adapter;
+//    private List<Quotation> quotations;
+//    MakieAdapter adapter;
     @BindView(R.id.listView)
     ListView listView;
     @BindView(R.id.iv_money_icon)
     ImageView iv_money_icon;
     @BindView(R.id.iv_range_icon)
     ImageView iv_range_icon;
+    private List<Quotation> list;
+    private boolean isMoney;
+    private boolean isRange;
+    List<String> stringList;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_makie;
@@ -97,9 +102,7 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
         listView.setAdapter(mAdapter);
 
     }
-    private List<Quotation> list;
-    private boolean isMoney;
-    private boolean isRange;
+
     @OnClick({R.id.ll_money, R.id.ll_range})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -125,7 +128,6 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
                 break;
         }
     }
-    List<String> stringList;
     //获取动态 价格 涨跌幅排序 start 1.按价格降序 2.按价格升序 3.按涨跌降序 4.按涨跌升序
     private void requestTrends(int start){
         if(list.size() > 0){

@@ -6,28 +6,35 @@
     android:layout_height="match_parent">
 
 
-    <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/magic_indicator3"
-        android:paddingTop="35dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@mipmap/wo_top_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/magic_indicator3"
+            android:layout_width="match_parent"
+            android:layout_height="148dp"
+            android:background="@mipmap/icon_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="@dimen/dp_0"
-        android:layout_height="@dimen/dp_0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/magic_indicator3"
-        >
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/magic_indicator3"
+            android:layout_marginTop="91dp"
+            >
 
 
-    </android.support.v4.view.ViewPager>
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
+
+
 
 
 </android.support.constraint.ConstraintLayout>

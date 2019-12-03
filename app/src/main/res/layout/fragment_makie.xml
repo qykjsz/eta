@@ -85,66 +85,11 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        style="@style/MatchMatch.Vertical"
-        android:layout_marginTop="@dimen/dp_20"
-        android:background="@drawable/bg_ffffff_top_round_25"
-        android:visibility="gone"
-       >
-
-        <RelativeLayout
-            style="@style/MatchWrap"
-            android:layout_marginTop="@dimen/dp_5"
-            >
-
-            <TextView
-                style="@style/WrapWrap"
-                android:layout_alignParentLeft="true"
-                android:layout_marginStart="@dimen/dp_20"
-                android:text="资产"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/sp_12" />
-
-            <TextView
-
-                style="@style/WrapWrap"
-                android:layout_centerHorizontal="true"
-                android:text="最新价"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/sp_12" />
-
-            <TextView
-                style="@style/WrapWrap"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="@dimen/dp_20"
-                android:text="涨跌幅"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/sp_12" />
-
-
-        </RelativeLayout>
-
-
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_20"
-                        android:layout_marginEnd="@dimen/dp_20">
-
-
-                    </android.support.v7.widget.RecyclerView>
-                </RelativeLayout>
-    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:divider="@null"></ListView>
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"></ListView>
 </LinearLayout>
