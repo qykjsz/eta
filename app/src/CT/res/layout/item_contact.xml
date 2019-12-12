@@ -54,13 +54,14 @@
 
 
     </android.support.constraint.ConstraintLayout>
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/ly_front"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
             android:id="@+id/iv_pic"
             android:layout_width="@dimen/dp_50"
+            android:layout_centerVertical="true"
             android:layout_height="@dimen/dp_50"
             android:layout_marginStart="@dimen/dp_padding_x_min"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +74,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
+            android:layout_toRightOf="@+id/iv_pic"
             android:text="TextView"
+            android:layout_centerVertical="true"
             app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
             app:layout_constraintStart_toEndOf="@+id/iv_pic"
             app:layout_constraintTop_toTopOf="@+id/iv_pic" />
@@ -82,6 +85,8 @@
             android:id="@+id/tv_coin_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_name"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/dp_10"
             android:background="@mipmap/lxr_jianb"
             android:gravity="center"
@@ -98,6 +103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/wd_gd_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,6 +113,6 @@
 
 
 
-    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
 
 </com.chauthai.swipereveallayout.SwipeRevealLayout>

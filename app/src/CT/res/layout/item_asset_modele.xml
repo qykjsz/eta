@@ -3,28 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_85">
+    android:layout_height="@dimen/dp_77">
 
-
-    <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:fp_round_corner="fp_corner_all"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:fp_shadowColor="@color/shadow_color"
-        app:fp_shadowRadius="@dimen/shadow_radius"
-        app:fp_shadowRoundRadius="@dimen/dp_7"
-        app:fp_shadowShape="fp_round_rectangle"
-        app:fp_shadowSide="fp_all"
-        >
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:background="@drawable/bg_ffffff_round_7"
-            android:layout_height="match_parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/bg_e6e6e6_round_14">
 
 
             <ImageView
@@ -54,7 +43,7 @@
 
 
         </android.support.constraint.ConstraintLayout>
-    </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
 
 
 

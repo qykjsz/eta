@@ -41,7 +41,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.MainActivity" />
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.MainActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            >
+        </activity>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TransferActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyCommemorationActivity" />
@@ -50,6 +53,7 @@
             android:exported="true"
             />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ContactActivity" />
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.InvestLogActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AddNewContactActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChangeWalletPasswordActivity" />
@@ -93,6 +97,7 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.SettingPriceActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BuyerPayActivity"/>
         <activity android:name="com.zbar.lib.CaptureActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.InvestActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyLogActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLsvelToCreateActivity"/>
     </application>

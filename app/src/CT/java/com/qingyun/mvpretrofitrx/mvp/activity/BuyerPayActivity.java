@@ -68,6 +68,8 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
     private CoinTypeRate coinTypeRate;
     private BigDecimal amount;
     private int digits = 2;
+    private boolean fromSetting1 = false;
+    private boolean fromSetting2 = false;
 
     @Override
     protected String getTitleRightText() {
@@ -114,10 +116,14 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
             tvTo.setText(businessPayEntity.getAdddress().substring(0, 5) + "****" + businessPayEntity.getAdddress().substring(businessPayEntity.getAdddress().length() - 5, businessPayEntity.getAdddress().length()));
             tvPriceName.setText(businessPayEntity.getPriceName());
             tvPrice.setText(businessPayEntity.getPrice());
-            tvAmount.setText(businessPayEntity.getAmount());
+//            tvAmount.setText(businessPayEntity.getAmount());
             tvPrice.setEnabled(false);
             tvCoinName.setText(businessPayEntity.getCoinName());
             Glide.with(getActivity()).load(businessPayEntity.getImg()).into(ivCoinImg);
+            fromSetting1 = true;
+            fromSetting2 = true;
+
+            getPresenter().getCoinTypeRate();
 
         } else {
             btnResetPrice.setVisibility(View.VISIBLE);
@@ -167,7 +173,24 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
 
     @Override
     public void getCurrencyRateSuccess(List<CurrencyRate> currencyRateList) {
+        if (fromSetting1){
+            for (int i=0;i<currencyRateList.size();i++){
+                if (businessPayEntity.getPriceName().equals(currencyRateList.get(i).getName())){
+                    currencyRate = currencyRateList.get(i);
+                    break;
+                }
+            }
+            fromSetting1 = false;
 
+            if (!TextUtils.isEmpty(tvPrice.getText().toString()) && currencyRate != null && coinTypeRate != null) {
+
+                amount = new BigDecimal(tvPrice.getText().toString()).multiply(new BigDecimal(currencyRate.getRate())).divide(new BigDecimal(coinTypeRate.getRate()), 4, RoundingMode.DOWN);
+                tvAmount.setText(amount.setScale(4, RoundingMode.DOWN).toString());
+
+            }
+
+            return;
+        }
         if (currencyRate == null && currencyRateList != null && currencyRateList.size() > 0) {
             currencyRate = currencyRateList.get(0);
             tvPriceName.setText(currencyRate.getName());
@@ -194,7 +217,17 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
 
     @Override
     public void getCoinTypeRateSuccess(List<CoinTypeRate> coinTypeRateList) {
-
+        if (fromSetting2){
+            for (int i=0;i<coinTypeRateList.size();i++){
+                if (businessPayEntity.getCoinName().equals(coinTypeRateList.get(i).getName())){
+                    coinTypeRate = coinTypeRateList.get(i);
+                    break;
+                }
+            }
+            fromSetting2 = false;
+            getPresenter().getCurrencyRate();
+            return;
+        }
         if (coinTypeRate == null && coinTypeRateList != null && coinTypeRateList.size() > 0) {
             coinTypeRate = coinTypeRateList.get(0);
             Glide.with(getContext()).load(coinTypeRate.getImg()).into(ivCoinImg);

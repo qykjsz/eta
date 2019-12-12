@@ -100,5 +100,7 @@
     <color name="color_000000">#000000</color>
     <color name="color_24CE94">#24CE94</color>
     <color name="shadow_color">#08002796</color>
+    <color name="color_65A4FE">#65A4FE</color>
+    <color name="color_B7BCDC">#B7BCDC</color>
 
 </resources>

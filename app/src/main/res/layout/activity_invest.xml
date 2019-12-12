@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_FFFFFF"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ly_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/ly1"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_160"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView18"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/czzx_kp" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:id="@+id/textView551"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_padding_x_min"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:text="@string/et_invest_center"
+                        android:textColor="@color/color_FFFFFF"
+                        android:textSize="@dimen/sp_18"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_3"
+                        android:text="@string/et_invest_center_en"
+                        android:textColor="@color/color_65A4FE"
+                        android:textSize="@dimen/sp_13"
+                        app:layout_constraintStart_toStartOf="@+id/textView551"
+                        app:layout_constraintTop_toBottomOf="@+id/textView551" />
+
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_7"
+                    android:layout_marginEnd="@dimen/dp_7"
+                    app:layout_constraintTop_toBottomOf="@+id/ly1"
+                    app:fp_shadowColor="@color/shadow_color"
+                    app:fp_shadowRadius="@dimen/shadow_radius"
+                    app:fp_shadowRoundRadius="@dimen/dp_9"
+                    app:fp_shadowShape="fp_round_rectangle"
+                    app:fp_round_corner="fp_corner_leftBottom|fp_corner_rightBottom"
+                    app:fp_shadowSide="fp_bottom|fp_left|fp_right"
+                    >
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_padding_x_min"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        android:background="@drawable/bg_ffffff_round_7"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ly1">
+
+                        <android.support.constraint.ConstraintLayout
+                            android:id="@+id/ly_other"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/ly_log"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/imageView19"
+                                android:layout_width="@dimen/dp_41"
+                                android:layout_height="@dimen/dp_41"
+                                android:layout_marginStart="@dimen/dp_13"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_marginBottom="@dimen/dp_10"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/qtcz_icon"
+                                tools:layout_editor_absoluteX="28dp"
+                                tools:layout_editor_absoluteY="36dp" />
+
+                            <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                                android:id="@+id/textView109"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp_5"
+                                android:layout_marginTop="@dimen/dp_2"
+                                android:text="@string/other_invest"
+                                app:layout_constraintStart_toEndOf="@+id/imageView19"
+                                app:layout_constraintTop_toTopOf="@+id/imageView19" />
+
+                            <TextView
+                                android:id="@+id/textView117"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp_5"
+                                android:layout_marginBottom="@dimen/dp_2"
+                                android:text="@string/other_invest_en"
+                                android:textColor="@color/color_999999"
+                                android:textSize="@dimen/sp_12"
+                                app:layout_constraintBottom_toBottomOf="@+id/imageView19"
+                                app:layout_constraintStart_toEndOf="@+id/imageView19" />
+
+
+                        </android.support.constraint.ConstraintLayout>
+
+
+                        <android.support.constraint.ConstraintLayout
+                            android:id="@+id/ly_log"
+                            android:layout_width="@dimen/dp_0"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ly_other"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/imageView191"
+                                android:layout_width="@dimen/dp_41"
+                                android:layout_height="@dimen/dp_41"
+                                android:layout_marginStart="@dimen/dp_13"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_marginBottom="@dimen/dp_10"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/czjl_icon"
+                                tools:layout_editor_absoluteX="28dp"
+                                tools:layout_editor_absoluteY="36dp" />
+
+                            <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                                android:id="@+id/textView1091"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp_5"
+                                android:layout_marginTop="@dimen/dp_2"
+                                android:text="@string/invest_log"
+                                app:layout_constraintStart_toEndOf="@+id/imageView191"
+                                app:layout_constraintTop_toTopOf="@+id/imageView191" />
+
+                            <TextView
+                                android:id="@+id/textView1171"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp_5"
+                                android:layout_marginBottom="@dimen/dp_2"
+                                android:text="@string/invest_log_en"
+                                android:textColor="@color/color_999999"
+                                android:textSize="@dimen/sp_12"
+                                app:layout_constraintBottom_toBottomOf="@+id/imageView191"
+                                app:layout_constraintStart_toEndOf="@+id/imageView191" />
+
+
+                        </android.support.constraint.ConstraintLayout>
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+
+                </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+            <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_7"
+                android:layout_marginEnd="@dimen/dp_7"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                android:id="@+id/constraintLayout8"
+                app:fp_shadowColor="@color/shadow_color"
+                app:fp_shadowRadius="@dimen/shadow_radius"
+                app:fp_shadowRoundRadius="@dimen/dp_9"
+                app:fp_shadowShape="fp_round_rectangle"
+                app:fp_round_corner="fp_corner_all"
+                app:fp_shadowSide="fp_all"
+                >
+
+
+                <android.support.constraint.ConstraintLayout
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/bg_ffffff_round_9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:id="@+id/imageView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/bt_zs"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="@dimen/dp_padding_x_min"
+                        android:layout_marginStart="@dimen/dp_padding_x_min"
+                        tools:layout_editor_absoluteX="44dp"
+                        tools:layout_editor_absoluteY="16dp" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:id="@+id/textView137"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:textSize="@dimen/sp_16"
+                        android:text="@string/choose_platform"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView21"
+                        app:layout_constraintStart_toEndOf="@+id/imageView21"
+                        app:layout_constraintTop_toTopOf="@+id/imageView21" />
+
+                    <TextView
+                        android:id="@+id/textView139"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_platform_en"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/color_999999"
+                        app:layout_constraintTop_toBottomOf="@+id/textView137"
+                        app:layout_constraintStart_toStartOf="@+id/textView137"
+                        android:layout_marginTop="@dimen/dp_3"
+                        tools:layout_editor_absoluteX="65dp"
+                        tools:layout_editor_absoluteY="52dp" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:id="@+id/tv_platform"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_44"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/bg_line_round_6_sto"
+                        android:paddingStart="@dimen/dp_padding_x_min"
+                        app:layout_constraintTop_toBottomOf="@+id/textView139"
+                        app:layout_constraintStart_toStartOf="@+id/imageView21"
+                        android:text="@string/qubao_game"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        tools:layout_editor_absoluteX="65dp"
+                        tools:layout_editor_absoluteY="110dp" />
+
+                    <TextView
+                        android:id="@+id/btn_choose_platform"
+                        android:layout_width="wrap_content"
+                        app:layout_constraintTop_toTopOf="@+id/tv_platform"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_platform"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_platform"
+                        android:textColor="@color/main_blue"
+                        android:padding="@dimen/dp_padding_x_min"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/choose"
+                        tools:layout_editor_absoluteX="296dp"
+                        tools:layout_editor_absoluteY="109dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/bt_zs"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_platform"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="@dimen/dp_25"
+                        android:layout_marginStart="@dimen/dp_padding_x_min"
+                        tools:layout_editor_absoluteX="27dp"
+                        tools:layout_editor_absoluteY="162dp" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:id="@+id/textView143"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:textSize="@dimen/sp_16"
+                        android:text="@string/platform_account"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView22"
+                        app:layout_constraintStart_toEndOf="@+id/imageView22"
+                        app:layout_constraintTop_toTopOf="@+id/imageView22" />
+
+                    <TextView
+                        android:id="@+id/textView144"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/platform_account_en"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/color_999999"
+                        app:layout_constraintTop_toBottomOf="@+id/textView143"
+                        app:layout_constraintStart_toStartOf="@+id/textView143"
+                        android:layout_marginTop="@dimen/dp_3"
+                        tools:layout_editor_absoluteX="53dp"
+                        tools:layout_editor_absoluteY="216dp" />
+
+                    <EditText
+                        android:id="@+id/tv_account"
+                        android:layout_width="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:singleLine="true"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        android:layout_height="@dimen/dp_44"
+                        android:background="@drawable/bg_line_round_6_sto"
+
+                        app:layout_constraintTop_toBottomOf="@+id/textView144"
+                        android:hint="@string/input_platform_account"
+                        android:paddingStart="@dimen/dp_padding_x_min"
+                        android:paddingEnd="@dimen/dp_40"
+                        app:layout_constraintStart_toStartOf="@+id/imageView22"
+                        android:layout_marginTop="@dimen/dp_12"
+                        tools:layout_editor_absoluteX="34dp"
+                        tools:layout_editor_absoluteY="265dp" />
+
+                    <TextView
+                        android:id="@+id/btn_account"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/dp_padding_x_min"
+                        android:layout_height="0dp"
+                        android:text="@string/review"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/main_blue"
+                        app:layout_constraintTop_toTopOf="@+id/tv_account"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_account"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_account"
+
+                        tools:layout_editor_absoluteX="289dp"
+                        tools:layout_editor_absoluteY="265dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/bt_zs"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_account"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="@dimen/dp_25"
+                        android:layout_marginStart="@dimen/dp_padding_x_min"
+                        tools:layout_editor_absoluteX="18dp"
+                        tools:layout_editor_absoluteY="268dp" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:id="@+id/textView149"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:text="@string/invest_num"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView23"
+                        app:layout_constraintStart_toEndOf="@+id/imageView23"
+                        app:layout_constraintTop_toTopOf="@+id/imageView23" />
+
+                    <TextView
+                        android:id="@+id/textView150"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invest_num_en"
+                        tools:layout_editor_absoluteX="34dp"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintTop_toBottomOf="@+id/textView149"
+                        app:layout_constraintStart_toStartOf="@+id/textView149"
+                        android:textColor="@color/color_999999"
+                        android:layout_marginTop="@dimen/dp_3"
+                        tools:layout_editor_absoluteY="308dp" />
+
+                    <EditText
+                        android:id="@+id/et_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_44"
+                        android:inputType="numberDecimal"
+                        android:gravity="center_vertical"
+                        android:hint="@string/input_platform_coin_num"
+                        app:layout_constraintTop_toBottomOf="@+id/textView150"
+                        android:paddingStart="@dimen/dp_padding_x_min"
+                        android:singleLine="true"
+
+                        android:paddingEnd="@dimen/dp_40"
+                        android:background="@drawable/bg_line_round_6_sto"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        android:layout_marginTop="@dimen/dp_12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/imageView23"
+                        tools:layout_editor_absoluteY="357dp" />
+
+                    <TextView
+                        android:id="@+id/btn_amount"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/dp_padding_x_min"
+                        android:layout_height="0dp"
+                        android:text="@string/choose"
+                        app:layout_constraintTop_toTopOf="@+id/et_amount"
+                        app:layout_constraintBottom_toBottomOf="@+id/et_amount"
+                        app:layout_constraintEnd_toEndOf="@+id/et_amount"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/main_blue"
+                        tools:layout_editor_absoluteX="278dp"
+                        tools:layout_editor_absoluteY="357dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@+id/imageView23"
+                        app:layout_constraintTop_toBottomOf="@+id/et_amount"
+                        android:layout_marginTop="@dimen/dp_25"
+                        app:srcCompat="@mipmap/bt_zs"
+                        tools:layout_editor_absoluteX="16dp"
+                        tools:layout_editor_absoluteY="359dp" />
+
+                    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                        android:id="@+id/textView153"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_coin_type"
+                        app:layout_constraintTop_toTopOf="@+id/imageView24"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView24"
+                        app:layout_constraintStart_toEndOf="@+id/imageView24"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:textSize="@dimen/sp_16"
+                        tools:layout_editor_absoluteX="71dp"
+                        tools:layout_editor_absoluteY="393dp" />
+
+                    <TextView
+                        android:id="@+id/textView154"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/choose_coin_type_en"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/color_999999"
+                        app:layout_constraintTop_toBottomOf="@+id/textView153"
+                        app:layout_constraintStart_toStartOf="@+id/textView153"
+                        android:layout_marginTop="@dimen/dp_3"
+                        tools:layout_editor_absoluteX="44dp"
+                        tools:layout_editor_absoluteY="424dp" />
+
+                    <TextView
+                        android:id="@+id/tv_coin_type"
+                        android:layout_width="0dp"
+                        app:layout_constraintStart_toStartOf="@+id/imageView24"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        android:gravity="center_vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/textView154"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:paddingStart="@dimen/dp_padding_x_min"
+                        android:paddingEnd="@dimen/dp_40"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_height="@dimen/dp_44"
+                        android:background="@drawable/bg_line_round_6_sto"
+                        android:text="@string/eth"
+                        tools:layout_editor_absoluteX="44dp"
+                        tools:layout_editor_absoluteY="458dp" />
+
+
+                    <TextView
+                        android:id="@+id/btn_coin_type"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/dp_padding_x_min"
+                        android:layout_height="0dp"
+                        android:text="@string/choose"
+                        android:textColor="@color/main_blue"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_coin_type"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_coin_type"
+
+                        app:layout_constraintTop_toTopOf="@+id/tv_coin_type" />
+
+
+                    <CheckBox
+                        android:id="@+id/cb"
+                        android:button="@drawable/cb_read"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_coin_type"
+                        app:layout_constraintStart_toStartOf="@+id/tv_coin_type"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="@dimen/dp_padding_x_min"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/textView552"
+                        android:text="@string/have_read_and_agree"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/color_999999"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@+id/cb"
+                        android:layout_marginStart="@dimen/dp_10"
+                        app:layout_constraintBottom_toBottomOf="@+id/cb"
+                        app:layout_constraintStart_toEndOf="@+id/cb"
+
+                        />
+
+                    <TextView
+                        app:layout_constraintTop_toTopOf="@+id/textView552"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView552"
+                        app:layout_constraintStart_toEndOf="@+id/textView552"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_blue"
+                        android:text="@string/et_invest_note"
+                        />
+
+                    <ImageView
+                        android:id="@+id/iv_account_true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/yz_cg_icon"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toTopOf="@+id/tv_account"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_account"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_account"
+                        android:layout_marginEnd="@dimen/dp_padding_x_min"
+                        />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:id="@+id/ly_bottom"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_7"
+        android:layout_marginEnd="@dimen/dp_7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:fp_shadowColor="@color/shadow_color"
+        app:fp_shadowRadius="@dimen/shadow_radius"
+        app:fp_shadowShape="fp_round_rectangle"
+        app:fp_shadowSide="fp_top"
+        >
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="@dimen/dp_64">
+
+            <TextView
+                android:id="@+id/textView555"
+                android:layout_width="wrap_content"
+                android:text="@string/need_pay"
+                android:textColor="@color/color_999999"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/dp_padding_x_min"
+                android:layout_height="wrap_content" />
+
+
+            <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_000"
+                android:textColor="@color/main_blue"
+                android:textSize="@dimen/sp_21"
+                app:layout_constraintBottom_toBottomOf="@+id/textView555"
+                app:layout_constraintStart_toEndOf="@+id/textView555"
+                app:layout_constraintTop_toTopOf="@+id/textView555" />
+
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/btn_sure_invest"
+                android:background="@mipmap/qrzf_an"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:layout_marginEnd="@dimen/dp_10"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="@dimen/dp_130"
+                android:layout_height="0dp" >
+
+
+
+                <TextView
+                    android:id="@+id/sure_china"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/color_FFFFFF"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    android:text="@string/sure_to_invest"
+                    app:layout_constraintBottom_toTopOf="@+id/sure_en"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sure_china"
+                    android:id="@+id/sure_en"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color_FFFFFF"
+                    android:text="@string/sure_to_invest_en"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
+
+</android.support.constraint.ConstraintLayout>

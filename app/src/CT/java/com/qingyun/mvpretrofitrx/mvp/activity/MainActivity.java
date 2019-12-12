@@ -3,8 +3,10 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.allens.lib_ios_dialog.IosDialog;
 import com.develop.wallet.eth.Wallet;
@@ -20,6 +22,8 @@ import com.qingyun.mvpretrofitrx.mvp.fragment.FindFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.InformationFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.MineFragment;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardChangeListener;
+import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardUtils;
 import com.qingyun.mvpretrofitrx.mvp.weight.MyViewPager;
 import com.senon.mvpretrofitrx.R;
 
@@ -68,6 +72,13 @@ public class MainActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+
+    @Override
+    protected void setHeaderData() {
+        super.setHeaderData();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED);
     }
 
     @Override
@@ -211,4 +222,14 @@ public class MainActivity extends BaseActivity {
 //            getSupportFragmentManager().beginTransaction().replace(0,new AssetFragment()).commit();
         }
     }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent ev) {
+//        if (ev.getAction() == MotionEvent.ACTION_DOWN&& KeyboardChangeListener.isSofeVisiable) {
+//          KeyboardUtils.hideKeyboard(getContext());
+//            KeyboardChangeListener.isSofeVisiable = false;
+//            return true;
+//        }
+//        return super.onTouchEvent(ev);
+//    }
 }

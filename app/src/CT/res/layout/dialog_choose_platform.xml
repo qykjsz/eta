@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:maxHeight="@dimen/dp_300"
+    android:layout_height="wrap_content"
+   >
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:gravity="center"
+        android:background="@drawable/bg_ffffff_top_round_25"
+        android:text="@string/choose_platform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcy"
+        app:layout_constraintBottom_toTopOf="@+id/cancel"
+        android:layout_width="@dimen/dp_0"
+        android:background="@color/color_FFFFFF"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        style="@style/line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/cancel"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/rcy"
+        android:background="@drawable/bg_item"
+        android:textColor="@color/main_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="@dimen/dp_44" />
+
+
+    <!--<TextView-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/rcy"-->
+        <!--android:layout_width="@dimen/dp_0"-->
+        <!--android:layout_height="@dimen/dp_1"-->
+        <!--style="@style/line"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+
+        <!--/>-->
+</android.support.constraint.ConstraintLayout>

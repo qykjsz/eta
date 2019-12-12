@@ -22,9 +22,12 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.qingyun.mvpretrofitrx.mvp.adapter.CoinChooseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.CoinRateChooseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.CurrencyChooseAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.PlatformAdapter;
+import com.qingyun.mvpretrofitrx.mvp.adapter.StringDialogAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
+import com.qingyun.mvpretrofitrx.mvp.entity.Platform;
 import com.qingyun.mvpretrofitrx.mvp.entity.Wallet;
 import com.senon.mvpretrofitrx.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -83,6 +86,77 @@ public class DialogUtils {
                         }
                     })
                     .show();
+//        }else {
+////            Intent intent = new Intent(context,ChangePayPasswordActivity.class);
+////            context.startActivity(intent);
+//        }
+
+    }
+
+
+    static CountDownUtils countDownUtils;
+
+    public static void showInvestPayDialog(Context context, final String amount, final String coinNmae, final int start, final SureListener sureListener){
+//        if (ApplicationUtil.getUser().getHas_pay_password()){
+        AnyLayer.with(context)
+                .contentView(R.layout.dialog_invest_pay)
+                .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+                .gravity(Gravity.CENTER)
+                .onClickToDismiss(R.id.btn_cancel)
+                .onClick(R.id.btn_sure, new LayerManager.OnLayerClickListener() {
+                    @Override
+                    public void onClick(AnyLayer anyLayer, View v) {
+                        EditText etPass =  anyLayer.getView(R.id.et_pass);
+                        if (TextUtils.isEmpty(etPass.getText().toString())){
+                            ToastUtil.showShortToast(R.string.pass_not_null);
+                            return;
+                        }
+                        if (sureListener!=null){
+                            sureListener.onSure(etPass.getText().toString());
+                            anyLayer.dismiss();
+                        }
+                    }
+                })
+                .bindData(new LayerManager.IDataBinder() {
+                    @Override
+                    public void bind(final AnyLayer anyLayer) {
+                        final EditText etPass =  anyLayer.getView(R.id.et_pass);
+                        // TODO 绑定数据
+                        CheckBox checkBox = anyLayer.getView(R.id.btn_visi);
+                        TextView tvAmount = anyLayer.getView(R.id.tv_amount);
+                        TextView tvCoinName = anyLayer.getView(R.id.tv_coin_name);
+                        tvAmount.setText(amount);
+                        tvCoinName.setText(coinNmae);
+
+                        final TextView tvTime = anyLayer.getView(R.id.tv_time);
+                        countDownUtils = new CountDownUtils().showCloseCountDown(1, 30, new CountDownUtils.CountDownListener() {
+                            @Override
+                            public void next(Long aLong) {
+                                tvTime.setText(aLong+"s");
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                if (!countDownUtils.getCall().isDisposed())
+                                countDownUtils.getCall().dispose();
+                                anyLayer.dismiss();
+                            }
+                        });
+                        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if (isChecked){
+                                    etPass.setInputType(128);//设置为隐藏密码
+                                }else {
+                                    etPass.setInputType(129);//设置为隐藏密码
+                                }
+                                etPass.setSelection(etPass.getText().toString().length());
+
+                            }
+                        });
+                    }
+                })
+                .show();
 //        }else {
 ////            Intent intent = new Intent(context,ChangePayPasswordActivity.class);
 ////            context.startActivity(intent);
@@ -395,6 +469,93 @@ public class DialogUtils {
                 })
                 .show();
     }
+
+
+
+
+
+    public static void showPlatformChooseDialog(final Activity context, final List<Platform> platformList, final BaseAdapter.OnItemClickListener onItemClickListener) {
+        AnyLayer.with(context)
+                .contentView(R.layout.dialog_choose_coin)
+                .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+                .gravity(Gravity.BOTTOM)
+
+                .bindData(new LayerManager.IDataBinder() {
+                    @Override
+                    public void bind(final AnyLayer anyLayer) {
+                        RecyclerView recyclerView =  anyLayer.getView(R.id.rcy);
+                        PlatformAdapter platformAdapter = new PlatformAdapter(context,platformList);
+                        platformAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(List list, int position) {
+                                onItemClickListener.onItemClick(list,position);
+                                anyLayer.dismiss();
+                            }
+                        });
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        recyclerView.addItemDecoration(DividerHelper.getMyDivider(context));
+                        recyclerView.setAdapter(platformAdapter);
+                    }
+                })
+                .onClickToDismiss(R.id.cancel)
+                .contentAnim(new LayerManager.IAnim() {
+                    @Override
+                    public Animator inAnim(View content) {
+                        return AnimHelper.createBottomAlphaInAnim(content);
+                    }
+
+                    @Override
+                    public Animator outAnim(View content) {
+                        return AnimHelper.createBottomAlphaOutAnim(content);
+                    }
+                })
+                .show();
+    }
+
+
+
+
+    public static void showStringDialog(final Activity context, final String title,final List<String> stringList, final BaseAdapter.OnItemClickListener onItemClickListener) {
+        AnyLayer.with(context)
+                .contentView(R.layout.dialog_choose_coin)
+                .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+                .gravity(Gravity.BOTTOM)
+
+                .bindData(new LayerManager.IDataBinder() {
+                    @Override
+                    public void bind(final AnyLayer anyLayer) {
+                        TextView textView = anyLayer.getView(R.id.textView4);
+                        textView.setText(title);
+                        RecyclerView recyclerView =  anyLayer.getView(R.id.rcy);
+                        StringDialogAdapter stringDialogAdapter = new StringDialogAdapter(context,stringList);
+                        stringDialogAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(List list, int position) {
+                                onItemClickListener.onItemClick(list,position);
+                                anyLayer.dismiss();
+                            }
+                        });
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        recyclerView.addItemDecoration(DividerHelper.getMyDivider(context));
+                        recyclerView.setAdapter(stringDialogAdapter);
+                    }
+                })
+                .onClickToDismiss(R.id.cancel)
+                .contentAnim(new LayerManager.IAnim() {
+                    @Override
+                    public Animator inAnim(View content) {
+                        return AnimHelper.createBottomAlphaInAnim(content);
+                    }
+
+                    @Override
+                    public Animator outAnim(View content) {
+                        return AnimHelper.createBottomAlphaOutAnim(content);
+                    }
+                })
+                .show();
+    }
+
+
 
 
 
