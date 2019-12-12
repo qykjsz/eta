@@ -279,9 +279,9 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
             viewHolder.tv_position.setText(position+"");
             viewHolder.tvName.setText(item.getName());
             viewHolder.tv_nik_name.setText(item.allname);
-            viewHolder.tv_money.setText("￥" + item.getXiamoney());
-            viewHolder.tv_issue_num.setText("￥"+item.circulation);
-            viewHolder.tv_value.setText("￥"+item.shizhi);
+            viewHolder.tv_money.setText("$" + item.getXiamoney());
+            viewHolder.tv_issue_num.setText(item.circulation);
+            viewHolder.tv_value.setText("$"+item.shizhi);
 
 //            viewHolder.tvShangmoney.setText(item.getShangmoney());
 //            viewHolder.tvZb.setText(item.getZd() + "%");
