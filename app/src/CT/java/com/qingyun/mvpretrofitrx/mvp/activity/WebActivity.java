@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
@@ -48,6 +49,17 @@ public class WebActivity extends Activity {
                 finish();
             }
         });
+        WebChromeClient wvcc = new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                Log.d("post=====", "TITLE=" + title);
+                //title 就是网页的title
+                ((TextView)findViewById(R.id.tv_title)).setText(title);
+            }
+        };
+        // 设置setWebChromeClient对象
+        webView.setWebChromeClient(wvcc);
     }
 
 

@@ -61,10 +61,10 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
 //    MakieAdapter adapter;
     @BindView(R.id.listView)
     ListView listView;
-    @BindView(R.id.iv_money_icon)
-    ImageView iv_money_icon;
-    @BindView(R.id.iv_range_icon)
-    ImageView iv_range_icon;
+//    @BindView(R.id.iv_money_icon)
+//    ImageView iv_money_icon;
+//    @BindView(R.id.iv_range_icon)
+//    ImageView iv_range_icon;
     private List<Quotation> list;
     private boolean isMoney;
     private boolean isRange;
@@ -107,24 +107,24 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_money://最新价格
-                isMoney = !isMoney;
-                if(isMoney){//跌
-                    iv_money_icon.setBackgroundResource(R.mipmap.hq_xjian_01);
-                    requestTrends(1);
-                }else{//涨
-                    iv_money_icon.setBackgroundResource(R.mipmap.hq_sjian);
-                    requestTrends(2);
-                }
+//                isMoney = !isMoney;
+//                if(isMoney){//跌
+//                    iv_money_icon.setBackgroundResource(R.mipmap.hq_xjian_01);
+//                    requestTrends(1);
+//                }else{//涨
+//                    iv_money_icon.setBackgroundResource(R.mipmap.hq_sjian);
+//                    requestTrends(2);
+//                }
                 break;
             case R.id.ll_range://涨跌幅
-                isRange = !isRange;
-                if(isRange){//跌
-                    iv_range_icon.setBackgroundResource(R.mipmap.hq_xjian_01);
-                    requestTrends(3);
-                }else{//涨
-                    iv_range_icon.setBackgroundResource(R.mipmap.hq_sjian);
-                    requestTrends(4);
-                }
+//                isRange = !isRange;
+//                if(isRange){//跌
+//                    iv_range_icon.setBackgroundResource(R.mipmap.hq_xjian_01);
+//                    requestTrends(3);
+//                }else{//涨
+//                    iv_range_icon.setBackgroundResource(R.mipmap.hq_sjian);
+//                    requestTrends(4);
+//                }
                 break;
         }
     }
@@ -229,6 +229,10 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
     private void request() {
         RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_quotation");
         x.http().post(params, new XCallBack() {
+
+
+
+
             @Override
             public void onAfterFinished() {
 
@@ -266,44 +270,64 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
             }
             ViewHolder viewHolder = (ViewHolder) convertView.getTag();
             final Quotation item = getItem(position);
-            setUi(viewHolder, item);
+            setUi(viewHolder, item,position);
             return convertView;
         }
 
-        private void setUi(final ViewHolder viewHolder, final Quotation item) {
+        private void setUi(final ViewHolder viewHolder, final Quotation item,int position) {
+            position++;
+            viewHolder.tv_position.setText(position+"");
             viewHolder.tvName.setText(item.getName());
-            viewHolder.tvShangmoney.setText(item.getShangmoney());
-            viewHolder.tvXiamoney.setText(getContext().getString(R.string.test1) + item.getXiamoney());
+            viewHolder.tv_nik_name.setText(item.allname);
+            viewHolder.tv_money.setText("￥" + item.getXiamoney());
+            viewHolder.tv_issue_num.setText("￥"+item.circulation);
+            viewHolder.tv_value.setText("￥"+item.shizhi);
+
+//            viewHolder.tvShangmoney.setText(item.getShangmoney());
 //            viewHolder.tvZb.setText(item.getZd() + "%");
-            Glide.with(getContext()).load(item.getImg()).into(viewHolder.ivImg);
+//            Glide.with(getContext()).load(item.getImg()).into(viewHolder.ivImg);
             double s_zd = Double.parseDouble(item.getZd());
 
             if (s_zd > 0) {//你输入的是正数
-                viewHolder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_E04159));
-                viewHolder.tvZb.setText("+"+item.getZd() + "%");
+                viewHolder.tv_zd.setText("+"+item.getZd() + "%");
+                viewHolder.tv_zd.setTextColor(mContext.getResources().getColor(R.color.color_00B794));
+                viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.color_00B794));
             } else if (s_zd < 0) {//你输入的是负数
-                viewHolder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_00B794));
-                viewHolder.tvZb.setText(item.getZd() + "%");
+                viewHolder.tv_zd.setText(item.getZd() + "%");
+                viewHolder.tv_zd.setTextColor(mContext.getResources().getColor(R.color.color_E04159));
+                viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.color_E04159));
             } else if (item.getZd().equals("0")) {
-                viewHolder.tvZb.setBackground(getContext().getResources().getDrawable(R.color.color_999999));
-                viewHolder.tvZb.setText(item.getZd() + "%");
+                viewHolder.tv_zd.setText(item.getZd() + "%");
+                viewHolder.tv_zd.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+                viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.color_999999));
             }
         }
 
         public class ViewHolder extends SuperViewHolder {
-            ImageView ivImg;
+//            ImageView ivImg;
+            TextView tv_position;
             TextView tvName;
-            TextView tvShangmoney;
-            TextView tvXiamoney;
-            TextView tvZb;
+            TextView tv_nik_name;
+            TextView tv_zd;
+            TextView tv_money;
+            TextView tv_issue_num;
+            TextView tv_value;
+//            TextView tvShangmoney;
+//            TextView tvXiamoney;
+//            TextView tvZb;
 
             public ViewHolder(View view) {
                 super(view);
-                ivImg = view.findViewById(R.id.iv_img);
+                tv_position = view.findViewById(R.id.tv_position);
                 tvName = view.findViewById(R.id.tv_name);
-                tvShangmoney = view.findViewById(R.id.tv_shangmoney);
-                tvXiamoney = view.findViewById(R.id.tv_xiamoney);
-                tvZb = view.findViewById(R.id.tv_zb);
+                tv_nik_name = view.findViewById(R.id.tv_nik_name);
+                tv_zd = view.findViewById(R.id.tv_zd);
+                tv_money = view.findViewById(R.id.tv_money);
+                tv_issue_num = view.findViewById(R.id.tv_issue_num);
+                tv_value = view.findViewById(R.id.tv_value);
+//                tvShangmoney = view.findViewById(R.id.tv_shangmoney);
+//                tvXiamoney = view.findViewById(R.id.tv_xiamoney);
+//                tvZb = view.findViewById(R.id.tv_zb);
             }
         }
     }

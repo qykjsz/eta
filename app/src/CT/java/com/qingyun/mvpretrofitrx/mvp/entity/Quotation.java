@@ -11,11 +11,15 @@ public class Quotation {
      * zd : -0.76
      */
 
-    private String name;
-    private String img;
-    private String shangmoney;
-    private String xiamoney;
-    private String zd;
+    public String name;//名称
+    public String allname;//全称
+    public String circulation;//发行量
+    public String shizhi;//市值
+
+    public String img;
+    public String shangmoney;
+    public String xiamoney;
+    public String zd;
 
     public String getName() {
         return name;

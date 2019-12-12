@@ -23,11 +23,11 @@
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="资产"
+               android:text="Top100币种"
                android:textSize="12sp"
                android:textColor="@color/color_999999"
                android:layout_marginTop="15dp"
-               android:layout_marginLeft="30dp"
+               android:layout_marginLeft="40dp"
                />
 
 
@@ -41,18 +41,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="最新价"
+                    android:text="涨跌幅/价格"
                     android:textSize="12sp"
                     android:textColor="@color/color_999999"
                     android:layout_gravity="center"
                     />
-                <ImageView
-                    android:id="@+id/iv_money_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/hq_sjian"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="4dp"/>
+
 
             </LinearLayout>
             <LinearLayout
@@ -61,29 +55,25 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="25dp"
                 android:layout_marginTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="涨跌幅"
+                    android:text="24h成交额/市值"
                     android:textSize="12sp"
                     android:textColor="@color/color_999999"
                     android:layout_gravity="center"
                     />
-                <ImageView
-                    android:id="@+id/iv_range_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/hq_sjian"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="4dp"/>
+
 
             </LinearLayout>
 
         </RelativeLayout>
 
     </RelativeLayout>
+
+
 
 
     <ListView

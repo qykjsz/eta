@@ -193,8 +193,9 @@
                         android:paddingLeft="25dp"
                         android:paddingRight="10dp"
                         android:paddingTop="10dp"
-                        android:verticalSpacing="20dp" />
-
+                        android:verticalSpacing="20dp"
+                        />
+                  <!--  android:horizontalSpacing="@dimen/alert_width"-->
 
                         <com.qingyun.mvpretrofitrx.mvp.view.TabScrollView
                             android:id="@+id/tabscrollview"
@@ -208,7 +209,8 @@
                         <android.support.v4.view.ViewPager
                             android:id="@+id/viewpager"
                             android:layout_width="match_parent"
-                            android:layout_height="1000dp"
+                            android:layout_height="1200dp"
+                            android:overScrollMode="never"
                             >
                         </android.support.v4.view.ViewPager>
                     </LinearLayout>
