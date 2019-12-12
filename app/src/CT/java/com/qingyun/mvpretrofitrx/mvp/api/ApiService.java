@@ -12,11 +12,13 @@ import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
+import com.qingyun.mvpretrofitrx.mvp.entity.InvestLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.entity.Node;
 import com.qingyun.mvpretrofitrx.mvp.entity.NodeResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NoticeDetail;
+import com.qingyun.mvpretrofitrx.mvp.entity.Platform;
 import com.qingyun.mvpretrofitrx.mvp.entity.PlatformNoticResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation1;
@@ -153,4 +155,35 @@ public interface ApiService {
     Observable <BaseResponse<NormalResponse>>addBusinessPayLog(@Query("from")String from, @Query("to")String to,@Query("hash") String hash,
                                                                @Query("money")String money,@Query("moneyid") String moneyid,
                                                                @Query("fimoney")String fimoney,@Query("fimoneyid") String fimoneyid);
+    @GET("?ct=new_recharge&ac=check")
+    Observable <BaseResponse<NormalResponse>>checkAccount(@Query("account")String account);
+
+    @GET("?ct=new_recharge&ac=notice")
+    Observable <BaseResponse<NormalResponse>>addInvestInfo(@Query("account")String account,
+                             @Query("num")String num,
+                             @Query("order_sn")String order_sn,
+                             @Query("sign")String sign);
+
+    @POST("support_et_games")
+    Observable <BaseResponse<List<Platform>>>getSuprtPlatform();
+
+    @POST("support_et_gamemoneys")
+    Observable <BaseResponse<List<String>>>getInvestAmountList();
+
+    @POST("recharge_et_game")
+    Observable<BaseResponse<String>> invest( @Query("from")String from,
+                       @Query("to")String to,
+                       @Query("hash") String hash,
+                       @Query("moneystate")String moneystate,
+                       @Query("gameid")String gameid,
+                       @Query("money")String money,
+                       @Query("gamenumber") String gamenumber,
+                       @Query("gameuser")String gameuser);
+
+    @POST("recharge_et_gameorder")
+    Observable <BaseResponse<InvestLogResponse>>getInvestLog(@Query("address")String address, @Query("page") int page);
+
+
+    @POST("recharge_et_game_verification")
+    Observable <BaseResponse<String>>checkInvestInfo(@Query("gameid")String gameid, @Query("gamenumber")String gamenumber, @Query("moneystate")String moneystate, @Query("money")String money);
 }

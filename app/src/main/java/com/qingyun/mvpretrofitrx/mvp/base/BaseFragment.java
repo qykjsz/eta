@@ -55,6 +55,8 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
     private LoadingLayout freash_loading;
     private View lyHeader1;
     protected int currentPage;
+    private ViewGroup mLyContent;
+
     public P getPresenter() {
         return presenter;
     }
@@ -76,7 +78,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
         lyBack = (LinearLayout) mView.findViewById(R.id.ly_back);
         lyBack.setVisibility(View.GONE);
         setHeaderData();
-        LinearLayout mLyContent = mView.findViewById(R.id.ly_content);
+        mLyContent = mView.findViewById(R.id.ly_content);
         mLyContent.addView(LayoutInflater.from(getContext()).inflate(getLayoutId(), container, false));
         unbinder = ButterKnife.bind(this, mView);
         mContext = getActivity();
@@ -99,6 +101,9 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
         return mView;
     }
 
+    public ViewGroup getmLyContent() {
+        return mLyContent;
+    }
 
     public SmartRefreshLayout getRefreash() {
         return refreash;

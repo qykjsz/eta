@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp_265"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_pay">
+
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_padding_x_max"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:text="@string/wallet_password"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_pass"
+        android:layout_width="222dp"
+        android:singleLine="true"
+        android:paddingStart="@dimen/dp_25"
+        android:paddingEnd="@dimen/dp_30"
+        android:layout_height="@dimen/et_height"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/dp_padding_x_max"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:background="@drawable/bg_dialog_et"
+        android:gravity="center"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/btn_sure"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+        android:layout_marginTop="@dimen/dp_52"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:background="@drawable/bg_item"
+        android:textColor="@color/main_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancel"
+        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+
+    <TextView
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/setting_item_height"
+
+        android:background="@drawable/bg_item"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/color_666666"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sure"
+        app:layout_constraintEnd_toStartOf="@+id/btn_sure"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_sure" />
+
+    <TextView
+        android:id="@+id/textView142"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/color_line"
+
+        app:layout_constraintBottom_toTopOf="@+id/btn_sure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:layout_width="@dimen/dp_1"
+        android:layout_height="0dp"
+        android:background="@color/color_line"
+        app:layout_constraintTop_toTopOf="@+id/btn_sure"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sure"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel"
+        />
+
+    <CheckBox
+        android:button="@drawable/btn_check_box_eye_1"
+        app:layout_constraintTop_toTopOf="@+id/et_pass"
+        app:layout_constraintBottom_toBottomOf="@+id/et_pass"
+        app:layout_constraintEnd_toEndOf="@+id/et_pass"
+        android:padding="@dimen/dp_6"
+        android:id="@+id/btn_visi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/tc_xianshi"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/textView129"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textSize="@dimen/sp_13"
+        android:text="@string/need_pay_"
+        app:layout_constraintStart_toStartOf="@+id/et_pass"
+        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+
+    <TextView
+        android:id="@+id/tv_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_000"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintBottom_toBottomOf="@+id/textView129"
+        app:layout_constraintStart_toEndOf="@+id/textView129"
+        app:layout_constraintTop_toTopOf="@+id/textView129" />
+
+    <TextView
+        android:id="@+id/tv_coin_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/eth"
+        android:layout_marginStart="@dimen/dp_5"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_amount"
+        app:layout_constraintStart_toEndOf="@+id/tv_amount"
+        app:layout_constraintTop_toTopOf="@+id/tv_amount" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="30s"
+        android:textColor="@color/main_blue"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintEnd_toEndOf="@+id/btn_visi"
+        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+</android.support.constraint.ConstraintLayout>

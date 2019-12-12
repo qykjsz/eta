@@ -30,6 +30,8 @@ import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IndicatorUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
+import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
+import com.qingyun.mvpretrofitrx.mvp.weight.NoVertralScrollViewPager;
 import com.senon.mvpretrofitrx.R;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -66,21 +68,24 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     @BindView(R.id.rcy)
     RecyclerView rcy;
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    NoVertralScrollViewPager viewPager;
     @BindView(R.id.tv_usdt)
     TextView tvUsdt;
     @BindView(R.id.et_search)
     EditText etSearch;
     @BindView(R.id.btn_visiable)
     CheckBox btnVisiable;
+    @BindView(R.id.textView8)
+    BoldTextView textView8;
     private List<BaseFragment> fragments;
     private List<String> titles;
     private Wallet asset;
     private int type;
     private AssetWalletLogAdapter assetWalletLogAdapter;
     private List<TransferLog> list;
-    private static final String INVISIABLE_STR="****";
+    private static final String INVISIABLE_STR = "****";
     private TransferLogResponse transferLogResponse;
+
 
     @Override
     protected String getTitleRightText() {
@@ -115,12 +120,14 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
 
     @Override
     public void init() {
+        viewPager.setRecycler(rcy);
         EventBus.getDefault().register(this);
         titles = new ArrayList<>();
         titles.add(getResources().getString(R.string.all));
         titles.add(getResources().getString(R.string.transfer_in));
         titles.add(getResources().getString(R.string.transfer_out));
         asset = (Wallet) getIntent().getSerializableExtra(IntentUtils.ASSET);
+        textView8.setText(asset.getName());
         fragments = new ArrayList<>();
         fragments.add(new EmptyFragment());
         fragments.add(new EmptyFragment());
@@ -135,7 +142,7 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
         });
         mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getSupportFragmentManager());
         viewPager.setAdapter(mainViewPagerAdapter);
-        IndicatorUtils.initMagicIndicator3(viewPager,titles,getActivity(),magicIndicator3,0,0);
+        IndicatorUtils.initMagicIndicator3(viewPager, titles, getActivity(), magicIndicator3, 0, 0);
 //        IndicatorUtils.initMagicIndicator3(magicIndicator3,viewPager,titles,getActivity());
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -148,15 +155,15 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
                 page = 0;
                 switch (i) {
                     case 0:
-                        isLoadMore=false;
+                        isLoadMore = false;
                         type = 3;
                         break;
                     case 1:
-                        isLoadMore=false;
+                        isLoadMore = false;
                         type = 1;
                         break;
                     case 2:
-                        isLoadMore=false;
+                        isLoadMore = false;
                         type = 2;
                         break;
                 }
@@ -191,13 +198,13 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     }
 
 
-    private void refreashAsset(boolean visiable){
-        if (visiable){
-            if (transferLogResponse!=null)
+    private void refreashAsset(boolean visiable) {
+        if (visiable) {
+            if (transferLogResponse != null)
                 tvAsset.setText(transferLogResponse.getNumber());
             tvUsdt.setText(transferLogResponse.getUsdtnumber());
-            tvIncomeToday.setText(transferLogResponse.getToday().startsWith("-")?transferLogResponse.getToday():"+"+transferLogResponse.getToday());
-        }else {
+            tvIncomeToday.setText(transferLogResponse.getToday().startsWith("-") ? transferLogResponse.getToday() : "+" + transferLogResponse.getToday());
+        } else {
             tvIncomeToday.setText(INVISIABLE_STR);
             tvAsset.setText(INVISIABLE_STR);
             tvUsdt.setText(INVISIABLE_STR);
@@ -287,7 +294,7 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getDetail(TransferLogResponse transferLogResponse) {
         tvAsset.setText(transferLogResponse.getUsdtnumber());
-        tvIncomeToday.setText(transferLogResponse.getToday().startsWith("-")?transferLogResponse.getToday():"+"+transferLogResponse.getToday());
+        tvIncomeToday.setText(transferLogResponse.getToday().startsWith("-") ? transferLogResponse.getToday() : "+" + transferLogResponse.getToday());
 
 
     }

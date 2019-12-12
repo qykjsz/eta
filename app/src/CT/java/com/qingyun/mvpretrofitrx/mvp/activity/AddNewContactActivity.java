@@ -91,6 +91,7 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
             etRemark.setText(contact.getRemarks());
             etAddress.setText(contact.getAddress());
             tvBottom.setText(contact.getWallettype());
+            setTitle(getResources().getString(R.string.edit_address));
         }
     }
 
@@ -157,9 +158,11 @@ public class AddNewContactActivity extends BaseActivity<ContactsContact.View,Con
     }
 
     @Override
-    public void deleteContactsSuccess() {
+    public void deleteContactsSuccess(int position) {
 
     }
+
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreashWallet(ImportScanResult importScanResult) {

@@ -63,13 +63,13 @@ public class ContactsPresenter extends ContactsContact.Presenter {
     }
 
     @Override
-    public void deleteContacts(String id, String contacts) {
+    public void deleteContacts(String id, String contacts, final int position) {
         model.deleteContacts(context,id,contacts, getView().bindLifecycle(), new ObserverResponseListener<Object>() {
 
             @Override
             public void onNext(Object o) {
                 if(getView() != null){
-                    getView().deleteContactsSuccess();
+                    getView().deleteContactsSuccess(position);
                 }
             }
 

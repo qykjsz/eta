@@ -4,4 +4,5 @@ include ':app','gallery','lib_ios_dialog',
         'magicindicator',
         'indicatorseekbar',
         'wallet-eth',
-   ':mutilanguagelibrary'
+   ':mutilanguagelibrary',
+':swipe-reveal-layout'

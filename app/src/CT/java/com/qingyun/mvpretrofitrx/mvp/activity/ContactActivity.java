@@ -114,8 +114,10 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
                         SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
                             @Override
                             public void requestSuccess(String uuid) {
-                                getPresenter().deleteContacts(contact.getId(), uuid);
-                                contactAdapter.getViewBinderHelper().closeLayout(position+"");
+
+                                getPresenter().deleteContacts(contact.getId(), uuid,position);
+                                contactAdapter.getViewBinderHelper().unbind(contact.getAddress());
+//                                contactAdapter.getViewBinderHelper().closeLayout(contact.getAddress());
                             }
                         });
                     }
@@ -141,6 +143,25 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
 
 
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (contactAdapter != null) {
+            contactAdapter.saveStates(outState);
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (contactAdapter != null) {
+            contactAdapter.restoreStates(savedInstanceState);
+        }
+    }
+
+
 
 
     @Override
@@ -187,6 +208,7 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
     @Override
     public void getContactListSuccess(List<Contact> contactList) {
         list = contactList;
+        rcy.getRecycledViewPool().clear();
         contactAdapter.notifyDataSetChanged(list);
         refreashView(list, rcy);
     }
@@ -202,13 +224,14 @@ public class ContactActivity extends BaseActivity<ContactsContact.View, Contacts
     }
 
     @Override
-    public void deleteContactsSuccess() {
-        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
-            @Override
-            public void requestSuccess(String uuid) {
-                getPresenter().getContactList(uuid);
-            }
-        });
+    public void deleteContactsSuccess(int position) {
+        contactAdapter.notifyMyItemRemoved(position);
+//        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+//            @Override
+//            public void requestSuccess(String uuid) {
+//                getPresenter().getContactList(uuid);
+//            }
+//        });
 
     }
 

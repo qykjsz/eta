@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:maxHeight="@dimen/dp_300"
     android:layout_height="wrap_content"
    >
 
 
-    <TextView
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dp_44"
+        android:layout_height="@dimen/dp_48"
         android:gravity="center"
+        android:textSize="@dimen/sp_16"
         android:background="@drawable/bg_ffffff_top_round_25"
         android:text="@string/coin_choose"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +27,7 @@
         android:layout_width="@dimen/dp_0"
         android:background="@color/color_FFFFFF"
         android:layout_height="wrap_content"
+        android:maxHeight="@dimen/dp_400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

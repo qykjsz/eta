@@ -243,12 +243,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-            </android.support.v4.view.ViewPager>
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
                 android:id="@+id/refreash"
                 android:layout_width="match_parent"
@@ -275,6 +270,13 @@
 
             </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
+            <com.qingyun.mvpretrofitrx.mvp.weight.NoVertralScrollViewPager
+                android:id="@+id/viewPager"
+                android:background="@color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.qingyun.mvpretrofitrx.mvp.weight.NoVertralScrollViewPager>
 
         </RelativeLayout>
 

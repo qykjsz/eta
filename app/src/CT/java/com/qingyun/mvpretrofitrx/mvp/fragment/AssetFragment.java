@@ -5,12 +5,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -31,6 +37,7 @@ import com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLsvelToCreateActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.CreateWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.InvestActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.PlatformNoticActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.TransferActivity;
@@ -56,6 +63,7 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.DividerHelper;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardChangeListener;
 import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
@@ -65,7 +73,6 @@ import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
-import com.zbar.lib.CaptureActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -79,6 +86,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import cc.shinichi.library.tool.utility.ui.PhoneUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
@@ -127,7 +135,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     RecyclerView rcyModle;
     @BindView(R.id.more_asset)
     BoldTextView moreAsset;
-    @BindView(R.id.rcy_wallet)
+    @BindView(R.id.rcy)
     RecyclerView rcyWallet;
     Unbinder unbinder;
     AssetModleAdapter assetModleAdapter;
@@ -138,6 +146,10 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     RecyclerView rcyProportion;
     @BindView(R.id.et_search)
     EditText etSearch;
+    @BindView(R.id.ly)
+    ConstraintLayout ly;
+    @BindView(R.id.nest_)
+    NestedScrollView nest;
     private List<AssetModle> modleList;
     private List<com.qingyun.mvpretrofitrx.mvp.entity.Wallet> assetList;
     private List<com.qingyun.mvpretrofitrx.mvp.entity.Wallet> searchList;
@@ -148,6 +160,11 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     private float[] weight;
     private int[] colors;
     private static final String INVISIABLE_STR = "****";
+    private ConstraintLayout.LayoutParams oldLp;
+    private int height;
+    private ConstraintLayout.LayoutParams lp2;
+    private ConstraintLayout.LayoutParams c;
+
 
     @Override
     public int getLayoutId() {
@@ -165,33 +182,72 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     }
 
 
+
     @Override
     public void init() {
-        getRefreash().setEnableLoadMore(false);
+        nestScrollListener();
+        ConstraintLayout.LayoutParams lp1 = (ConstraintLayout.LayoutParams) moreAsset.getLayoutParams();
+        lp2 = (ConstraintLayout.LayoutParams) rcyWallet.getLayoutParams();
+        height = PhoneUtil.getPhoneHei(getActivity()) - getResources().getDimensionPixelSize(R.dimen.dp_250);
+        lp2.height = height;
+        rcyWallet.setLayoutParams(lp2);
+        rcyWallet.setNestedScrollingEnabled(false);
+        oldLp = (ConstraintLayout.LayoutParams) etSearch.getLayoutParams();
+        if (getRefreash() != null)
+            getRefreash().setEnableLoadMore(false);
         EventBus.getDefault().register(this);
         refreashData();
+        c = oldLp;
+        etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                return false;
+            }
+        });
+//        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                Log.e(">>>>>>>>>>>hasFouse",hasFocus+"");
+//                if (hasFocus) {
+//                    Message msg = new Message();
+//                    msg.what=1;
+//                    handler.sendMessage(msg);
+//                } else {
+//                    Message msg = new Message();
+//                    msg.what=2;
+//                    handler.sendMessage(msg);
+//
+//                }
+//            }
+//        });
         getPresenter().getVersion();
         modleList = new ArrayList<>();
         modleList.add(new AssetModle(R.mipmap.sy_ziyuan, R.string.ziyuan));
-        modleList.add(new AssetModle(R.mipmap.sy_toupiao, R.string.vote));
+        modleList.add(new AssetModle(R.mipmap.sy_cz_icon, R.string.inverst));
         modleList.add(new AssetModle(R.mipmap.sy_maibi, R.string.b_business));
         modleList.add(new AssetModle(R.mipmap.sy_more, R.string.more_modle));
 
         assetModleAdapter = new AssetModleAdapter(getContext(), modleList);
         rcyModle.setLayoutManager(new GridLayoutManager(getContext(), 4));
-//        rcyModle.addItemDecoration(new GridSpacingItemDecoration(4, getResources().getDimensionPixelSize(R.dimen.dp_5), false));
+        rcyModle.addItemDecoration(new GridSpacingItemDecoration(4, getResources().getDimensionPixelSize(R.dimen.dp_12), false));
         rcyModle.setAdapter(assetModleAdapter);
+        assetModleAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(List list, int position) {
+                if (position == 1) {
+                    startActivity(InvestActivity.class);
+                }
+            }
+        });
         refreashView(modleList, rcyModle);
-
-
         assetList = new ArrayList<>();
+
 
         assetAdapter = new AssetAdapter(getContext(), assetList);
         assetAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
-
-
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(IntentUtils.ASSET, (com.qingyun.mvpretrofitrx.mvp.entity.Wallet) assetList.get(position));
                 startActivity(AssetWalletActivity.class, bundle);
@@ -213,10 +269,52 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SpUtils.setBoolenToShare(getContext(), isChecked, "is_asset_visiable");
-
                 refreashAsset(isChecked);
             }
         });
+    }
+
+    private void nestScrollListener() {
+        nest.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+                //Log.e(TAG, "onScrollChange: " + scrollX +"---" + scrollY + "----" +oldScrollX + "---" + oldScrollY );
+                //监听滚动状态
+
+                if (scrollY > oldScrollY) {//向下滚动
+
+                }
+                if (scrollY < oldScrollY) {//向上滚动
+
+                }
+
+                if (scrollY == 0) {// 滚动到顶
+
+                }
+                oldLp = (ConstraintLayout.LayoutParams) etSearch.getLayoutParams();
+                c = oldLp;
+                // 滚动到底
+                if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+//                    c.width = 0;
+//                    etSearch.setLayoutParams(c);
+                }
+
+
+
+
+//                Log.e(TAG, "onScrollChange: ------------" + scrollY +"------"+ tvscrollthree.getTop() );
+//                //判断某个控件是否滚到顶部
+//                if (scrollY == tvscrollthree.getTop()){
+//                    Log.i(TAG, "onScrollChange: ------top-------" );
+//                }
+//
+//                Log.e(TAG, "onScrollChange: bottmo" + scrollY +"-----"+ (tvscrollthree.getTop() + tvscrollthree.getHeight()) );
+
+
+            }
+        });
+
     }
 
 
@@ -335,6 +433,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @OnClick(R.id.tv_name)
     public void onViewClicked() {
+        KeyboardUtils.hideKeyboard(getContext());
 
 
         AnyLayer.with(getContext())
@@ -425,7 +524,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         if (visiable) {
             if (assetResponse != null)
                 tvAsset.setText(assetResponse.getAllnumber());
-            tvIncomeToday.setText(assetResponse.getToday().startsWith("-")?assetResponse.getToday():"+"+assetResponse.getToday());
+            tvIncomeToday.setText(assetResponse.getToday().startsWith("-") ? assetResponse.getToday() : "+" + assetResponse.getToday());
         } else {
             tvIncomeToday.setText(INVISIABLE_STR);
             tvAsset.setText(INVISIABLE_STR);
@@ -440,8 +539,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         assetAdapter.notifyDataSetChanged(assetList);
         btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(), "is_asset_visiable"));
         refreashAsset(btnVisiable.isChecked());
-        refreashView(assetList, rcyWallet);
-
+//        refreashView(assetList, rcyWallet);
 
         SimpleMF<String> marqueeFactory = new SimpleMF(getContext());
         List<String> newList = new ArrayList<>();
@@ -547,61 +645,127 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     @Override
     public void getVersionSuccess(final VersionInfo versionInfo) {
         if (!ApplicationUtil.isApkInDebug(ApplicationUtil.getContext()))
-        if (!versionInfo.getName().equals(AppUtils.getAppVersionName(getContext()))) {
-            AnyLayer anyLayer = AnyLayer.with(getContext())
-                    .contentView(R.layout.dialog_new_version)
-                    .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
-                    .gravity(Gravity.CENTER)
-                    .cancelableOnTouchOutside(false)
-                    .cancelableOnClickKeyBack(false)
-                    .bindData(new LayerManager.IDataBinder() {
-                        @Override
-                        public void bind(final AnyLayer anyLayer) {
+            if (!versionInfo.getName().equals(AppUtils.getAppVersionName(getContext()))) {
+                AnyLayer anyLayer = AnyLayer.with(getContext())
+                        .contentView(R.layout.dialog_new_version)
+                        .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
+                        .gravity(Gravity.CENTER)
+                        .cancelableOnTouchOutside(false)
+                        .cancelableOnClickKeyBack(false)
+                        .bindData(new LayerManager.IDataBinder() {
+                            @Override
+                            public void bind(final AnyLayer anyLayer) {
 
-                            TextView updata = anyLayer.getView(R.id.btn_updata);
-                            TextView tvContent = anyLayer.getView(R.id.tv_content);
-                            TextView tvVersion = anyLayer.getView(R.id.tv_version);
-                            ImageView cancel = anyLayer.getView(R.id.btn_close);
-                            updata.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if (TextUtils.isEmpty(versionInfo.getDownload())) return;
-                                    Intent intent = new Intent();
-                                    intent.setData(Uri.parse(versionInfo.getDownload()));//Url 就是你要打开的网址
-                                    intent.setAction(Intent.ACTION_VIEW);
-                                    startActivity(intent); //启动浏览器
-                                }
-                            });
-                            cancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    ToastUtil.showShortToast(R.string.need_updata);
-                                }
-                            });
-                            tvVersion.setText(versionInfo.getName());
-                            if (!TextUtils.isEmpty(versionInfo.getRemark()))
-                                tvContent.setText(versionInfo.getRemark().replace("\\n", "\n"));
+                                TextView updata = anyLayer.getView(R.id.btn_updata);
+                                TextView tvContent = anyLayer.getView(R.id.tv_content);
+                                TextView tvVersion = anyLayer.getView(R.id.tv_version);
+                                ImageView cancel = anyLayer.getView(R.id.btn_close);
+                                updata.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if (TextUtils.isEmpty(versionInfo.getDownload())) return;
+                                        Intent intent = new Intent();
+                                        intent.setData(Uri.parse(versionInfo.getDownload()));//Url 就是你要打开的网址
+                                        intent.setAction(Intent.ACTION_VIEW);
+                                        startActivity(intent); //启动浏览器
+                                    }
+                                });
+                                cancel.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        ToastUtil.showShortToast(R.string.need_updata);
+                                    }
+                                });
+                                tvVersion.setText(versionInfo.getName());
+                                if (!TextUtils.isEmpty(versionInfo.getRemark()))
+                                    tvContent.setText(versionInfo.getRemark().replace("\\n", "\n"));
 
-                        }
-                    });
-            anyLayer.show();
+                            }
+                        });
+                anyLayer.show();
 
-        }
+            }
 
     }
+     Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+
+            if (msg.what==1){
+                c.width = 0;
+                etSearch.setLayoutParams(c);
+                nest.fullScroll(NestedScrollView.FOCUS_DOWN);
+                rcyWallet.clearFocus();
+                etSearch.findFocus();
+            }else if (msg.what==2){
+                c.width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
+                etSearch.setLayoutParams(c);
+                etSearch.clearFocus();
+                rcyWallet.clearFocus();
+            }
+            return true;
+        }
+    });
+
+
+
 
 
     private void addSearch() {
+
+//        final View mRoot = getActivity().getWindow().getDecorView();
+//        mRoot.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            int oldRootInvisibleHeight=-1;
+//            boolean isVisiable = false;
+//            @Override
+//            public void onGlobalLayout() {
+//
+//                Rect rect = new Rect();
+//                mRoot.getWindowVisibleDisplayFrame(rect);
+//               int rootInvisibleHeight = mRoot.getRootView().getHeight()-rect.bottom;
+//
+//               if (isVisiable&&rootInvisibleHeight==0||oldRootInvisibleHeight!=rootInvisibleHeight){
+//                   etSearch.clearFocus();
+//                   isVisiable=false;
+//               }else if (!isVisiable&&rootInvisibleHeight!=0||oldRootInvisibleHeight!=rootInvisibleHeight){
+//                   isVisiable = true;
+//                   etSearch.findFocus();
+//               }
+//                oldRootInvisibleHeight = rootInvisibleHeight;
+//
+//                Log.e("rootInvisibleHeight>>",rootInvisibleHeight+"");
+//            }
+//        });
+
+        new KeyboardChangeListener(getActivity()).setKeyBoardListener(new KeyboardChangeListener.KeyBoardListener() {
+            @Override
+            public void onKeyboardChange(boolean isShow, int keyboardHeight) {
+                Log.e(">>>>>>>>>>>",isShow+"");
+
+                if (isShow) {
+                    Message msg = new Message();
+                    msg.what=1;
+                    handler.sendMessage(msg);
+                } else {
+                    Message msg = new Message();
+                    msg.what=2;
+                    handler.sendMessage(msg);
+
+                }
+            }
+        });
+
+
         RxTextView.textChanges(etSearch)//当EditText发生改变
                 //每500毫秒发射一次
                 //仅在过了一段指定的时间还没发射数据时才发射一个数据
                 //如果原始Observable在这个新生成的Observable终止之前发射了另一个数据， debounce 会抑制(suppress)这个数据项。
-                .debounce(1000, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+                .debounce(200, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
                 .subscribeOn(AndroidSchedulers.mainThread())//内容监听操作需要在主线程操作
                 .filter(new Predicate<CharSequence>() {
                     @Override
                     public boolean test(CharSequence charSequence) throws Exception {
-                        return charSequence.length() >=0;
+                        return charSequence.length() >= 0;
                     }
                 })
                 .observeOn(Schedulers.io())
@@ -625,19 +789,19 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
                     @Override
                     public void onNext(String s) {
-                        if (TextUtils.isEmpty(s)){
+                        if (TextUtils.isEmpty(s)) {
                             assetAdapter.notifyDataSetChanged(assetList);
-                            refreashView(assetList,rcyWallet);
+                            refreashView(assetList, rcyWallet);
                             return;
                         }
                         searchList = new ArrayList<>();
-                        for (int i = 0;i<assetList.size();i++){
-                            if (assetList.get(i).getName().toLowerCase().contains(s.toLowerCase())){
+                        for (int i = 0; i < assetList.size(); i++) {
+                            if (assetList.get(i).getName().toLowerCase().contains(s.toLowerCase())) {
                                 searchList.add(assetList.get(i));
                             }
                         }
-                        KeyboardUtils.hideKeyboard(etSearch);
-
+//                        KeyboardUtils.hideKeyboard(etSearch);
+//                        etSearch.clearFocus();
 
 
                         Handler handler = new Handler();
@@ -645,10 +809,10 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                             @Override
                             public void run() {
                                 assetAdapter.notifyDataSetChanged(searchList);
-                                refreashView(searchList,rcyWallet);
+                                refreashView(searchList, rcyWallet);
 
                             }
-                        },300);
+                        }, 300);
                     }
 
                     @Override

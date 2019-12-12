@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.api;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseApi;
@@ -40,12 +41,30 @@ public class Api {
         apiService = baseApi.getRetrofit(baseUrl).create(ApiService.class);
     }
 
+    private Api(String baseUrl) {
+        this.baseUrl = baseUrl;
+
+        BaseApi baseApi = new BaseApi();
+        apiService = baseApi.getRetrofit(baseUrl).create(ApiService.class);
+    }
+
     public static void UpdataToken() {
         synchronized (Api.class) {
             new Api();
         }
     }
 
+    public static void UpdataBaseUrl(String baseUrl) {
+        if (TextUtils.isEmpty(baseUrl)){
+            synchronized (Api.class) {
+                new Api();
+            }
+        }else {
+            synchronized (Api.class) {
+                new Api(baseUrl);
+            }
+        }
+    }
     public static String returnEtUrl(){
         return baseUrl;
     }

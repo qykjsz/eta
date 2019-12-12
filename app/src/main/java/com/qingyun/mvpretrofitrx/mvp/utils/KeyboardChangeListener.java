@@ -1,7 +1,10 @@
 package com.qingyun.mvpretrofitrx.mvp.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -13,9 +16,11 @@ import android.view.ViewTreeObserver;
 public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutListener {
     private static final String TAG = "ListenerHandler";
     private View mContentView;
-    private int mOriginHeight;
-    private int mPreHeight;
+    private int mOriginHeight=0;
+    private int mPreHeight=0;
     private KeyBoardListener mKeyBoardListen;
+    private Rect rect;
+    public static Boolean isSofeVisiable = false;
 
     public interface KeyBoardListener {
         /**
@@ -41,8 +46,16 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
         }
     }
 
+    public KeyboardChangeListener(View view) {
+        mContentView = view;
+        if (mContentView != null) {
+            addContentTreeObserver();
+        }
+    }
+
     private View findContentView(Activity contextObj) {
-        return contextObj.findViewById(android.R.id.content);
+       return contextObj.getWindow().getDecorView();
+//        return contextObj.findViewById(android.R.id.content);
     }
 
     private void addContentTreeObserver() {
@@ -51,37 +64,38 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
 
     @Override
     public void onGlobalLayout() {
-        int currHeight = mContentView.getHeight();
-        if (currHeight == 0) {
-            Log.i(TAG, "currHeight is 0");
-            return;
-        }
+        rect = new Rect();
+        mContentView.getWindowVisibleDisplayFrame(rect);
+        int currHeight = mContentView.getRootView().getHeight()-rect.bottom;
+//        if (currHeight == 0) {
+//            Log.i(TAG, "currHeight is 0");
+//            return;
+//        }
         boolean hasChange = false;
-        if (mPreHeight == 0) {
-            mPreHeight = currHeight;
-            mOriginHeight = currHeight;
-        } else {
+
             if (mPreHeight != currHeight) {
                 hasChange = true;
                 mPreHeight = currHeight;
             } else {
                 hasChange = false;
+                return;
             }
-        }
+
+        Log.e(TAG, "onGlobalLayout: "+hasChange);
         if (hasChange) {
             boolean isShow;
             int keyboardHeight = 0;
-            if (mOriginHeight == currHeight) {
+            if ( currHeight==0) {
                 //hidden
                 isShow = false;
             } else {
                 //show
-                keyboardHeight = mOriginHeight - currHeight;
                 isShow = true;
             }
 
             if (mKeyBoardListen != null) {
-                mKeyBoardListen.onKeyboardChange(isShow, keyboardHeight);
+                isSofeVisiable = isShow;
+                mKeyBoardListen.onKeyboardChange(isShow, currHeight);
             }
         }
     }

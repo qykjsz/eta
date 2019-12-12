@@ -181,7 +181,7 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
         requestList();
     };
 
-    private void setHeaderData() {
+    protected void setHeaderData() {
 
         if (!haveHeader()){
             lyHeader.setVisibility(View.GONE);
