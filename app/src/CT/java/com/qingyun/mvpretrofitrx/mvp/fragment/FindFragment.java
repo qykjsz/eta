@@ -105,6 +105,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     BGABanner mCubeBanner;
     //Banner轮播图的List
     private List<String> bannerList;
+    private List<String> bannerLinkList;
     private FindGridViewAdapter mAdapter;
     private long lastClickTime = 0;
     @Override
@@ -300,10 +301,12 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 JSONArray data = object.getJSONArray("data");
                 if (data.size() > 0) {
                     bannerList = new ArrayList<>();
+                    bannerLinkList = new ArrayList<>();
                     for (int i = 0; i < data.size(); i++) {
                         JSONObject obj = data.getJSONObject(i);
                         //循环将图片url存入
                         bannerList.add(obj.getString("url"));
+                        bannerLinkList.add(obj.getString("link"));
                     }
                     //设置图片进入banner。第二个参数为设置文字
                     mCubeBanner.setData(bannerList, null);
@@ -311,6 +314,12 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     mCubeBanner.setDelegate(new BGABanner.Delegate<ImageView, String>() {
                         @Override
                         public void onBannerItemClick(BGABanner banner, ImageView itemView, String model, int position) {
+                            if(bannerLinkList.get(position).startsWith("http") || bannerLinkList.get(position).startsWith("https")){
+                                Intent intent = new Intent(mContext, WebActivity.class);
+                                intent.putExtra("url", bannerLinkList.get(position));
+                                intent.putExtra("title","");
+                                mContext.startActivity(intent);
+                            }
 //                            if(bannerData.get(position).type.equals("2")){//1为普通(不可跳转) 2为带外链的（可跳转）
 //                                PublicJump.startWebActivity(mContext, bannerData.get(position).title, bannerData.get(position).external_link);
 //                            }
