@@ -484,6 +484,8 @@ public class DialogUtils {
                     @Override
                     public void bind(final AnyLayer anyLayer) {
                         RecyclerView recyclerView =  anyLayer.getView(R.id.rcy);
+                        TextView textView = anyLayer.getView(R.id.textView4);
+                        textView.setText(context.getResources().getString(R.string.platform_choose));
                         PlatformAdapter platformAdapter = new PlatformAdapter(context,platformList);
                         platformAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
                             @Override

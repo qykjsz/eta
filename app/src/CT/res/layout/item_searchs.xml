@@ -56,6 +56,8 @@
                     android:textColor="@color/color_999999"
                     android:textSize="12sp"
                     android:layout_marginTop="7.5dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     />
             </LinearLayout>
         </LinearLayout>

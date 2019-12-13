@@ -314,12 +314,16 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     mCubeBanner.setDelegate(new BGABanner.Delegate<ImageView, String>() {
                         @Override
                         public void onBannerItemClick(BGABanner banner, ImageView itemView, String model, int position) {
+                            if(bannerLinkList.get(position) != null){
+
                             if(bannerLinkList.get(position).startsWith("http") || bannerLinkList.get(position).startsWith("https")){
                                 Intent intent = new Intent(mContext, WebActivity.class);
                                 intent.putExtra("url", bannerLinkList.get(position));
                                 intent.putExtra("title","");
                                 mContext.startActivity(intent);
                             }
+                            }
+
 //                            if(bannerData.get(position).type.equals("2")){//1为普通(不可跳转) 2为带外链的（可跳转）
 //                                PublicJump.startWebActivity(mContext, bannerData.get(position).title, bannerData.get(position).external_link);
 //                            }
