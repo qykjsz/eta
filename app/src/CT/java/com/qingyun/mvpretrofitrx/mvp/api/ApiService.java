@@ -11,6 +11,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
+import com.qingyun.mvpretrofitrx.mvp.entity.GoldInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
 import com.qingyun.mvpretrofitrx.mvp.entity.InvestLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
@@ -186,4 +187,7 @@ public interface ApiService {
 
     @POST("recharge_et_game_verification")
     Observable <BaseResponse<String>>checkInvestInfo(@Query("gameid")String gameid, @Query("gamenumber")String gamenumber, @Query("moneystate")String moneystate, @Query("money")String money);
+
+    @POST("glod_details")
+    Observable <BaseResponse<GoldInfo>>getGoldInfo(@Query("glod")String glod);
 }

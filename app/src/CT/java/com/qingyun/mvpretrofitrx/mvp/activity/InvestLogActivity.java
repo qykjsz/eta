@@ -10,6 +10,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.InvestContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
+import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.InvestLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Platform;
@@ -115,6 +116,11 @@ public class InvestLogActivity extends BaseActivity<InvestContact.View,InvestCon
     }
 
     @Override
+    public void checkAccountFailure() {
+
+    }
+
+    @Override
     public void addInvestInfoSuccess(NormalResponse normalResponse) {
 
     }
@@ -148,6 +154,11 @@ public class InvestLogActivity extends BaseActivity<InvestContact.View,InvestCon
 
     @Override
     public void checkInvestInfoSuccess(String s) {
+
+    }
+
+    @Override
+    public void getCurrencyRateSuccess(List<CurrencyRate> currencyRateList) {
 
     }
 

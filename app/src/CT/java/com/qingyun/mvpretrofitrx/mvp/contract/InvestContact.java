@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.contract;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
+import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.InvestLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
@@ -18,6 +19,8 @@ public interface InvestContact {
         void getNodeSuccess(String node);
         void getCoinTypeRateSuccess(List<CoinTypeRate> coinTypeRateList);
         void checkAccountSuccess(NormalResponse normalResponse);
+        void checkAccountFailure();
+
         void addInvestInfoSuccess(NormalResponse normalResponse);
 
         void getSuprtPlatformSuccess(List<Platform> platformList);
@@ -25,6 +28,7 @@ public interface InvestContact {
         void investSuccess( );
         void getInvestLogSuccess(List<InvestLog> investLogList);
         void checkInvestInfoSuccess(String s);
+        void getCurrencyRateSuccess(List<CurrencyRate> currencyRateList);
 
     }
 
@@ -46,6 +50,7 @@ public interface InvestContact {
 
         public abstract void getInvestLog(String address,int page);
         public abstract void checkInvestInfo(String gameid,String gamenumber,String moneystate,String money);
+        public abstract void getCurrencyRate();
 
     }
 }

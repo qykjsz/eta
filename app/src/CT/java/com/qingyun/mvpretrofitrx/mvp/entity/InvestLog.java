@@ -9,7 +9,7 @@ public class InvestLog {
     private String money;
     private String time;
     private String color;
-    private int state;
+    private String state;
 
     public String getId() {
         return id;
@@ -75,11 +75,12 @@ public class InvestLog {
         this.color = color;
     }
 
-    public int getState() {
+
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
 }

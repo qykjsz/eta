@@ -68,11 +68,13 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
     @Override
     public void onNext(BaseResponse<T> tBaseResponse) {
         dismissProgressDialog();
-        if (tBaseResponse.getCode() == 200) {
+        if (tBaseResponse.getCode() == 200||tBaseResponse.getCode()==1) {
             listener.onNext(tBaseResponse.getData());//可定制接口，通过code回调处理不同的业务
         } else {
             if (!TextUtils.isEmpty(tBaseResponse.getMsg())) {
                 ToastUtil.showShortToast(tBaseResponse.getMsg());
+                listener.onError(tBaseResponse.getMsg());
+
             }
         }
 

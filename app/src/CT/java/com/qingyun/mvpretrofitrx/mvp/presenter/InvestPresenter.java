@@ -6,6 +6,7 @@ import com.qingyun.mvpretrofitrx.mvp.contract.AboutUsContact;
 import com.qingyun.mvpretrofitrx.mvp.contract.InvestContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.BusinessPayLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
+import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.InvestLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
@@ -80,7 +81,9 @@ public class InvestPresenter extends InvestContact.Presenter {
 
             @Override
             public void onError(String e) {
-
+                if(getView() != null){
+                    getView().checkAccountFailure();
+                }
             }
         });
     }
@@ -183,6 +186,24 @@ public class InvestPresenter extends InvestContact.Presenter {
             public void onNext(String s) {
                 if(getView() != null){
                     getView().checkInvestInfoSuccess(s);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getCurrencyRate() {
+        model.getCurrencyRate(context,getView().bindLifecycle(), new ObserverResponseListener<List<CurrencyRate>>() {
+
+            @Override
+            public void onNext(List<CurrencyRate> currencyRateList) {
+                if(getView() != null){
+                    getView().getCurrencyRateSuccess(currencyRateList);
                 }
             }
 

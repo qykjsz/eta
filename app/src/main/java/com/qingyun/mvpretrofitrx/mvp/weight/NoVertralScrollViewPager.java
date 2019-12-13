@@ -22,7 +22,81 @@ public class NoVertralScrollViewPager extends ViewPager {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
-        switch (ev.getAction()){
+//        switch (ev.getAction()){
+//            case MotionEvent.ACTION_DOWN:
+//                isMove = false;
+//                oldY = ev.getY();
+//                oldX = ev.getX();
+//
+//                break;
+//            case MotionEvent.ACTION_UP:
+//
+//                if (isMove){
+//                    ev.setAction(MotionEvent.ACTION_MOVE);
+//                    Log.e("onInterceptTouchEvent","------------8");
+//
+//                }
+//                break;
+////
+////                currY = ev.getY();
+////                currX = ev.getX();
+////
+////                if ( Math.abs(currX-oldX)>touchSlop||Math.abs(currY-oldY)>touchSlop){
+////                    oldX = currX;
+////                    oldY = currY;
+////                    isMove = true;
+////                    Log.e("onInterceptTouchEvent","------------4");
+////                    return true;
+////                }
+////                else {
+////                    oldX = currX;
+////                    oldY = currY;
+////                    if (isMove){
+////                        ev.setAction(MotionEvent.ACTION_CANCEL);
+////                    }
+////                    rcy.dispatchTouchEvent(ev);
+////                    return false;
+////                }
+//
+////                else {
+////                    ev.setAction(MotionEvent.ACTION_CANCEL);
+////                    rcy.dispatchTouchEvent(ev);
+////                    oldY = currY;
+////                    return true;
+////
+////                }
+//
+//            case MotionEvent.ACTION_MOVE:
+//                currY = ev.getY();
+//                currX = ev.getX();
+//
+//                if (Math.abs(currX-oldX)>touchSlop){
+//                    isMove = true;
+//                    return true;
+//                }
+////                if (Math.abs(currY-oldY)>=touchSlop){
+////                    oldY = currY;
+////                    oldX = currX;
+////                    Log.e("onInterceptTouchEvent","------------2");
+////                    isMove = true;
+////                    return false;
+////               }
+//                oldY = currY;
+//                oldX = currX;
+//
+//                break;
+//            case MotionEvent.ACTION_CANCEL:
+//                break;
+//        }
+//        Log.e("onInterceptTouchEvent","------------3");
+//        rcy.dispatchTouchEvent(ev);
+        return super.dispatchTouchEvent(ev);
+
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+          switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
                 isMove = false;
                 oldY = ev.getY();
@@ -32,7 +106,7 @@ public class NoVertralScrollViewPager extends ViewPager {
             case MotionEvent.ACTION_UP:
 
                 if (isMove){
-                    ev.setAction(MotionEvent.ACTION_MOVE);
+                    ev.setAction(MotionEvent.ACTION_CANCEL);
                     Log.e("onInterceptTouchEvent","------------8");
 
                 }
@@ -89,42 +163,7 @@ public class NoVertralScrollViewPager extends ViewPager {
                 break;
         }
         Log.e("onInterceptTouchEvent","------------3");
-        rcy.dispatchTouchEvent(ev);
-        return super.dispatchTouchEvent(ev);
-
-    }
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        switch (ev.getAction()){
-//            case MotionEvent.ACTION_DOWN:
-//                oldY = ev.getY();
-//                oldX = ev.getX();
-//
-//                break;
-//            case MotionEvent.ACTION_UP:
-//            case MotionEvent.ACTION_MOVE:
-//            case MotionEvent.ACTION_CANCEL:
-//
-//                currY = ev.getY();
-//                currX = ev.getX();
-//
-//                if ( Math.abs(currX-oldX)>=touchSlop){
-//                    oldY = currY;
-//                    oldX = currX;
-//                    Log.e("onInterceptTouchEvent","------------2");
-//                    return true;
-//                }else {
-//                    oldY = currY;
-//                    oldX = currX;
-//                    return super.onInterceptTouchEvent(ev);
-//                }
-//
-//
-//
-//        }
-//        Log.e("onInterceptTouchEvent","------------3");
-
+        rcy.onInterceptTouchEvent(ev);
         return super.onInterceptTouchEvent(ev);
     }
 

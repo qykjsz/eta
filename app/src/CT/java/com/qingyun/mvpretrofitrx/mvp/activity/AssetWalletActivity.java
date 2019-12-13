@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -77,6 +78,7 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     CheckBox btnVisiable;
     @BindView(R.id.textView8)
     BoldTextView textView8;
+
     private List<BaseFragment> fragments;
     private List<String> titles;
     private Wallet asset;
@@ -300,9 +302,14 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     }
 
 
-    @OnClick({R.id.btn_back, R.id.btn_visiable, R.id.btn_get_money, R.id.btn_transfer})
+    @OnClick({R.id.btn_info,R.id.btn_back, R.id.btn_visiable, R.id.btn_get_money, R.id.btn_transfer})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_info:
+                Bundle bundle1 = new Bundle();
+                bundle1.putString(IntentUtils.TRANSFER_COIN_NAME,asset.getName());
+                startActivity(TokenProfileActivity.class,bundle1);
+                break;
             case R.id.btn_transfer:
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(IntentUtils.ASSET, asset);

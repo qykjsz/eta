@@ -11,12 +11,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.develop.wallet.eth.WalletManager;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.contract.InvestContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
+import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.InvestLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Platform;
@@ -67,6 +69,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     private List<String> amountList;
     private CoinTypeRate currentCoin;
     private Platform currentPlatform;
+    private String currentRatio;
+    private Boolean checkAccountSuccess = false;
 
     @Override
     protected String getTitleRightText() {
@@ -105,11 +109,12 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
 
     @Override
     public void init() {
+        getPresenter().getCurrencyRate();
         getPresenter().getCoinTypeRate();
         getPresenter().getSuprtPlatform();
         getPresenter().getInvestAmountList();
 
-        etAmount.addTextChangedListener(new TextWatcher() {
+        tvAccount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -178,10 +183,10 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                             s = "0";
                         }
                         amount = new BigDecimal(s);
-                        if (currentPlatform == null || currentCoin == null) return;
+                        if (currentPlatform == null || currentCoin == null||currentRatio==null) return;
                         platformRatio = new BigDecimal(currentPlatform.getProportion());
                         coinRatio = new BigDecimal(currentCoin.getRate());
-                        price = amount.multiply(platformRatio).divide(coinRatio, 4, RoundingMode.DOWN);
+                        price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
                         tvPrice.setText(price.toString());
                     }
 
@@ -226,7 +231,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 }
                 platformRatio = new BigDecimal(currentPlatform.getProportion());
                 coinRatio = new BigDecimal(currentCoin.getRate());
-                price = amount.multiply(platformRatio).divide(coinRatio, 4, RoundingMode.DOWN);
+                price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
                 tvPrice.setText(price.toString());
 
             }
@@ -237,6 +242,18 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     public void checkAccountSuccess(NormalResponse normalResponse) {
         ivAccountTrue.setVisibility(View.VISIBLE);
         btnAccount.setVisibility(View.GONE);
+        checkAccountSuccess = true;
+
+        Glide.with(getContext()).load(R.mipmap.yz_cg_icon).into(ivAccountTrue);
+    }
+
+    @Override
+    public void checkAccountFailure() {
+        ivAccountTrue.setVisibility(View.VISIBLE);
+        btnAccount.setVisibility(View.GONE);
+        checkAccountSuccess = false;
+        Glide.with(getContext()).load(R.mipmap.yz_sb_icon).into(ivAccountTrue);
+
     }
 
     @Override
@@ -257,6 +274,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
             @Override
             public void onItemClick(List list, int position) {
                 platform = (Platform) list.get(position);
+                currentPlatform = platform;
                 tvPlatform.setText(platform.getName());
                 if (TextUtils.isEmpty(etAmount.getText().toString())) {
                     amount = new BigDecimal("0");
@@ -266,7 +284,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 }
                 platformRatio = new BigDecimal(currentPlatform.getProportion());
                 coinRatio = new BigDecimal(currentCoin.getRate());
-                price = amount.multiply(platformRatio).divide(coinRatio, 4, RoundingMode.DOWN);
+                price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
                 tvPrice.setText(price.toString());
 
             }
@@ -290,7 +308,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
 
     @Override
     public void investSuccess() {
-        ToastUtil.showShortToast(R.string.invest_success);
+        ToastUtil.showShortToast(R.string.subbmit_success);
+        finish();
     }
 
     @Override
@@ -300,7 +319,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
 
     @Override
     public void checkInvestInfoSuccess(String s) {
-        DialogUtils.showInvestPayDialog(getContext(), s, currentCoin.getName(), 30, new DialogUtils.SureListener() {
+        DialogUtils.showInvestPayDialog(getContext(), s, currentCoin.getName(), 60, new DialogUtils.SureListener() {
             @Override
             public void onSure(Object o) {
                 ProgressDialogUtils.getInstances().showDialog();
@@ -336,6 +355,16 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 });
             }
         });
+    }
+
+    @Override
+    public void getCurrencyRateSuccess(List<CurrencyRate> currencyRateList) {
+        for (int i = 0;i<currencyRateList.size();i++){
+            if (currencyRateList.get(i).getId()==1){
+                currentRatio = currencyRateList.get(i).getRate();
+            }
+        }
+
     }
 
     @Override
@@ -385,10 +414,18 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                     ToastUtil.showShortToast(R.string.amount_not_0);
                     return;
                 }
+                if (ivAccountTrue.getVisibility()==View.GONE||!checkAccountSuccess) {
+                    ToastUtil.showShortToast(R.string.must_check_account);
+                    return;
+                }
+
                 if (!cb.isChecked()) {
                     ToastUtil.showShortToast(R.string.sure_have_read_agree);
                     return;
                 }
+
+
+
                 getPresenter().getNode();
                 break;
         }

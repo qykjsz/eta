@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ly_null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="@dimen/dp_0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="@dimen/dp_0">
+
+        <ImageView
+            android:id="@+id/iv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/dp_132"
+            android:src="@mipmap/kby_qt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv"
+            app:layout_constraintStart_toStartOf="@+id/iv"
+            app:layout_constraintEnd_toEndOf="@+id/iv"
+            app:layout_constraintTop_toBottomOf="@+id/iv"
+            android:layout_marginTop="@dimen/dp_20"
+            android:textSize="@dimen/sp_17"
+            android:text="@string/not_token_profit"
+            android:textColor="@color/color_999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintTop_toBottomOf="@+id/tv"
+            app:layout_constraintStart_toStartOf="@+id/tv"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/not_token_note"
+            app:layout_constraintEnd_toEndOf="@+id/tv"
+            android:textColor="@color/color_C2C2C2"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/ly1"
+                android:background="@color/color_FFFFFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_70">
+
+                <ImageView
+                    android:id="@+id/iv_img"
+                    android:src="@mipmap/dc_eth"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="@dimen/dp_24"
+                    android:layout_width="@dimen/dp_44"
+                    android:layout_height="@dimen/dp_44" />
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                    android:id="@+id/tv_coin_name"
+                    android:textSize="@dimen/dp_20"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    app:layout_constraintTop_toTopOf="@+id/iv_img"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+                    app:layout_constraintStart_toEndOf="@+id/iv_img"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/eth"
+                    />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/ly2"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/color_FFFFFF"
+                app:layout_constraintTop_toBottomOf="@+id/ly1"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content">
+
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                    android:id="@+id/textView135"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:text="@string/base_info"
+                    android:textSize="@dimen/sp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView140"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:text="@string/own_web_"
+                    android:textColor="@color/color_999999"
+                    app:layout_constraintStart_toStartOf="@+id/textView135"
+                    app:layout_constraintTop_toBottomOf="@+id/textView135" />
+
+                <TextView
+                    android:id="@+id/textView145"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:text="@string/while_book"
+
+                    android:textColor="@color/color_999999"
+                    app:layout_constraintStart_toStartOf="@+id/textView140"
+                    app:layout_constraintTop_toBottomOf="@+id/textView140" />
+
+                <TextView
+                    android:id="@+id/tv_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_35"
+                    android:text="The crypto-fuel for the Ethereum network"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/dp_padding_x_min"
+                    android:textColor="@color/color_999999"
+                    app:layout_constraintStart_toStartOf="@+id/textView145"
+                    app:layout_constraintTop_toBottomOf="@+id/textView145" />
+
+                <TextView
+                    android:id="@+id/tv_web_url"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    app:layout_constraintStart_toEndOf="@+id/textView140"
+                    android:text="TextView"
+                    android:textColor="@color/main_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView140"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView140" />
+
+                <TextView
+                    android:id="@+id/tv_while_book"
+                    android:layout_width="0dp"
+                    android:gravity="right"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/textView145"
+                    android:text="TextView"
+                    android:singleLine="true"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:textColor="@color/main_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView145"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_web_url"
+                    app:layout_constraintTop_toTopOf="@+id/textView145" />
+
+                <TextView
+                    app:layout_constraintStart_toStartOf="@+id/textView145"
+                    app:layout_constraintTop_toBottomOf="@+id/textView145"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_while_book"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_1"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_1"
+                    style="@style/line"/>
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/ly3"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/color_FFFFFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ly2"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content">
+
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                    android:id="@+id/textView152"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:text="@string/base_info"
+                    android:textSize="@dimen/sp_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView155"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_999999"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:text="@string/publish_time_"
+                    app:layout_constraintStart_toStartOf="@+id/textView152"
+                    app:layout_constraintTop_toBottomOf="@+id/textView152" />
+
+                <TextView
+                    android:id="@+id/textView156"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:text="@string/publish_amount_"
+                    android:textColor="@color/color_999999"
+
+                    app:layout_constraintStart_toStartOf="@+id/textView155"
+                    app:layout_constraintTop_toBottomOf="@+id/textView155" />
+
+                <TextView
+                    android:id="@+id/textView157"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:text="@string/publish_price_"
+                    android:textColor="@color/color_999999"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/dp_padding_x_min"
+                    app:layout_constraintStart_toStartOf="@+id/textView156"
+                    app:layout_constraintTop_toBottomOf="@+id/textView156" />
+
+                <TextView
+                    android:id="@+id/tv_publish_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@+id/textView155"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView155"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="107dp" />
+
+                <TextView
+                    android:id="@+id/tv_publish_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@+id/textView156"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView156"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="151dp" />
+
+                <TextView
+                    android:id="@+id/tv_publish_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    android:text="TextView"
+                    app:layout_constraintTop_toTopOf="@+id/textView157"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView157"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="220dp" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="@dimen/dp_0"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/color_FFFFFF"
+                android:minHeight="@dimen/dp_300"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ly3"
+                android:layout_height="wrap_content">
+
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                    android:textSize="@dimen/sp_16"
+                    android:id="@+id/textView161"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jianjie"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="35dp"
+                    tools:layout_editor_absoluteY="25dp" />
+
+                <TextView
+                    android:id="@+id/tv_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    android:text="TextView"
+                    android:textColor="@color/color_999999"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView161"
+                    app:layout_constraintTop_toBottomOf="@+id/textView161" />
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</android.support.constraint.ConstraintLayout>

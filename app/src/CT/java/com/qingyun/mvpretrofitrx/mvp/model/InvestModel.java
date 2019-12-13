@@ -76,4 +76,11 @@ public class InvestModel<T> extends BaseModel {
 
     }
 
+
+
+    public void getCurrencyRate(Context context, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getCurrencyRate(), observerListener,transformer);
+
+    }
+
 }

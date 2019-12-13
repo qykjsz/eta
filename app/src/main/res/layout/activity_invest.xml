@@ -418,7 +418,7 @@
                         android:id="@+id/et_amount"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_44"
-                        android:inputType="numberDecimal"
+                        android:inputType="number"
                         android:gravity="center_vertical"
                         android:hint="@string/input_platform_coin_num"
                         app:layout_constraintTop_toBottomOf="@+id/textView150"

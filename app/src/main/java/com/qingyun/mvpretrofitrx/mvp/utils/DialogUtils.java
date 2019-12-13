@@ -129,7 +129,7 @@ public class DialogUtils {
                         tvCoinName.setText(coinNmae);
 
                         final TextView tvTime = anyLayer.getView(R.id.tv_time);
-                        countDownUtils = new CountDownUtils().showCloseCountDown(1, 30, new CountDownUtils.CountDownListener() {
+                        countDownUtils = new CountDownUtils().showCloseCountDown(1, start, new CountDownUtils.CountDownListener() {
                             @Override
                             public void next(Long aLong) {
                                 tvTime.setText(aLong+"s");

@@ -97,6 +97,8 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.SettingPriceActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BuyerPayActivity"/>
         <activity android:name="com.zbar.lib.CaptureActivity"/>
+
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TokenProfileActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.InvestActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyLogActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLsvelToCreateActivity"/>

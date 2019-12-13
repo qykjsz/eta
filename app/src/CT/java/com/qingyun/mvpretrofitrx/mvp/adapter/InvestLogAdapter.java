@@ -33,6 +33,7 @@ public class InvestLogAdapter extends BaseAdapter<InvestLog, InvestLogAdapter.In
     @Override
     protected void onItemReset(InvestLogViewHolder holder) {
 
+
     }
 
     @Override
@@ -48,20 +49,28 @@ public class InvestLogAdapter extends BaseAdapter<InvestLog, InvestLogAdapter.In
         holder.tvCoinIn.setText("+"+getList().get(position).getGamenumber());
         holder.tvMoneyOut.setText("-"+getList().get(position).getMoney()+getList().get(position).getMoneystate());
         holder.tvTime.setText(getList().get(position).getTime());
-        if (getList().get(position).getState()==1){
+        holder.tvStatus.setText(getList().get(position).getState());
+        if (getList().get(position).getState().equals(getContext().getResources().getString(R.string.status_invest_success))){
             holder.tvStatus.setTextColor(getContext().getResources().getColor(R.color.color_B7BCDC));
 
         }else {
             holder.tvStatus.setTextColor(getContext().getResources().getColor(R.color.color_24CE94));
 
         }
-        if (getList().get(position).getState()==0){
-            holder.tvStatus.setText(getContext().getResources().getString(R.string.status_investing));
-        }else if (getList().get(position).getState()==1){
-            holder.tvStatus.setText(getContext().getResources().getString(R.string.status_invest_success));
-        }else {
-            holder.tvStatus.setText(getContext().getResources().getString(R.string.status_invest_failure));
-        }
+//        if (getList().get(position).getState()==1){
+//            holder.tvStatus.setTextColor(getContext().getResources().getColor(R.color.color_B7BCDC));
+//
+//        }else {
+//            holder.tvStatus.setTextColor(getContext().getResources().getColor(R.color.color_24CE94));
+//
+//        }
+//        if (getList().get(position).getState()==0){
+//            holder.tvStatus.setText(getContext().getResources().getString(R.string.status_investing));
+//        }else if (getList().get(position).getState()==1){
+//            holder.tvStatus.setText(getContext().getResources().getString(R.string.status_invest_success));
+//        }else {
+//            holder.tvStatus.setText(getContext().getResources().getString(R.string.status_invest_failure));
+//        }
 
     }
 

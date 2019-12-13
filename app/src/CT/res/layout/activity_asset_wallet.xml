@@ -42,6 +42,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btn_back"
             app:layout_constraintVertical_bias="0.571" />
+
+        <ImageView
+            android:id="@+id/btn_info"
+            android:src="@mipmap/bz_jj_icon"
+            app:layout_constraintTop_toTopOf="@+id/textView8"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="@dimen/dp_padding_x_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </android.support.constraint.ConstraintLayout>
 
 
@@ -272,6 +283,7 @@
 
             <com.qingyun.mvpretrofitrx.mvp.weight.NoVertralScrollViewPager
                 android:id="@+id/viewPager"
+                android:visibility="gone"
                 android:background="@color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

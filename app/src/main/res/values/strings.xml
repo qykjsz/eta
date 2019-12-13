@@ -323,4 +323,16 @@
     <string name="status_investing">充值中</string>
     <string name="status_invest_success">充值成功</string>
     <string name="status_invest_failure">充值失败</string>
+    <string name="token_profile">Token Profile</string>
+    <string name="base_info">基本信息</string>
+    <string name="own_web_">官网：</string>
+    <string name="while_book">白皮书：</string>
+    <string name="publish_time_">发行时间：</string>
+    <string name="publish_amount_">发行总量：</string>
+    <string name="publish_price_">发行价：</string>
+    <string name="jianjie">简介</string>
+    <string name="not_token_profit">暂无此 Token 档案</string>
+    <string name="not_token_note">Token 档案需由 Token 官方团队提交</string>
+    <string name="subbmit_success">提交成功</string>
+    <string name="must_check_account">请验证账号</string>
 </resources>
