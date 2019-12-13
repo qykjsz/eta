@@ -315,7 +315,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     @Override
     public void investSuccess() {
         ToastUtil.showShortToast(R.string.subbmit_success);
-        finish();
+//        finish();
     }
 
     @Override

@@ -23,6 +23,7 @@ public interface WalletAssetContact {
         void searchLogByHashSuccess(TransferLog transferLog);
         void getGasPriceSuccess(List<GasPrice> gasPrices);
         void getVersionSuccess(VersionInfo versionInfo);
+        void checkCanTransferSuccess();
 
     }
 
@@ -36,6 +37,7 @@ public interface WalletAssetContact {
         public abstract void searchLogByHash(String address,String hash,String glod);
         public abstract void getGasPrice();
         public abstract void getVersion();
+        public abstract void checkCanTransfer(String name);
 
     }
 }

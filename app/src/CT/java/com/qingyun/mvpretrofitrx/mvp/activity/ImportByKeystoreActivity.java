@@ -187,6 +187,11 @@ public class ImportByKeystoreActivity extends BaseActivity<WalletAssetContact.Vi
 
     }
 
+    @Override
+    public void checkCanTransferSuccess() {
+
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreashWallet(ImportScanResult importScanResult) {
         etContent.setText(importScanResult.getAddress());

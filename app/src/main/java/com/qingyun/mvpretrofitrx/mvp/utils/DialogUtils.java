@@ -103,6 +103,19 @@ public class DialogUtils {
                 .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
                 .gravity(Gravity.CENTER)
                 .onClickToDismiss(R.id.btn_cancel)
+                .onLayerDismissListener(new LayerManager.OnLayerDismissListener() {
+                    @Override
+                    public void onDismissing(AnyLayer anyLayer) {
+
+                    }
+
+                    @Override
+                    public void onDismissed(AnyLayer anyLayer) {
+                        if (countDownUtils!=null&&!countDownUtils.getCall().isDisposed())
+                            countDownUtils.getCall().dispose();
+
+                    }
+                })
                 .onClick(R.id.btn_sure, new LayerManager.OnLayerClickListener() {
                     @Override
                     public void onClick(AnyLayer anyLayer, View v) {

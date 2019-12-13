@@ -190,4 +190,7 @@ public interface ApiService {
 
     @POST("glod_details")
     Observable <BaseResponse<GoldInfo>>getGoldInfo(@Query("glod")String glod);
+
+    @POST("et_transaction")
+    Observable <BaseResponse<String>>checkCanTransfer(@Query("name")String name);
 }

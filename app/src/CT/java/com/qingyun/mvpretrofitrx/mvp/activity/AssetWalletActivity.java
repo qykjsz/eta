@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -78,6 +77,10 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     CheckBox btnVisiable;
     @BindView(R.id.textView8)
     BoldTextView textView8;
+    @BindView(R.id.btn_transfer)
+    TextView btnTransfer;
+    @BindView(R.id.btn_get_money)
+    TextView btnGetMoney;
 
     private List<BaseFragment> fragments;
     private List<String> titles;
@@ -129,6 +132,11 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
         titles.add(getResources().getString(R.string.transfer_in));
         titles.add(getResources().getString(R.string.transfer_out));
         asset = (Wallet) getIntent().getSerializableExtra(IntentUtils.ASSET);
+        if (asset.getName().equals("EGA")){
+            btnTransfer.setVisibility(View.GONE);
+            btnGetMoney.setVisibility(View.GONE);
+
+        }
         textView8.setText(asset.getName());
         fragments = new ArrayList<>();
         fragments.add(new EmptyFragment());
@@ -302,13 +310,13 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
     }
 
 
-    @OnClick({R.id.btn_info,R.id.btn_back, R.id.btn_visiable, R.id.btn_get_money, R.id.btn_transfer})
+    @OnClick({R.id.btn_info, R.id.btn_back, R.id.btn_visiable, R.id.btn_get_money, R.id.btn_transfer})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_info:
                 Bundle bundle1 = new Bundle();
-                bundle1.putString(IntentUtils.TRANSFER_COIN_NAME,asset.getName());
-                startActivity(TokenProfileActivity.class,bundle1);
+                bundle1.putString(IntentUtils.TRANSFER_COIN_NAME, asset.getName());
+                startActivity(TokenProfileActivity.class, bundle1);
                 break;
             case R.id.btn_transfer:
                 Bundle bundle = new Bundle();
@@ -371,6 +379,11 @@ public class AssetWalletActivity extends BaseActivity<WalletAssetContact.View, W
 
     @Override
     public void getVersionSuccess(VersionInfo versionInfo) {
+
+    }
+
+    @Override
+    public void checkCanTransferSuccess() {
 
     }
 
