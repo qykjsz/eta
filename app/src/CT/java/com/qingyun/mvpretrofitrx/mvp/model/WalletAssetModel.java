@@ -5,8 +5,13 @@ import android.content.Context;
 import com.qingyun.mvpretrofitrx.mvp.api.Api;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseModel;
 import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
+import com.qingyun.mvpretrofitrx.mvp.progress.ProgressObserver;
 
+import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class WalletAssetModel<T> extends BaseModel {
@@ -15,7 +20,8 @@ public class WalletAssetModel<T> extends BaseModel {
 
 
     public void getWalletInfo(Context context,String walletAddress, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-            subscribe(context, Api.getApiService().getWalletInfo(walletAddress), observerListener,transformer);
+            subscribe(context, Api.getApiService().getWalletInfo(walletAddress), observerListener,transformer,false,true);
+
 
     }
     public void addWallet(Context context,String walletAddress, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
@@ -47,6 +53,12 @@ public class WalletAssetModel<T> extends BaseModel {
 
     public void getVersion(Context context,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
         subscribe(context, Api.getApiService().getVersion("android"), observerListener,transformer);
+
+    }
+
+    public void checkCanTransfer(Context context,String name
+                                 ,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().checkCanTransfer(name), observerListener,transformer);
 
     }
 

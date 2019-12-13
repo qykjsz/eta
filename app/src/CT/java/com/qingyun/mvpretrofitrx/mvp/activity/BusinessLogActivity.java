@@ -145,6 +145,11 @@ public class BusinessLogActivity extends BaseActivity<WalletAssetContact.View, W
     }
 
     @Override
+    public void checkCanTransferSuccess() {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindToLifecycle();
     }

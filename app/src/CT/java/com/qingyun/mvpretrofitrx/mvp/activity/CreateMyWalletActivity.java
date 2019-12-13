@@ -239,6 +239,11 @@ public class CreateMyWalletActivity extends BaseActivity<WalletAssetContact.View
     }
 
     @Override
+    public void checkCanTransferSuccess() {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindToLifecycle();
     }

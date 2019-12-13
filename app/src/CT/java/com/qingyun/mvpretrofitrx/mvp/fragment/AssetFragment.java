@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -71,6 +70,7 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.qingyun.mvpretrofitrx.mvp.weight.MultistageProgress;
+import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
@@ -150,6 +150,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     ConstraintLayout ly;
     @BindView(R.id.nest_)
     NestedScrollView nest;
+    @BindView(R.id.constraintLayout)
+    ConstraintLayout constraintLayout;
     private List<AssetModle> modleList;
     private List<com.qingyun.mvpretrofitrx.mvp.entity.Wallet> assetList;
     private List<com.qingyun.mvpretrofitrx.mvp.entity.Wallet> searchList;
@@ -163,8 +165,10 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     private ConstraintLayout.LayoutParams oldLp;
     private int height;
     private ConstraintLayout.LayoutParams lp2;
-    private ConstraintLayout.LayoutParams c;
+    private ConstraintLayout.LayoutParams lp3;
 
+    private ConstraintLayout.LayoutParams c;
+    ConstraintLayout.LayoutParams lp1;
 
     @Override
     public int getLayoutId() {
@@ -182,21 +186,33 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     }
 
 
-
     @Override
     public void init() {
         nestScrollListener();
-        ConstraintLayout.LayoutParams lp1 = (ConstraintLayout.LayoutParams) moreAsset.getLayoutParams();
+        lp1 = (ConstraintLayout.LayoutParams) moreAsset.getLayoutParams();
         lp2 = (ConstraintLayout.LayoutParams) rcyWallet.getLayoutParams();
-        height = PhoneUtil.getPhoneHei(getActivity()) - getResources().getDimensionPixelSize(R.dimen.dp_250);
-        lp2.height = height;
-        rcyWallet.setLayoutParams(lp2);
+        lp3 = (ConstraintLayout.LayoutParams) getRefreash().getLayoutParams();
+
         rcyWallet.setNestedScrollingEnabled(false);
         oldLp = (ConstraintLayout.LayoutParams) etSearch.getLayoutParams();
         if (getRefreash() != null)
             getRefreash().setEnableLoadMore(false);
         EventBus.getDefault().register(this);
         refreashData();
+        if (ApplicationUtil.getCurrentWallet().getStatus() == Wallet.STATUS_NO_MAKE_COPY) {
+            DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.cancel, R.string.beifen, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            }, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(MakeCopyWalletActivity.class);
+                }
+            });
+        }
+
         c = oldLp;
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -301,8 +317,6 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 }
 
 
-
-
 //                Log.e(TAG, "onScrollChange: ------------" + scrollY +"------"+ tvscrollthree.getTop() );
 //                //判断某个控件是否滚到顶部
 //                if (scrollY == tvscrollthree.getTop()){
@@ -343,19 +357,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             getPresenter().getWalletInfo(ApplicationUtil.getCurrentWallet().getAddress());
 
         tvName.setText(ApplicationUtil.getCurrentWallet().getWalletName());
-        if (ApplicationUtil.getCurrentWallet().getStatus() == Wallet.STATUS_NO_MAKE_COPY) {
-            DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.cancel, R.string.beifen, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            }, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(MakeCopyWalletActivity.class);
-                }
-            });
-        }
 
     }
 
@@ -470,6 +472,20 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                             @Override
                             public void onItemClick(List list, int position) {
                                 ApplicationUtil.setCurrentWallet((Wallet) list.get(position));
+                                if (ApplicationUtil.getCurrentWallet().getStatus() == Wallet.STATUS_NO_MAKE_COPY) {
+                                    DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.cancel, R.string.beifen, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                        }
+                                    }, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            startActivity(MakeCopyWalletActivity.class);
+                                        }
+                                    });
+                                }
+
                                 anyLayer.dismiss();
                                 refreashData();
                             }
@@ -535,6 +551,19 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
     @Override
     public void getWalletInfoSuccess(AssetResponse assetResponse) {
         this.assetResponse = assetResponse;
+        Log.e(">>>>>>>>>>",moreAsset.getMeasuredHeight()+"");
+        Log.e(">>>>>>>>>>",lp1.topMargin+"");
+        Log.e(">>>>>>>>>>",lp2.topMargin+"");
+        Log.e(">>>>>>>>>>",lp3.topMargin+"");
+        Log.e(">>>>>>>>>>",lp2.bottomMargin+"");
+
+        height = constraintLayout.getHeight()-moreAsset.getMeasuredHeight()-lp1.topMargin-lp2.topMargin-lp3.topMargin-lp2.bottomMargin;
+//        height = PhoneUtil.getPhoneHei(getActivity()) - getResources().getDimensionPixelSize(R.dimen.dp_56) - getResources().getDimensionPixelSize(R.dimen.dp_172) - getResources().getDimensionPixelSize(R.dimen.dp_25) - lp1.height;
+        lp2.height = height;
+        rcyWallet.setLayoutParams(lp2);
+
+
+
         assetList = assetResponse.getGlod();
         assetAdapter.notifyDataSetChanged(assetList);
         btnVisiable.setChecked(SpUtils.getBoolenToShare(getContext(), "is_asset_visiable"));
@@ -687,17 +716,23 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             }
 
     }
-     Handler handler = new Handler(new Handler.Callback() {
+
+    @Override
+    public void checkCanTransferSuccess() {
+
+    }
+
+    Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
 
-            if (msg.what==1){
+            if (msg.what == 1) {
                 c.width = 0;
                 etSearch.setLayoutParams(c);
                 nest.fullScroll(NestedScrollView.FOCUS_DOWN);
                 rcyWallet.clearFocus();
                 etSearch.findFocus();
-            }else if (msg.what==2){
+            } else if (msg.what == 2) {
                 c.width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
                 etSearch.setLayoutParams(c);
                 etSearch.clearFocus();
@@ -706,9 +741,6 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             return true;
         }
     });
-
-
-
 
 
     private void addSearch() {
@@ -740,15 +772,15 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         new KeyboardChangeListener(getActivity()).setKeyBoardListener(new KeyboardChangeListener.KeyBoardListener() {
             @Override
             public void onKeyboardChange(boolean isShow, int keyboardHeight) {
-                Log.e(">>>>>>>>>>>",isShow+"");
+                Log.e(">>>>>>>>>>>", isShow + "");
 
                 if (isShow) {
                     Message msg = new Message();
-                    msg.what=1;
+                    msg.what = 1;
                     handler.sendMessage(msg);
                 } else {
                     Message msg = new Message();
-                    msg.what=2;
+                    msg.what = 2;
                     handler.sendMessage(msg);
 
                 }
@@ -791,7 +823,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                     public void onNext(String s) {
                         if (TextUtils.isEmpty(s)) {
                             assetAdapter.notifyDataSetChanged(assetList);
-                            refreashView(assetList, rcyWallet);
+//                            refreashView(assetList, rcyWallet);
+                            rcyWallet.setVisibility(View.VISIBLE);
                             return;
                         }
                         searchList = new ArrayList<>();
@@ -809,7 +842,9 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                             @Override
                             public void run() {
                                 assetAdapter.notifyDataSetChanged(searchList);
-                                refreashView(searchList, rcyWallet);
+//                                refreashView(searchList, rcyWallet);
+                                rcyWallet.setVisibility(View.VISIBLE);
+
 
                             }
                         }, 300);
@@ -829,6 +864,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreashWallet(Wallet wallet) {
+        ProgressDialogUtils.getInstances().cancel();
         refreashData();
     }
 

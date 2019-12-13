@@ -200,6 +200,11 @@ public class ImportByCommemorationActivity extends BaseActivity<WalletAssetConta
 
     }
 
+    @Override
+    public void checkCanTransferSuccess() {
+
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreashWallet(ImportScanResult importScanResult) {
         etMom.setText(importScanResult.getAddress());

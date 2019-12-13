@@ -131,6 +131,8 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
         }
     }
 
+
+
     protected void initRefreshLayout(SmartRefreshLayout refreshLayout) {
         if (refreshLayout == null)
             return;

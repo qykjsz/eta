@@ -278,7 +278,7 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                     return;
                 }
 
-                getPresenter().getNode();
+                getPresenter().checkCanTransfer(currentCoin.getName());
 
                 break;
         }
@@ -410,5 +410,10 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
     @Override
     public void getVersionSuccess(VersionInfo versionInfo) {
 
+    }
+
+    @Override
+    public void checkCanTransferSuccess() {
+        getPresenter().getNode();
     }
 }

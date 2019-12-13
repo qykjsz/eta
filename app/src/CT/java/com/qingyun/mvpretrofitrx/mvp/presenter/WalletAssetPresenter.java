@@ -151,4 +151,22 @@ public class WalletAssetPresenter extends WalletAssetContact.Presenter {
             }
         });
     }
+
+    @Override
+    public void checkCanTransfer(String name) {
+        model.checkCanTransfer(context,name,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().checkCanTransferSuccess();
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
 }
