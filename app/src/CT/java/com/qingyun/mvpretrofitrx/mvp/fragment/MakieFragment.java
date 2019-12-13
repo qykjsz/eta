@@ -280,7 +280,7 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
             viewHolder.tvName.setText(item.getName());
             viewHolder.tv_nik_name.setText(item.allname);
             viewHolder.tv_money.setText("$" + item.getXiamoney());
-            viewHolder.tv_issue_num.setText(item.circulation);
+            viewHolder.tv_issue_num.setText("$" +item.vol);
             viewHolder.tv_value.setText("$"+item.shizhi);
 
 //            viewHolder.tvShangmoney.setText(item.getShangmoney());
@@ -288,11 +288,11 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
 //            Glide.with(getContext()).load(item.getImg()).into(viewHolder.ivImg);
             double s_zd = Double.parseDouble(item.getZd());
 
-            if (s_zd > 0) {//你输入的是正数
+            if (s_zd > 0) {//涨
                 viewHolder.tv_zd.setText("+"+item.getZd() + "%");
                 viewHolder.tv_zd.setTextColor(mContext.getResources().getColor(R.color.color_00B794));
                 viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.color_00B794));
-            } else if (s_zd < 0) {//你输入的是负数
+            } else if (s_zd < 0) {//跌
                 viewHolder.tv_zd.setText(item.getZd() + "%");
                 viewHolder.tv_zd.setTextColor(mContext.getResources().getColor(R.color.color_E04159));
                 viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.color_E04159));

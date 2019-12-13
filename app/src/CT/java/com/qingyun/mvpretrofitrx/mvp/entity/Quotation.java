@@ -15,6 +15,7 @@ public class Quotation {
     public String allname;//全称
     public String circulation;//发行量
     public String shizhi;//市值
+    public String vol;//24小时成交量
 
     public String img;
     public String shangmoney;
