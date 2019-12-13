@@ -29,7 +29,7 @@ public abstract class XCallBack implements CommonCallback<String> {
     private static Toast toast;
     @Override
     public void onSuccess(String result) {
-        ZLog.showPost("post=="+result);
+        ZLog.c("Sampost",result);
         JSONObject object = JSON.parseObject(result);
         int code = object.getIntValue("code");
         String msg = object.getString("msg");

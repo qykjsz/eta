@@ -241,6 +241,7 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
             @Override
             public void onAfterSuccessOk(JSONObject object) {
                 JSONArray data = object.getJSONArray("data");
+                ZLog.c("Sampostaa",object.toJSONString());
                 list = JSON.parseArray(data.toJSONString(), Quotation.class);
                 if (list.size() > 0) {
                     mAdapter.setDatas(list);
@@ -286,18 +287,18 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
 //            viewHolder.tvShangmoney.setText(item.getShangmoney());
 //            viewHolder.tvZb.setText(item.getZd() + "%");
 //            Glide.with(getContext()).load(item.getImg()).into(viewHolder.ivImg);
-            double s_zd = Double.parseDouble(item.getZd());
+            float s_zd = Float.parseFloat(item.zd);
 
             if (s_zd > 0) {//涨
-                viewHolder.tv_zd.setText("+"+item.getZd() + "%");
+                viewHolder.tv_zd.setText("+"+item.zd + "%");
                 viewHolder.tv_zd.setTextColor(mContext.getResources().getColor(R.color.color_00B794));
                 viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.color_00B794));
-            } else if (s_zd < 0) {//跌
-                viewHolder.tv_zd.setText(item.getZd() + "%");
+            } else if (item.zd.startsWith("-")) {//跌
+                viewHolder.tv_zd.setText(item.zd + "%");
                 viewHolder.tv_zd.setTextColor(mContext.getResources().getColor(R.color.color_E04159));
                 viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.color_E04159));
-            } else if (item.getZd().equals("0")) {
-                viewHolder.tv_zd.setText(item.getZd() + "%");
+            } else {
+                viewHolder.tv_zd.setText(item.zd + "%");
                 viewHolder.tv_zd.setTextColor(mContext.getResources().getColor(R.color.color_999999));
                 viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.color_999999));
             }
