@@ -115,7 +115,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.ll_dapp:
-                startActivity(tv_app_name.getText().toString(),"");
+//                startActivity(tv_app_name.getText().toString(),"");
                 break;
             case R.id.ll_link:
                 startActivity(tv_link.getText().toString(),"");

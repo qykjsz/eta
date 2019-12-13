@@ -32,6 +32,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.GameData;
 import com.qingyun.mvpretrofitrx.mvp.entity.MessageEvent;
 import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
 import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
+import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.qingyun.mvpretrofitrx.mvp.view.ListViewForScrollView;
 import com.senon.mvpretrofitrx.R;
@@ -139,6 +140,7 @@ public class FindViewPageFragment extends BaseFragment {
                 long now = System.currentTimeMillis();
                 if(now - lastClickTime > 3000) {
                     lastClickTime = now;
+                    getUuid(mAdapter.getData().get(position).id);
                     Intent intent = new Intent(mContext, WebActivity.class);
                     intent.putExtra("url",mAdapter.getData().get(position).url);
                     intent.putExtra("title",mAdapter.getData().get(position).name);
@@ -147,6 +149,38 @@ public class FindViewPageFragment extends BaseFragment {
             }
         });
 //        requestGameList();
+    }
+
+    //点击保存到最近使用
+    private void requestGetUUid(String uuid,String id) {
+        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appnew");
+        params.addBodyParameter("appid", id);
+        params.addBodyParameter("contacts", uuid);
+        x.http().post(params, new XCallBack() {
+            @Override
+            public void onAfterFinished() {
+
+            }
+
+            @Override
+            public void onAfterSuccessOk(JSONObject object) {
+
+            }
+
+            @Override
+            public void onAfterSuccessErr(JSONObject object, String msg) {
+
+            }
+        });
+    }
+    //获取设备号
+    private void getUuid(final String id) {
+        SystemUtil.getMyUUID(getActivity(), new SystemUtil.RequestPermissionListener() {
+            @Override
+            public void requestSuccess(String uuid) {
+                requestGetUUid(uuid,id);
+            }
+        });
     }
 
     @Override

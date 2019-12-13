@@ -219,9 +219,9 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 //动态设置字体大小
                 for (int i = 0; i < tabs.length; i++) {
                     if (i == index) {
-                        ((TextView) tabs[i]).setTextSize(16);
+                        ((TextView) tabs[i]).setTextSize(14);
                     } else {
-                        ((TextView) tabs[i]).setTextSize(13);
+                        ((TextView) tabs[i]).setTextSize(12);
                     }
                 }
                 //数据传递
@@ -262,7 +262,7 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     protected String getTitleText() {
         return null;
     }
-
+    //点击保存到最近使用
     private void requestGetUUid(String id) {
         RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl() + "et_appnew");
         params.addBodyParameter("appid", id);
