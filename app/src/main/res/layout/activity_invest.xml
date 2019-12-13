@@ -600,27 +600,52 @@
             <TextView
                 android:id="@+id/textView555"
                 android:layout_width="wrap_content"
-                android:text="@string/need_pay"
-                android:textColor="@color/color_999999"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_padding_x_min"
-                android:layout_height="wrap_content" />
+                app:layout_constraintBottom_toTopOf="@+id/yue"
+                android:text="@string/need_pay"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:textColor="@color/color_999999"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
+
+            <TextView
+                android:id="@+id/yue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="≈"
+                android:textSize="@dimen/sp_21"
+                android:textColor="@color/main_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView555"
+                app:layout_constraintTop_toBottomOf="@+id/textView555"
+                />
             <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_000"
+                android:maxLength="12"
                 android:textColor="@color/main_blue"
                 android:textSize="@dimen/sp_21"
-                app:layout_constraintBottom_toBottomOf="@+id/textView555"
-                app:layout_constraintStart_toEndOf="@+id/textView555"
-                app:layout_constraintTop_toTopOf="@+id/textView555" />
+                app:layout_constraintBottom_toBottomOf="@+id/yue"
+                app:layout_constraintStart_toEndOf="@+id/yue"
+                app:layout_constraintTop_toTopOf="@+id/yue" />
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_coin_name"
+                android:text="@string/eth"
+                app:layout_constraintStart_toEndOf="@+id/tv_price"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_price"
+                android:textColor="@color/main_blue"
+                android:layout_marginStart="@dimen/dp_3"
+                android:layout_marginBottom="@dimen/dp_3"
+                />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/btn_sure_invest"

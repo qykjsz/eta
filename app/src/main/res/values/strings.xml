@@ -313,7 +313,7 @@
     <string name="et_invest_note">《Etoken充值协议》</string>
     <string name="sure_to_invest">确认支付</string>
     <string name="sure_to_invest_en">confirm to pay</string>
-    <string name="need_pay">需支付  Pay：</string>
+    <string name="need_pay">需支付 Pay：</string>
     <string name="invest_amount">充值数量</string>
     <string name="account_not_null">账号不能为空</string>
     <string name="amount_not_null">数量不能为空</string>

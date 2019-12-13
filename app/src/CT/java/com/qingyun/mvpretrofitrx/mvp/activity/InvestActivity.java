@@ -65,6 +65,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     ImageView ivAccountTrue;
     @BindView(R.id.btn_account)
     TextView btnAccount;
+    @BindView(R.id.tv_coin_name)
+    TextView tvCoinName;
     private List<Platform> platformList;
     private List<String> amountList;
     private CoinTypeRate currentCoin;
@@ -150,9 +152,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 .filter(new Predicate<CharSequence>() {
                     @Override
                     public boolean test(CharSequence charSequence) throws Exception {
-                        if (charSequence.toString().startsWith("."))
-                        {
-                            charSequence=null;
+                        if (charSequence.toString().startsWith(".")) {
+                            charSequence = null;
                             etAmount.setText(charSequence);
                         }
                         return charSequence.length() >= 0;
@@ -183,11 +184,13 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                             s = "0";
                         }
                         amount = new BigDecimal(s);
-                        if (currentPlatform == null || currentCoin == null||currentRatio==null) return;
+                        if (currentPlatform == null || currentCoin == null || currentRatio == null)
+                            return;
                         platformRatio = new BigDecimal(currentPlatform.getProportion());
                         coinRatio = new BigDecimal(currentCoin.getRate());
                         price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
                         tvPrice.setText(price.toString());
+                        tvCoinName.setText(currentCoin.getName());
                     }
 
                     @Override
@@ -216,12 +219,15 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
         if (currentCoin == null && coinTypeRateList != null && coinTypeRateList.size() > 0) {
             currentCoin = coinTypeRateList.get(0);
             tvCoinType.setText(currentCoin.getName());
+            tvCoinName.setText(currentCoin.getName());
+
             return;
         }
         DialogUtils.showCoinRateChooseDialog(getActivity(), coinTypeRateList, new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
                 currentCoin = (CoinTypeRate) list.get(position);
+                tvCoinName.setText(currentCoin.getName());
                 tvCoinType.setText(currentCoin.getName());
                 if (TextUtils.isEmpty(etAmount.getText().toString())) {
                     amount = new BigDecimal("0");
@@ -359,8 +365,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
 
     @Override
     public void getCurrencyRateSuccess(List<CurrencyRate> currencyRateList) {
-        for (int i = 0;i<currencyRateList.size();i++){
-            if (currencyRateList.get(i).getId()==1){
+        for (int i = 0; i < currencyRateList.size(); i++) {
+            if (currencyRateList.get(i).getId() == 1) {
                 currentRatio = currencyRateList.get(i).getRate();
             }
         }
@@ -414,7 +420,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                     ToastUtil.showShortToast(R.string.amount_not_0);
                     return;
                 }
-                if (ivAccountTrue.getVisibility()==View.GONE||!checkAccountSuccess) {
+                if (ivAccountTrue.getVisibility() == View.GONE || !checkAccountSuccess) {
                     ToastUtil.showShortToast(R.string.must_check_account);
                     return;
                 }
@@ -423,7 +429,6 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                     ToastUtil.showShortToast(R.string.sure_have_read_agree);
                     return;
                 }
-
 
 
                 getPresenter().getNode();
