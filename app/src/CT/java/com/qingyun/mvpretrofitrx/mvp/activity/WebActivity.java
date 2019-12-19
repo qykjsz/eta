@@ -1,15 +1,18 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -30,7 +33,6 @@ public class WebActivity extends Activity {
 
     private WebView webView;
     private String linkUrl;//链接地址
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +62,9 @@ public class WebActivity extends Activity {
         };
         // 设置setWebChromeClient对象
         webView.setWebChromeClient(wvcc);
+        //保持不锁屏
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
     }
 
 

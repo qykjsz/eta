@@ -60,14 +60,14 @@
 
     <ImageView
         android:id="@+id/iv_title_right"
-        android:layout_width="@dimen/dp_50"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_padding_x_min"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/icon_scan" />
-
+        android:layout_marginRight="@dimen/dp_padding_x_min"
+         />
+   <!-- -->
     <TextView
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_1"

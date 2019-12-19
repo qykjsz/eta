@@ -67,6 +67,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     TextView btnAccount;
     @BindView(R.id.tv_coin_name)
     TextView tvCoinName;
+    @BindView(R.id.iv_title_right)
+    ImageView iv_title_right;
     private List<Platform> platformList;
     private List<String> amountList;
     private CoinTypeRate currentCoin;
@@ -77,6 +79,11 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     @Override
     protected String getTitleRightText() {
         return null;
+    }
+
+    @Override
+    public ImageView getIvTitleRight() {
+        return super.getIvTitleRight();
     }
 
     @Override
@@ -115,7 +122,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
         getPresenter().getCoinTypeRate();
         getPresenter().getSuprtPlatform();
         getPresenter().getInvestAmountList();
-
+        iv_title_right.setVisibility(View.VISIBLE);
+        iv_title_right.setBackgroundResource(R.mipmap.czcz_icon);
         tvAccount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -385,7 +393,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.ly_other, R.id.ly_log, R.id.btn_choose_platform, R.id.btn_account, R.id.btn_amount, R.id.btn_coin_type, R.id.btn_sure_invest})
+    @OnClick({R.id.ly_other, R.id.ly_log, R.id.btn_choose_platform, R.id.btn_account, R.id.btn_amount, R.id.btn_coin_type, R.id.btn_sure_invest,R.id.iv_title_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_other:
@@ -432,6 +440,9 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
 
 
                 getPresenter().getNode();
+                break;
+            case R.id.iv_title_right:
+                startActivity(RechargeExplainActivity.class);
                 break;
         }
     }

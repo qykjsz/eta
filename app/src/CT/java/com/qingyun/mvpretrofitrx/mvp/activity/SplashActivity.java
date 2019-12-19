@@ -22,6 +22,7 @@ import com.qingyun.mvpretrofitrx.mvp.fragment.AssetFragment;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.LocalManageUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.StatsConfig;
 import com.senon.mvpretrofitrx.R;
 
 import java.lang.reflect.Field;
@@ -205,5 +206,17 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        StatsConfig.getInstance().onPageStart(this,"com.qingyun.mvpretrofitrx.mvp.activity.SplashActivity");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        StatsConfig.getInstance().onPageEnd(this,"com.qingyun.mvpretrofitrx.mvp.activity.SplashActivity");
     }
 }

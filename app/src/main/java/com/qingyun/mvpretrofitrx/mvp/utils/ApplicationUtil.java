@@ -47,6 +47,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import cn.jiguang.analytics.android.api.CountEvent;
+import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 import skin.support.SkinCompatManager;
 import skin.support.constraint.app.SkinConstraintViewInflater;
 import skin.support.design.app.SkinMaterialViewInflater;
@@ -65,6 +67,11 @@ public class ApplicationUtil extends Application implements Application.Activity
     public static Locale locale = Locale.getDefault();
     private static Wallet currentWallet;
 
+    private static ApplicationUtil applicationUtil;
+
+    public static ApplicationUtil getInstance(){
+        return applicationUtil;
+    }
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
@@ -177,9 +184,14 @@ public class ApplicationUtil extends Application implements Application.Activity
         MultiDex.install(this);
         activityList = new ArrayList<>();
         mContext = getApplicationContext();
+        applicationUtil = this;
         Stetho.initializeWithDefaults(this);
         //初始x3
         x.Ext.init(this);
+        //极光统计
+        StatsConfig.getInstance().initStats();
+        /**极光统计开启crashlog日志上报**/
+//        JAnalyticsInterface.initCrashHandler(mContext);
     }
 
 
