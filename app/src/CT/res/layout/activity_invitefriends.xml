@@ -4,6 +4,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_351EDC"
     tools:context="com.qingyun.mvpretrofitrx.mvp.activity.InvitefriendsActivity">
+
+
+    <android.support.v4.widget.NestedScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/imageView25"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_307"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/yq_top_bj"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_copy_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_282"
+                app:layout_constraintEnd_toStartOf="@+id/imageView25"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imageView25"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/yqlj_fzan"
+                tools:layout_editor_absoluteY="277dp" />
+
+            <TextView
+                android:id="@+id/textView147"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_padding_x_min"
+                android:text="@string/my_invi_code"
+                app:layout_constraintTop_toBottomOf="@+id/btn_copy_link"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/color_FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="408dp" />
+
+            <ImageView
+                android:id="@+id/imageView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_padding_x_min"
+                app:layout_constraintBottom_toBottomOf="@+id/textView147"
+                app:layout_constraintEnd_toStartOf="@+id/textView147"
+                app:layout_constraintTop_toTopOf="@+id/textView147"
+                app:srcCompat="@mipmap/yq_bt_zs" />
+
+            <ImageView
+                android:id="@+id/imageView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_padding_x_min"
+                app:layout_constraintBottom_toBottomOf="@+id/textView147"
+                app:layout_constraintStart_toEndOf="@+id/textView147"
+                app:layout_constraintTop_toTopOf="@+id/textView147"
+                app:srcCompat="@mipmap/yq_bt_zsy" />
+
+
+
+            <android.support.constraint.ConstraintLayout
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView147"
+                android:layout_marginTop="@dimen/dp_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@mipmap/yq_ewm_k"
+                android:layout_marginBottom="@dimen/dp_30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="@dimen/dp_25"
+                android:layout_marginEnd="@dimen/dp_25"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_235">
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="@dimen/dp_150"
+                    android:id="@+id/constraintLayout31"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@mipmap/yq_ewm_xk"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="@dimen/dp_150">
+
+
+                    <ImageView
+                        android:id="@+id/iv_code"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="@dimen/dp_0"
+                        android:layout_marginStart="@dimen/dp_5"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginEnd="@dimen/dp_5"
+                        android:layout_marginBottom="@dimen/dp_5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/btn_copy_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/yq_fzan"
+                    android:gravity="center"
+                    android:text="@string/copy_code"
+                    android:textColor="@color/color_FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout31"
+                    app:layout_constraintStart_toStartOf="@+id/constraintLayout31"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout31" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
 
 </android.support.constraint.ConstraintLayout>

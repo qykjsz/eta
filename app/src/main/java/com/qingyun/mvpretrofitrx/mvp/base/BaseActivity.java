@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -153,10 +154,17 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
             return;
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
-                refreshLayout.finishRefresh();//关闭
+            public void onRefresh(final RefreshLayout refreshLayout) {
+
                 isLoadMore = false;
                 refresh();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.finishRefresh();//关闭
+                    }
+                },1400);
             }
         });
         //加载更多

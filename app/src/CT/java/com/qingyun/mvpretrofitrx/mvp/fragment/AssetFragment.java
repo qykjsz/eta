@@ -240,7 +240,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
         getPresenter().getVersion();
         modleList = new ArrayList<>();
         modleList.add(new AssetModle(R.mipmap.sy_ziyuan, R.string.ziyuan));
-        modleList.add(new AssetModle(R.mipmap.sy_cz_icon, R.string.inverst));
+        modleList.add(new AssetModle(R.mipmap.sy_cz_icon, R.string.inverst_center));
         modleList.add(new AssetModle(R.mipmap.sy_maibi, R.string.b_business));
         modleList.add(new AssetModle(R.mipmap.sy_more, R.string.more_modle));
 
@@ -673,6 +673,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void getVersionSuccess(final VersionInfo versionInfo) {
+        ApplicationUtil.setVersionInfo(versionInfo);
         if (!ApplicationUtil.isApkInDebug(ApplicationUtil.getContext()))
             if (!versionInfo.getName().equals(AppUtils.getAppVersionName(getContext()))) {
                 AnyLayer anyLayer = AnyLayer.with(getContext())

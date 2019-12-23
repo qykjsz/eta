@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item
+        android:drawable="@mipmap/jzdh_1"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_2"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_3"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_4"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_5"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_6"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_7"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_8"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_9"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_10"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_11"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_12"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_13"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_14"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_15"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_16"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_17"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_18"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_19"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_20"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_21"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_22"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_23"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_24"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_25"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_26"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_27"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_28"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_29"
+        android:duration="40"/>
+    <item
+        android:drawable="@mipmap/jzdh_30"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_31"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_32"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_33"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_34"
+        android:duration="40"/>
+
+    <item
+        android:drawable="@mipmap/jzdh_35"
+        android:duration="40"/>
+
+
+
+</animation-list>

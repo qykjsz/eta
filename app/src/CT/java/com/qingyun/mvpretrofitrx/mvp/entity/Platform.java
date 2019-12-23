@@ -5,7 +5,15 @@ public class Platform  {
     private String  id;
     private String  address;
     private String proportion;
+    private String is_user_url;
 
+    public String getIs_user_url() {
+        return is_user_url;
+    }
+
+    public void setIs_user_url(String is_user_url) {
+        this.is_user_url = is_user_url;
+    }
 
     public String getProportion() {
         return proportion;

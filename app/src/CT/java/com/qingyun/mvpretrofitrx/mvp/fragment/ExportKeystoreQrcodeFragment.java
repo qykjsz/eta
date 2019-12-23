@@ -68,7 +68,6 @@ public class ExportKeystoreQrcodeFragment extends BaseFragment {
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

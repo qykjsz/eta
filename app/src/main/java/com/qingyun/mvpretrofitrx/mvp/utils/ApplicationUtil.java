@@ -22,6 +22,7 @@ import com.qingyun.mvpretrofitrx.mvp.api.Api;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.entity.AccountInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.PersonalInfo;
+import com.qingyun.mvpretrofitrx.mvp.weight.IntenalHeader;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.CommonData;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.CommonDialogService;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
@@ -78,8 +79,8 @@ public class ApplicationUtil extends Application implements Application.Activity
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setPrimaryColorsId(R.color.color_FFFFFF, R.color.color_999999);//全局设置主题颜色
-                return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+
+                return new IntenalHeader(context,R.layout.refreash_header);
             }
         });
         //设置全局的Footer构建器

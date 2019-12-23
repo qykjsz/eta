@@ -17,6 +17,7 @@ import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
 
 import static com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils.TRANSFER_COIN_NAME;
@@ -66,6 +67,7 @@ public class TokenProfileActivity extends BaseActivity<TokenProfileContact.View,
     ConstraintLayout lyNull;
     @BindView(R.id.scroll)
     NestedScrollView scroll;
+    private GoldInfo goldInfo;
 
     @Override
     protected String getTitleRightText() {
@@ -111,10 +113,11 @@ public class TokenProfileActivity extends BaseActivity<TokenProfileContact.View,
 
     @Override
     public void getGoldInfoSuccess(GoldInfo goldInfo) {
+        this.goldInfo = goldInfo;
         Glide.with(getActivity()).load(goldInfo.getImg()).into(ivImg);
         tvCoinName.setText(goldInfo.getName());
         tvWebUrl.setText(goldInfo.getWebsite());
-        tvWhileBook.setText(goldInfo.getPaper());
+//        tvWhileBook.setText(goldInfo.getPaper());
         tvPublishTime.setText(goldInfo.getIssuetime());
         tvPublishAmount.setText(goldInfo.getIssuenumber());
         tvPublishPrice.setText(goldInfo.getIssueprice());
@@ -135,5 +138,26 @@ public class TokenProfileActivity extends BaseActivity<TokenProfileContact.View,
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.tv_web_url, R.id.tv_while_book})
+    public void onViewClicked(View view) {
+        Bundle bundle = new Bundle();
+
+        switch (view.getId()) {
+
+            case R.id.tv_web_url:
+                bundle.putString("url",goldInfo.getWebsite());
+                startActivity(WebActivity.class,bundle);
+                bundle.putString("title",goldInfo.getName());
+
+                break;
+            case R.id.tv_while_book:
+                bundle.putString("url",goldInfo.getPaper());
+                startActivity(WebActivity.class,bundle);
+                bundle.putString("title",getResources().getString(R.string.eth_white_book));
+
+                break;
+        }
     }
 }

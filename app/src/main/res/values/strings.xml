@@ -336,4 +336,7 @@
     <string name="subbmit_success">提交成功</string>
     <string name="must_check_account">请验证账号</string>
     <string name="platform_choose">选择平台</string>
+    <string name="eth_white_book">ETH 白皮书</string>
+    <string name="my_invi_code">我的邀请二维码</string>
+    <string name="copy_code">复制二维码</string>
 </resources>

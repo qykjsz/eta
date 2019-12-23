@@ -22,6 +22,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.InvestLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Platform;
+import com.qingyun.mvpretrofitrx.mvp.model.InvestModel;
 import com.qingyun.mvpretrofitrx.mvp.presenter.InvestPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
@@ -67,8 +68,6 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     TextView btnAccount;
     @BindView(R.id.tv_coin_name)
     TextView tvCoinName;
-    @BindView(R.id.iv_title_right)
-    ImageView iv_title_right;
     private List<Platform> platformList;
     private List<String> amountList;
     private CoinTypeRate currentCoin;
@@ -79,11 +78,6 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     @Override
     protected String getTitleRightText() {
         return null;
-    }
-
-    @Override
-    public ImageView getIvTitleRight() {
-        return super.getIvTitleRight();
     }
 
     @Override
@@ -122,8 +116,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
         getPresenter().getCoinTypeRate();
         getPresenter().getSuprtPlatform();
         getPresenter().getInvestAmountList();
-        iv_title_right.setVisibility(View.VISIBLE);
-        iv_title_right.setBackgroundResource(R.mipmap.czcz_icon);
+
         tvAccount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -280,6 +273,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
         if (currentPlatform == null && platformList != null && platformList.size() > 0) {
             currentPlatform = platformList.get(0);
             tvPlatform.setText(currentPlatform.getName());
+            InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
             return;
         }
         DialogUtils.showPlatformChooseDialog(getActivity(), platformList, new BaseAdapter.OnItemClickListener() {
@@ -290,6 +284,9 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 platform = (Platform) list.get(position);
                 currentPlatform = platform;
                 tvPlatform.setText(platform.getName());
+                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
+
+
                 if (TextUtils.isEmpty(etAmount.getText().toString())) {
                     amount = new BigDecimal("0");
 
@@ -393,7 +390,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.ly_other, R.id.ly_log, R.id.btn_choose_platform, R.id.btn_account, R.id.btn_amount, R.id.btn_coin_type, R.id.btn_sure_invest,R.id.iv_title_right})
+    @OnClick({R.id.ly_other, R.id.ly_log, R.id.btn_choose_platform, R.id.btn_account, R.id.btn_amount, R.id.btn_coin_type, R.id.btn_sure_invest})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_other:
@@ -405,6 +402,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 getPresenter().getSuprtPlatform();
                 break;
             case R.id.btn_account:
+                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
                 getPresenter().checkAccount(tvAccount.getText().toString());
                 break;
             case R.id.btn_amount:
@@ -440,9 +438,6 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
 
 
                 getPresenter().getNode();
-                break;
-            case R.id.iv_title_right:
-                startActivity(RechargeExplainActivity.class);
                 break;
         }
     }
