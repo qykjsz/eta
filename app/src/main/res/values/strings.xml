@@ -339,4 +339,5 @@
     <string name="eth_white_book">ETH 白皮书</string>
     <string name="my_invi_code">我的邀请二维码</string>
     <string name="copy_code">复制二维码</string>
+    <string name="recharge_explain">充值说明</string>
 </resources>

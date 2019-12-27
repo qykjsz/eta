@@ -58,10 +58,10 @@ import ezy.ui.layout.LoadingLayout;
 import io.reactivex.ObservableTransformer;
 
 public class TiteFragment extends BaseFragment<TimeContact.View, TimeContact.Presenter> {
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.freash_loading)
-    LoadingLayout freashLoading;
+//    @BindView(R.id.recyclerView)
+//    RecyclerView recyclerView;
+//    @BindView(R.id.freash_loading)
+//    LoadingLayout freashLoading;
     @BindView(R.id.srl)
     SmartRefreshLayout srl;
     Unbinder unbinder;

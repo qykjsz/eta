@@ -117,6 +117,14 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
         getPresenter().getSuprtPlatform();
         getPresenter().getInvestAmountList();
 
+        getIvTitleRight().setImageResource(R.mipmap.czcz_icon);
+        getIvTitleRight().setVisibility(View.VISIBLE);
+        getIvTitleRight().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(RechargeExplainActivity.class);
+            }
+        });
         tvAccount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

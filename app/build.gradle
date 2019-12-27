@@ -21,12 +21,14 @@ android {
             //解决编译时com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'META-INF/rxjava.properties'这个错误
             exclude 'META-INF/rxjava.properties'
         }
+
         //极光统计
         applicationId "com.senon.mvpretrofitrx" // 你应用的包名.
         manifestPlaceholders = [
                 JPUSH_APPKEY : "efd63d226e15e5392bf0b03b", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
+
     }
     buildTypes {
 
@@ -54,7 +56,7 @@ android {
         }
         CT {
             applicationId 'com.qingyun.et'
-            versionName '1.0.7'
+            versionName '1.0.9'
         }
     }
 }
@@ -149,7 +151,8 @@ dependencies {
 
     //    implementation 'cn.bingoogolapple:bga-qrcode-zbar:1.2.1'
     implementation 'jp.wasabeef:glide-transformations:2.0.0'
-    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+//    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     implementation project(':orcameralib')
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     implementation 'com.zhy:magic-viewpager:1.0.1'
@@ -200,9 +203,7 @@ dependencies {
     implementation 'pub.devrel:easypermissions:1.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     implementation project(path: ':swipe-reveal-layout')
-    //极光统计
-    compile 'cn.jiguang.sdk:janalytics:1.1.1' // 此处以JAnalytics 1.1.1 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.1.2' // 此处以JCore 1.1.2 版本为例。
-
+    implementation 'cn.jiguang.sdk:janalytics:1.1.1' // 此处以JAnalytics 1.1.1 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.1.2' // 此处以JCore 1.1.2 版本为例。
 
 }

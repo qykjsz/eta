@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +38,8 @@ import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
@@ -55,6 +58,8 @@ import io.reactivex.ObservableTransformer;
 
 public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.Presenter> implements MakieContact.View {
 //    @BindView(R.id.recyclerView)
+@BindView(R.id.srl)
+SmartRefreshLayout mSmartRefreshLayout;
 //    RecyclerView recyclerView;
     Unbinder unbinder;
 //    private List<Quotation> quotations;
@@ -101,6 +106,13 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
         mAdapter = new MakieAdapter(mContext);
         listView.setAdapter(mAdapter);
 
+        mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                request();
+            }
+        });
+        mSmartRefreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
     }
 
     @OnClick({R.id.ll_money, R.id.ll_range})
@@ -235,7 +247,7 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
 
             @Override
             public void onAfterFinished() {
-
+                mSmartRefreshLayout.finishRefresh();//刷新完成
             }
 
             @Override
@@ -250,7 +262,7 @@ public class MakieFragment extends BaseFragment<MakieContact.View, MakieContact.
 
             @Override
             public void onAfterSuccessErr(JSONObject object, String msg) {
-
+                mSmartRefreshLayout.finishLoadMore(false);//结束加载（加载失败）
             }
         });
     }

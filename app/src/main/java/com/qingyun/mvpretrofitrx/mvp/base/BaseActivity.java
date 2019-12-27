@@ -164,7 +164,7 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
                     public void run() {
                         refreshLayout.finishRefresh();//关闭
                     }
-                },1400);
+                },900);
             }
         });
         //加载更多

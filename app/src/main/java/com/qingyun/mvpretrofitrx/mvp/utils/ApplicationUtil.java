@@ -22,6 +22,7 @@ import com.qingyun.mvpretrofitrx.mvp.api.Api;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.entity.AccountInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.PersonalInfo;
+import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
 import com.qingyun.mvpretrofitrx.mvp.weight.IntenalHeader;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.CommonData;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.CommonDialogService;
@@ -48,8 +49,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import cn.jiguang.analytics.android.api.CountEvent;
-import cn.jiguang.analytics.android.api.JAnalyticsInterface;
+
 import skin.support.SkinCompatManager;
 import skin.support.constraint.app.SkinConstraintViewInflater;
 import skin.support.design.app.SkinMaterialViewInflater;
@@ -60,6 +60,7 @@ import skin.support.design.app.SkinMaterialViewInflater;
 public class ApplicationUtil extends Application implements Application.ActivityLifecycleCallbacks{
 
     public static boolean isFirst = true;
+    public static VersionInfo mVersionInfo;
     private static Context mContext;//全局上下文对象
     private static PersonalInfo user;
     public static List<BaseActivity> activityList;
@@ -92,6 +93,8 @@ public class ApplicationUtil extends Application implements Application.Activity
             }
         });
     }
+
+
 
     public static void setCurrentWallet(Wallet wallet) {
         currentWallet = wallet;

@@ -33,8 +33,13 @@ public class RechargeExplainActivity extends BaseActivity {
     }
 
     @Override
+    public boolean haveHeader() {
+        return true;
+    }
+
+    @Override
     protected String getTitleText() {
-        return null;
+        return getResources().getString(R.string.recharge_explain);
     }
 
     @Override

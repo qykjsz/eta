@@ -673,7 +673,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @Override
     public void getVersionSuccess(final VersionInfo versionInfo) {
-        ApplicationUtil.setVersionInfo(versionInfo);
+        ApplicationUtil.mVersionInfo = versionInfo;
         if (!ApplicationUtil.isApkInDebug(ApplicationUtil.getContext()))
             if (!versionInfo.getName().equals(AppUtils.getAppVersionName(getContext()))) {
                 AnyLayer anyLayer = AnyLayer.with(getContext())

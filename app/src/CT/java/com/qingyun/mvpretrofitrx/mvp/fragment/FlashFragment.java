@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -48,6 +49,8 @@ import com.qingyun.mvpretrofitrx.mvp.view.DottedLineView;
 import com.qingyun.mvpretrofitrx.mvp.view.ExpandCollapseAnimation;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
@@ -70,13 +73,13 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
 
     Unbinder unbinder;
     FlashAdapter flashAdapter;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+//    @BindView(R.id.recyclerView)
+//    RecyclerView recyclerView;
     @BindView(R.id.srl)
     SmartRefreshLayout mSmartRefreshLayout;
     List<News> list;
-    @BindView(R.id.freash_loading)
-    LoadingLayout freashLoading;
+//    @BindView(R.id.freash_loading)
+//    LoadingLayout freashLoading;
     News news;
     @BindView(R.id.tv_nian)
     TextView tvNian;
@@ -152,6 +155,13 @@ public class FlashFragment extends BaseFragment<FlashContact.View, FlashContact.
 //                shuliang.setText(adpter001.getSet().size()+"/10");
             }
         });
+//        mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+//                request();
+//
+//            }
+//        });
     }
 
     private HashSet<Integer> set;//保存多选状态下的变量

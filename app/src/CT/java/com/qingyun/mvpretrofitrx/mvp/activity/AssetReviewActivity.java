@@ -57,6 +57,7 @@ public class AssetReviewActivity extends BaseActivity<AssetsReviewContact.View,A
     final public static String MEDIA_TYPE_Json = "application/json;charset=utf-8";
     private AssetReviewResponse assetReviewResponse;
     private static final String INVISIABLE_STR="****";
+    private RequestBody body;
 
 
     @Override
@@ -113,8 +114,7 @@ public class AssetReviewActivity extends BaseActivity<AssetsReviewContact.View,A
         allAddress.setAlladdress(walletList);
         Log.e("wallListStr>>>",new Gson().toJson(allAddress));
 
-        RequestBody body=RequestBody.create(okhttp3.MediaType.parse(MEDIA_TYPE_Json),new Gson().toJson(allAddress,AllAddress.class));
-
+        body=RequestBody.create(okhttp3.MediaType.parse(MEDIA_TYPE_Json),new Gson().toJson(allAddress,AllAddress.class));
         assetReviewAdapter  = new AssetReviewAdapter(getContext(),list);
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.setAdapter(assetReviewAdapter);
@@ -131,6 +131,13 @@ public class AssetReviewActivity extends BaseActivity<AssetsReviewContact.View,A
 
     }
 
+
+    @Override
+    protected void refresh() {
+        super.refresh();
+        getPresenter().getAssetsReview(body);
+
+    }
 
     private void refreashAsset(boolean visiable){
         if (visiable){
@@ -171,6 +178,7 @@ public class AssetReviewActivity extends BaseActivity<AssetsReviewContact.View,A
 
 
     private List<RecyclerViewData> getRecyclerViewData(List<Assets> itemList) {
+        list.clear();
         for (int i = 0;i<itemList.size();i++){
             list.add(new RecyclerViewData(itemList.get(i),itemList.get(i).getGlods(),true));
         }
