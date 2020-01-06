@@ -51,6 +51,15 @@
 
     </RelativeLayout>
 
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:text="测试"/>
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
