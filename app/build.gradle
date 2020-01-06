@@ -206,4 +206,6 @@ dependencies {
     implementation 'cn.jiguang.sdk:janalytics:1.1.1' // 此处以JAnalytics 1.1.1 版本为例。
     implementation 'cn.jiguang.sdk:jcore:1.1.2' // 此处以JCore 1.1.2 版本为例。
 
+    implementation "org.java-websocket:Java-WebSocket:1.4.0"
+
 }

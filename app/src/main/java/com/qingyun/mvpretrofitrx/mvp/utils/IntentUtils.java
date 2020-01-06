@@ -43,6 +43,9 @@ public class IntentUtils {
     public static final String IS_FROM_TRANSFER = "is_from_transfer";
     public static final String BUSINESS_PAY_ENTITY = "business_pay_entity";
     public static final String CONTACT = "contact";
+    public static final String GROUP_MEMBER = "group_member";
+    public static final String ADDRESS = "address";
+    public static final String GROUP = "group";
 
     public static String NEW_ID="news_id";
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp_140"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textView133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="@dimen/dp_44"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_ffffff_top_round_5"
+        android:text="@string/create_chat_group"
+        android:drawableStart="@mipmap/add_qunliao"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:drawablePadding="@dimen/dp_12"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+
+
+    <TextView
+        android:id="@+id/btn_add_friends"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="@dimen/dp_44"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_item"
+        android:text="@string/add_friends"
+        android:drawableStart="@mipmap/tianjiahaoyou"
+        app:layout_constraintTop_toBottomOf="@+id/textView133"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:drawablePadding="@dimen/dp_12" />
+
+
+    <TextView
+        android:id="@+id/textView134"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="@dimen/dp_44"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/scan"
+        android:background="@drawable/bg_ffffff_bottom_round_5"
+        android:drawableStart="@mipmap/add_sao"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:drawablePadding="@dimen/dp_12"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_friends"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_25"
+        android:layout_marginEnd="@dimen/dp_25"
+        style="@style/line"
+        app:layout_constraintTop_toBottomOf="@+id/textView133"
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_25"
+        android:layout_marginEnd="@dimen/dp_25"
+        style="@style/line"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_friends"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

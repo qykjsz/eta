@@ -2,19 +2,24 @@ package com.qingyun.mvpretrofitrx.mvp.api;
 
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.ApplyListRespones;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetReviewResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.BusinessDetail;
 import com.qingyun.mvpretrofitrx.mvp.entity.BusinessPayLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessageLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
 import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
 import com.qingyun.mvpretrofitrx.mvp.entity.GoldInfo;
+import com.qingyun.mvpretrofitrx.mvp.entity.Group;
+import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.Img;
 import com.qingyun.mvpretrofitrx.mvp.entity.InvestLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
+import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.entity.Node;
 import com.qingyun.mvpretrofitrx.mvp.entity.NodeResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
@@ -193,4 +198,88 @@ public interface ApiService {
 
     @POST("et_transaction")
     Observable <BaseResponse<String>>checkCanTransfer(@Query("name")String name);
+
+    @POST("addchatfriend_no")
+    Observable <BaseResponse<String>>applyToFriendsRefuse(@Query("fromwho")String fromwho, @Query("fid")int fid);
+
+    @POST("addchatfriend_ok")
+    Observable <BaseResponse<String>>applyToFriendsPass(@Query("fromwho")String fromwho, @Query("fid")int fid);
+
+
+    @POST("chatfriend_order")
+    Observable <BaseResponse<List<GroupMember>>>getFriendsList(@Query("fromwho")String fromwho);
+
+    @POST("tochating")
+    Observable <BaseResponse<String>>sendMessage(@Query("fromwho")String fromwho, @Query("towho")String towho, @Query("text")String text);
+
+
+    @POST("lookchating")
+    Observable <BaseResponse<String>>viewMessage(@Query("fromwho")String fromwho, @Query("towho")String towho);
+
+    @POST("chatingorder")
+    Observable<BaseResponse<ChatMessageLogResponse>> seeChatMessageLog(@Query("fromwho")String fromwho, @Query("towho") String towho, @Query("page")int page);
+
+    @POST("chatinglist")
+    Observable <BaseResponse<NewChat>>newChaList(@Query("fromwho")String fromwho);
+
+    @POST("friendlist")
+    Observable<BaseResponse<ApplyListRespones>> addFriendsList(@Query("fromwho")String fromwho, @Query("page")int page);
+
+    @POST("groupaddlist")
+    Observable<BaseResponse<ApplyListRespones>> addGroupList(@Query("fromwho")String fromwho, @Query("page")int page);
+
+    @POST("addgroup")
+    Observable <BaseResponse<String>>createGroup(@Query("address")String address, @Query("name")String name, @Query("introduce")String introduce);
+
+    @POST("grouplist")
+    Observable  <BaseResponse<List<Group>>>getGroupList(@Query("address")String address);
+
+    @POST("groupverification")
+    Observable <BaseResponse<String>>setIfGroupReview(@Query("address")String address, @Query("code")String code,@Query("verification")String verification);
+
+    @POST("useraddgroup")
+    Observable<BaseResponse<String>> applyIntoGroup(@Query("address")String address,@Query("code") String code);
+
+
+//    	2 通过 3 拒绝
+    @POST("adminaddgroup")
+    Observable <BaseResponse<String>>dealApplyIntoGroupApply(@Query("address")String address, @Query("qcode")String qcode,@Query("sid") int sid,@Query("state")int state);
+
+
+    @POST("selusername")
+    Observable <BaseResponse<GroupMember>>getNicknameByAdress(@Query("address")String address);
+
+
+    @POST("upgroupuser")
+    Observable <BaseResponse<String>>transferGroup(@Query("address")String address, @Query("qcode")String qcode,@Query("toaddress") String toaddress);
+
+    @POST("groupusers")
+    Observable<BaseResponse<List<GroupMember>>> getGroupMemberList(@Query("address")String address,@Query("qcode") String qcode);
+
+
+    @POST("groupout")
+    Observable<BaseResponse<String>> exitGroup(@Query("address")String address,@Query("qcode") String qcode);
+
+
+    @POST("togroupchating")
+    Observable <BaseResponse<String>>sendMessageToGroup(@Query("fromwho")String fromwho, @Query("togroup")String togroup,@Query("text") String text);
+
+    @POST("addchatuser")
+    Observable <BaseResponse<String>>registerChat(@Query("address")String address);
+
+    @POST("chatinggrouporder")
+    Observable <BaseResponse<ChatMessageLogResponse>>getGroupChatLog(@Query("fromwho")String fromwho,@Query("qcode") String qcode,@Query("page") int page);
+
+    @POST("lookgroupchating")
+    Observable <BaseResponse<String>>setMessageReadGroup(@Query("fromwho")String fromwho, @Query("qcode")String qcode);
+
+    @POST("upchatusername")
+    Observable <BaseResponse<String>>changeNickname(@Query("address")String address, @Query("name")String name);
+
+    @POST("addchatfriend")
+    Observable <BaseResponse<String>>applyToFriends(@Query("fromwho")String fromwho, @Query("towho")String towho);
+
+
+    @POST("groupinformation")
+    Observable <BaseResponse<Group>>getGroupInfo(@Query("address")String address, @Query("qcode")String qcode);
 }

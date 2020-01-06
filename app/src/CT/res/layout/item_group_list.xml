@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginBottom="@dimen/dp_padding_x_min"
+        android:background="@drawable/bg_ovl_mainblue"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/tv_avatar"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginBottom="@dimen/dp_padding_x_min"
+        android:textColor="@color/color_FFFFFF"
+        android:textSize="@dimen/sp_30"
+        android:gravity="center"
+        android:background="@drawable/bg_ovl_mainblue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:text="@string/group_message"
+        android:layout_marginTop="@dimen/dp_4"
+        app:layout_constraintBottom_toTopOf="@+id/btn_agree"
+        app:layout_constraintStart_toEndOf="@+id/iv_pic"
+        app:layout_constraintTop_toTopOf="@+id/iv_pic" />
+
+    <TextView
+        android:id="@+id/tv_new_message"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
+        tools:layout_editor_absoluteX="97dp" />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        style="@style/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_new_message"
+        />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_100"
+        android:background="@mipmap/ql_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_group_avatar"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:background="@drawable/bg_ovl_mainblue"
+            android:textColor="@color/color_FFFFFF"
+            android:gravity="center"
+            android:textSize="@dimen/sp_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/btn_group_name"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/group_name"
+        android:background="@drawable/bg_item"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+    <TextView
+        android:id="@+id/btn_share"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:background="@drawable/bg_item"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:text="@string/group_share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_group_name" />
+
+    <TextView
+        android:id="@+id/textView168"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:text="@string/group_id"
+        android:background="@color/color_FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_share" />
+
+    <TextView
+        android:id="@+id/textView169"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:background="@color/color_FFFFFF"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/group_introduction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView168" />
+
+    <TextView
+        android:id="@+id/tv_group_explain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dp_65"
+        android:background="@color/color_FFFFFF"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/group_introduction"
+        android:textColor="@color/color_999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView169" />
+
+    <TextView
+        android:id="@+id/btn_group_num"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+
+        android:text="@string/group_persons"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:background="@drawable/bg_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_group_explain" />
+
+    <TextView
+        android:id="@+id/textView171"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/add_group_review"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/color_FFFFFF"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_group_num" />
+
+
+    <CheckBox
+        android:id="@+id/cb_verti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:button="@drawable/skin_btn_check_box_1"
+        app:layout_constraintBottom_toBottomOf="@+id/textView171"
+        app:layout_constraintEnd_toEndOf="@+id/textView171"
+        app:layout_constraintTop_toTopOf="@+id/textView171" />
+
+    <TextView
+        android:id="@+id/btn_groip_transfer"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/transfer_group"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+
+        android:background="@drawable/bg_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView171" />
+
+    <TextView
+        android:id="@+id/btn_exit_group"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_e04159_round_5"
+        android:gravity="center"
+        android:text="@string/exit_group"
+        android:textColor="@color/color_FFFFFF"
+        android:textSize="@dimen/sp_17"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_groip_transfer" />
+
+    <TextView
+        android:id="@+id/tv_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@+id/btn_group_name"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_group_name"
+        app:layout_constraintEnd_toEndOf="@+id/btn_group_name"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:textColor="@color/color_999999"
+        tools:layout_editor_absoluteX="275dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <ImageView
+        android:id="@+id/imageView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ql_ma"
+        app:layout_constraintTop_toTopOf="@+id/btn_share"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_share"
+        app:layout_constraintEnd_toEndOf="@+id/btn_share"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:textColor="@color/color_999999"
+        tools:layout_editor_absoluteX="337dp"
+        tools:layout_editor_absoluteY="183dp" />
+
+    <TextView
+        android:id="@+id/tv_qcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@+id/textView168"
+        app:layout_constraintBottom_toBottomOf="@+id/textView168"
+        app:layout_constraintEnd_toEndOf="@+id/textView168"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        tools:layout_editor_absoluteX="301dp"
+        tools:layout_editor_absoluteY="234dp" />
+
+    <TextView
+        android:id="@+id/tv_group_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintTop_toTopOf="@+id/btn_group_num"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_group_num"
+        app:layout_constraintEnd_toEndOf="@+id/btn_group_num"
+        android:layout_marginEnd="@dimen/dp_30"
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="412dp" />
+
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/btn_group_name"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"/>
+
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/btn_share"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"/>
+
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/textView168"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"/>
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/tv_group_explain"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"/>
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/btn_group_num"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"/>
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/textView171"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"/>
+</android.support.constraint.ConstraintLayout>

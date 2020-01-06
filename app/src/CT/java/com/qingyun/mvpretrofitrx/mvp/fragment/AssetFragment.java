@@ -435,8 +435,8 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
 
     @OnClick(R.id.tv_name)
     public void onViewClicked() {
-        KeyboardUtils.hideKeyboard(getContext());
-
+        if (getContext()==null) return;
+        KeyboardUtils.hideKeyboard(getActivity());
 
         AnyLayer.with(getContext())
                 .contentView(R.layout.dialog_wallet_list)

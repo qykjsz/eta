@@ -19,6 +19,18 @@ public class BaseResponse<T> {
     private int code;
     private T data;
 
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
     public String getMsg() {
         return msg;
     }

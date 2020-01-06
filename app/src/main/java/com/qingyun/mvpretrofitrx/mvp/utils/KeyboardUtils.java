@@ -59,6 +59,7 @@ public class KeyboardUtils {
 
     public static void hideKeyboard(Context context) {
         View view = ((Activity)context).getCurrentFocus();
+        if (view==null) return;
         KeyboardUtils.hideKeyboard(view);
     }
 

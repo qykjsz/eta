@@ -41,10 +41,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btn_back"
             app:layout_constraintVertical_bias="0.571" />
+
+        <ImageView
+            android:id="@+id/btn_person"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_padding_x_min"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView8"
+            app:srcCompat="@mipmap/lt_lianxiren"
+            tools:layout_editor_absoluteX="14dp" />
+
+        <ImageView
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_padding_x_min"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView8"
+            app:srcCompat="@mipmap/lt_jia" />
     </android.support.constraint.ConstraintLayout>
 
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/ly_1"
         android:layout_width="@dimen/dp_0"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_74"
@@ -67,11 +89,11 @@
             app:srcCompat="@mipmap/lt_que" />
 
         <TextView
-            android:id="@+id/textView75"
+            android:id="@+id/btn_start"
             style="@style/main_btn"
-            android:enabled="false"
             android:layout_marginBottom="@dimen/dp_70"
             android:text="@string/start_yanzheng"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -79,6 +101,188 @@
     </android.support.constraint.ConstraintLayout>
 
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="@dimen/dp_0"
+        android:visibility="gone"
+        android:id="@+id/nest_scroll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_ffffff_top_round_25"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dp_74"
+        android:layout_height="wrap_content">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/ly_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/ly_group_chat"
+                android:layout_marginTop="@dimen/dp_20"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/iv_pic"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:layout_marginBottom="@dimen/dp_padding_x_min"
+                    app:srcCompat="@mipmap/icon_notice"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:text="@string/group_message"
+                    app:layout_constraintStart_toEndOf="@+id/iv_pic"
+                    app:layout_constraintTop_toTopOf="@+id/iv_pic" />
+
+                <TextView
+                    android:id="@+id/tv_new_message"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintStart_toStartOf="@+id/tv_name"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
+                    tools:layout_editor_absoluteX="97dp" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_1"
+                    style="@style/line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_new_message"
+                    />
+
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/ly_friends_chat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ly_group_chat"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/iv_pic_friends"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_marginTop="@dimen/dp_padding_x_min"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:layout_marginBottom="@dimen/dp_padding_x_min"
+                    app:srcCompat="@mipmap/haoyou"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+                    android:id="@+id/tv_name_friends"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_padding_x_min"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:text="@string/friends_message"
+                    app:layout_constraintStart_toEndOf="@+id/iv_pic_friends"
+                    app:layout_constraintTop_toTopOf="@+id/iv_pic_friends" />
+
+                <TextView
+                    android:id="@+id/tv_new_message_friends"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintStart_toStartOf="@+id/tv_name_friends"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_pic_friends"
+                    tools:layout_editor_absoluteX="97dp" />
+
+                <TextView
+                    android:id="@+id/tv_time_friends"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_padding_x_min"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_name_friends"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_name_friends" />
+
+                <TextView
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="@dimen/dp_1"
+                    style="@style/line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_new_message_friends"
+                    />
+
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcy_chat"
+                android:layout_width="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ly_friends_chat"
+                android:layout_height="wrap_content">
+
+
+
+
+            </android.support.v7.widget.RecyclerView>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
 
 
 

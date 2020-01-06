@@ -43,7 +43,6 @@ public class Api {
 
     private Api(String baseUrl) {
         this.baseUrl = baseUrl;
-
         BaseApi baseApi = new BaseApi();
         apiService = baseApi.getRetrofit(baseUrl).create(ApiService.class);
     }

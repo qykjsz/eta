@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginBottom="@dimen/dp_padding_x_min"
+        app:srcCompat="@mipmap/icon_notice"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        app:layout_goneMarginBottom="@dimen/dp_padding_x_min"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:text="@string/group_message"
+        app:layout_constraintBottom_toTopOf="@+id/btn_agree"
+        app:layout_constraintStart_toEndOf="@+id/iv_pic"
+        app:layout_constraintTop_toTopOf="@+id/iv_pic" />
+
+    <TextView
+        android:id="@+id/tv_new_message"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_pic"
+        tools:layout_editor_absoluteX="97dp" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:visibility="gone"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+    
+    <TextView
+        android:id="@+id/btn_agree"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/sp_12"
+        android:text="@string/agree"
+        android:gravity="center"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:textColor="@color/color_FFFFFF"
+        android:background="@drawable/btn_agree"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginBottom="@dimen/dp_12"
+        app:layout_constraintStart_toEndOf="@+id/iv_pic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="@dimen/dp_22" />
+
+
+    <TextView
+        android:id="@+id/btn_refuse"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/sp_12"
+        android:text="@string/refuse"
+        android:gravity="center"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:textColor="@color/color_FFFFFF"
+        android:background="@drawable/btn_refuse"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toEndOf="@+id/btn_agree"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_agree"
+        android:layout_height="@dimen/dp_22" />
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        style="@style/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_new_message"
+        />
+
+    <TextView
+        android:id="@+id/textView178"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apply_to_be_your_friends"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginStart="@dimen/dp_5"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        tools:layout_editor_absoluteX="155dp" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/textView178"
+        app:layout_constraintBottom_toBottomOf="@+id/textView178"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:layout_height="wrap_content"
+        android:text="@string/refused"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_B7BCDC"
+        tools:layout_editor_absoluteX="331dp"
+        tools:layout_editor_absoluteY="22dp" />
+</android.support.constraint.ConstraintLayout>

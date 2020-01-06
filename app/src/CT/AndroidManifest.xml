@@ -4,6 +4,14 @@
     package="com.senon.mvpretrofitrx">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 解锁屏幕需要的权限 -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <!-- 申请电源锁需要的权限 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--震动权限-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -45,6 +53,19 @@
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme"
         tools:replace="android:theme,android:icon">
+
+        <service
+            android:name="com.qingyun.mvpretrofitrx.mvp.websocket.JWebSocketClientService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="com.qingyun.mvpretrofitrx.mvp.websocket.JWebSocketClientService$GrayInnerService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":gray" />
+
+
+
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TheArticleDetailsActivity"></activity>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ExpressTheDetailsActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ThewalletManagementActivity" />
@@ -125,6 +146,33 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyLogActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLsvelToCreateActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.RechargeExplainActivity"/>
+
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupMessageActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.CreateGroupChatActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.AddressBookActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.MyQrcodeActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupInfoActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupShareActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupMemberActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupTransferActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.AddFriendsActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.AddFriendsAddActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.FriendsMessageActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.ScanActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.AddGroupAddActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.ChatAcrivity"
+
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+
+
+            >
+
+
+        </activity>
+
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.MyChatActivity"  android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

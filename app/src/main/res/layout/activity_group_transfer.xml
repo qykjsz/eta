@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView170"
+        android:layout_width="@dimen/dp_122"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:background="@color/color_FFFFFF"
+        android:text="@string/other_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView172"
+        android:layout_width="@dimen/dp_122"
+        android:layout_height="@dimen/dp_49"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:background="@color/color_FFFFFF"
+        android:text="@string/other_nickname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView170" />
+
+    <EditText
+        android:id="@+id/tv_toaddress"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:background="@color/color_FFFFFF"
+        android:hint="@string/input_nickname"
+        app:layout_constraintBottom_toBottomOf="@+id/textView170"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView170"
+        app:layout_constraintTop_toTopOf="@+id/textView170" />
+
+
+    <TextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
+        android:gravity="center_vertical"
+        android:background="@color/color_FFFFFF"
+        android:textColor="@color/color_999999"
+        app:layout_constraintBottom_toBottomOf="@+id/textView172"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView172"
+        app:layout_constraintTop_toTopOf="@+id/textView172" />
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+        app:layout_constraintTop_toBottomOf="@+id/textView170"
+        />
+
+    <TextView
+        android:id="@+id/btn_transfer"
+        android:text="@string/transfer_to"
+        style="@style/main_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/dp_100"
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="642dp" />
+</android.support.constraint.ConstraintLayout>

@@ -159,7 +159,7 @@ public class BaseApi {
                 .client(client)
                 .baseUrl(baseUrl)
                 .addConverterFactory(ScalarsConverterFactory.create())//请求结果转换为基本类型，一般为String
-                .addConverterFactory(GsonConverterFactory.create())//请求的结果转为实体类
+                .addConverterFactory(com.qingyun.mvpretrofitrx.mvp.utils.GsonConverterFactory.create())//请求的结果转为实体类
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//适配RxJava2.0,
                 // RxJava1.x则为RxJavaCallAdapterFactory.create()
                 .build();

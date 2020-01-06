@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import com.google.gson.JsonSyntaxException;
+import com.qingyun.mvpretrofitrx.mvp.BaseResponseException;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
@@ -72,7 +73,7 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
             listener.onNext(tBaseResponse.getData());//可定制接口，通过code回调处理不同的业务
         } else {
             if (!TextUtils.isEmpty(tBaseResponse.getMsg())) {
-                ToastUtil.showShortToast(tBaseResponse.getMsg());
+//                ToastUtil.showShortToast(tBaseResponse.getMsg());
                 listener.onError(tBaseResponse.getMsg());
 
             }
@@ -115,6 +116,10 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
 //            BaseResponse bad = gson.fromJson(s, BaseResponse.class);
 //            ToastUtil.showShortToast(bad.getMsg());
 //        }
+        if (e instanceof BaseResponseException){
+            ToastUtil.showShortToast(((BaseResponseException) e).getMsg());
+            return;
+        }
 
         if (e instanceof com.jakewharton.retrofit2.adapter.rxjava2.HttpException) {
             ResponseBody body = ((com.jakewharton.retrofit2.adapter.rxjava2.HttpException) e).response().errorBody();
@@ -154,9 +159,6 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
             ToastUtil.showLongToast("连接失败");
         } else if (e instanceof HttpException) {
             ToastUtil.showLongToast("请求超时");
-        }
-        else {
-            ToastUtil.showLongToast("请求失败");
         }
     }
 

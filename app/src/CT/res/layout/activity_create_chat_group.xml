@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_FFFFFF">
+
+
+    <TextView
+        android:id="@+id/textView148"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="@dimen/dp_49"
+        android:background="@color/color_FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:text="@string/group_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_group_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_FFFFFF"
+        android:gravity="center_vertical"
+        android:hint="@string/input_group_name"
+        app:layout_constraintBottom_toBottomOf="@+id/textView148"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView148"
+        app:layout_constraintTop_toTopOf="@+id/textView148"
+        tools:layout_editor_absoluteX="174dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <TextView
+        android:id="@+id/textView158"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:text="@string/group_introduction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView148" />
+
+
+    <EditText
+        android:id="@+id/et_explain"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:background="@color/color_FFFFFF"
+        android:gravity="left"
+        android:hint="@string/input_group_introduction"
+        android:minHeight="@dimen/dp_90"
+        android:maxLength="300"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:paddingBottom="@dimen/dp_40"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView158" />
+
+    <TextView
+        android:id="@+id/max_length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        android:text="300"
+        android:textColor="@color/main_blue"
+        android:textSize="@dimen/sp_11"
+        app:layout_constraintBottom_toBottomOf="@+id/et_explain"
+        app:layout_constraintEnd_toEndOf="@+id/et_explain"
+
+        />
+
+    <TextView
+        android:id="@+id/split"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:textColor="@color/main_blue"
+        android:textSize="@dimen/sp_11"
+        app:layout_constraintBottom_toBottomOf="@+id/max_length"
+        app:layout_constraintEnd_toStartOf="@+id/max_length"
+        app:layout_constraintTop_toTopOf="@+id/max_length" />
+
+    <TextView
+        android:id="@+id/tv_current_font_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/main_blue"
+        android:textSize="@dimen/sp_11"
+        app:layout_constraintBottom_toBottomOf="@+id/split"
+        app:layout_constraintEnd_toStartOf="@+id/split"
+        app:layout_constraintTop_toTopOf="@+id/split" />
+
+    <TextView
+        style="@style/line"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_explain" />
+
+
+    <TextView
+        style="@style/line"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView148" />
+    <TextView
+        android:id="@+id/btn_create_group"
+        style="@style/main_btn"
+        android:layout_marginBottom="@dimen/dp_80"
+        android:text="@string/create_chat_group"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
