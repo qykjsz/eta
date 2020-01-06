@@ -145,13 +145,12 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
     implementation 'com.android.support:multidex:1.0.1'
     implementation 'com.github.goweii:AnyLayer:2.3.1'
-
-
     implementation 'com.github.goweii:AnyDialog:3.0.3'
 
     //    implementation 'cn.bingoogolapple:bga-qrcode-zbar:1.2.1'
     implementation 'jp.wasabeef:glide-transformations:2.0.0'
-//    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+
+    //    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     implementation project(':orcameralib')
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
@@ -191,7 +190,6 @@ dependencies {
 
     // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
     implementation project(':wallet-eth')
-
     implementation 'am.widget:wraplayout:1.2.1'
     implementation project(':mutilanguagelibrary')
     implementation 'com.android.support:cardview-v7:28.0.0'
@@ -203,9 +201,15 @@ dependencies {
     implementation 'pub.devrel:easypermissions:1.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     implementation project(path: ':swipe-reveal-layout')
-    implementation 'cn.jiguang.sdk:janalytics:1.1.1' // 此处以JAnalytics 1.1.1 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:1.1.2' // 此处以JCore 1.1.2 版本为例。
+    implementation 'cn.jiguang.sdk:janalytics:1.1.1'
 
-    implementation "org.java-websocket:Java-WebSocket:1.4.0"
+    // 此处以JAnalytics 1.1.1 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.1.2'
 
+    // 此处以JCore 1.1.2 版本为例。
+    implementation 'org.java-websocket:Java-WebSocket:1.4.0'
+    compile ('io.socket:socket.io-client:1.0.0') {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
 }

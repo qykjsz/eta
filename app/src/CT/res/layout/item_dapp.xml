@@ -13,7 +13,8 @@
         <RelativeLayout
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@mipmap/fx_logo_k">
+            android:background="@mipmap/fx_logo_k"
+            android:layout_gravity="center">
 
 
             <ImageView
@@ -32,7 +33,10 @@
             android:layout_marginTop="9dp"
             android:gravity="center"
             android:textColor="@color/color_333333"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            android:maxEms="4"
+            android:maxLines="2"
+            android:ellipsize="end"/>
     </LinearLayout>
 
 </LinearLayout>

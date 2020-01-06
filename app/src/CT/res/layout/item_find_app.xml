@@ -13,7 +13,8 @@
         <RelativeLayout
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@mipmap/fx_logo_k">
+            android:background="@mipmap/fx_logo_k"
+            android:layout_gravity="center">
 
 
             <ImageView
@@ -25,15 +26,18 @@
         </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_333333"
-        android:layout_gravity="center"
-        android:textSize="11sp"
-        android:layout_marginTop="9dp"
-        android:gravity="center"/>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_333333"
+            android:layout_gravity="center"
+            android:textSize="11sp"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            android:maxEms="4"
+            android:maxLines="2"
+            android:ellipsize="end"/>
     </LinearLayout>
 
 </LinearLayout>
