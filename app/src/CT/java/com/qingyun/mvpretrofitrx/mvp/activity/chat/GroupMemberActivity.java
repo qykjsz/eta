@@ -3,11 +3,15 @@ package com.qingyun.mvpretrofitrx.mvp.activity.chat;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.adapter.GroupMemberAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
@@ -26,11 +30,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.ObservableTransformer;
 
-public class GroupMemberActivity extends BaseActivity<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
+public class GroupMemberActivity extends BaseActivity<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.rcy)
     RecyclerView rcy;
+    @BindView(R.id.et_search)
+    EditText etSearch;
+    @BindView(R.id.et_search_hint)
+    TextView etSearchHint;
     private GroupMemberAdapter groupMemberAdapter;
     private List<GroupMember> list;
+    private List<GroupMember>  searchList;
 
     @Override
     protected String getTitleRightText() {
@@ -71,11 +80,45 @@ public class GroupMemberActivity extends BaseActivity<ChatContact.View,ChatConta
     @Override
     public void init() {
         list = new ArrayList<>();
-        groupMemberAdapter = new GroupMemberAdapter(getContext(),list);
+        groupMemberAdapter = new GroupMemberAdapter(getContext(), list);
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.setAdapter(groupMemberAdapter);
         Group group = (Group) getIntent().getSerializableExtra(IntentUtils.GROUP);
-        getPresenter().getGroupMemberList(ApplicationUtil.getCurrentWallet().getAddress(),group.getCode());
+        getPresenter().getGroupMemberList(ApplicationUtil.getCurrentWallet().getAddress(), group.getCode());
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(s.toString())){
+                    groupMemberAdapter.notifyDataSetChanged(list);
+                    refreashView(list,rcy);
+                }else {
+
+                    searchList.clear();
+                    for (int i = 0;i<list.size();i++){
+                        if (list.get(i).getName().contains(s.toString())){
+                            searchList.add(list.get(i));
+                        }
+                    }
+                    groupMemberAdapter.notifyDataSetChanged(searchList);
+                    refreashView(searchList,rcy);
+
+
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -124,7 +167,7 @@ public class GroupMemberActivity extends BaseActivity<ChatContact.View,ChatConta
     public void getGroupMemberListSuccess(List<GroupMember> groupMemberList) {
         list = groupMemberList;
         groupMemberAdapter.notifyDataSetChanged(list);
-        refreashView(list,rcy);
+        refreashView(list, rcy);
     }
 
     @Override

@@ -385,4 +385,9 @@
     <string name="apply_into">请求加入</string>
     <string name="send">发送</string>
     <string name="msg_not_null">发送内容不能为空</string>
+    <string name="check_code">请检查二维码</string>
+    <string name="search_friends_hint">请输入要搜索的用户地址 或 群ID</string>
+
+    <string name="not_permissions">没有权限</string>
+
 </resources>

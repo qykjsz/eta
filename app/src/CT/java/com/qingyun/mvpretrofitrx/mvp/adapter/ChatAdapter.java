@@ -4,16 +4,23 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
-import com.qingyun.mvpretrofitrx.mvp.entity.Chat;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
+import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
+import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 public class ChatAdapter extends BaseAdapter<ChatMessage, ChatAdapter.ChatViewHolder> {
+
+
 
     public ChatAdapter(Context context, List<ChatMessage> list) {
         super(context, list);
@@ -21,7 +28,7 @@ public class ChatAdapter extends BaseAdapter<ChatMessage, ChatAdapter.ChatViewHo
 
     @Override
     protected ChatViewHolder getViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_chat,parent,false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_chat, parent, false);
         return new ChatViewHolder(view);
     }
 
@@ -37,11 +44,20 @@ public class ChatAdapter extends BaseAdapter<ChatMessage, ChatAdapter.ChatViewHo
 
     @Override
     protected void viewHolderBind(ChatViewHolder holder, int position) {
-
+        holder.tvName.setText(getList().get(position).getFromwhoname());
+        holder.tvNewMessage.setText(getList().get(position).getText());
+        holder.tvTime.setText(TimeUtils.getTime(Long.parseLong(getList().get(position).getTime())));
     }
 
-    class ChatViewHolder extends BaseViewHolder{
-
+    class ChatViewHolder extends BaseViewHolder {
+        @BindView(R.id.iv_pic)
+        ImageView ivPic;
+        @BindView(R.id.tv_name)
+        BoldTextView tvName;
+        @BindView(R.id.tv_new_message)
+        TextView tvNewMessage;
+        @BindView(R.id.tv_time)
+        TextView tvTime;
         public ChatViewHolder(View itemView) {
             super(itemView);
         }

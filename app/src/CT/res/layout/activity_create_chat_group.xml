@@ -25,6 +25,8 @@
         android:background="@color/color_FFFFFF"
         android:gravity="center_vertical"
         android:hint="@string/input_group_name"
+        android:singleLine="true"
+        android:maxLength="20"
         app:layout_constraintBottom_toBottomOf="@+id/textView148"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView148"

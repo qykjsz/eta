@@ -18,6 +18,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.GroupMessage;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.ArrayList;
@@ -165,6 +166,7 @@ public class GroupMessageActivity extends BaseActivity<ChatContact.View,ChatCont
 
     @Override
     public void dealApplyIntoGroupApplySuccess(String s) {
+        ToastUtil.showShortToast(s);
 
     }
 

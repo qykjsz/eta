@@ -93,7 +93,6 @@
             style="@style/main_btn"
             android:layout_marginBottom="@dimen/dp_70"
             android:text="@string/start_yanzheng"
-            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -103,12 +102,12 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="@dimen/dp_0"
-        android:visibility="gone"
         android:id="@+id/nest_scroll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/bg_ffffff_top_round_25"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/dp_74"
         android:layout_height="wrap_content">
 

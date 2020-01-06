@@ -13,7 +13,7 @@
         android:layout_marginTop="@dimen/dp_padding_x_min"
         android:layout_marginStart="@dimen/dp_padding_x_min"
         android:layout_marginBottom="@dimen/dp_padding_x_min"
-        app:srcCompat="@mipmap/icon_notice"
+        app:srcCompat="@mipmap/avater_default"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,14 +44,18 @@
 
     <TextView
         android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:singleLine="true"
+        android:gravity="end"
         android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:text="TextView"
         android:textColor="@color/color_999999"
         android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toBottomOf="@+id/tv_name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
         app:layout_constraintTop_toTopOf="@+id/tv_name" />
 
     <TextView

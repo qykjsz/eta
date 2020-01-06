@@ -66,6 +66,7 @@
             android:layout_width="0dp"
             android:paddingStart="@dimen/dp_padding_x_min"
             android:paddingEnd="@dimen/dp_20"
+            android:maxLength="10"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/dp_24"
             android:visibility="gone"
@@ -137,6 +138,7 @@
         android:layout_height="@dimen/dp_24" />
 
     <TextView
+        android:id="@+id/tv_search_hint"
         android:layout_width="wrap_content"
         android:drawableStart="@mipmap/sy_sousuo"
         android:textSize="@dimen/sp_12"

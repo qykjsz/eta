@@ -99,7 +99,7 @@ public class AddFriendsActivity extends BaseActivity<ChatContact.View, ChatConta
 
     @Override
     public void applyToFriendsSuccess(String s) {
-        ToastUtil.showShortToast(R.string.friends_apply_success);
+        ToastUtil.showShortToast(s);
     }
 
     @Override
@@ -147,7 +147,6 @@ public class AddFriendsActivity extends BaseActivity<ChatContact.View, ChatConta
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(IntentUtils.GROUP_MEMBER, groupMember);
-        bundle.putString(IntentUtils.ADDRESS, btnSearchIt.getText().toString());
         startActivity(AddFriendsAddActivity.class, bundle);
     }
 

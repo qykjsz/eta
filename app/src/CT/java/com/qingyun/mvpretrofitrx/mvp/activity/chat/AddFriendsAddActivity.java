@@ -16,6 +16,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
@@ -74,7 +75,7 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
     @Override
     public void init() {
        groupMember =  (GroupMember)getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
-       address = getIntent().getStringExtra(IntentUtils.ADDRESS);
+       address = groupMember.getAddress();
        tvAddress.setText(address);
        tvName.setText(groupMember.getName());
     }
@@ -93,6 +94,7 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
 
     @Override
     public void applyToFriendsSuccess(String s) {
+        ToastUtil.showShortToast(s);
 
     }
 

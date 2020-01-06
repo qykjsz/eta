@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
         android:drawablePadding="@dimen/dp_10"
-        android:hint="@string/search"
+        android:hint="@string/search_friends_hint"
         android:textSize="@dimen/sp_12"
         android:paddingStart="@dimen/dp_padding_x_min"
         android:paddingEnd="@dimen/dp_padding_x_min"

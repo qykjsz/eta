@@ -2,6 +2,9 @@ package com.qingyun.mvpretrofitrx.mvp.activity.chat;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -55,10 +58,16 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
     TextView tvAccount;
     @BindView(R.id.iv_avater)
     ImageView ivAvater;
+    @BindView(R.id.et_search)
+    EditText etSearch;
+    @BindView(R.id.tv_search_hint)
+    TextView tvSearchHint;
     private List<BaseFragment> fragment;
     private MainViewPagerAdapter mainViewPagerAdapter;
     private List<String> titles;
     private GroupMember personal;
+    private FriendsChatFragment friendsChatFragment;
+    private GroupListFragment groupListFragment;
 
     @Override
     protected String getTitleRightText() {
@@ -98,17 +107,43 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
 
     @Override
     public void init() {
-
+        friendsChatFragment = new FriendsChatFragment();
+        groupListFragment = new GroupListFragment();
         getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
         titles = new ArrayList<>();
         titles.add(getResources().getString(R.string.friends));
         titles.add(getResources().getString(R.string.groups));
         fragment = new ArrayList<>();
-        fragment.add(new FriendsChatFragment());
-        fragment.add(new GroupListFragment());
+        fragment.add(friendsChatFragment);
+        fragment.add(groupListFragment);
         mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragment, getSupportFragmentManager());
         vp.setAdapter(mainViewPagerAdapter);
         IndicatorUtils.initMagicIndicator3(vp, titles, getActivity(), magicIndicator3, 0, 0);
+
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(s.toString())) {
+                    tvSearchHint.setVisibility(View.VISIBLE);
+                }else {
+                    tvSearchHint.setVisibility(View.GONE);
+
+                }
+                friendsChatFragment.search(s.toString());
+                groupListFragment.search(s.toString());
+            }
+        });
     }
 
     @Override
@@ -123,8 +158,8 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
         switch (view.getId()) {
             case R.id.iv_code:
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(IntentUtils.GROUP_MEMBER,personal);
-                startActivity(MyQrcodeActivity.class,bundle);
+                bundle.putSerializable(IntentUtils.GROUP_MEMBER, personal);
+                startActivity(MyQrcodeActivity.class, bundle);
                 break;
             case R.id.iv_edit_name:
                 ivEditName.setVisibility(View.GONE);

@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupInfoActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.FriendsListAdapter;
@@ -32,6 +33,7 @@ public class GroupListFragment extends BaseFragment<ChatContact.View,ChatContact
     @BindView(R.id.rcy)
     RecyclerView rcy;
     private List<Group> list;
+    private List<Group>  searchList;
 
     public GroupListFragment() {
     }
@@ -76,7 +78,7 @@ public class GroupListFragment extends BaseFragment<ChatContact.View,ChatContact
     @Override
     public void init() {
         list = new ArrayList<>();
-
+        searchList = new ArrayList<>();
         groupListAdapter = new GroupListAdapter(getContext(), list);
         groupListAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
@@ -228,6 +230,25 @@ public class GroupListFragment extends BaseFragment<ChatContact.View,ChatContact
     @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindUntilEvent(FragmentEvent.PAUSE);
+
+    }
+
+    public void search(String toString) {
+        if (TextUtils.isEmpty(toString)){
+            groupListAdapter.notifyDataSetChanged(list);
+            refreashView(list,rcy);
+        }else {
+            searchList.clear();
+            for (int i = 0;i<list.size();i++){
+                if (list.get(i).getName().contains(toString)){
+                    searchList.add(list.get(i));
+                }
+            }
+            groupListAdapter.notifyDataSetChanged(searchList);
+            refreashView(searchList,rcy);
+
+
+        }
 
     }
 }

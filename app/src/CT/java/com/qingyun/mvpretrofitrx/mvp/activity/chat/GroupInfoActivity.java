@@ -113,6 +113,10 @@ public class GroupInfoActivity extends BaseActivity<ChatContact.View, ChatContac
                 startActivity(GroupMemberActivity.class, bundle1);
                 break;
             case R.id.btn_groip_transfer:
+                if (group.getOwner()!=1){
+                    ToastUtil.showShortToast(R.string.not_permissions);
+                    return;
+                }
                 Bundle bundle2 = new Bundle();
                 bundle2.putSerializable(IntentUtils.GROUP, group);
                 startActivity(GroupTransferActivity.class,bundle2);
@@ -266,9 +270,15 @@ public class GroupInfoActivity extends BaseActivity<ChatContact.View, ChatContac
         if (group.getVerification() == 1) {
             cbVerti.setChecked(true);
         }
+
+        if (group.getOwner()!=1){
+            cbVerti.setEnabled(false);
+                }
+
         cbVerti.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if (!isChecked) {
                     getPresenter().setIfGroupReview(ApplicationUtil.getCurrentWallet().getAddress(), group.getCode(), "2");
                 } else {

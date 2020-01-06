@@ -178,7 +178,8 @@ public class CreateGroupChatActivity extends BaseActivity<ChatContact.View, Chat
     @Override
     public void createGroupSuccess(String s) {
         ToastUtil.showShortToast(s);
-        startActivity(GroupInfoActivity.class);
+//        startActivity(GroupInfoActivity.class);
+        finish();
     }
 
     @Override

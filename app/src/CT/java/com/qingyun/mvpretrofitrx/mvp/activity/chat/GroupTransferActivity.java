@@ -198,7 +198,7 @@ public class GroupTransferActivity extends BaseActivity<ChatContact.View, ChatCo
 
     @Override
     public void transferGroupSuccess(String s) {
-
+        ToastUtil.showShortToast(s);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment;
 
+import android.Manifest;
 import android.animation.Animator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.NestedScrollView;
@@ -18,6 +20,7 @@ import com.qingyun.mvpretrofitrx.mvp.activity.chat.AddressBookActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.CreateGroupChatActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.FriendsMessageActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupMessageActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.chat.ScanActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.ChatAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
@@ -30,8 +33,10 @@ import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.ArrayList;
@@ -42,6 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.functions.Consumer;
 import per.goweii.anylayer.Alignment;
 import per.goweii.anylayer.AnimHelper;
 import per.goweii.anylayer.AnyLayer;
@@ -131,7 +137,7 @@ public class ChatFragment extends BaseFragment<ChatContact.View, ChatContact.Pre
     @Override
     public void refreashData() {
         super.refreashData();
-//        getPresenter().newChaList(ApplicationUtil.getCurrentWallet().getAddress());
+        getPresenter().newChaList(ApplicationUtil.getCurrentWallet().getAddress());
 
     }
 
@@ -141,68 +147,82 @@ public class ChatFragment extends BaseFragment<ChatContact.View, ChatContact.Pre
         unbinder.unbind();
     }
 
-//    @OnClick({R.id.ly_friends_chat,R.id.btn_start, R.id.btn_person, R.id.btn_add, R.id.ly_group_chat})
-//    public void onViewClicked(View view) {
-//        switch (view.getId()) {
-//            case R.id.btn_start:
-//                getPresenter().registerChat(ApplicationUtil.getCurrentWallet().getAddress());
-//                break;
-//            case R.id.btn_person:
-//                startActivity(AddressBookActivity.class);
-//                break;
-//            case R.id.btn_add:
-//                AnyLayer.target(btnAdd)
-//                        .contentView(R.layout.dialog_chat_add)
-//
-//                        .alignment(Alignment.Direction.VERTICAL, Alignment.Horizontal.ALIGN_RIGHT, Alignment.Vertical.BELOW, true)
-//                        .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
-//                        .contentAnim(new LayerManager.IAnim() {
-//                            @Override
-//                            public Animator inAnim(View content) {
-//                                return AnimHelper.createTopInAnim(content);
-//                            }
-//
-//                            @Override
-//                            public Animator outAnim(View content) {
-//                                return AnimHelper.createTopOutAnim(content);
-//                            }
-//                        }).bindData(new LayerManager.IDataBinder() {
-//                    @Override
-//                    public void bind(AnyLayer anyLayer) {
-//
-//                    }
-//                })
-//                        .onClickToDismiss(R.id.textView133, new LayerManager.OnLayerClickListener() {
-//                            @Override
-//                            public void onClick(AnyLayer anyLayer, View v) {
-//                                startActivity(CreateGroupChatActivity.class);
-//                            }
-//                        })
-//                        .onClickToDismiss(R.id.btn_add_friends, new LayerManager.OnLayerClickListener() {
-//                            @Override
-//                            public void onClick(AnyLayer anyLayer, View v) {
-//                                startActivity(AddFriendsActivity.class);
-//                            }
-//                        })
-//
-//                        .onClickToDismiss(R.id.textView134, new LayerManager.OnLayerClickListener() {
-//                            @Override
-//                            public void onClick(AnyLayer anyLayer, View v) {
-//
-//                            }
-//                        })
-//                        .show();
-//                break;
-//            case R.id.ly_group_chat:
-//                startActivity(GroupMessageActivity.class);
-//
-//                break;
-//            case R.id.ly_friends_chat:
-//                startActivity(FriendsMessageActivity.class);
-//
-//                break;
-//        }
-//    }
+    @OnClick({R.id.ly_friends_chat,R.id.btn_start, R.id.btn_person, R.id.btn_add, R.id.ly_group_chat})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_start:
+                getPresenter().registerChat(ApplicationUtil.getCurrentWallet().getAddress());
+                break;
+            case R.id.btn_person:
+                startActivity(AddressBookActivity.class);
+                break;
+            case R.id.btn_add:
+                AnyLayer.target(btnAdd)
+                        .contentView(R.layout.dialog_chat_add)
+
+                        .alignment(Alignment.Direction.VERTICAL, Alignment.Horizontal.ALIGN_RIGHT, Alignment.Vertical.BELOW, true)
+                        .backgroundColorInt(getResources().getColor(R.color.bg_dialog))
+                        .contentAnim(new LayerManager.IAnim() {
+                            @Override
+                            public Animator inAnim(View content) {
+                                return AnimHelper.createTopInAnim(content);
+                            }
+
+                            @Override
+                            public Animator outAnim(View content) {
+                                return AnimHelper.createTopOutAnim(content);
+                            }
+                        }).bindData(new LayerManager.IDataBinder() {
+                    @Override
+                    public void bind(AnyLayer anyLayer) {
+
+                    }
+                })
+                        .onClickToDismiss(R.id.textView133, new LayerManager.OnLayerClickListener() {
+                            @Override
+                            public void onClick(AnyLayer anyLayer, View v) {
+                                startActivity(CreateGroupChatActivity.class);
+                            }
+                        })
+                        .onClickToDismiss(R.id.btn_add_friends, new LayerManager.OnLayerClickListener() {
+                            @Override
+                            public void onClick(AnyLayer anyLayer, View v) {
+                                startActivity(AddFriendsActivity.class);
+                            }
+                        })
+
+                        .onClickToDismiss(R.id.textView134, new LayerManager.OnLayerClickListener() {
+                            @Override
+                            public void onClick(AnyLayer anyLayer, View v) {
+
+                                RxPermissions rxPermissions=new RxPermissions(getActivity());
+                                rxPermissions.request(Manifest.permission.CAMERA).subscribe(new Consumer<Boolean>() {
+                                    @Override
+                                    public void accept(Boolean aBoolean) throws Exception {
+                                        if (aBoolean){
+                                            Intent intent = new Intent(getActivity(),ScanActivity.class);
+                                            startActivity(intent);
+                                        }else{
+                                            //只要有一个权限被拒绝，就会执行
+                                            ToastUtil.showShortToast(R.string.camera_permission_required);
+                                        }
+                                    }
+                                });
+
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.ly_group_chat:
+                startActivity(GroupMessageActivity.class);
+
+                break;
+            case R.id.ly_friends_chat:
+                startActivity(FriendsMessageActivity.class);
+
+                break;
+        }
+    }
 
     @Override
     public void applyToFriendsSuccess(String s) {
