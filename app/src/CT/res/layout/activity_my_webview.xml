@@ -31,6 +31,24 @@
             android:padding="15dp"
             />
 
+        <RelativeLayout
+            android:id="@+id/start_web"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_5"
+                android:textColor="@color/color_333333"
+                android:textSize="12sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/icon11"
+                android:layout_marginRight="15dp"
+                />
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <WebView

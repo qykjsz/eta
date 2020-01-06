@@ -62,6 +62,18 @@ public class WebActivity extends Activity {
         };
         // 设置setWebChromeClient对象
         webView.setWebChromeClient(wvcc);
+        findViewById(R.id.start_web).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(linkUrl);
+                intent.setData(content_url);
+                startActivity(intent);
+
+
+            }
+        });
     }
 
 
