@@ -12,6 +12,21 @@
         <item name="android:editTextColor">@color/color_main_text</item>
         <item name="android:textColorHint">@color/color_edittext_hint</item>
     </style>
+
+    <style name="TranslucentTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">false</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="colorAccent">@color/color_999999</item>
+        <item name="colorControlNormal">@color/color_E9E9E9</item>
+        <item name="android:textColor">@color/color_main_text</item>
+        <item name="styleLoadingLayout">@style/LoadingLayoutStyle</item>
+        <item name="android:editTextColor">@color/color_main_text</item>
+        <item name="android:textColorHint">@color/color_edittext_hint</item>
+    </style>
+
+
     <style name="LoadingLayoutStyle" parent="LoadingLayout.Style">
         <item name="llEmptyImage">@mipmap/bg_no_data</item>
         <item name="llErrorImage">@mipmap/bg_no_data</item>

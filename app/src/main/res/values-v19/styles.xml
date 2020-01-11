@@ -10,6 +10,21 @@
         <item name="android:editTextColor">@color/color_main_text</item>
         <item name="android:textColorHint">@color/color_edittext_hint</item>
     </style>
+
+
+    // values-v19。v19 开始有 android:windowTranslucentStatus 这个属性
+    <style name="TranslucentTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/color_main_text</item>
+        <item name="styleLoadingLayout">@style/LoadingLayoutStyle</item>
+        <item name="android:editTextColor">@color/color_main_text</item>
+        <item name="android:textColorHint">@color/color_edittext_hint</item>
+    </style>
+
+
+
     <style name="LoadingLayoutStyle" parent="LoadingLayout.Style">
         <item name="llEmptyImage">@mipmap/bg_no_data</item>
         <item name="llErrorImage">@mipmap/bg_no_data</item>
