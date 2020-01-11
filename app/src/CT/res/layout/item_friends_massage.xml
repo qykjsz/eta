@@ -24,6 +24,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         app:layout_goneMarginBottom="@dimen/dp_padding_x_min"
+        android:maxLength="15"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_padding_x_min"
         android:text="@string/group_message"
@@ -97,8 +98,10 @@
 
     <TextView
         android:id="@+id/textView178"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/tv_status"
         android:text="@string/apply_to_be_your_friends"
         android:textColor="@color/color_999999"
         android:textSize="@dimen/sp_12"

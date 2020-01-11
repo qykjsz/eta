@@ -194,6 +194,9 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
 
     @Override
     public void addFriendsListSuccess(List<ApplyGroup> applyGroupList) {
+        if (applyGroupList==null){
+            applyGroupList = new ArrayList<>();
+        }
         if (isLoadMore){
             list.addAll(applyGroupList);
         }else {
@@ -244,6 +247,16 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
 
     @Override
     public void getGroupInfoSuccess(Group group) {
+
+    }
+
+    @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
 
     }
 

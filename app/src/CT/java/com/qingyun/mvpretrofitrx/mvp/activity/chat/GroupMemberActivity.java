@@ -80,6 +80,7 @@ public class GroupMemberActivity extends BaseActivity<ChatContact.View, ChatCont
     @Override
     public void init() {
         list = new ArrayList<>();
+        searchList = new ArrayList<>();
         groupMemberAdapter = new GroupMemberAdapter(getContext(), list);
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.setAdapter(groupMemberAdapter);
@@ -99,6 +100,11 @@ public class GroupMemberActivity extends BaseActivity<ChatContact.View, ChatCont
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(s.toString())){
+                    etSearchHint.setVisibility(View.VISIBLE);
+                }else {
+                    etSearchHint.setVisibility(View.GONE);
+                }
                 if (TextUtils.isEmpty(s.toString())){
                     groupMemberAdapter.notifyDataSetChanged(list);
                     refreashView(list,rcy);
@@ -252,6 +258,16 @@ public class GroupMemberActivity extends BaseActivity<ChatContact.View, ChatCont
 
     @Override
     public void getGroupInfoSuccess(Group group) {
+
+    }
+
+    @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
 
     }
 

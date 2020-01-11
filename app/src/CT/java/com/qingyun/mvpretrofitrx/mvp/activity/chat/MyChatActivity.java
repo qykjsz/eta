@@ -15,14 +15,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.qingyun.mvpretrofitrx.mvp.adapter.ChatMessageAdapter;
@@ -34,22 +35,24 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
+import com.qingyun.mvpretrofitrx.mvp.service.SingleSocket;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardChangeListener;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.websocket.JWebSocketClient;
 import com.qingyun.mvpretrofitrx.mvp.websocket.JWebSocketClientService;
 import com.qingyun.mvpretrofitrx.mvp.websocket.Util;
 import com.senon.mvpretrofitrx.R;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -58,20 +61,24 @@ import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
 
 
-public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
+public class MyChatActivity extends BaseActivity<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.rcy)
     RecyclerView rcy;
     @BindView(R.id.et_content)
     EditText etContent;
+    @BindView(R.id.ly_1)
+    ConstraintLayout ly1;
     private Context mContext;
     private JWebSocketClient client;
     private GroupMember groupMember;
-
+    private int mPage = 0;
     private JWebSocketClientService.JWebSocketClientBinder binder;
     private JWebSocketClientService jWebSClientService;
-    private List<ChatMessage> chatMessageList = new ArrayList<>();//消息列表
+    private List<ChatMessage> chatMessageList ;
     private ChatMessageReceiver chatMessageReceiver;
     ChatMessageAdapter chatMessageAdapter;
+    ConstraintLayout.LayoutParams lp;
+    private int oldHeight;
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -81,6 +88,7 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
             jWebSClientService = binder.getService();
             client = jWebSClientService.client;
         }
+
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             Log.e("MainActivity", "服务与活动成功断开");
@@ -89,18 +97,43 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
 
     @OnClick(R.id.btn_send)
     public void onViewClicked() {
-        if (TextUtils.isEmpty(etContent.getText().toString())){
+        if (TextUtils.isEmpty(etContent.getText().toString())) {
             ToastUtil.showShortToast(R.string.msg_not_null);
             return;
         }
-        if (client != null && client.isOpen()) {
-            jWebSClientService.sendMsg(etContent.getText().toString());
-            getPresenter().sendMessage(ApplicationUtil.getCurrentWallet().getAddress(),groupMember.getAddress(),etContent.getText().toString());
-            chatMessageList.add(new ChatMessage());
-            chatMessageAdapter.notifyDataSetChanged(chatMessageList);
+
+        if (SingleSocket.getInstance().getSocket().connected()) {
+
+            getPresenter().sendMessage(ApplicationUtil.getCurrentWallet().getAddress(), groupMember.getAddress(), etContent.getText().toString());
+            ChatMessage chatMessage = new ChatMessage();
+            chatMessage.setText(etContent.getText().toString());
+            chatMessage.setFromwho(ApplicationUtil.getCurrentWallet().getAddress());
+            chatMessage.setTowho(groupMember.getAddress());
+            chatMessage.setFromname(ApplicationUtil.getChatPersonalInfo().getName());
+            chatMessage.setToname(groupMember.getName());
+            chatMessage.setFromphoto(ApplicationUtil.getChatPersonalInfo().getPhoto());
+            chatMessage.setTophoto(groupMember.getPhoto());
+            chatMessage.setTime(System.currentTimeMillis() / 1000 + "");
+            chatMessage.setState(1);
+//            chatMessageList.add(chatMessage);
+            chatMessageAdapter.addItem(chatMessage);
+            rcy.scrollToPosition(chatMessageAdapter.getItemCount() - 1);
+            refreashView(this.chatMessageList, rcy);
+            etContent.setText("");
         } else {
             Util.showToast(mContext, "连接已断开，请稍等或重启App哟");
+            SingleSocket.getInstance().getSocket().connect();
         }
+
+//        if (client != null && client.isOpen()) {
+//            jWebSClientService.sendMsg(etContent.getText().toString());
+//            getPresenter().sendMessage(ApplicationUtil.getCurrentWallet().getAddress(),groupMember.getAddress(),etContent.getText().toString());
+//            chatMessageList.add(new ChatMessage());
+//            chatMessageAdapter.notifyDataSetChanged(chatMessageList);
+//        } else {
+//            Util.showToast(mContext, "连接已断开，请稍等或重启App哟");
+//        }
+
     }
 
     @Override
@@ -194,8 +227,26 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
     }
 
     @Override
-    public void seeChatMessageLogSuccess(List<ChatMessage> chatMessageList) {
+    protected void setHeaderData() {
+        super.setHeaderData();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+    }
+
+    @Override
+    public void seeChatMessageLogSuccess(List<ChatMessage> chatMessageList) {
+        if (chatMessageList == null) chatMessageList = new ArrayList<>();
+        Collections.reverse(chatMessageList);
+        if (isLoadMore) {
+            this.chatMessageList.addAll(0, chatMessageList);
+        } else {
+            this.chatMessageList = chatMessageList;
+        }
+        chatMessageAdapter.notifyDataSetChanged(this.chatMessageList);
+        refreashView(this.chatMessageList, rcy);
+        if (!isLoadMore) {
+            rcy.scrollToPosition(this.chatMessageList.size() - 1);
+        }
     }
 
     @Override
@@ -229,8 +280,25 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
     }
 
     @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindToLifecycle();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
 
@@ -256,12 +324,12 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
 
     @Override
     protected String getTitleLeftText() {
-        return getResources().getString(R.string.chat);
+        return null;
     }
 
     @Override
     protected String getTitleText() {
-        return null;
+        return getResources().getString(R.string.chat);
     }
 
     @Override
@@ -281,72 +349,101 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
 
     @Override
     public void init() {
-        groupMember = (GroupMember) getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
-        mContext = MyChatActivity.this;
-
-        chatMessageAdapter = new ChatMessageAdapter(mContext, chatMessageList);
-        rcy.setLayoutManager(new LinearLayoutManager(getContext()));
-        rcy.setAdapter(chatMessageAdapter);
-        //启动服务
-        startJWebSClientService();
-        //绑定服务
-        bindService();
-        //注册广播
-        doRegisterReceiver();
-        //检测通知是否开启
-        checkNotification(mContext);
-        initView();
-
-        new Thread(){
+        getRefreash().setEnableLoadMore(false);
+        lp = (ConstraintLayout.LayoutParams) ly1.getLayoutParams();
+        ly1.post(new Runnable() {
             @Override
             public void run() {
-                super.run();
-                try {
-                    //1.创建监听指定服务器地址以及指定服务器监听的端口号
-                    Socket socket = new Socket("47.244.50.67", 2569);//192.168.1.101为我这个本机的IP地址，端口号为9080.
-                    //2.拿到客户端的socket对象的输出流发送给服务器数据
-                    ////                    OutputStream os = socket.getOutputStream();
-                    //                    //写入要发送给服务器的数据
-                    ////                    String s1 = new String("这里是你要发送到服务端的数据".getBytes(),"UTF-8");
-                    ////                    os.write(s1.getBytes());
-                    ////                    os.flush();
-                    ////                    socket.shutdownOutput();
-                    //                    //拿到socket的输入流，这里存储的是服务器返回的数据
-                   while (true){
-                       InputStream is = socket.getInputStream();
-                       //解析服务器返回的数据
-                       int lenght = 0;
-                       byte[] buff = new byte[1024];
-                       final StringBuffer sb = new StringBuffer();
-                       while((lenght = is.read(buff)) != -1){
-                           sb.append(new String(buff,0,lenght,"UTF-8"));
-                       }
-                       runOnUiThread(new Runnable() {
-                           @Override
-                           public void run() {
-                               //这里更新UI
-                               ToastUtil.showShortToast(sb.toString());
-                            Log.e("-------------->",sb.toString());
-                           }
-                       });
-                   }
+                oldHeight = ly1.getMeasuredHeight();
+            }
+        });
+        new KeyboardChangeListener(getActivity()).setKeyBoardListener(new KeyboardChangeListener.KeyBoardListener() {
+            @Override
+            public void onKeyboardChange(boolean isShow, int keyboardHeight) {
+                Log.e(">>>>>>>>>>>", isShow + "" + keyboardHeight);
+                lp.height = oldHeight+keyboardHeight;
+                ly1.setLayoutParams(lp);
+                if (isShow) {
+                    rcy.scrollToPosition(chatMessageAdapter.getItemCount() - 1);
+                } else {
 
-                } catch (UnknownHostException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }finally {
-                    //3、关闭IO资源（注：实际开发中需要放到finally中）
-//                    is.close();
-//                    os.close();
-//                    socket.close();
                 }
             }
-        }.start();
+        });
+
+
+        EventBus.getDefault().register(this);
+        groupMember = (GroupMember) getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
+        getPresenter().viewMessage(ApplicationUtil.getCurrentWallet().getAddress(),groupMember.getAddress());
+        setTitle(groupMember.getName());
+        getPresenter().seeChatMessageLog(ApplicationUtil.getCurrentWallet().getAddress(), groupMember.getAddress(), mPage);
+        mContext = MyChatActivity.this;
+        chatMessageList = new ArrayList<>();
+        chatMessageAdapter = new ChatMessageAdapter(mContext, chatMessageList, false);
+        rcy.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcy.setAdapter(chatMessageAdapter);
+        if (!SingleSocket.getInstance().getSocket().connected()) {
+            SingleSocket.getInstance().getSocket().connect();
+        }
+//        //启动服务
+//        startJWebSClientService();
+//        //绑定服务
+//        bindService();
+//        //注册广播
+//        doRegisterReceiver();
+//        //检测通知是否开启
+//        checkNotification(mContext);
+        initView();
+
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                super.run();
+//                try {
+//                    //1.创建监听指定服务器地址以及指定服务器监听的端口号
+//                    Socket socket = new Socket("47.244.50.67", 2569);//192.168.1.101为我这个本机的IP地址，端口号为9080.
+//                    //2.拿到客户端的socket对象的输出流发送给服务器数据
+//                    ////                    OutputStream os = socket.getOutputStream();
+//                    //                    //写入要发送给服务器的数据
+//                    ////                    String s1 = new String("这里是你要发送到服务端的数据".getBytes(),"UTF-8");
+//                    ////                    os.write(s1.getBytes());
+//                    ////                    os.flush();
+//                    ////                    socket.shutdownOutput();
+//                    //                    //拿到socket的输入流，这里存储的是服务器返回的数据
+//                   while (true){
+//                       InputStream is = socket.getInputStream();
+//                       //解析服务器返回的数据
+//                       int lenght = 0;
+//                       byte[] buff = new byte[1024];
+//                       final StringBuffer sb = new StringBuffer();
+//                       while((lenght = is.read(buff)) != -1){
+//                           sb.append(new String(buff,0,lenght,"UTF-8"));
+//                       }
+//                       runOnUiThread(new Runnable() {
+//                           @Override
+//                           public void run() {
+//                               //这里更新UI
+//                               ToastUtil.showShortToast(sb.toString());
+//                            Log.e("-------------->",sb.toString());
+//                           }
+//                       });
+//                   }
+//
+//                } catch (UnknownHostException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }finally {
+//                    //3、关闭IO资源（注：实际开发中需要放到finally中）
+////                    is.close();
+////                    os.close();
+////                    socket.close();
+//                }
+//            }
+//        }.start();
 
 
     }
-
 
 
     /**
@@ -363,6 +460,16 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
     private void startJWebSClientService() {
         Intent intent = new Intent(mContext, JWebSocketClientService.class);
         startService(intent);
+    }
+
+
+    @Override
+    protected void refresh() {
+        super.refresh();
+        isLoadMore = true;
+        mPage++;
+        getPresenter().seeChatMessageLog(ApplicationUtil.getCurrentWallet().getAddress(), groupMember.getAddress(), mPage);
+
     }
 
     /**
@@ -428,7 +535,6 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
 //                break;
 //        }
 //    }
-
 
 
     /**
@@ -515,6 +621,15 @@ public class MyChatActivity extends BaseActivity<ChatContact.View,ChatContact.Pr
             e.printStackTrace();
         }
         return false;
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetStickyEvent(ChatMessage message) {
+        if (message.getState() == 1) {
+            chatMessageAdapter.addItem(message);
+            rcy.scrollToPosition(chatMessageAdapter.getItemCount() - 1);
+        }
     }
 
 }

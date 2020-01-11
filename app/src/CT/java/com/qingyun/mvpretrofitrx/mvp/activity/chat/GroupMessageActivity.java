@@ -167,6 +167,10 @@ public class GroupMessageActivity extends BaseActivity<ChatContact.View,ChatCont
     @Override
     public void dealApplyIntoGroupApplySuccess(String s) {
         ToastUtil.showShortToast(s);
+        page=0;
+        refresh();
+//        getPresenter().addGroupList(ApplicationUtil.getCurrentWallet().getAddress(),page);
+
 
     }
 
@@ -244,6 +248,16 @@ public class GroupMessageActivity extends BaseActivity<ChatContact.View,ChatCont
 
     @Override
     public void getGroupInfoSuccess(Group group) {
+
+    }
+
+    @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
 
     }
 

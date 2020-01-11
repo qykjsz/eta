@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -18,11 +19,20 @@ import com.facebook.stetho.Stetho;
 
 import com.github.jokar.multilanguages.library.LanguageLocalListener;
 import com.github.jokar.multilanguages.library.MultiLanguage;
+import com.google.gson.Gson;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
 import com.qingyun.mvpretrofitrx.mvp.api.Api;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
+import com.qingyun.mvpretrofitrx.mvp.base.BaseModel;
 import com.qingyun.mvpretrofitrx.mvp.entity.AccountInfo;
+import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
+import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.PersonalInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.VersionInfo;
+import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
+import com.qingyun.mvpretrofitrx.mvp.service.SingleSocket;
+import com.qingyun.mvpretrofitrx.mvp.service.WebSocketService;
 import com.qingyun.mvpretrofitrx.mvp.weight.IntenalHeader;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.CommonData;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.CommonDialogService;
@@ -36,8 +46,12 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.senon.mvpretrofitrx.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.smtt.sdk.QbSdk;
 
+import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.x;
 
 import java.lang.reflect.Constructor;
@@ -50,6 +64,14 @@ import java.util.Locale;
 import java.util.Map;
 
 
+import io.reactivex.functions.Consumer;
+import io.rong.imkit.RongExtensionManager;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.model.GroupUserInfo;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import skin.support.SkinCompatManager;
 import skin.support.constraint.app.SkinConstraintViewInflater;
 import skin.support.design.app.SkinMaterialViewInflater;
@@ -68,6 +90,8 @@ public class ApplicationUtil extends Application implements Application.Activity
     public static Context currentContext;
     public static Locale locale = Locale.getDefault();
     private static Wallet currentWallet;
+    private static final String TAG = WebSocketService.class.getSimpleName();
+    private static GroupMember chatPersonalInfo;
 
     private static ApplicationUtil applicationUtil;
 
@@ -111,7 +135,13 @@ public class ApplicationUtil extends Application implements Application.Activity
     }
 
 
+    public static GroupMember getChatPersonalInfo() {
+        return chatPersonalInfo;
+    }
 
+    public static void setChatPersonalInfo(GroupMember chatPersonalInfo) {
+        ApplicationUtil.chatPersonalInfo = chatPersonalInfo;
+    }
 
     public static Map<String,List<Wallet>> getWallet(){
        return (Map<String, List<Wallet>>) SpUtils.getObjectFromShare(getContext(),"wallet");
@@ -165,6 +195,11 @@ public class ApplicationUtil extends Application implements Application.Activity
     @Override
     public void onCreate() {
         super.onCreate();
+        initRongIm();
+
+
+
+        startSocket();
         SkinCompatManager.withoutActivity(this)
 //                .addInflater(new SkinAppCompatViewInflater())           // 基础控件换肤初始化// 基础控件换肤初始化
                 .addInflater(new SkinMaterialViewInflater())            // material design 控件换肤初始化[可选]
@@ -197,6 +232,48 @@ public class ApplicationUtil extends Application implements Application.Activity
         /**极光统计开启crashlog日志上报**/
 //        JAnalyticsInterface.initCrashHandler(mContext);
     }
+
+    private void initRongIm() {
+
+        RongIM.init(this,"pwe86ga5p9hm6");
+
+    }
+
+    private void startSocket() {
+        mSocket = SingleSocket.getInstance().getSocket();
+        getSocketMsg();
+    }
+
+
+
+    private Socket mSocket;
+    private void getSocketMsg(){
+        mSocket.on("refresh", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                try {
+                    JSONObject data = (JSONObject) args[0];
+                    Log.e("push>>>>>>",data.toString());
+                    ChatMessage chatMessage = new Gson().fromJson(data.toString(), ChatMessage.class);
+                    if (chatMessage.getState()==1){
+                        if (chatMessage.getTowho().equals(ApplicationUtil.getCurrentWallet().getAddress()))
+                            EventBus.getDefault().post(chatMessage);
+                    }else if (chatMessage.getState()==2){
+                        if (!chatMessage.getFromwho().equals(ApplicationUtil.getCurrentWallet().getAddress()))
+                            EventBus.getDefault().post(chatMessage);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
+
+    }
+
 
 
     /**
@@ -390,6 +467,8 @@ public class ApplicationUtil extends Application implements Application.Activity
             }
         }
     }
+
+
 
 
 }

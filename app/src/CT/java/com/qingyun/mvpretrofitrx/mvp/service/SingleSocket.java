@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.service;
 
+
 import java.net.URISyntaxException;
 
 import io.socket.client.IO;
@@ -13,7 +14,6 @@ public class SingleSocket {
     private Socket mSocket;
     public static final String IO_SERVER_URL = "http://47.244.50.67:2569/";
     private SingleSocket(){
-
     }
 
     private static class Holder{

@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
+import com.qingyun.mvpretrofitrx.mvp.utils.GlideUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.TimeUtils;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
@@ -44,7 +46,17 @@ public class ChatAdapter extends BaseAdapter<ChatMessage, ChatAdapter.ChatViewHo
 
     @Override
     protected void viewHolderBind(ChatViewHolder holder, int position) {
-        holder.tvName.setText(getList().get(position).getFromwhoname());
+        if (getList().get(position).getType() == 1) {
+            holder.tvName.setText(getList().get(position).getFromwhoname());
+            holder.tvPic.setVisibility(View.INVISIBLE);
+            holder.ivPic.setVisibility(View.VISIBLE);
+            Glide.with(getContext()).load(getList().get(position).getPhone()).apply(GlideUtils.getAvaterOptions()).into(holder.ivPic);
+        } else {
+            holder.tvPic.setVisibility(View.VISIBLE);
+            holder.ivPic.setVisibility(View.INVISIBLE);
+            holder.tvName.setText(getList().get(position).getQname());
+            holder.tvPic.setText(getList().get(position).getQname().substring(0,1));
+        }
         holder.tvNewMessage.setText(getList().get(position).getText());
         holder.tvTime.setText(TimeUtils.getTime(Long.parseLong(getList().get(position).getTime())));
     }
@@ -58,6 +70,8 @@ public class ChatAdapter extends BaseAdapter<ChatMessage, ChatAdapter.ChatViewHo
         TextView tvNewMessage;
         @BindView(R.id.tv_time)
         TextView tvTime;
+        @BindView(R.id.tv_pic)
+        BoldTextView tvPic;
         public ChatViewHolder(View itemView) {
             super(itemView);
         }

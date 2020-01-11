@@ -54,9 +54,11 @@
 
     <TextView
         android:id="@+id/tv_new_message"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="@dimen/dp_4"
+        android:layout_width="0dp"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:layout_height="wrap_content"
+        android:maxLines="3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_name"
         android:textColor="@color/color_999999"
         android:textSize="@dimen/sp_12"

@@ -19,7 +19,7 @@ public abstract class BaseAdapter<T extends Object, VH extends RecyclerView.View
     private Context context;
     private int selectPosition = -1;
     private OnItemClickListener onItemClickListener;
-    private List<T> list;
+    protected List<T> list;
 
 
     public int getSelectPosition() {

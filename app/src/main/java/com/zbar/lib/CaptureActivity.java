@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -217,6 +218,7 @@ public abstract  class CaptureActivity extends BaseActivity implements Callback 
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		Log.e("code>>>",result);
 		if (!onScanSuccess(result)){
 			handler.sendEmptyMessage(R.id.decode_failed);
 		}

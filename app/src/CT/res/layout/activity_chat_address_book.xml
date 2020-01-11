@@ -128,28 +128,19 @@
         android:layout_width="@dimen/dp_0"
         app:layout_constraintTop_toBottomOf="@+id/ly_top"
         android:layout_marginTop="@dimen/dp_20"
+        android:hint="@string/search_friends_or_group"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
+        android:paddingStart="@dimen/dp_10"
+        android:drawableStart="@mipmap/sy_sousuo"
         android:textSize="@dimen/sp_12"
+        android:drawablePadding="@dimen/dp_5"
         android:layout_marginStart="@dimen/dp_padding_x_min"
         android:layout_marginEnd="@dimen/dp_padding_x_min"
         android:background="@drawable/bg_f5f5f5_round_12"
         android:layout_height="@dimen/dp_24" />
 
-    <TextView
-        android:id="@+id/tv_search_hint"
-        android:layout_width="wrap_content"
-        android:drawableStart="@mipmap/sy_sousuo"
-        android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_C2C2C2"
-        android:text="@string/search"
-        android:drawablePadding="@dimen/dp_5"
-        app:layout_constraintTop_toTopOf="@+id/et_search"
-        app:layout_constraintBottom_toBottomOf="@+id/et_search"
-        app:layout_constraintStart_toStartOf="@+id/et_search"
-        app:layout_constraintEnd_toEndOf="@+id/et_search"
-        android:layout_height="wrap_content" />
+
 
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/magic_indicator3"

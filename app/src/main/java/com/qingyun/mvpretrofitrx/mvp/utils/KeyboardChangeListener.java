@@ -71,7 +71,7 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
 //            Log.i(TAG, "currHeight is 0");
 //            return;
 //        }
-        Log.e(">>>>>>>>>>>>",currHeight+"");
+//        Log.e(">>>>>>>>>>>>",currHeight+"");
         boolean hasChange = false;
 
             if (mPreHeight != currHeight) {

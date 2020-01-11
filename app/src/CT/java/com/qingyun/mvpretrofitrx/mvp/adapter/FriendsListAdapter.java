@@ -56,6 +56,7 @@ public class FriendsListAdapter extends BaseAdapter<GroupMember, FriendsListAdap
     @Override
     protected void viewHolderBind(FriendsListViewHolder holder, int position) {
         holder.tvName.setText(getList().get(position).getName());
+        holder.tvNewMessage.setText(getList().get(position).getAddress());
         holder.tvAvatar.setText(getList().get(position).getName().substring(0,1));
         Glide.with(getContext()).load(getList().get(position).getPhoto()).apply(GlideUtils.getAvaterOptions()).into(holder.ivPic);
 

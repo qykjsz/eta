@@ -10,6 +10,7 @@
         android:layout_width="@dimen/dp_0"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/dp_10"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
         android:drawablePadding="@dimen/dp_10"
@@ -54,11 +55,12 @@
         android:layout_marginTop="@dimen/dp_20"
         android:text="@string/groups_"
         app:layout_constraintStart_toStartOf="@+id/et_search"
-        app:layout_constraintTop_toBottomOf="@+id/textView75" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_search_it" />
 
     <TextView
         android:id="@+id/btn_search_it"
         android:layout_width="0dp"
+        android:paddingStart="@dimen/dp_5"
         android:layout_height="wrap_content"
         android:textColor="@color/main_blue"
         android:layout_marginEnd="@dimen/dp_padding_x_min"
@@ -71,6 +73,7 @@
     <TextView
         android:id="@+id/btn_search_group"
         android:layout_width="0dp"
+        android:paddingStart="@dimen/dp_5"
         android:layout_height="wrap_content"
         android:textColor="@color/main_blue"
         android:layout_marginEnd="@dimen/dp_padding_x_min"

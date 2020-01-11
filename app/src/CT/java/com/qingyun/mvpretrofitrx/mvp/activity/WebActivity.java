@@ -1,16 +1,11 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,34 +15,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import com.pusher.java_websocket.drafts.Draft_17;
 import com.qingyun.mvpretrofitrx.mvp.service.SingleSocket;
 import com.qingyun.mvpretrofitrx.mvp.service.WebSocketService;
-import com.qingyun.mvpretrofitrx.mvp.utils.JsOperation;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.senon.mvpretrofitrx.R;
 
-import org.java_websocket.WebSocketImpl;
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.drafts.Draft;
-import org.java_websocket.enums.CloseHandshakeType;
-import org.java_websocket.enums.HandshakeState;
-import org.java_websocket.exceptions.InvalidDataException;
-import org.java_websocket.exceptions.InvalidHandshakeException;
-import org.java_websocket.framing.Framedata;
-import org.java_websocket.handshake.ClientHandshake;
-import org.java_websocket.handshake.ClientHandshakeBuilder;
-import org.java_websocket.handshake.HandshakeBuilder;
-import org.java_websocket.handshake.ServerHandshake;
-import org.java_websocket.handshake.ServerHandshakeBuilder;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.ByteBuffer;
-import java.util.List;
 
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
@@ -60,13 +34,11 @@ import io.socket.emitter.Emitter;
  */
 
 public class WebActivity extends Activity {
-    private static final String TAG = WebSocketService.class.getSimpleName();
     private WebView webView;
     private String linkUrl;//链接地址
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSocket = SingleSocket.getInstance().getSocket();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_my_webview);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -107,26 +79,8 @@ public class WebActivity extends Activity {
 
 
 
-        getSocketMsg();
-
     }
-    private Socket mSocket;
-    private void getSocketMsg(){
-        mSocket.on("refresh", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                JSONObject data = (JSONObject) args[0];
-                try {
-                    ZLog.showPost(TAG+data.getString("text"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
-
-
-    }
 
     /**
      * 设置wenView参数

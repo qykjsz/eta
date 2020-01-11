@@ -115,6 +115,10 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
     }
 
 
+    public SmartRefreshLayout getRefreash() {
+        return refreash;
+    }
+
     public Context getContext(){
         return this;
     }

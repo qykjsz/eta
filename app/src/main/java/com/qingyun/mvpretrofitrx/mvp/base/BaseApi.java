@@ -98,17 +98,32 @@ public class BaseApi {
             }
         };
 
+        OkHttpClient client;
         //创建一个OkHttpClient并设置超时时间
-        OkHttpClient client = new OkHttpClient.Builder()
-                .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
-                .addNetworkInterceptor(new StethoInterceptor())
-                .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(mRewriteCacheControlInterceptor)//没网的情况下
-                .addNetworkInterceptor(mRewriteCacheControlInterceptor)//有网的情况下
-                .addInterceptor(headerInterceptor)
-                .addInterceptor(logInterceptor)
-                .cache(cache)
-                .build();
+        if (ApplicationUtil.isApkInDebug(ApplicationUtil.getContext())){
+             client = new OkHttpClient.Builder()
+                    .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
+                    .addNetworkInterceptor(new StethoInterceptor())
+                    .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
+                    .addInterceptor(mRewriteCacheControlInterceptor)//没网的情况下
+                    .addNetworkInterceptor(mRewriteCacheControlInterceptor)//有网的情况下
+                    .addInterceptor(headerInterceptor)
+                    .addInterceptor(logInterceptor)
+                    .cache(cache)
+                    .build();
+        }else {
+             client = new OkHttpClient.Builder()
+                    .readTimeout(READ_TIME_OUT, TimeUnit.MILLISECONDS)
+                    .addNetworkInterceptor(new StethoInterceptor())
+                    .connectTimeout(CONNECT_TIME_OUT, TimeUnit.MILLISECONDS)
+                    .addInterceptor(mRewriteCacheControlInterceptor)//没网的情况下
+                    .addNetworkInterceptor(mRewriteCacheControlInterceptor)//有网的情况下
+                    .addInterceptor(headerInterceptor)
+                    .addInterceptor(logInterceptor)
+                    .cache(cache)
+                    .build();
+
+        }
 
         SSLContext sc = null;
         try {

@@ -9,6 +9,7 @@
 
     <EditText
         android:id="@+id/et_search"
+        android:visibility="gone"
         android:layout_width="@dimen/dp_0"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/dp_10"
@@ -28,6 +29,7 @@
         android:textSize="@dimen/sp_12"
         android:textColor="@color/color_C2C2C2"
         android:text="@string/search"
+        android:visibility="gone"
         android:drawablePadding="@dimen/dp_5"
         app:layout_constraintTop_toTopOf="@+id/et_search"
         app:layout_constraintBottom_toBottomOf="@+id/et_search"

@@ -7,14 +7,66 @@ public class ChatMessage {
     private String text;
     private String time;
     private String towho;
+    private String toname;
+    private String fromphoto;
+    private String tophoto;
+    private String fromname;
     private int id;
     private String times;
     private int type;
-
     private int state;
     private  String from;
     private  String to;
+    private String phone;
+    private String qname;
 
+    public String getQname() {
+        return qname;
+    }
+
+    public void setQname(String qname) {
+        this.qname = qname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getFromname() {
+        return fromname;
+    }
+
+    public void setFromname(String fromname) {
+        this.fromname = fromname;
+    }
+
+    public String getToname() {
+        return toname;
+    }
+
+    public void setToname(String toname) {
+        this.toname = toname;
+    }
+
+    public String getFromphoto() {
+        return fromphoto;
+    }
+
+    public void setFromphoto(String fromphoto) {
+        this.fromphoto = fromphoto;
+    }
+
+    public String getTophoto() {
+        return tophoto;
+    }
+
+    public void setTophoto(String tophoto) {
+        this.tophoto = tophoto;
+    }
 
     public int getState() {
         return state;

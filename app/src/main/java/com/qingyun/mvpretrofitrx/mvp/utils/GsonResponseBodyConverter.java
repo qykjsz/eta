@@ -54,24 +54,27 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     try {
       String response = value.string();
       BaseResponse httpStatus = gson.fromJson(response, BaseResponse.class);
-      if (httpStatus.getCode() != 200) {
+      if (httpStatus.getCode() == 200||httpStatus.getCode() == 1){
+
+          MediaType contentType = value.contentType();
+          Charset charset = contentType != null ? contentType.charset(UTF_8) : UTF_8;
+          InputStream inputStream = new ByteArrayInputStream(response.getBytes());
+          Reader reader = new InputStreamReader(inputStream, charset);
+          JsonReader jsonReader = gson.newJsonReader(reader);
+          T finalObject = adapter.read(jsonReader);
+          if (finalObject instanceof BaseResponse){
+            if ((((BaseResponse) finalObject).getData())instanceof String&&TextUtils.isEmpty((String)(((BaseResponse) finalObject).getData())))
+            {
+              ((BaseResponse) finalObject).setData(((BaseResponse) finalObject).getMsg());
+            }
+          }
+          return finalObject;
+
+      }else {
         value.close();
         throw new BaseResponseException(httpStatus.getCode(), httpStatus.getMsg());
-      } else {
-        MediaType contentType = value.contentType();
-        Charset charset = contentType != null ? contentType.charset(UTF_8) : UTF_8;
-        InputStream inputStream = new ByteArrayInputStream(response.getBytes());
-        Reader reader = new InputStreamReader(inputStream, charset);
-        JsonReader jsonReader = gson.newJsonReader(reader);
-        T finalObject = adapter.read(jsonReader);
-        if (finalObject instanceof BaseResponse){
-          if ((((BaseResponse) finalObject).getData())instanceof String&&TextUtils.isEmpty((String)(((BaseResponse) finalObject).getData())))
-          {
-            ((BaseResponse) finalObject).setData(((BaseResponse) finalObject).getMsg());
-          }
-        }
-        return finalObject;
       }
+
     }finally {
       value.close();
     }

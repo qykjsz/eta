@@ -37,6 +37,7 @@ import com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLsvelToCreateActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.CreateWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.GetMoneyActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.InvestActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.MainActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.PlatformNoticActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.TransferActivity;
@@ -472,6 +473,7 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                             @Override
                             public void onItemClick(List list, int position) {
                                 ApplicationUtil.setCurrentWallet((Wallet) list.get(position));
+                                EventBus.getDefault().post((Wallet) list.get(position));
                                 if (ApplicationUtil.getCurrentWallet().getStatus() == Wallet.STATUS_NO_MAKE_COPY) {
                                     DialogUtils.showConfirmDialog(getActivity(), 0, R.string.to_wallet_safe, R.string.cancel, R.string.beifen, new View.OnClickListener() {
                                         @Override
@@ -731,13 +733,13 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
                 c.width = 0;
                 etSearch.setLayoutParams(c);
                 nest.fullScroll(NestedScrollView.FOCUS_DOWN);
-                rcyWallet.clearFocus();
-                etSearch.findFocus();
+//                rcyWallet.clearFocus();
+//                etSearch.findFocus();
             } else if (msg.what == 2) {
                 c.width = ConstraintLayout.LayoutParams.WRAP_CONTENT;
                 etSearch.setLayoutParams(c);
-                etSearch.clearFocus();
-                rcyWallet.clearFocus();
+//                etSearch.clearFocus();
+//                rcyWallet.clearFocus();
             }
             return true;
         }
@@ -775,16 +777,19 @@ public class AssetFragment extends BaseFragment<WalletAssetContact.View, WalletA
             public void onKeyboardChange(boolean isShow, int keyboardHeight) {
                 Log.e(">>>>>>>>>>>", isShow + "");
 
-                if (isShow) {
-                    Message msg = new Message();
-                    msg.what = 1;
-                    handler.sendMessage(msg);
-                } else {
-                    Message msg = new Message();
-                    msg.what = 2;
-                    handler.sendMessage(msg);
+                if (MainActivity.index==0){
+                    if (isShow) {
+                        Message msg = new Message();
+                        msg.what = 1;
+                        handler.sendMessage(msg);
+                    } else {
+                        Message msg = new Message();
+                        msg.what = 2;
+                        handler.sendMessage(msg);
 
+                    }
                 }
+
             }
         });
 

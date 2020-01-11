@@ -1,8 +1,10 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.view.WindowManager;
 
 import com.allens.lib_ios_dialog.IosDialog;
 import com.develop.wallet.eth.Wallet;
+import com.qingyun.mvpretrofitrx.mvp.activity.chat.MyChatActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MainViewPagerAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
@@ -21,11 +24,14 @@ import com.qingyun.mvpretrofitrx.mvp.fragment.ChooseBottomLevelFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.FindFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.InformationFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.MineFragment;
+import com.qingyun.mvpretrofitrx.mvp.fragment.RYunChatActivity;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardChangeListener;
 import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.MyViewPager;
 import com.senon.mvpretrofitrx.R;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -36,6 +42,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.functions.Consumer;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Message;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
 
@@ -50,6 +60,8 @@ public class MainActivity extends BaseActivity {
     private NavigationController mNavigationController;
     private ArrayList<BaseFragment> fragments;
     private MainViewPagerAdapter mainViewPagerAdapter;
+    private BaseFragment chatFragment;
+    public static int index;
 
 //    @BindView(R.id.navigation)
 //    BottomNavigationView navigation;
@@ -95,45 +107,100 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void init() {
-        EventBus.getDefault().register(this);
 
+        setRootViewFitsSystemWindows(this, false);
+
+//        RxPermissions rxPermissions=new RxPermissions(this);
+//        rxPermissions.request(Manifest.permission.WRITE_SETTINGS).subscribe(new Consumer<Boolean>() {
+//            @Override
+//            public void accept(Boolean aBoolean) throws Exception {
+//                if (aBoolean){
+                    RongIM.connect("rQ1VVZLSiT9OhLCBoZXFxvKnWFucwBQGJ3n06v7+JS96mrwlsXRaajsEUnuyQGvo/c3wOf4WIqA=", new RongIMClient.ConnectCallback() {
+                        @Override
+                        public void onTokenIncorrect() {
+                            Log.e("------------->","onTokenIncorrect");
+                        }
+                        @Override
+                        public void onSuccess(String userid) {
+                            Log.d("TAG", "--onSuccess" + userid);
+                            Log.e("------------->","onSuccess");
+
+                        }
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+                            Log.d("TAG", "--onSuccess" + errorCode);
+                            Log.e("------------->","onError");
+                        }
+                    });
+
+/**
+ * 设置接收消息的监听器。
+ *
+ * 所有接收到的消息、通知、状态都经由此处设置的监听器处理。包括私聊消息、群组消息、聊天室消息以及各种状态。
+ */
+        RongIM.getInstance().setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
+            @Override
+            public boolean onReceived(Message message, int left) {
+                Log.e("push>>message",message.toString());
+                return false;
+            }
+        });
+
+
+                    EventBus.getDefault().register(this);
 //        navigation.setItemIconTintList(null);
 //        navigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
-        ViewGroup.LayoutParams lp = vp.getLayoutParams();
-        setRootViewFitsSystemWindows(this, false);
-        initNavigation();
-        fragments = new ArrayList<>();
+                    ViewGroup.LayoutParams lp = vp.getLayoutParams();
+                    initNavigation();
+                    fragments = new ArrayList<>();
+                    chatFragment = new RYunChatActivity();
 //        if (ApplicationUtil.getCurrentWallet()==null){
 //            fragments.add(new ChooseBottomLevelFragment());
 
 //        }else {
-            fragments.add(new AssetFragment());
+                    fragments.add(new AssetFragment());
 //        }
-        fragments.add(new InformationFragment());
-        fragments.add(new FindFragment());
-        fragments.add(new ChatFragment());
-        fragments.add(new MineFragment());
+                    fragments.add(new InformationFragment());
+                    fragments.add(new FindFragment());
+                    fragments.add(chatFragment);
+                    fragments.add(new MineFragment());
 
 
-        mainViewPagerAdapter = new MainViewPagerAdapter(MainActivity.this, fragments, getSupportFragmentManager());
-        vp.setAdapter(mainViewPagerAdapter);
-        vp.setOffscreenPageLimit(4);
-        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
+                    mainViewPagerAdapter = new MainViewPagerAdapter(MainActivity.this, fragments, getSupportFragmentManager());
+                    vp.setAdapter(mainViewPagerAdapter);
+                    vp.setOffscreenPageLimit(4);
+                    index = 0;
+                    vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-            }
+                        @Override
+                        public void onPageScrolled(int i, float v, int i1) {
 
-            @Override
-            public void onPageSelected(int i) {
-                fragments.get(i).refreashData();
-            }
+                        }
 
-            @Override
-            public void onPageScrollStateChanged(int i) {
+                        @Override
+                        public void onPageSelected(int i) {
+                            index = i;
+                            fragments.get(i).refreashData();
+                        }
 
-            }
-        });
+                        @Override
+                        public void onPageScrollStateChanged(int i) {
+
+                        }
+                    });
+
+
+
+
+//                }else{
+//                    //只要有一个权限被拒绝，就会执行
+//                    ToastUtil.showShortToast(R.string.permission_need_open);
+//                }
+//            }
+//        });
+
+
+
     }
 
 
@@ -171,6 +238,9 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         refreashUser();
+        if (index==3){
+            chatFragment.refreashData();
+        }
     }
 
 

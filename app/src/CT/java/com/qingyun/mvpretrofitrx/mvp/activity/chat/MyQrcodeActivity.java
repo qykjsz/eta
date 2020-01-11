@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.ChatCode;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.utils.DensityUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.GlideUtils;
@@ -68,9 +69,11 @@ public class MyQrcodeActivity extends BaseActivity {
     @Override
     public void init() {
         groupMember = (GroupMember) getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
+        ChatCode chatCode = new ChatCode();
+        chatCode.setChatCode(groupMember.getAddress());
         if (groupMember != null) {
             Gson gson = new Gson();
-            bitmap = ZXingUtils.createQRImage(gson.toJson(groupMember), DensityUtil.dip2px(getContext(), 178), DensityUtil.dip2px(getContext(), 178));
+            bitmap = ZXingUtils.createQRImage(gson.toJson(chatCode), DensityUtil.dip2px(getContext(), 178), DensityUtil.dip2px(getContext(), 178));
             Glide.with(getActivity()).load(bitmap).into(ivCode);
             Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getAvaterOptions()).into(ivAvatar);
             tvName.setText(groupMember.getName());

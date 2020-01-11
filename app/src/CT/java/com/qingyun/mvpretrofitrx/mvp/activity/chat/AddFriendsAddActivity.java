@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
@@ -15,6 +16,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.GlideUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
@@ -78,6 +80,7 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
        address = groupMember.getAddress();
        tvAddress.setText(address);
        tvName.setText(groupMember.getName());
+        Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getAvaterOptions()).into(ivAvatar);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +218,16 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
 
     @Override
     public void getGroupInfoSuccess(Group group) {
+
+    }
+
+    @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
 
     }
 

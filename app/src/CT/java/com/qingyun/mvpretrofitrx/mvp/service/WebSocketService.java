@@ -20,10 +20,6 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.tavendo.autobahn.WebSocketConnection;
-import de.tavendo.autobahn.WebSocketException;
-import de.tavendo.autobahn.WebSocketHandler;
-import de.tavendo.autobahn.WebSocketOptions;
 
 /**
  * Date 2020/1/6.
@@ -31,5 +27,6 @@ import de.tavendo.autobahn.WebSocketOptions;
  * ClassExplain：WebSocketService 监听
  */
 public class WebSocketService {
+
 
 }

@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.ChatCode;
 import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.utils.DensityUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZXingUtils;
@@ -70,7 +71,9 @@ public class GroupShareActivity extends BaseActivity {
         Group group = (Group) getIntent().getSerializableExtra(GROUP);
         if (group != null) {
             Gson gson = new Gson();
-            bitmap = ZXingUtils.createQRImage(gson.toJson(group), DensityUtil.dip2px(getContext(), 178), DensityUtil.dip2px(getContext(), 178));
+            ChatCode chatCode = new ChatCode();
+            chatCode.setChatCode(group.getCode());
+            bitmap = ZXingUtils.createQRImage(gson.toJson(chatCode), DensityUtil.dip2px(getContext(), 178), DensityUtil.dip2px(getContext(), 178));
             Glide.with(getActivity()).load(bitmap).into(ivCode);
             tvName.setText(group.getName());
             tvAvatar.setText(group.getName().substring(0,1));

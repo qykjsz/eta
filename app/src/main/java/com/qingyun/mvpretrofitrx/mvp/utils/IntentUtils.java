@@ -46,6 +46,7 @@ public class IntentUtils {
     public static final String GROUP_MEMBER = "group_member";
     public static final String ADDRESS = "address";
     public static final String GROUP = "group";
+    public static final String CHAT_CODE = "chat_code";
 
     public static String NEW_ID="news_id";
 }

@@ -207,7 +207,7 @@ public interface ApiService {
 
 
     @POST("chatfriend_order")
-    Observable <BaseResponse<List<GroupMember>>>getFriendsList(@Query("fromwho")String fromwho);
+    Observable <BaseResponse<List<GroupMember>>>getFriendsList(@Query("fromwho")String fromwho,@Query("selectaddress")String selectaddress);
 
     @POST("tochating")
     Observable <BaseResponse<String>>sendMessage(@Query("fromwho")String fromwho, @Query("towho")String towho, @Query("text")String text);
@@ -282,4 +282,14 @@ public interface ApiService {
 
     @POST("groupinformation")
     Observable <BaseResponse<Group>>getGroupInfo(@Query("address")String address, @Query("qcode")String qcode);
+
+
+
+    @POST("upuserphone")
+    @Multipart
+    Observable  <BaseResponse<String>>upDataAvatar(@Query("address")String address, @Part MultipartBody.Part userphone);
+
+
+    @POST("rongyun")
+    Observable <BaseResponse<Group>>getChatToken(@Query("address")String address);
 }

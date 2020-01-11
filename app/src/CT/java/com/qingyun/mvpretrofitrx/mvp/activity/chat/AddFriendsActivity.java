@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity.chat;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -77,7 +78,6 @@ public class AddFriendsActivity extends BaseActivity<ChatContact.View, ChatConta
     @Override
     public void init() {
         address = getIntent().getStringExtra(IntentUtils.ADDRESS);
-        etSearch.setText(address);
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -95,6 +95,12 @@ public class AddFriendsActivity extends BaseActivity<ChatContact.View, ChatConta
                 btnSearchGroup.setText(s.toString());
             }
         });
+        if (!TextUtils.isEmpty(address))
+
+        {
+            etSearch.setText(address);
+            etSearch.setSelection(address.length());
+        }
     }
 
     @Override
@@ -226,6 +232,16 @@ public class AddFriendsActivity extends BaseActivity<ChatContact.View, ChatConta
         Bundle bundle = new Bundle();
         bundle.putSerializable(IntentUtils.GROUP, group);
         startActivity(AddGroupAddActivity.class, bundle);
+    }
+
+    @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
+
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseModel;
 import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
 
 import io.reactivex.ObservableTransformer;
+import okhttp3.MultipartBody;
 
 
 public class ChatModel<T> extends BaseModel {
@@ -24,14 +25,14 @@ public class ChatModel<T> extends BaseModel {
     }
 
 
-    public void getFriendsList(Context context,String fromwho, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().getFriendsList( fromwho), observerListener,transformer);
+    public void getFriendsList(Context context,String fromwho, String selectaddress,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getFriendsList( fromwho,selectaddress), observerListener,transformer);
 
     }
 
 
     public void sendMessage(Context context,String fromwho,String towho,String text, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().sendMessage(  fromwho, towho, text), observerListener,transformer);
+        subscribe(context, Api.getApiService().sendMessage(  fromwho, towho, text), observerListener,transformer,false,false);
 
     }
 
@@ -46,7 +47,7 @@ public class ChatModel<T> extends BaseModel {
     }
 
     public void newChaList(Context context,String fromwho , ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().newChaList(fromwho), observerListener,transformer);
+        subscribe(context, Api.getApiService().newChaList(fromwho), observerListener,transformer,false,false);
 
     }
 
@@ -89,7 +90,7 @@ public class ChatModel<T> extends BaseModel {
     }
 
     public void getNicknameByAdress(Context context,String address, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().getNicknameByAdress(address), observerListener,transformer);
+        subscribe(context, Api.getApiService().getNicknameByAdress(address), observerListener,transformer,false,false);
 
     }
 
@@ -112,7 +113,7 @@ public class ChatModel<T> extends BaseModel {
 
 
     public void sendMessageToGroup(Context context,String fromwho,String togroup,String text, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().sendMessageToGroup(fromwho,togroup,text), observerListener,transformer);
+        subscribe(context, Api.getApiService().sendMessageToGroup(fromwho,togroup,text), observerListener,transformer,false,false);
 
     }
 
@@ -149,6 +150,17 @@ public class ChatModel<T> extends BaseModel {
 
     public void getGroupInfo(Context context,String address,String qcode, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
         subscribe(context, Api.getApiService().getGroupInfo(address,qcode), observerListener,transformer);
+
+    }
+
+    public void upDataAvatar(Context context, String address, MultipartBody.Part userphone, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().upDataAvatar(address,userphone), observerListener,transformer);
+
+    }
+
+
+    public void getChatToken(Context context, String address, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getChatToken(address), observerListener,transformer);
 
     }
 

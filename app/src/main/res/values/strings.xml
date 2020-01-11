@@ -381,13 +381,20 @@
     <string name="search_group_">搜索群：</string>
     <string name="friends_">好友:</string>
     <string name="groups_">群组:</string>
-    <string name="add_group">申请加群</string>
-    <string name="apply_into">请求加入</string>
+    <string name="add_group">添加群组</string>
+    <string name="apply_into">申请加入</string>
     <string name="send">发送</string>
     <string name="msg_not_null">发送内容不能为空</string>
     <string name="check_code">请检查二维码</string>
     <string name="search_friends_hint">请输入要搜索的用户地址 或 群ID</string>
 
     <string name="not_permissions">没有权限</string>
+    <string name="re_connect">重连中...</string>
+    <string name="scan_to_add_group">扫一扫二维码，添加群组</string>
+    <string name="start_chat">开始验证</string>
+    <string name="search_friends_or_group">请输入要搜索的用户地址 或 群ID</string>
+    <string name="group_id_">群ID:</string>
+    <string name="deal_name_">处理人:</string>
+    <string name="apply_into_group">申请加入群组</string>
 
 </resources>

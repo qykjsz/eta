@@ -51,7 +51,7 @@ public class GroupListAdapter extends BaseAdapter<Group, GroupListAdapter.Friend
     protected void viewHolderBind(FriendsListViewHolder holder, int position) {
         holder.tvName.setText(getList().get(position).getName());
         holder.tvAvatar.setText(getList().get(position).getName().substring(0,1));
-        holder.tvNewMessage.setText(getList().get(position).getIntroduce());
+        holder.tvNewMessage.setText(getList().get(position).getCode());
 
     }
 

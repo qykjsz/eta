@@ -1,6 +1,8 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -11,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MainViewPagerAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
@@ -33,13 +38,26 @@ import com.senon.mvpretrofitrx.R;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.magic_indicator3)
@@ -60,14 +78,13 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
     ImageView ivAvater;
     @BindView(R.id.et_search)
     EditText etSearch;
-    @BindView(R.id.tv_search_hint)
-    TextView tvSearchHint;
     private List<BaseFragment> fragment;
     private MainViewPagerAdapter mainViewPagerAdapter;
     private List<String> titles;
     private GroupMember personal;
     private FriendsChatFragment friendsChatFragment;
     private GroupListFragment groupListFragment;
+    private MultipartBody.Part img_area;
 
     @Override
     protected String getTitleRightText() {
@@ -121,6 +138,10 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
         IndicatorUtils.initMagicIndicator3(vp, titles, getActivity(), magicIndicator3, 0, 0);
 
 
+
+
+
+        addSearch();
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -134,16 +155,60 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (TextUtils.isEmpty(s.toString())) {
-                    tvSearchHint.setVisibility(View.VISIBLE);
-                }else {
-                    tvSearchHint.setVisibility(View.GONE);
 
-                }
-                friendsChatFragment.search(s.toString());
-                groupListFragment.search(s.toString());
             }
         });
+    }
+
+    private void addSearch() {
+        RxTextView.textChanges(etSearch)//当EditText发生改变
+                //每500毫秒发射一次
+                //仅在过了一段指定的时间还没发射数据时才发射一个数据
+                //如果原始Observable在这个新生成的Observable终止之前发射了另一个数据， debounce 会抑制(suppress)这个数据项。
+                .debounce(300, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+                .subscribeOn(AndroidSchedulers.mainThread())//内容监听操作需要在主线程操作
+                .filter(new Predicate<CharSequence>() {
+                    @Override
+                    public boolean test(CharSequence charSequence) throws Exception {
+                        return charSequence.length() >= 0;
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .switchMap(new Function<CharSequence, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(CharSequence charSequence) throws Exception {
+                        Observable<String> just = Observable.just(charSequence.toString());
+                        return just;
+
+                    }
+                })
+
+//
+                .retry()//凡是请求出错就重试（例如超时、数据解析异常等），直到正确为止。（如果不retry的话就会调用onError。onError会导致整个订阅链条死掉，无法触发下一次了）
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+
+                        friendsChatFragment.search(s.toString());
+                        groupListFragment.search(s.toString());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -174,10 +239,37 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
 
                 break;
             case R.id.iv_avater:
-                DialogUtils.showPictureChooseDialog(getActivity(), true);
+                DialogUtils.showPictureChooseDialogAvatar(getActivity(), true);
                 break;
         }
     }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        /*结果回调*/
+        if (requestCode == DialogUtils.CODE_CHOOSE_PICTURE_CAMEAR || requestCode == DialogUtils.CODE_CHOOSE_PICTURE_PHONE) {
+            if (data != null) {
+                List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                // 例如 LocalMedia 里面返回三种path
+                // 1.media.getPath(); 为原图path
+                // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true  注意：音视频除外
+                // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
+                // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                String picturePath = selectList.get(0).getCompressPath();
+                RequestBody imageBody_head = RequestBody.create(MediaType.parse("image/jpeg"), new File(picturePath));
+                img_area = MultipartBody.Part.createFormData("userphone", new File(picturePath).getName(), imageBody_head);
+                Glide.with(getActivity()).load(new File(picturePath)).apply(GlideUtils.getAvaterOptions()).into(ivAvater);
+                getPresenter().upDataAvatar(ApplicationUtil.getCurrentWallet().getAddress(),img_area);
+
+            }
+        }
+
+    }
+
 
     @Override
     public void applyToFriendsSuccess(String s) {
@@ -191,6 +283,8 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
         tvName.setText(etName.getText().toString());
         ivNameConfirm.setVisibility(View.GONE);
         etName.setVisibility(View.GONE);
+        getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
+
     }
 
     @Override
@@ -234,6 +328,7 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
         tvName.setText(groupMember.getName());
         Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getAvaterOptions()).into(ivAvater);
         tvAccount.setText(groupMember.getAddress());
+        ApplicationUtil.setChatPersonalInfo(groupMember);
     }
 
     @Override
@@ -308,6 +403,17 @@ public class AddressBookActivity extends BaseActivity<ChatContact.View, ChatCont
 
     @Override
     public void getGroupInfoSuccess(Group group) {
+
+    }
+
+    @Override
+    public void upDataAvatarSuccess(String s) {
+        ToastUtil.showShortToast(s);
+        getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
 
     }
 

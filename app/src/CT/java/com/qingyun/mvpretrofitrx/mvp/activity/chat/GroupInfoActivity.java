@@ -290,6 +290,16 @@ public class GroupInfoActivity extends BaseActivity<ChatContact.View, ChatContac
     }
 
     @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindToLifecycle();
     }

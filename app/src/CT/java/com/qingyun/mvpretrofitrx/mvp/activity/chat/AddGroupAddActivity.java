@@ -15,6 +15,7 @@ import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
+import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import io.reactivex.ObservableTransformer;
 
 public class AddGroupAddActivity extends BaseActivity<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.iv_avatar)
-    ImageView ivAvatar;
+    BoldTextView ivAvatar;
     @BindView(R.id.tv_name)
     TextView tvName;
     @BindView(R.id.tv_address)
@@ -52,7 +53,7 @@ public class AddGroupAddActivity extends BaseActivity<ChatContact.View, ChatCont
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.add_friends);
+        return getResources().getString(R.string.add_group);
     }
 
     @Override
@@ -77,6 +78,7 @@ public class AddGroupAddActivity extends BaseActivity<ChatContact.View, ChatCont
         tvAddress.setText(group.getCode());
         tvName.setText(group.getName());
         tvExplain.setText(group.getIntroduce());
+        ivAvatar.setText(group.getName().substring(0,1));
     }
 
     @Override
@@ -213,6 +215,16 @@ public class AddGroupAddActivity extends BaseActivity<ChatContact.View, ChatCont
 
     @Override
     public void getGroupInfoSuccess(Group group) {
+
+    }
+
+    @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
 
     }
 

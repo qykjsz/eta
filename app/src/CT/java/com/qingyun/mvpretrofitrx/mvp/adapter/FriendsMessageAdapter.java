@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseViewHolder;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
+import com.qingyun.mvpretrofitrx.mvp.utils.GlideUtils;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
 
@@ -62,6 +64,7 @@ public class FriendsMessageAdapter extends BaseAdapter<ApplyGroup, FriendsMessag
             }
         }
 
+        Glide.with(getContext()).load(getList().get(position).getPhone()).apply(GlideUtils.getAvaterOptions()).into(holder.ivPic);
         holder.btnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

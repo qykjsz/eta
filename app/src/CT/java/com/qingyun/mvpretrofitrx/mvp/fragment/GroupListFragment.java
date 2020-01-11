@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
+import com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupChatActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupInfoActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.FriendsListAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.GroupListAdapter;
@@ -85,7 +86,8 @@ public class GroupListFragment extends BaseFragment<ChatContact.View,ChatContact
             public void onItemClick(List list, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(IntentUtils.GROUP,(Group)list.get(position));
-                startActivity(GroupInfoActivity.class,bundle);
+//                startActivity(GroupInfoActivity.class,bundle);
+                startActivity(GroupChatActivity.class,bundle);
             }
         });
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -228,6 +230,16 @@ public class GroupListFragment extends BaseFragment<ChatContact.View,ChatContact
     }
 
     @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindUntilEvent(FragmentEvent.PAUSE);
 
@@ -240,7 +252,7 @@ public class GroupListFragment extends BaseFragment<ChatContact.View,ChatContact
         }else {
             searchList.clear();
             for (int i = 0;i<list.size();i++){
-                if (list.get(i).getName().contains(toString)){
+                if (list.get(i).getCode().contains(toString)){
                     searchList.add(list.get(i));
                 }
             }

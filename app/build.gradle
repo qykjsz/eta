@@ -56,7 +56,7 @@ android {
         }
         CT {
             applicationId 'com.qingyun.et'
-            versionName '1.0.9'
+            versionName '1.1.2'
         }
     }
 }
@@ -212,4 +212,29 @@ dependencies {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
+    implementation (project(path: ':IMKit')){
+        exclude group: 'com.android.support'
+        exclude group: 'com.github.bumptech.glide'
+        exclude group: 'com.android.support:exifinterface'
+        exclude module: 'appcompat-v7'
+    }
+    implementation (project(path: ':IMLib')){
+        exclude group: 'com.android.support'
+        exclude group: 'com.github.bumptech.glide'
+        exclude group: 'com.android.support:exifinterface'
+        exclude module: 'appcompat-v7'
+    }
+    implementation 'org.jetbrains:annotations-java5:15.0'
+//    api ('cn.rongcloud.sdk:im_kit:2.9.18'){
+//        exclude group: 'com.android.support'
+//        exclude group: 'com.android.support:exifinterface'
+//        exclude module: 'appcompat-v7'
+//    }
+////im_kit必须依赖im_lib，所以需要加入对应依赖
+//
+//    api ('cn.rongcloud.sdk:im_lib:2.9.18'){
+//        exclude group: 'com.android.support'
+//        exclude group: 'com.android.support:exifinterface'
+//        exclude module: 'appcompat-v7'
+//    }
 }

@@ -20,6 +20,26 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp" />
 
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/tv_pic"
+        android:layout_width="@dimen/dp_50"
+        android:textSize="@dimen/sp_20"
+        android:textColor="@color/color_FFFFFF"
+        android:gravity="center"
+        android:background="@drawable/bg_ovl_mainblue"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_padding_x_min"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginBottom="@dimen/dp_padding_x_min"
+        app:srcCompat="@mipmap/avater_default"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+
     <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"

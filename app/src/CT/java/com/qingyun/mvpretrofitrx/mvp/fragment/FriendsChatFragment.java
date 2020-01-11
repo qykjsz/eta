@@ -41,6 +41,7 @@ public class FriendsChatFragment extends BaseFragment<ChatContact.View,ChatConta
     RecyclerView rcy;
     private List<GroupMember> list;
     private List<GroupMember> searchList;
+    private String searchStr="";
 
     public FriendsChatFragment() {
     }
@@ -91,6 +92,7 @@ public class FriendsChatFragment extends BaseFragment<ChatContact.View,ChatConta
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(IntentUtils.GROUP_MEMBER,(GroupMember)list.get(position));
                 startActivity(MyChatActivity.class,bundle);
+
             }
         });
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -104,7 +106,7 @@ public class FriendsChatFragment extends BaseFragment<ChatContact.View,ChatConta
     protected void refresh() {
         super.refresh();
 
-            getPresenter().getFriendsList(ApplicationUtil.getCurrentWallet().getAddress());
+            getPresenter().getFriendsList(ApplicationUtil.getCurrentWallet().getAddress(),searchStr);
 
     }
 
@@ -236,19 +238,31 @@ public class FriendsChatFragment extends BaseFragment<ChatContact.View,ChatConta
     }
 
     @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindUntilEvent(FragmentEvent.PAUSE);
 
     }
 
     public void search(String toString) {
+//        getPresenter().getFriendsList(ApplicationUtil.getCurrentWallet().getAddress(),searchStr);
+
         if (TextUtils.isEmpty(toString)){
             friendsListAdapter.notifyDataSetChanged(list);
             refreashView(list,rcy);
         }else {
             searchList.clear();
             for (int i = 0;i<list.size();i++){
-                if (list.get(i).getName().contains(toString)){
+                if (list.get(i).getAddress().contains(toString)){
                     searchList.add(list.get(i));
                 }
             }

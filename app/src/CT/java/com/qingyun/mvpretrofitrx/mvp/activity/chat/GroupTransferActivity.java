@@ -282,6 +282,16 @@ public class GroupTransferActivity extends BaseActivity<ChatContact.View, ChatCo
     }
 
     @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(String token) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindToLifecycle();
     }

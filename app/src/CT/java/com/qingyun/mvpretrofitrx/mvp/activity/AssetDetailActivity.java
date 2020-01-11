@@ -238,8 +238,8 @@ public class AssetDetailActivity extends BaseActivity<WalletAssetContact.View,Wa
 
                             @Override
                             public void onFailure(Exception e) {
-                                ToastUtil.showShortToast(e.toString());
                                 ToastUtil.showShortToast(R.string.pass_err);
+                                ProgressDialogUtils.getInstances().cancel();
 
                             }
                         });

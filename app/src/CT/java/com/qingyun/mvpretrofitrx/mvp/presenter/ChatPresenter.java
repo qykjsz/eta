@@ -18,6 +18,8 @@ import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+
 public class ChatPresenter extends ChatContact.Presenter {
     private ChatModel model;
     private Context context;
@@ -68,8 +70,8 @@ public class ChatPresenter extends ChatContact.Presenter {
     }
 
     @Override
-    public void getFriendsList(String fromwho) {
-        model.getFriendsList(context,fromwho,getView().bindLifecycle(), new ObserverResponseListener<List<GroupMember>>() {
+    public void getFriendsList(String fromwho,String selectaddress) {
+        model.getFriendsList(context,fromwho,selectaddress,getView().bindLifecycle(), new ObserverResponseListener<List<GroupMember>>() {
 
             @Override
             public void onNext(List<GroupMember> groupMemberList) {
@@ -476,6 +478,43 @@ public class ChatPresenter extends ChatContact.Presenter {
             public void onNext(Group group) {
                 if(getView() != null){
                     getView().getGroupInfoSuccess(group);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void upDataAvatar(String address, MultipartBody.Part userphone) {
+
+        model.upDataAvatar(context,address,userphone,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().upDataAvatarSuccess(s);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getChatToken(String address) {
+        model.getChatToken(context,address,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().getChatTokenSuccess(s);
                 }
             }
 

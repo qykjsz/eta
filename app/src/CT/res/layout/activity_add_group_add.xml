@@ -19,9 +19,13 @@
         android:layout_height="wrap_content">
 
 
-        <ImageView
+        <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/dp_50"
+            android:background="@drawable/bg_ovl_mainblue"
+            android:gravity="center"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_20"
             android:layout_height="@dimen/dp_50"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_marginStart="@dimen/dp_padding_x_min"
@@ -31,7 +35,10 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/dp_padding_x_min"
+            android:singleLine="true"
             app:layout_constraintStart_toEndOf="@+id/iv_avatar"
             android:layout_marginStart="@dimen/dp_20"
             android:layout_height="wrap_content"
@@ -45,7 +52,7 @@
             android:id="@+id/textView179"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/account_"
+            android:text="@string/group_id_"
             app:layout_constraintStart_toStartOf="@+id/tv_name"
             app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
             android:layout_marginBottom="@dimen/dp_4"

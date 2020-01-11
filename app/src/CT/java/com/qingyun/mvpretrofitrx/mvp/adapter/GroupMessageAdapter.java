@@ -46,11 +46,11 @@ public class GroupMessageAdapter extends BaseAdapter<ApplyGroup, GroupMessageAda
     }
 
 
-    public  void setRefuseListener(OnItemClickListener refuseListener){
+    public void setRefuseListener(OnItemClickListener refuseListener) {
         this.refuseListener = refuseListener;
     }
 
-    public  void setAgreeListener(OnItemClickListener agreeListener){
+    public void setAgreeListener(OnItemClickListener agreeListener) {
         this.agreeListener = agreeListener;
     }
 
@@ -59,20 +59,28 @@ public class GroupMessageAdapter extends BaseAdapter<ApplyGroup, GroupMessageAda
     protected void viewHolderBind(GroupMessageViewHolder holder, final int position) {
 
 
-        if (getList().get(position).getState()==1){
+        if (getList().get(position).getState() == 1) {
             holder.btnAgree.setVisibility(View.VISIBLE);
             holder.btnRefuse.setVisibility(View.VISIBLE);
+            holder.btnAgree.setEnabled(true);
+            holder.btnRefuse.setEnabled(true);
+
             holder.tvStatus.setVisibility(View.GONE);
+            holder.tvNewMessage.setVisibility(View.GONE);
 
-        }else {
-            holder.btnAgree.setVisibility(View.GONE);
-            holder.btnRefuse.setVisibility(View.GONE);
+        } else {
+            holder.btnAgree.setVisibility(View.INVISIBLE);
+            holder.btnAgree.setEnabled(false);
+            holder.btnRefuse.setVisibility(View.INVISIBLE);
+            holder.btnRefuse.setEnabled(false);
+
             holder.tvStatus.setVisibility(View.VISIBLE);
-
-            if (getList().get(position).getState()==2){
+            holder.tvNewMessage.setVisibility(View.VISIBLE);
+            holder.tvNewMessage.setText(getContext().getResources().getString(R.string.deal_name_)+getList().get(position).getOperation());
+            if (getList().get(position).getState() == 2) {
                 holder.tvStatus.setText(R.string.agreed);
                 holder.tvStatus.setTextColor(getContext().getResources().getColor(R.color.main_blue));
-            }else if (getList().get(position).getState()==3){
+            } else if (getList().get(position).getState() == 3) {
                 holder.tvStatus.setText(R.string.refused);
                 holder.tvStatus.setTextColor(getContext().getResources().getColor(R.color.color_B7BCDC));
             }
@@ -82,21 +90,21 @@ public class GroupMessageAdapter extends BaseAdapter<ApplyGroup, GroupMessageAda
         holder.btnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                refuseListener.onItemClick(getList(),position);
+                refuseListener.onItemClick(getList(), position);
             }
         });
 
         holder.btnAgree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                agreeListener.onItemClick(getList(),position);
+                agreeListener.onItemClick(getList(), position);
             }
         });
 
         holder.tvName.setText(getList().get(position).getName());
         holder.tvQname.setText(getList().get(position).getQname());
         Glide.with(getContext()).load(getList().get(position).getId()).apply(GlideUtils.getAvaterOptions()).into(holder.ivPic);
-        holder.tvPic.setText(getList().get(position).getQname().substring(0,1));
+        holder.tvPic.setText(getList().get(position).getQname().substring(0, 1));
     }
 
     class GroupMessageViewHolder extends BaseViewHolder {
@@ -116,6 +124,9 @@ public class GroupMessageAdapter extends BaseAdapter<ApplyGroup, GroupMessageAda
 
         @BindView(R.id.iv_pic)
         ImageView ivPic;
+
+        @BindView(R.id.tv_new_message)
+        TextView tvNewMessage;
         public GroupMessageViewHolder(View itemView) {
             super(itemView);
         }

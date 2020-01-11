@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.qingyun.mvpretrofitrx.mvp.entity.ChatCode;
 import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
@@ -16,26 +17,27 @@ import com.zbar.lib.CaptureActivity;
 public class ScanActivity extends CaptureActivity {
     @Override
     protected boolean onScanSuccess(String result) {
+        try {
+            JSONObject object = JSONObject.parseObject(result);
+            if (!TextUtils.isEmpty( object.get("chatCode")+"")){
+                ChatCode chatCode = new Gson().fromJson(result, ChatCode.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(IntentUtils.ADDRESS, chatCode.getChatCode());
+                startActivity(AddFriendsActivity.class, bundle);
+                finish();
+                return true;
 
-        JSONObject object = JSONObject.parseObject(result);
-        if (!TextUtils.isEmpty((String) object.get("owner"))){
-            Group group = new Gson().fromJson(result, Group.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(IntentUtils.GROUP, group);
-            startActivity(AddGroupAddActivity.class, bundle);
-            return true;
+            }else {
+                ToastUtil.showShortToast(R.string.check_code);
+                return false;
 
-        }else if (!TextUtils.isEmpty((String) object.get("name"))&&!TextUtils.isEmpty((String) object.get("address"))){
-            GroupMember groupMember = new Gson().fromJson(result, GroupMember.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(IntentUtils.GROUP_MEMBER, groupMember);
-            startActivity(AddFriendsAddActivity.class, bundle);
-            return true;
-        }else {
+            }
+        }catch (Exception e){
             ToastUtil.showShortToast(R.string.check_code);
             return false;
 
         }
+
 
     }
 }

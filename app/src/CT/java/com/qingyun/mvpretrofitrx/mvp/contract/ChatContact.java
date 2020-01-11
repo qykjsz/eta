@@ -11,6 +11,8 @@ import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+
 
 public interface ChatContact {
 
@@ -41,13 +43,14 @@ public interface ChatContact {
         void applyToFriendsPassSuccess(String s);
         void applyToFriendsRefuseSuccess(String s);
         void getGroupInfoSuccess(Group group);
-
+        void upDataAvatarSuccess(String s);
+        void getChatTokenSuccess(String token);
     }
 
     abstract class Presenter extends BasePresenter<View> {
         public abstract void applyToFriendsRefuse(String fromwho,int fid);
         public abstract void applyToFriendsPass(String fromwho,int fid);
-        public abstract void getFriendsList(String fromwho);
+        public abstract void getFriendsList(String fromwho,String selectaddress);
         public abstract void sendMessage(String fromwho,String towho,String text);
         public abstract void viewMessage(String fromwho,String towho);
         public abstract void seeChatMessageLog(String fromwho,String towho,int page);
@@ -71,6 +74,8 @@ public interface ChatContact {
         public abstract void changeNickname(String address,String name);
         public abstract void applyToFriends(String fromwho,String towho);
         public abstract void getGroupInfo(String address,String qcode);
+        public abstract void upDataAvatar(String address, MultipartBody.Part userphone);
+        public abstract void getChatToken(String address);
 
 
     }

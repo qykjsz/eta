@@ -8,6 +8,15 @@ public class ApplyGroup {
     private int state;
     private String operation;
     private String time;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getTime() {
         return time;

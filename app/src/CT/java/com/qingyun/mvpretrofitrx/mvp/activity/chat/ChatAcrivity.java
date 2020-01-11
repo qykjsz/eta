@@ -3,7 +3,6 @@ package com.qingyun.mvpretrofitrx.mvp.activity.chat;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.EditText;
 
 import com.qingyun.mvpretrofitrx.mvp.adapter.ChatMessageAdapter;
@@ -82,7 +81,7 @@ public class ChatAcrivity extends BaseActivity {
         list.add(new ChatMessage());
 
 
-        chatMessageAdapter = new ChatMessageAdapter(getContext(),list);
+        chatMessageAdapter = new ChatMessageAdapter(getContext(),list, true);
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.setAdapter(chatMessageAdapter);
 
