@@ -253,4 +253,10 @@ dependencies {
     implementation files('libs/AMap_Search_V6.9.3_20190722.jar')
     implementation files('libs/Android_Map3D_SDK_V6.9.3_20191018.jar')
     implementation files('libs/MapApiLocationMini.jar')
+
+    implementation 'cc.solart:turbo-recyclerview-helper:1.0.3-beta'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    implementation project(path: ':library_circle_menu')
+
+    
 }
