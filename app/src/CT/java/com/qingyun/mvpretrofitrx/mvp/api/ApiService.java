@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.api;
 
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyListRespones;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.AssetReviewResponse;
@@ -10,6 +11,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.BusinessPayLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessageLogResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.CoinTypeRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Contact;
+import com.qingyun.mvpretrofitrx.mvp.entity.ContactsResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.CurrencyRate;
 import com.qingyun.mvpretrofitrx.mvp.entity.Flash;
 import com.qingyun.mvpretrofitrx.mvp.entity.GasPrice;
@@ -28,6 +30,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Platform;
 import com.qingyun.mvpretrofitrx.mvp.entity.PlatformNoticResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation1;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.entity.TheArticleDetails;
 import com.qingyun.mvpretrofitrx.mvp.entity.Time;
 import com.qingyun.mvpretrofitrx.mvp.entity.TransferLog;
@@ -161,8 +164,8 @@ public interface ApiService {
     Observable <BaseResponse<NormalResponse>>addBusinessPayLog(@Query("from")String from, @Query("to")String to,@Query("hash") String hash,
                                                                @Query("money")String money,@Query("moneyid") String moneyid,
                                                                @Query("fimoney")String fimoney,@Query("fimoneyid") String fimoneyid);
-    @GET("?ct=new_recharge&ac=check")
-    Observable <BaseResponse<NormalResponse>>checkAccount(@Query("account")String account);
+    @GET("/")
+    Observable <BaseResponse<NormalResponse>>checkAccount();
 
     @GET("?ct=new_recharge&ac=notice")
     Observable <BaseResponse<NormalResponse>>addInvestInfo(@Query("account")String account,
@@ -202,12 +205,12 @@ public interface ApiService {
     @POST("addchatfriend_no")
     Observable <BaseResponse<String>>applyToFriendsRefuse(@Query("fromwho")String fromwho, @Query("fid")int fid);
 
-    @POST("addchatfriend_ok")
-    Observable <BaseResponse<String>>applyToFriendsPass(@Query("fromwho")String fromwho, @Query("fid")int fid);
+    @POST("rongyun_addfriend_agree")
+    Observable <BaseResponse<String>>applyToFriendsPass(@Query("uid")String uid, @Query("tid")int tid);
 
 
-    @POST("chatfriend_order")
-    Observable <BaseResponse<List<GroupMember>>>getFriendsList(@Query("fromwho")String fromwho,@Query("selectaddress")String selectaddress);
+    @POST("rongyun_myfriends")
+    Observable <BaseResponse<ContactsResponse>>getFriendsList(@Query("uid")String uid, @Query("selectaddress")String selectaddress);
 
     @POST("tochating")
     Observable <BaseResponse<String>>sendMessage(@Query("fromwho")String fromwho, @Query("towho")String towho, @Query("text")String text);
@@ -222,8 +225,8 @@ public interface ApiService {
     @POST("chatinglist")
     Observable <BaseResponse<NewChat>>newChaList(@Query("fromwho")String fromwho);
 
-    @POST("friendlist")
-    Observable<BaseResponse<ApplyListRespones>> addFriendsList(@Query("fromwho")String fromwho, @Query("page")int page);
+    @POST("rongyun_givefriend")
+    Observable<BaseResponse<List<ApplyGroup>>> addFriendsList(@Query("uid")String uid, @Query("page")int page);
 
     @POST("groupaddlist")
     Observable<BaseResponse<ApplyListRespones>> addGroupList(@Query("fromwho")String fromwho, @Query("page")int page);
@@ -246,7 +249,7 @@ public interface ApiService {
     Observable <BaseResponse<String>>dealApplyIntoGroupApply(@Query("address")String address, @Query("qcode")String qcode,@Query("sid") int sid,@Query("state")int state);
 
 
-    @POST("selusername")
+    @POST("rongyun_getuser_address")
     Observable <BaseResponse<GroupMember>>getNicknameByAdress(@Query("address")String address);
 
 
@@ -273,23 +276,23 @@ public interface ApiService {
     @POST("lookgroupchating")
     Observable <BaseResponse<String>>setMessageReadGroup(@Query("fromwho")String fromwho, @Query("qcode")String qcode);
 
-    @POST("upchatusername")
-    Observable <BaseResponse<String>>changeNickname(@Query("address")String address, @Query("name")String name);
+    @POST("rongyun_upmyname")
+    Observable <BaseResponse<String>>changeNickname(@Query("uid")String uid, @Query("name")String name);
 
-    @POST("addchatfriend")
-    Observable <BaseResponse<String>>applyToFriends(@Query("fromwho")String fromwho, @Query("towho")String towho);
+    @POST("rongyun_addfriend")
+    Observable <BaseResponse<String>>applyToFriends(@Query("uid")String fromwho, @Query("tid")String towho);
 
 
     @POST("groupinformation")
     Observable <BaseResponse<Group>>getGroupInfo(@Query("address")String address, @Query("qcode")String qcode);
 
-
-
-    @POST("upuserphone")
+    @POST("rongyun_upmyphoto")
     @Multipart
-    Observable  <BaseResponse<String>>upDataAvatar(@Query("address")String address, @Part MultipartBody.Part userphone);
+    Observable  <BaseResponse<String>>upDataAvatar(@Query("uid")String uid, @Part MultipartBody.Part userphone);
 
+    @POST("rongyun_gettoken")
+    Observable <BaseResponse<RyunToken>>getChatToken(@Query("address")String address);
 
-    @POST("rongyun")
-    Observable <BaseResponse<Group>>getChatToken(@Query("address")String address);
+    @POST("rongyun_delmyfriend")
+    Observable <BaseResponse<String>>deleteFriends(@Query("uid")String uid,@Query("tid")String tid);
 }

@@ -175,6 +175,15 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.FriendsMessageActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.ScanActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.AddGroupAddActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.AddFriendsApplyActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.SetBeizhuActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.FriendsSettingActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.ContactDetailActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.ChooseContactActivity"/>
+
+
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupChatInfoActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.CreateRyunGroupActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.ChatAcrivity"
 
             android:configChanges="keyboardHidden|orientation|screenSize"

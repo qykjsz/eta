@@ -8,6 +8,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 
 import java.util.List;
 
@@ -44,7 +45,9 @@ public interface ChatContact {
         void applyToFriendsRefuseSuccess(String s);
         void getGroupInfoSuccess(Group group);
         void upDataAvatarSuccess(String s);
-        void getChatTokenSuccess(String token);
+        void getChatTokenSuccess(RyunToken ryunToken);
+        void deleteFriendsSuccess(String s);
+
     }
 
     abstract class Presenter extends BasePresenter<View> {
@@ -76,6 +79,7 @@ public interface ChatContact {
         public abstract void getGroupInfo(String address,String qcode);
         public abstract void upDataAvatar(String address, MultipartBody.Part userphone);
         public abstract void getChatToken(String address);
+        public abstract void deleteFriends(String uid,String tid);
 
 
     }

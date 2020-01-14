@@ -25,6 +25,7 @@ import java.util.List;
 
 public class IndicatorUtils {
 
+
     public static void initMagicIndicator3(MagicIndicator magicIndicator, final ViewPager vp, final List<String> titles, final Activity activity) {
         CommonNavigator commonNavigator = new CommonNavigator(activity);
 

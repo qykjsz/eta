@@ -16,4 +16,16 @@ public class GlideUtils {
                 .priority(Priority.HIGH);
         return options;
     }
+
+
+
+    public static RequestOptions getChatAvaterOptions(){
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .transform(new CircleCrop())
+                .placeholder(R.mipmap.avater_default)
+                .error(R.mipmap.avater_default)
+                .priority(Priority.HIGH);
+        return options;
+    }
 }

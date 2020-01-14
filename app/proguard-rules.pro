@@ -227,3 +227,8 @@
 -keepattributes *Annotation*
 -keepattributes *JavascriptInterface*
 
+#RenderScript
+-keepclasseswithmembernames class * {
+native <methods>;
+}
+-keep class android.support.v8.renderscript.** { *; }

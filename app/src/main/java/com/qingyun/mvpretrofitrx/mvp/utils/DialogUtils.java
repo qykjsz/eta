@@ -94,6 +94,46 @@ public class DialogUtils {
     }
 
 
+    public static void shoEditDialog(final String editStr, Context context, final SureListener sureListener){
+//        if (ApplicationUtil.getUser().getHas_pay_password()){
+        AnyLayer.with(context)
+                .contentView(R.layout.dialog_edit)
+                .backgroundColorInt(context.getResources().getColor(R.color.bg_dialog))
+                .gravity(Gravity.CENTER)
+                .onClickToDismiss(R.id.btn_cancel)
+                .onClick(R.id.btn_sure, new LayerManager.OnLayerClickListener() {
+                    @Override
+                    public void onClick(AnyLayer anyLayer, View v) {
+                        EditText etPass =  anyLayer.getView(R.id.et_pass);
+                        if (TextUtils.isEmpty(etPass.getText().toString())){
+                            ToastUtil.showShortToast(R.string.pass_not_null);
+                            return;
+                        }
+                        if (sureListener!=null){
+                            sureListener.onSure(etPass.getText().toString());
+                            anyLayer.dismiss();
+                        }
+                    }
+                })
+                .bindData(new LayerManager.IDataBinder() {
+                    @Override
+                    public void bind(AnyLayer anyLayer) {
+                        EditText etPass =  anyLayer.getView(R.id.et_pass);
+                        etPass.setText(editStr);
+
+                    }
+                })
+                .show();
+//        }else {
+////            Intent intent = new Intent(context,ChangePayPasswordActivity.class);
+////            context.startActivity(intent);
+//        }
+
+    }
+
+
+
+
     static CountDownUtils countDownUtils;
 
     public static void showInvestPayDialog(Context context, final String amount, final String coinNmae, final int start, final SureListener sureListener){

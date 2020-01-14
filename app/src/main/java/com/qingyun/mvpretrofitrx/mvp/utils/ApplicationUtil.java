@@ -199,7 +199,7 @@ public class ApplicationUtil extends Application implements Application.Activity
 
 
 
-        startSocket();
+//        startSocket();
         SkinCompatManager.withoutActivity(this)
 //                .addInflater(new SkinAppCompatViewInflater())           // 基础控件换肤初始化// 基础控件换肤初始化
                 .addInflater(new SkinMaterialViewInflater())            // material design 控件换肤初始化[可选]

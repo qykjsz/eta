@@ -10,6 +10,10 @@ android {
         multiDexEnabled true
         versionCode 2
         versionName "1.1.4"
+
+//        //RenderScript向下兼容
+//        renderscriptTargetApi 28
+//        renderscriptSupportModeEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         flavorDimensions "default"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
@@ -56,9 +60,13 @@ android {
         }
         CT {
             applicationId 'com.qingyun.et'
-            versionName '1.1.2'
+            versionName '1.1.3'
         }
     }
+
+    // 项目中依赖的第三方库越来越多时，有可能会出现两个依赖库中存在同一个（名称）文件 如果这样，Gradle在打包时就会提示错误（警告）。那么就可以根据提示，然后使用以下方法将重复的文件剔除
+
+
 }
 
 dependencies {
@@ -208,33 +216,49 @@ dependencies {
 
     // 此处以JCore 1.1.2 版本为例。
     implementation 'org.java-websocket:Java-WebSocket:1.4.0'
-    compile ('io.socket:socket.io-client:1.0.0') {
+    compile('io.socket:socket.io-client:1.0.0') {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
-    implementation (project(path: ':IMKit')){
+    implementation(project(path: ':IMKit')) {
         exclude group: 'com.android.support'
         exclude group: 'com.github.bumptech.glide'
         exclude group: 'com.android.support:exifinterface'
         exclude module: 'appcompat-v7'
     }
-    implementation (project(path: ':IMLib')){
+    implementation(project(path: ':IMLib')) {
         exclude group: 'com.android.support'
         exclude group: 'com.github.bumptech.glide'
         exclude group: 'com.android.support:exifinterface'
         exclude module: 'appcompat-v7'
     }
     implementation 'org.jetbrains:annotations-java5:15.0'
-//    api ('cn.rongcloud.sdk:im_kit:2.9.18'){
-//        exclude group: 'com.android.support'
-//        exclude group: 'com.android.support:exifinterface'
-//        exclude module: 'appcompat-v7'
-//    }
-////im_kit必须依赖im_lib，所以需要加入对应依赖
-//
-//    api ('cn.rongcloud.sdk:im_lib:2.9.18'){
-//        exclude group: 'com.android.support'
-//        exclude group: 'com.android.support:exifinterface'
-//        exclude module: 'appcompat-v7'
-//    }
+
+    //    api ('cn.rongcloud.sdk:im_kit:2.9.18'){
+
+    //        exclude group: 'com.android.support'
+
+    //        exclude group: 'com.android.support:exifinterface'
+
+    //        exclude module: 'appcompat-v7'
+
+    //    }
+
+    ////im_kit必须依赖im_lib，所以需要加入对应依赖
+
+    //
+
+    //    api ('cn.rongcloud.sdk:im_lib:2.9.18'){
+
+    //        exclude group: 'com.android.support'
+
+    //        exclude group: 'com.android.support:exifinterface'
+
+    //        exclude module: 'appcompat-v7'
+
+    //    }
+    implementation 'cc.solart:turbo-recyclerview-helper:1.0.3-beta'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    implementation project(path: ':library_circle_menu')
+
 }

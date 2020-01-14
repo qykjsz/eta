@@ -13,6 +13,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.senon.mvpretrofitrx.R;
 
+import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationFragment;
 import io.rong.imlib.model.Conversation;
 
@@ -67,6 +68,6 @@ public class FriendChatActivity extends BaseActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fly_friends_chat,mConversationFragment );
         transaction.commit(); // 提交创建Fragment请求
-
+        
     }
 }

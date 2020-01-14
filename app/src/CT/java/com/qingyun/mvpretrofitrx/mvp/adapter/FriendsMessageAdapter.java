@@ -50,10 +50,12 @@ public class FriendsMessageAdapter extends BaseAdapter<ApplyGroup, FriendsMessag
         if (getList().get(position).getState()==1){
             holder.btnAgree.setVisibility(View.VISIBLE);
             holder.btnRefuse.setVisibility(View.VISIBLE);
+            holder.tvStatus.setVisibility(View.GONE);
 
         }else {
             holder.btnAgree.setVisibility(View.GONE);
             holder.btnRefuse.setVisibility(View.GONE);
+            holder.tvStatus.setVisibility(View.VISIBLE);
 
             if (getList().get(position).getState()==2){
                 holder.tvStatus.setText(R.string.agreed);

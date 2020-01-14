@@ -47,6 +47,10 @@ public class IntentUtils {
     public static final String ADDRESS = "address";
     public static final String GROUP = "group";
     public static final String CHAT_CODE = "chat_code";
+    public static final String CONVESATIONTYPE = "convesation_type";
+    public static final String CONVESATIONTYPE_VALUE = "convesation_type_value";
+
+    public static final String TARGETID = "targetid";
 
     public static String NEW_ID="news_id";
 }

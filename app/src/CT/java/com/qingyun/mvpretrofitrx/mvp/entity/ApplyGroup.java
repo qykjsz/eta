@@ -9,6 +9,15 @@ public class ApplyGroup {
     private String operation;
     private String time;
     private String phone;
+    private String photo;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public String getPhone() {
         return phone;

@@ -33,7 +33,7 @@ public abstract class XCallBack implements CommonCallback<String> {
         JSONObject object = JSON.parseObject(result);
         int code = object.getIntValue("code");
         String msg = object.getString("msg");
-        if(code == 200){
+        if(code == 200||code==1){
             onAfterSuccessOk(object);
         }else{
             ToastUtil.showLongToast(msg);

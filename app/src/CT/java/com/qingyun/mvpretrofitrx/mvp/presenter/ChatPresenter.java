@@ -7,10 +7,12 @@ import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyListRespones;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessageLogResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.ContactsResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.model.AboutUsModel;
 import com.qingyun.mvpretrofitrx.mvp.model.ChatModel;
 import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
@@ -71,10 +73,39 @@ public class ChatPresenter extends ChatContact.Presenter {
 
     @Override
     public void getFriendsList(String fromwho,String selectaddress) {
-        model.getFriendsList(context,fromwho,selectaddress,getView().bindLifecycle(), new ObserverResponseListener<List<GroupMember>>() {
+        final List<GroupMember> groupMemberList = new ArrayList<>();
+        model.getFriendsList(context,fromwho,selectaddress,getView().bindLifecycle(), new ObserverResponseListener<ContactsResponse>() {
 
             @Override
-            public void onNext(List<GroupMember> groupMemberList) {
+            public void onNext(ContactsResponse contactsResponse) {
+                groupMemberList.addAll(contactsResponse.getA());
+                groupMemberList.addAll(contactsResponse.getB());
+                groupMemberList.addAll(contactsResponse.getC());
+                groupMemberList.addAll(contactsResponse.getD());
+                groupMemberList.addAll(contactsResponse.getE());
+                groupMemberList.addAll(contactsResponse.getF());
+                groupMemberList.addAll(contactsResponse.getG());
+                groupMemberList.addAll(contactsResponse.getH());
+                groupMemberList.addAll(contactsResponse.getI());
+                groupMemberList.addAll(contactsResponse.getJ());
+                groupMemberList.addAll(contactsResponse.getK());
+                groupMemberList.addAll(contactsResponse.getL());
+                groupMemberList.addAll(contactsResponse.getM());
+                groupMemberList.addAll(contactsResponse.getN());
+                groupMemberList.addAll(contactsResponse.getO());
+                groupMemberList.addAll(contactsResponse.getP());
+                groupMemberList.addAll(contactsResponse.getQ());
+                groupMemberList.addAll(contactsResponse.getR());
+                groupMemberList.addAll(contactsResponse.getS());
+                groupMemberList.addAll(contactsResponse.getT());
+                groupMemberList.addAll(contactsResponse.getU());
+                groupMemberList.addAll(contactsResponse.getV());
+                groupMemberList.addAll(contactsResponse.getW());
+                groupMemberList.addAll(contactsResponse.getX());
+                groupMemberList.addAll(contactsResponse.getY());
+                groupMemberList.addAll(contactsResponse.getZ());
+                groupMemberList.addAll(contactsResponse.getXx());
+
                 if(getView() != null){
                     getView().getFriendsListSuccess(groupMemberList);
                 }
@@ -161,12 +192,12 @@ public class ChatPresenter extends ChatContact.Presenter {
 
     @Override
     public void addFriendsList(String fromwho, int page) {
-        model.addFriendsList(context,fromwho,page,getView().bindLifecycle(), new ObserverResponseListener<ApplyListRespones>() {
+        model.addFriendsList(context,fromwho,page,getView().bindLifecycle(), new ObserverResponseListener<List<ApplyGroup>>() {
 
             @Override
-            public void onNext(ApplyListRespones applyListRespones) {
+            public void onNext(List<ApplyGroup> applyGroupList) {
                 if(getView() != null){
-                    getView().addFriendsListSuccess(applyListRespones.getList());
+                    getView().addFriendsListSuccess(applyGroupList);
                 }
             }
 
@@ -509,12 +540,29 @@ public class ChatPresenter extends ChatContact.Presenter {
 
     @Override
     public void getChatToken(String address) {
-        model.getChatToken(context,address,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+        model.getChatToken(context,address,getView().bindLifecycle(), new ObserverResponseListener<RyunToken>() {
+
+            @Override
+            public void onNext(RyunToken ryunToken) {
+                if(getView() != null){
+                    getView().getChatTokenSuccess(ryunToken);
+                }
+            }
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void deleteFriends(String uid, String tid) {
+        model.deleteFriends(context,uid,tid,getView().bindLifecycle(), new ObserverResponseListener<String>() {
 
             @Override
             public void onNext(String s) {
                 if(getView() != null){
-                    getView().getChatTokenSuccess(s);
+                    getView().deleteFriendsSuccess(s);
                 }
             }
 

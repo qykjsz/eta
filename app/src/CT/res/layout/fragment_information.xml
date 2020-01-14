@@ -12,7 +12,7 @@
         <net.lucode.hackware.magicindicator.MagicIndicator
             android:id="@+id/magic_indicator3"
             android:layout_width="match_parent"
-            android:layout_height="148dp"
+            android:layout_height="@dimen/dp_173"
             android:background="@mipmap/icon_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

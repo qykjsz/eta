@@ -164,4 +164,9 @@ public class ChatModel<T> extends BaseModel {
 
     }
 
+
+    public void deleteFriends(Context context, String uid,String tid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().deleteFriends(uid,tid), observerListener,transformer);
+
+    }
 }
