@@ -94,6 +94,7 @@
             style="@style/main_btn"
             android:layout_marginBottom="@dimen/dp_70"
             android:text="@string/start_chat"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

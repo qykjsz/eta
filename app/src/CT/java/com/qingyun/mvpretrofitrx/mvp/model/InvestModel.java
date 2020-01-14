@@ -26,7 +26,7 @@ public class InvestModel<T> extends BaseModel {
 
     public void checkAccount(Context context,String account ,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
         Api.UpdataBaseUrl(gamePlatformBaseUrl);
-        subscribe(context, Api.getApiService().checkAccount(account), observerListener,transformer);
+        subscribe(context, Api.getApiService().checkAccount(), observerListener,transformer);
         Api.UpdataBaseUrl(null);
 
     }

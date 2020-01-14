@@ -14,6 +14,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
 import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
@@ -75,33 +76,34 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
         groupMessageAdapter.setAgreeListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
-                getPresenter().applyToFriendsPass(ApplicationUtil.getCurrentWallet().getAddress(),((ApplyGroup)list.get(position)).getId());
+                getPresenter().applyToFriendsPass(ApplicationUtil.getChatPersonalInfo().getId()+"",((ApplyGroup)list.get(position)).getId());
             }
         });
         groupMessageAdapter.setRefuseListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
-                getPresenter().applyToFriendsRefuse(ApplicationUtil.getCurrentWallet().getAddress(),((ApplyGroup)list.get(position)).getId());
+                getPresenter().applyToFriendsRefuse(ApplicationUtil.getChatPersonalInfo().getId()+"",((ApplyGroup)list.get(position)).getId());
 
             }
         });
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
         rcy.setAdapter(groupMessageAdapter);
         refreashView(list,rcy);
-        getPresenter().addFriendsList(ApplicationUtil.getCurrentWallet().getAddress(),page);
+        if (ApplicationUtil.getChatPersonalInfo()==null) return;
+        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
     }
 
     @Override
     protected void refresh() {
         super.refresh();
-        getPresenter().addFriendsList(ApplicationUtil.getCurrentWallet().getAddress(),page);
+        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
 
     }
 
     @Override
     protected void loadMore() {
         super.loadMore();
-        getPresenter().addFriendsList(ApplicationUtil.getCurrentWallet().getAddress(),page);
+        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
 
     }
 
@@ -256,7 +258,12 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
     }
 
     @Override
-    public void getChatTokenSuccess(String token) {
+    public void getChatTokenSuccess(RyunToken ryunToken) {
+
+    }
+
+    @Override
+    public void deleteFriendsSuccess(String s) {
 
     }
 

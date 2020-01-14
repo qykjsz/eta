@@ -32,6 +32,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
 import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
@@ -115,6 +116,7 @@ public class ChatFragment extends BaseFragment<ChatContact.View, ChatContact.Pre
 
     @Override
     public void init() {
+
         EventBus.getDefault().register(this);
         rcyChat.setNestedScrollingEnabled(false);
         list = new ArrayList<>();
@@ -144,7 +146,9 @@ public class ChatFragment extends BaseFragment<ChatContact.View, ChatContact.Pre
         });
         rcyChat.setLayoutManager(new LinearLayoutManager(getContext()));
         rcyChat.setAdapter(chatAdapter);
-        getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
+//        getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
+
+
 
     }
 
@@ -175,14 +179,14 @@ public class ChatFragment extends BaseFragment<ChatContact.View, ChatContact.Pre
     @Override
     public void refreashData() {
         super.refreashData();
-        getPresenter().newChaList(ApplicationUtil.getCurrentWallet().getAddress());
+//        getPresenter().newChaList(ApplicationUtil.getCurrentWallet().getAddress());
 
     }
 
     @Override
     protected void refresh() {
         super.refresh();
-        getPresenter().newChaList(ApplicationUtil.getCurrentWallet().getAddress());
+//        getPresenter().newChaList(ApplicationUtil.getCurrentWallet().getAddress());
     }
 
     @Override
@@ -242,6 +246,7 @@ public class ChatFragment extends BaseFragment<ChatContact.View, ChatContact.Pre
                             public Animator outAnim(View content) {
                                 return AnimHelper.createTopOutAnim(content);
                             }
+
                         }).bindData(new LayerManager.IDataBinder() {
                     @Override
                     public void bind(AnyLayer anyLayer) {
@@ -466,23 +471,33 @@ public class ChatFragment extends BaseFragment<ChatContact.View, ChatContact.Pre
     }
 
     @Override
-    public void getChatTokenSuccess(String token) {
-        RongIM.init(getContext());
-        RongIM.connect(token, new RongIMClient.ConnectCallback() {
-            @Override
-            public void onTokenIncorrect() {
+    public void getChatTokenSuccess(RyunToken ryunToken) {
 
-            }
-            @Override
-            public void onSuccess(String userid) {
-                Log.d("TAG", "--onSuccess" + userid);
+    }
 
-            }
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-                Log.d("TAG", "--onSuccess" + errorCode);
-            }
-        });
+//    @Override
+//    public void getChatTokenSuccess(String token) {
+//        RongIM.init(getContext());
+//        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+//            @Override
+//            public void onTokenIncorrect() {
+//
+//            }
+//            @Override
+//            public void onSuccess(String userid) {
+//                Log.d("TAG", "--onSuccess" + userid);
+//
+//            }
+//            @Override
+//            public void onError(RongIMClient.ErrorCode errorCode) {
+//                Log.d("TAG", "--onSuccess" + errorCode);
+//            }
+//        });
+//    }
+
+    @Override
+    public void deleteFriendsSuccess(String s) {
+
     }
 
     @Override

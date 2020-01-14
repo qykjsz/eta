@@ -119,7 +119,7 @@ public class BaseApi {
                     .addInterceptor(mRewriteCacheControlInterceptor)//没网的情况下
                     .addNetworkInterceptor(mRewriteCacheControlInterceptor)//有网的情况下
                     .addInterceptor(headerInterceptor)
-                    .addInterceptor(logInterceptor)
+//                    .addInterceptor(logInterceptor)
                     .cache(cache)
                     .build();
 

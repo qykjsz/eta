@@ -10,6 +10,33 @@ public class GroupMember  implements Serializable {
     private int state;
     private String address;
     private String photo;
+    private String pinyin;
+    private int type=0;
+
+
+    public GroupMember() {
+    }
+
+    public GroupMember(String pinyin, int type) {
+        this.pinyin = pinyin;
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
+    }
 
     public String getPhoto() {
         return photo;

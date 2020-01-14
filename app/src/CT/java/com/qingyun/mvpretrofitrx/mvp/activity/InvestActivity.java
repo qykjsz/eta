@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.develop.wallet.eth.WalletManager;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -23,6 +24,8 @@ import com.qingyun.mvpretrofitrx.mvp.entity.InvestLog;
 import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Platform;
 import com.qingyun.mvpretrofitrx.mvp.model.InvestModel;
+import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
+import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.presenter.InvestPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
@@ -30,6 +33,9 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.qingyun.mvpretrofitrx.mvp.weight.dialog.ProgressDialogUtils;
 import com.senon.mvpretrofitrx.R;
+
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -410,9 +416,38 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 getPresenter().getSuprtPlatform();
                 break;
             case R.id.btn_account:
-                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
-                getPresenter().checkAccount(tvAccount.getText().toString());
-                break;
+                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url()+tvAccount.getText().toString();
+
+//                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
+//                getPresenter().checkAccount(tvAccount.getText().toString());
+                RequestParams params = HttpParamsUtils.getX3Params(currentPlatform.getIs_user_url()+tvAccount.getText().toString());
+                x.http().get(params, new XCallBack() {
+                    @Override
+                    public void onAfterFinished() {
+
+                    }
+
+                    @Override
+                    public void onAfterSuccessOk(JSONObject object) {
+
+                        ivAccountTrue.setVisibility(View.VISIBLE);
+                        btnAccount.setVisibility(View.GONE);
+                        checkAccountSuccess = true;
+                        Glide.with(getContext()).load(R.mipmap.yz_cg_icon).into(ivAccountTrue);
+                    }
+
+                    @Override
+                    public void onAfterSuccessErr(JSONObject object, String msg) {
+                        ivAccountTrue.setVisibility(View.VISIBLE);
+                        btnAccount.setVisibility(View.GONE);
+                        checkAccountSuccess = false;
+                        Glide.with(getContext()).load(R.mipmap.yz_sb_icon).into(ivAccountTrue);
+                    }
+                });
+
+
+
+            break;
             case R.id.btn_amount:
 
                 getPresenter().getInvestAmountList();

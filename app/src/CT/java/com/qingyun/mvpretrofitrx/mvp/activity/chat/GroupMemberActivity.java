@@ -18,6 +18,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
 import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
@@ -267,7 +268,14 @@ public class GroupMemberActivity extends BaseActivity<ChatContact.View, ChatCont
     }
 
     @Override
-    public void getChatTokenSuccess(String token) {
+    public void getChatTokenSuccess(RyunToken ryunToken) {
+
+    }
+
+
+
+    @Override
+    public void deleteFriendsSuccess(String s) {
 
     }
 

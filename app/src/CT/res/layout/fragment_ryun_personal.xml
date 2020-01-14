@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_ffffff_top_round_25"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/textView151"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_55"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dp_25"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:textSize="@dimen/sp_15"
+        android:text="@string/avatar"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="61dp" />
+
+
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/textView159"
+        android:layout_width="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView151"
+        android:layout_height="@dimen/dp_48"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/name"
+        android:textSize="@dimen/sp_15"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="122dp" />
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/textView162"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_48"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/textView159"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:textSize="@dimen/sp_15"
+        android:text="@string/account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="189dp" />
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/ly_code"
+        android:layout_width="0dp"
+        android:text="@string/qr_code"
+        android:layout_height="@dimen/dp_48"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        app:layout_constraintTop_toBottomOf="@+id/textView162"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/sp_15"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/textView165"
+        app:layout_constraintTop_toBottomOf="@+id/ly_code"
+        android:layout_width="0dp"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:drawableEnd="@mipmap/wd_gd_icon"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:layout_height="@dimen/dp_48"
+        android:text="@string/more"
+        tools:layout_editor_absoluteX="34dp"
+        android:textSize="@dimen/sp_15"
+        tools:layout_editor_absoluteY="334dp" />
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="@dimen/dp_48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView151"
+        app:layout_constraintBottom_toBottomOf="@+id/textView151"
+        android:layout_marginEnd="@dimen/dp_34"
+        android:layout_height="@dimen/dp_48"
+        app:srcCompat="@mipmap/avater_default"
+        tools:layout_editor_absoluteX="266dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:singleLine="true"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/textView159"
+        android:textColor="@color/color_999999"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/dp_100"
+        app:layout_constraintBottom_toBottomOf="@+id/textView159"
+        app:layout_constraintEnd_toEndOf="@+id/textView159"
+        android:layout_marginEnd="@dimen/dp_34"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="301dp"
+        tools:layout_editor_absoluteY="152dp" />
+
+    <TextView
+        android:id="@+id/tv_account"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:gravity="end"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/dp_100"
+        android:textColor="@color/color_999999"
+        app:layout_constraintTop_toTopOf="@+id/textView162"
+        app:layout_constraintBottom_toBottomOf="@+id/textView162"
+        app:layout_constraintEnd_toEndOf="@+id/textView162"
+        android:layout_marginEnd="@dimen/dp_34"
+        tools:layout_editor_absoluteX="301dp"
+        tools:layout_editor_absoluteY="193dp" />
+
+    <ImageView
+        app:layout_constraintTop_toTopOf="@+id/ly_code"
+        app:layout_constraintBottom_toBottomOf="@+id/ly_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_34"
+        android:id="@+id/imageView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/lt_ewm_icon"
+        tools:layout_editor_absoluteX="266dp"
+        tools:layout_editor_absoluteY="173dp" />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/textView151"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/textView159"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/textView162"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintTop_toBottomOf="@+id/ly_code"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/line"
+
+        />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        style="@style/line"
+        app:layout_constraintTop_toBottomOf="@+id/textView165"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+</android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,12 +13,16 @@ import android.view.WindowManager;
 
 import com.allens.lib_ios_dialog.IosDialog;
 import com.develop.wallet.eth.Wallet;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.MyChatActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MainViewPagerAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
+import com.qingyun.mvpretrofitrx.mvp.entity.ImageSelectPath;
 import com.qingyun.mvpretrofitrx.mvp.fragment.AssetFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.ChatFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.ChooseBottomLevelFragment;
@@ -25,7 +30,9 @@ import com.qingyun.mvpretrofitrx.mvp.fragment.FindFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.InformationFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.MineFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.RYunChatActivity;
+import com.qingyun.mvpretrofitrx.mvp.fragment.ryunchat.RyunChatFragment;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.DialogUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardChangeListener;
 import com.qingyun.mvpretrofitrx.mvp.utils.KeyboardUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
@@ -115,36 +122,6 @@ public class MainActivity extends BaseActivity {
 //            @Override
 //            public void accept(Boolean aBoolean) throws Exception {
 //                if (aBoolean){
-                    RongIM.connect("rQ1VVZLSiT9OhLCBoZXFxvKnWFucwBQGJ3n06v7+JS96mrwlsXRaajsEUnuyQGvo/c3wOf4WIqA=", new RongIMClient.ConnectCallback() {
-                        @Override
-                        public void onTokenIncorrect() {
-                            Log.e("------------->","onTokenIncorrect");
-                        }
-                        @Override
-                        public void onSuccess(String userid) {
-                            Log.d("TAG", "--onSuccess" + userid);
-                            Log.e("------------->","onSuccess");
-
-                        }
-                        @Override
-                        public void onError(RongIMClient.ErrorCode errorCode) {
-                            Log.d("TAG", "--onSuccess" + errorCode);
-                            Log.e("------------->","onError");
-                        }
-                    });
-
-/**
- * 设置接收消息的监听器。
- *
- * 所有接收到的消息、通知、状态都经由此处设置的监听器处理。包括私聊消息、群组消息、聊天室消息以及各种状态。
- */
-        RongIM.getInstance().setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
-            @Override
-            public boolean onReceived(Message message, int left) {
-                Log.e("push>>message",message.toString());
-                return false;
-            }
-        });
 
 
                     EventBus.getDefault().register(this);
@@ -162,7 +139,7 @@ public class MainActivity extends BaseActivity {
 //        }
                     fragments.add(new InformationFragment());
                     fragments.add(new FindFragment());
-                    fragments.add(chatFragment);
+                    fragments.add(new RyunChatFragment());
                     fragments.add(new MineFragment());
 
 
@@ -238,9 +215,9 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         refreashUser();
-        if (index==3){
-            chatFragment.refreashData();
-        }
+//        if (index==3){
+//            chatFragment.refreashData();
+//        }
     }
 
 
@@ -302,4 +279,30 @@ public class MainActivity extends BaseActivity {
 //        }
 //        return super.onTouchEvent(ev);
 //    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        /*结果回调*/
+        if (requestCode == DialogUtils.CODE_CHOOSE_PICTURE_CAMEAR || requestCode == DialogUtils.CODE_CHOOSE_PICTURE_PHONE) {
+            if (data != null) {
+                List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                // 例如 LocalMedia 里面返回三种path
+                // 1.media.getPath(); 为原图path
+                // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true  注意：音视频除外
+                // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
+                // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                String picturePath = selectList.get(0).getCompressPath();
+                EventBus.getDefault().post(new ImageSelectPath(picturePath));
+
+
+            }
+        }
+
+    }
+
+
+
 }

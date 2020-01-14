@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_60">
+
+
+    <CheckBox
+        android:id="@+id/cb_select"
+        android:visibility="gone"
+        android:button="@drawable/cb_choose"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_height="wrap_content"
+
+        />
+
+
+    <TextView
+        android:id="@+id/city_name"
+        app:layout_constraintTop_toTopOf="@+id/imageView29"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView29"
+        app:layout_constraintStart_toEndOf="@+id/imageView29"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/qr_code"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="43dp" />
+
+    <ImageView
+        android:id="@+id/imageView29"
+        app:layout_constraintStart_toEndOf="@+id/cb_select"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_width="@dimen/dp_44"
+        android:layout_height="@dimen/dp_44"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@mipmap/avater_default"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="-51dp" />
+</android.support.constraint.ConstraintLayout>
