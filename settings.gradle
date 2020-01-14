@@ -7,4 +7,5 @@ include ':app','gallery','lib_ios_dialog',
    ':mutilanguagelibrary',
 ':swipe-reveal-layout',
 'IMKit',
-        'IMLib'
+        'IMLib',
+'library_circle_menu'
