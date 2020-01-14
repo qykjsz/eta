@@ -42,7 +42,24 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET"/>
+   <!-- //地图包、搜索包需要的基础权限-->
+    <!--允许程序打开网络套接字-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--允许程序设置内置sd卡的写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--允许程序获取网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--允许程序访问WiFi网络信息-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--允许程序读写手机状态和身份-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+
+    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
 
     <application
 
@@ -67,8 +84,11 @@
             android:exported="false"
             android:process=":gray" />
 
-
-
+        <!-- 高德地图-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="19700e5838a0272a492ec03806a6fac9" />
+        <!--<service android:name="com.amap.api.location.APSService"></service>-->
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TheArticleDetailsActivity"></activity>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ExpressTheDetailsActivity" />
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ThewalletManagementActivity" />
@@ -204,15 +224,17 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupChatActivity"/>
         <service android:name="com.qingyun.mvpretrofitrx.mvp.service.WebSocketService"/>
 
+        <!--解决融云打开相机闪退问题-->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.qingyun.wallet.FileProvider"
+            android:authorities="com.qingyun.et.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/rc_file_path" />
         </provider>
+
 
 
         <!--<activity-->
@@ -280,5 +302,4 @@
         </receiver>
 
     </application>
-
 </manifest>

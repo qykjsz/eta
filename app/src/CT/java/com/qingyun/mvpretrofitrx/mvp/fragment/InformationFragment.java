@@ -80,11 +80,11 @@ public class InformationFragment extends BaseFragment {
     public void init() {
         titles = new ArrayList<>();
         titles.add("快讯");
-        titles.add("文章");
+//        titles.add("文章");
         titles.add("行情");
         fragments = new ArrayList<>();
         fragments.add(new FlashFragment());
-        fragments.add(new TiteFragment());
+//        fragments.add(new TiteFragment());
         fragments.add(new MakieFragment());
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getActivity().getSupportFragmentManager());
         viewPager.setAdapter(mainViewPagerAdapter);
