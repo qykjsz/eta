@@ -12,6 +12,8 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.Item;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
+import com.qingyun.mvpretrofitrx.mvp.entity.NormalResponse;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunGroupInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.model.AboutUsModel;
 import com.qingyun.mvpretrofitrx.mvp.model.ChatModel;
@@ -232,13 +234,13 @@ public class ChatPresenter extends ChatContact.Presenter {
     }
 
     @Override
-    public void createGroup(String address, String name, String introduce) {
-        model.createGroup(context,address,name,introduce,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+    public void createGroup(String uid, String name, String introduce, String ids, MultipartBody.Part photo) {
+        model.createGroup(context,uid,name,introduce,ids,photo,getView().bindLifecycle(), new ObserverResponseListener<RyunGroupInfo>() {
 
             @Override
-            public void onNext(String s) {
+            public void onNext(RyunGroupInfo ryunGroupInfo) {
                 if(getView() != null){
-                    getView().createGroupSuccess(s);
+                    getView().createGroupSuccess(ryunGroupInfo.getQid()+"");
                 }
             }
 
@@ -248,6 +250,8 @@ public class ChatPresenter extends ChatContact.Presenter {
             }
         });
     }
+
+
 
     @Override
     public void getGroupList(String address) {
@@ -394,6 +398,81 @@ public class ChatPresenter extends ChatContact.Presenter {
     }
 
     @Override
+    public void deleteGroupAddressBook(String address, String qcode) {
+        model.deleteGroupAddressBook(context,address,qcode,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().exitGroupSuccess(s);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void addBlacklist(String uid, String tid) {
+
+        model.addBlacklist(context,uid,tid,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().addBlacklistSuccess(s);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void removeBlacklist(String uid, String tid) {
+        model.removeBlacklist(context,uid,tid,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().addBlacklistSuccess(s);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void getBlacklist(String uid) {
+        model.getBlacklist(context,uid,getView().bindLifecycle(), new ObserverResponseListener<List<GroupMember>>() {
+
+            @Override
+            public void onNext(List<GroupMember> groupMemberList) {
+                if(getView() != null){
+                    getView().getGroupMemberListSuccess(groupMemberList);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
     public void sendMessageToGroup(String fromwho, String togroup, String text) {
         model.sendMessageToGroup(context,fromwho,togroup,text,getView().bindLifecycle(), new ObserverResponseListener<String>() {
 
@@ -484,8 +563,8 @@ public class ChatPresenter extends ChatContact.Presenter {
     }
 
     @Override
-    public void applyToFriends(String fromwho, String towho) {
-        model.applyToFriends(context,fromwho,towho,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+    public void applyToFriends(String fromwho, String towho,String remark) {
+        model.applyToFriends(context,fromwho,towho,remark,getView().bindLifecycle(), new ObserverResponseListener<String>() {
 
             @Override
             public void onNext(String s) {
@@ -563,6 +642,150 @@ public class ChatPresenter extends ChatContact.Presenter {
             public void onNext(String s) {
                 if(getView() != null){
                     getView().deleteFriendsSuccess(s);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void setRemark(String uid, String tid, String name) {
+        model.setRemark(context, uid,  tid,  name,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().setRemarkSuccess(s);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getNicknameByAdd(String address) {
+        model.getNicknameByAdd(context,address,getView().bindLifecycle(), new ObserverResponseListener<GroupMember>() {
+
+            @Override
+            public void onNext(GroupMember groupMember) {
+                if(getView() != null){
+                    getView().getNicknameByAdressSuccess(groupMember);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void addGroupMember(String uid, String tid, String qid) {
+        model.addGroupMember(context,uid,  tid,  qid,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().addGroupMemberSuccess(s);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void removeGroupMenber(String uid, String tid, String qid) {
+        model.removeGroupMenber(context,uid,  tid,  qid,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String string) {
+                if(getView() != null){
+                    getView().removeGroupMenberSuccess(string);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void upDataGroupAvatar(String uid, String qid, MultipartBody.Part userphone) {
+        model.upDataGroupAvatar(context,uid,  qid,  userphone,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String string) {
+                if(getView() != null){
+                    getView().upDataAvatarSuccess(string);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void upDataGroupName(String uid, String qid, String name) {
+        model.upDataGroupName(context,uid,  qid,  name,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String string) {
+                if(getView() != null){
+                    getView().upDataGroupNameSuccess(string);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void upDataGroupExplain(String uid, String qid, String introduce) {
+        model.upDataGroupExplain(context,uid,  qid,  introduce,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String string) {
+                if(getView() != null){
+                    getView().upDataGroupExplainSuccess(string);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void addGroupAddressBook(String uid, String qid) {
+        model.addGroupAddressBook(context,uid,  qid,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String string) {
+                if(getView() != null){
+                    getView().addGroupMemberSuccess(string);
                 }
             }
 

@@ -30,6 +30,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Platform;
 import com.qingyun.mvpretrofitrx.mvp.entity.PlatformNoticResponse;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation;
 import com.qingyun.mvpretrofitrx.mvp.entity.Quotation1;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunGroupInfo;
 import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.entity.TheArticleDetails;
 import com.qingyun.mvpretrofitrx.mvp.entity.Time;
@@ -202,11 +203,11 @@ public interface ApiService {
     @POST("et_transaction")
     Observable <BaseResponse<String>>checkCanTransfer(@Query("name")String name);
 
-    @POST("addchatfriend_no")
-    Observable <BaseResponse<String>>applyToFriendsRefuse(@Query("fromwho")String fromwho, @Query("fid")int fid);
+    @POST("rongyun_addfriend_agree")
+    Observable <BaseResponse<String>>applyToFriendsRefuse(@Query("uid")String uid, @Query("tid")int tid,@Query("status")int status);
 
     @POST("rongyun_addfriend_agree")
-    Observable <BaseResponse<String>>applyToFriendsPass(@Query("uid")String uid, @Query("tid")int tid);
+    Observable <BaseResponse<String>>applyToFriendsPass(@Query("uid")String uid, @Query("tid")int tid,@Query("status")int status);
 
 
     @POST("rongyun_myfriends")
@@ -231,11 +232,15 @@ public interface ApiService {
     @POST("groupaddlist")
     Observable<BaseResponse<ApplyListRespones>> addGroupList(@Query("fromwho")String fromwho, @Query("page")int page);
 
-    @POST("addgroup")
-    Observable <BaseResponse<String>>createGroup(@Query("address")String address, @Query("name")String name, @Query("introduce")String introduce);
+    @POST("rongyun_addgrop")
+    @Multipart
+    Observable <BaseResponse<RyunGroupInfo>>createGroup(@Query("uid")String uid, @Query("name")String name, @Query("introduce")String introduce, @Query("ids")String ids, @Part MultipartBody.Part photo);
 
-    @POST("grouplist")
-    Observable  <BaseResponse<List<Group>>>getGroupList(@Query("address")String address);
+    @POST("rongyun_addgrop")
+    Observable <BaseResponse<RyunGroupInfo>>createGroupNotAvatar(@Query("uid")String uid, @Query("name")String name, @Query("introduce")String introduce, @Query("ids")String ids);
+
+
+
 
     @POST("groupverification")
     Observable <BaseResponse<String>>setIfGroupReview(@Query("address")String address, @Query("code")String code,@Query("verification")String verification);
@@ -249,20 +254,17 @@ public interface ApiService {
     Observable <BaseResponse<String>>dealApplyIntoGroupApply(@Query("address")String address, @Query("qcode")String qcode,@Query("sid") int sid,@Query("state")int state);
 
 
-    @POST("rongyun_getuser_address")
-    Observable <BaseResponse<GroupMember>>getNicknameByAdress(@Query("address")String address);
+    @POST("rongyun_getuser_id")
+    Observable <BaseResponse<GroupMember>>getNicknameByAdress(@Query("id")String id);
 
+    @POST("rongyun_getuser_address")
+    Observable <BaseResponse<GroupMember>>getNicknameByAdd(@Query("address")String address);
 
     @POST("upgroupuser")
     Observable <BaseResponse<String>>transferGroup(@Query("address")String address, @Query("qcode")String qcode,@Query("toaddress") String toaddress);
 
-    @POST("groupusers")
-    Observable<BaseResponse<List<GroupMember>>> getGroupMemberList(@Query("address")String address,@Query("qcode") String qcode);
-
-
-    @POST("groupout")
-    Observable<BaseResponse<String>> exitGroup(@Query("address")String address,@Query("qcode") String qcode);
-
+    @POST("rongyun_groupsuser")
+    Observable<BaseResponse<List<GroupMember>>> getGroupMemberList(@Query("address")String address,@Query("qid") String qid);
 
     @POST("togroupchating")
     Observable <BaseResponse<String>>sendMessageToGroup(@Query("fromwho")String fromwho, @Query("togroup")String togroup,@Query("text") String text);
@@ -280,11 +282,11 @@ public interface ApiService {
     Observable <BaseResponse<String>>changeNickname(@Query("uid")String uid, @Query("name")String name);
 
     @POST("rongyun_addfriend")
-    Observable <BaseResponse<String>>applyToFriends(@Query("uid")String fromwho, @Query("tid")String towho);
+    Observable <BaseResponse<String>>applyToFriends(@Query("uid")String fromwho, @Query("tid")String towho, @Query("remarks")String remarks);
 
 
-    @POST("groupinformation")
-    Observable <BaseResponse<Group>>getGroupInfo(@Query("address")String address, @Query("qcode")String qcode);
+    @POST("rongyun_group")
+    Observable <BaseResponse<Group>>getGroupInfo(@Query("address")String address, @Query("qid")String qid);
 
     @POST("rongyun_upmyphoto")
     @Multipart
@@ -295,4 +297,50 @@ public interface ApiService {
 
     @POST("rongyun_delmyfriend")
     Observable <BaseResponse<String>>deleteFriends(@Query("uid")String uid,@Query("tid")String tid);
+
+    @POST("rongyun_userremarks")
+    Observable <BaseResponse<String>>setRemark(@Query("uid")String uid,@Query("tid")String tid,@Query("name")String name);
+
+
+    @POST("rongyun_addgropuser")
+    Observable <BaseResponse<String>>addGroupMember(@Query("uid")String uid,@Query("tid")String tid,@Query("qid")String qid);
+
+
+    @POST("rongyun_delgropuser_foradmin")
+    Observable <BaseResponse<String>>removeGroupMenber(@Query("uid")String uid,@Query("tid")String tid,@Query("qid")String qid);
+
+
+    @POST("rongyun_delgropuser_foruser")
+    Observable <BaseResponse<String>>exitGroup(@Query("uid")String uid,@Query("qid")String qid);
+
+
+    @POST("rongyun_upgroupphpoto")
+    @Multipart
+    Observable  <BaseResponse<String>>upDataGroupAvatar(@Query("uid")String uid,@Query("qid")String qid, @Part MultipartBody.Part userphone);
+
+    @POST("rongyun_upgroupname")
+    Observable  <BaseResponse<String>>upDataGroupName(@Query("uid")String uid,@Query("qid")String qid, @Query("name")String name);
+
+    @POST("rongyun_upgroupintroduce")
+    Observable  <BaseResponse<String>>upDataGroupExplain(@Query("uid")String uid,@Query("qid")String qid, @Query("introduce")String introduce);
+
+
+    @POST("rongyun_addmygroups")
+    Observable  <BaseResponse<String>>addGroupAddressBook(@Query("uid")String uid,@Query("qid")String qid);
+
+
+    @POST("rongyun_addmygroups")
+    Observable  <BaseResponse<String>>deleteGroupAddressBook(@Query("uid")String uid,@Query("qid")String qid);
+
+    @POST("rongyun_mygroups")
+    Observable  <BaseResponse<List<Group>>>getGroupList(@Query("uid")String uid);
+
+    @POST("rongyun_addblacklist")
+    Observable  <BaseResponse<String>>addBlacklist(@Query("uid")String uid,@Query("tid")String tid);
+
+    @POST("rongyun_delblacklist")
+    Observable  <BaseResponse<String>>removeBlacklist(@Query("uid")String uid,@Query("tid")String tid);
+
+    @POST("rongyun_blacklist")
+    Observable  <BaseResponse<List<GroupMember>>>getBlacklist(@Query("uid")String uid);
 }

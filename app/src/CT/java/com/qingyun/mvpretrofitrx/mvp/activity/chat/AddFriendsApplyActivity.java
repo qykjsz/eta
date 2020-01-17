@@ -1,10 +1,10 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.chat;
 
+import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
@@ -20,9 +20,14 @@ import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
 
-public class AddFriendsApplyActivity extends BaseActivity<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
+public class AddFriendsApplyActivity extends BaseActivity<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
+    @BindView(R.id.tv_remark)
+    EditText tvRemark;
     private GroupMember groupMember;
 
     @Override
@@ -63,13 +68,13 @@ public class AddFriendsApplyActivity extends BaseActivity<ChatContact.View,ChatC
 
     @Override
     public void init() {
-        groupMember =  (GroupMember)getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
-
+        groupMember = (GroupMember) getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
+        tvRemark.setText(groupMember.getName());
         getTvTitleRight().setText(R.string.send);
         getTvTitleRight().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getPresenter().applyToFriends(ApplicationUtil.getChatPersonalInfo().getId()+"",groupMember.getId()+"");
+                getPresenter().applyToFriends(ApplicationUtil.getChatPersonalInfo().getId() + "", groupMember.getId() + "", tvRemark.getText().toString());
             }
         });
     }
@@ -216,7 +221,54 @@ public class AddFriendsApplyActivity extends BaseActivity<ChatContact.View,ChatC
     }
 
     @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindToLifecycle();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.brn_clear)
+    public void onViewClicked() {
+        tvRemark.setText("");
     }
 }

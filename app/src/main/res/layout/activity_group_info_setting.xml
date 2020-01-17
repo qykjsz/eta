@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_FFFFFF"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView164"
+        android:layout_width="0dp"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView167"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/sp_12"
+        android:background="@color/color_F5F5F5"
+        android:text="@string/tip_set_beizhu"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
+        android:id="@+id/textView167"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_49"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:text="@string/beizhu_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView164" />
+
+    <EditText
+        android:background="@color/color_FFFFFF"
+        android:id="@+id/tv_remark"
+        android:layout_width="0dp"
+        android:maxLength="20"
+        app:layout_constraintTop_toTopOf="@+id/textView167"
+        app:layout_constraintBottom_toBottomOf="@+id/textView167"
+        app:layout_constraintStart_toEndOf="@+id/textView167"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="83dp" />
+
+    <ImageView
+        android:id="@+id/brn_clear"
+        app:layout_constraintTop_toTopOf="@+id/tv_remark"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_remark"
+        app:layout_constraintEnd_toEndOf="@+id/tv_remark"
+        android:padding="@dimen/dp_padding_x_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/lt_xgsc_icon"
+        tools:layout_editor_absoluteX="299dp"
+        tools:layout_editor_absoluteY="313dp" />
+
+
+    <TextView
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        style="@style/line"
+        app:layout_constraintTop_toBottomOf="@+id/tv_remark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+</android.support.constraint.ConstraintLayout>

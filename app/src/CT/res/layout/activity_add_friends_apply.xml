@@ -32,14 +32,15 @@
         android:gravity="center_vertical"
         android:paddingStart="@dimen/dp_padding_x_min"
         android:paddingEnd="@dimen/dp_padding_x_min"
-        android:text="@string/i_am"
+        android:text="@string/beizhu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView164" />
 
     <EditText
         android:background="@color/color_FFFFFF"
-        android:id="@+id/textView173"
+        android:id="@+id/tv_remark"
         android:layout_width="0dp"
+        android:maxLength="20"
         app:layout_constraintTop_toTopOf="@+id/textView167"
         app:layout_constraintBottom_toBottomOf="@+id/textView167"
         app:layout_constraintStart_toEndOf="@+id/textView167"
@@ -51,9 +52,9 @@
 
     <ImageView
         android:id="@+id/brn_clear"
-        app:layout_constraintTop_toTopOf="@+id/textView173"
-        app:layout_constraintBottom_toBottomOf="@+id/textView173"
-        app:layout_constraintEnd_toEndOf="@+id/textView173"
+        app:layout_constraintTop_toTopOf="@+id/tv_remark"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_remark"
+        app:layout_constraintEnd_toEndOf="@+id/tv_remark"
         android:padding="@dimen/dp_padding_x_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,7 +67,7 @@
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_1"
         style="@style/line"
-        app:layout_constraintTop_toBottomOf="@+id/textView173"
+        app:layout_constraintTop_toBottomOf="@+id/tv_remark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 

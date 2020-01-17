@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class FriendsMessageAdapter extends BaseAdapter<ApplyGroup, FriendsMessageAdapter.GroupMessageViewHolder> {
+
 
 
     private OnItemClickListener refuseListener;
@@ -47,51 +49,56 @@ public class FriendsMessageAdapter extends BaseAdapter<ApplyGroup, FriendsMessag
 
     @Override
     protected void viewHolderBind(GroupMessageViewHolder holder, final int position) {
-        if (getList().get(position).getState()==1){
+        if (getList().get(position).getState() == 1) {
             holder.btnAgree.setVisibility(View.VISIBLE);
             holder.btnRefuse.setVisibility(View.VISIBLE);
             holder.tvStatus.setVisibility(View.GONE);
 
-        }else {
+        } else {
             holder.btnAgree.setVisibility(View.GONE);
             holder.btnRefuse.setVisibility(View.GONE);
             holder.tvStatus.setVisibility(View.VISIBLE);
 
-            if (getList().get(position).getState()==2){
+            if (getList().get(position).getState() == 2) {
                 holder.tvStatus.setText(R.string.agreed);
                 holder.tvStatus.setTextColor(getContext().getResources().getColor(R.color.main_blue));
-            }else if (getList().get(position).getState()==3){
+            } else if (getList().get(position).getState() == 3) {
                 holder.tvStatus.setText(R.string.refused);
                 holder.tvStatus.setTextColor(getContext().getResources().getColor(R.color.color_B7BCDC));
             }
         }
 
-        Glide.with(getContext()).load(getList().get(position).getPhone()).apply(GlideUtils.getAvaterOptions()).into(holder.ivPic);
+        Glide.with(getContext()).load(getList().get(position).getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(holder.ivPic);
         holder.btnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                refuseListener.onItemClick(getList(),position);
+                refuseListener.onItemClick(getList(), position);
             }
         });
 
         holder.btnAgree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                agreeListener.onItemClick(getList(),position);
+                agreeListener.onItemClick(getList(), position);
             }
         });
 
         holder.tvName.setText(getList().get(position).getName());
-
+        if (TextUtils.isEmpty(getList().get(position).getRemarks())){
+            holder.textView178.setText(R.string.apply_to_be_your_friends);
+        }else {
+            holder.textView178.setText(getList().get(position).getRemarks());
+        }
     }
 
-    public  void setRefuseListener(OnItemClickListener refuseListener){
+    public void setRefuseListener(OnItemClickListener refuseListener) {
         this.refuseListener = refuseListener;
     }
 
-    public  void setAgreeListener(OnItemClickListener agreeListener){
+    public void setAgreeListener(OnItemClickListener agreeListener) {
         this.agreeListener = agreeListener;
     }
+
     class GroupMessageViewHolder extends BaseViewHolder {
 
 
@@ -109,6 +116,8 @@ public class FriendsMessageAdapter extends BaseAdapter<ApplyGroup, FriendsMessag
         TextView btnRefuse;
         @BindView(R.id.tv_status)
         TextView tvStatus;
+        @BindView(R.id.textView178)
+        TextView textView178;
         public GroupMessageViewHolder(View itemView) {
             super(itemView);
         }

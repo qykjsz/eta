@@ -26,16 +26,16 @@ public class MyChatListAdapter extends ConversationListAdapter {
         return position;
     }
 
-    //绑定视图并返回
-    @Override
-    protected View newView(Context context, int position, ViewGroup group) {
-        return mInflater.inflate(R.layout.item_chat_message_me,group,false);
-    }
+//    //绑定视图并返回
+//    @Override
+//    protected View newView(Context context, int position, ViewGroup group) {
+//        return newView(context, position, group);
+////        return mInflater.inflate(R.layout.item_chat_message_me,group,false);
+//    }
     // 设置视图的元素
     @Override
     protected void bindView(View v, int position, UIConversation data) {
-
-        Log.e("ryun",data.toString());
+        super.bindView(v,position,data);
     }
 
 

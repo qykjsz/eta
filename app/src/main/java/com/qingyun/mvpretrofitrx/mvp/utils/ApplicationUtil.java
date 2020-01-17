@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
@@ -141,6 +142,19 @@ public class ApplicationUtil extends Application implements Application.Activity
 
     public static void setChatPersonalInfo(GroupMember chatPersonalInfo) {
         ApplicationUtil.chatPersonalInfo = chatPersonalInfo;
+
+        final UserInfo userInfo = new UserInfo(chatPersonalInfo.getId()+"",chatPersonalInfo.getName(), Uri.parse(chatPersonalInfo.getPhoto()));
+        RongIM.getInstance().setCurrentUserInfo(userInfo);
+        RongIM.getInstance().setMessageAttachedUserInfo(true);
+        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+
+            @Override
+            public UserInfo getUserInfo(String userId) {
+
+                return userInfo;//根据 userId 去你的用户系统里查询对应的用户信息返回给融云 SDK。
+            }
+
+        }, true);
     }
 
     public static Map<String,List<Wallet>> getWallet(){

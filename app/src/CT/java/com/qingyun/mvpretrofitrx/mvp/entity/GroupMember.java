@@ -11,23 +11,55 @@ public class GroupMember  implements Serializable {
     private String address;
     private String photo;
     private String pinyin;
-    private int type=0;
+    private String type;
+    private boolean isCheck = false;
+    private int type1;
+    private String remarks;
+//    1+,2-
+    private int actionType = 0;
 
+    public int getActionType() {
+        return actionType;
+    }
+
+    public void setActionType(int actionType) {
+        this.actionType = actionType;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
 
     public GroupMember() {
     }
 
+    public GroupMember(int actionType) {
+        this.actionType = actionType;
+    }
+
     public GroupMember(String pinyin, int type) {
         this.pinyin = pinyin;
-        this.type = type;
+        this.type1 = type;
     }
 
     public int getType() {
-        return type;
+        return type1;
     }
 
     public void setType(int type) {
-        this.type = type;
+        this.type1 = type;
     }
 
     public String getPinyin() {

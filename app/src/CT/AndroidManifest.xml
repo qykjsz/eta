@@ -177,6 +177,7 @@
         <activity android:name="com.zbar.lib.CaptureActivity"/>
 
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TokenProfileActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupExplainSettingActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.InvestActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.BusinessGetMoneyLogActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ChooseBottomLsvelToCreateActivity"/>
@@ -200,8 +201,10 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.FriendsSettingActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.ContactDetailActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.ChooseContactActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupExplainActivity"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupMemberActivity"/>
 
-
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupInfoSettingActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupChatInfoActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.CreateRyunGroupActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.ChatAcrivity"
@@ -216,6 +219,7 @@
 
         </activity>
 
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupAddressBookActivity"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.MyChatActivity"
 
             android:configChanges="keyboardHidden|orientation|screenSize"

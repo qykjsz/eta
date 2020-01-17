@@ -6,16 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.bumptech.glide.request.target.ThumbnailImageViewTarget;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.FriendsMessageActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.rongyun.ContactDetailActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupAddressBookActivity;
 import com.qingyun.mvpretrofitrx.mvp.adapter.RyunContactAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
@@ -23,22 +20,20 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
+import com.qingyun.mvpretrofitrx.mvp.entity.SystemNotice;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
-import com.qingyun.mvpretrofitrx.mvp.view.lettercontact.LetterComparator;
 import com.qingyun.mvpretrofitrx.mvp.view.lettercontact.PinnedHeaderDecoration;
 import com.qingyun.mvpretrofitrx.mvp.view.lettercontact.WaveSideBarView;
-import com.qingyun.mvpretrofitrx.mvp.view.lettercontact.adapter.CityAdapter;
-import com.qingyun.mvpretrofitrx.mvp.view.lettercontact.bean.City;
-import com.rance.library.ButtonEventListener;
-import com.rance.library.SectorMenuButton;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
-import java.lang.reflect.Type;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,13 +42,15 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.ObservableTransformer;
 
-public class RyunAddressbookFragment extends BaseFragment<ChatContact.View,ChatContact.Presenter> implements  ChatContact.View{
+public class RyunAddressbookFragment extends BaseFragment<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R.id.side_view)
     WaveSideBarView mSideBarView;
     Unbinder unbinder;
     RyunContactAdapter adapter;
+    @BindView(R.id.iv_new_message)
+    TextView ivNewMessage;
     private List<GroupMember> list;
 
 
@@ -75,6 +72,7 @@ public class RyunAddressbookFragment extends BaseFragment<ChatContact.View,ChatC
 
     @Override
     public void init() {
+        EventBus.getDefault().register(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         final PinnedHeaderDecoration decoration = new PinnedHeaderDecoration();
@@ -110,8 +108,8 @@ public class RyunAddressbookFragment extends BaseFragment<ChatContact.View,ChatC
             @Override
             public void onItemClick(GroupMember groupMember) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(IntentUtils.GROUP_MEMBER,groupMember);
-                startActivity(ContactDetailActivity.class,bundle);
+                bundle.putSerializable(IntentUtils.GROUP_MEMBER, groupMember);
+                startActivity(ContactDetailActivity.class, bundle);
             }
         });
         mRecyclerView.setAdapter(adapter);
@@ -133,12 +131,17 @@ public class RyunAddressbookFragment extends BaseFragment<ChatContact.View,ChatC
     @Override
     public void refreashData() {
         super.refreashData();
-        if (ApplicationUtil.getChatPersonalInfo()==null)
+        if (ApplicationUtil.getChatPersonalInfo() == null)
             return;
-        getPresenter().getFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"","");
+        getPresenter().getFriendsList(ApplicationUtil.getChatPersonalInfo().getId() + "", "");
     }
 
 
+    @Override
+    public void onMyResume() {
+        super.onMyResume();
+        refreashData();
+    }
 
     @Override
     protected String getTitleRightText() {
@@ -173,9 +176,11 @@ public class RyunAddressbookFragment extends BaseFragment<ChatContact.View,ChatC
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_new_friends:
+                ivNewMessage.setVisibility(View.GONE);
                 startActivity(FriendsMessageActivity.class);
                 break;
             case R.id.btn_group:
+                startActivity(GroupAddressBookActivity.class);
                 break;
         }
     }
@@ -318,9 +323,43 @@ public class RyunAddressbookFragment extends BaseFragment<ChatContact.View,ChatC
     }
 
 
-
     @Override
     public void deleteFriendsSuccess(String s) {
+
+    }
+
+    @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
 
     }
 
@@ -329,4 +368,13 @@ public class RyunAddressbookFragment extends BaseFragment<ChatContact.View,ChatC
         return this.bindUntilEvent(FragmentEvent.PAUSE);
 
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSystemNoticeReceiver(SystemNotice systemNotice) {
+//        if (systemNotice.getType().equals("1"))
+        ivNewMessage.setVisibility(View.VISIBLE);
+    }
+
+
 }
