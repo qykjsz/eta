@@ -16,6 +16,9 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
 
+import java.util.ArrayList;
+
+import io.rong.callkit.RongCallKit;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationFragment;
 import io.rong.imlib.model.Conversation;
@@ -97,5 +100,21 @@ public class FriendChatActivity extends BaseActivity {
 
             }
         });
+        /**
+         * 发起单人通话。
+         *
+         * @param context   上下文
+         * @param targetId  会话 id
+         * @param mediaType 会话媒体类型
+         */
+//        RongCallKit.startSingleCall(FriendChatActivity.this,targetId,RongCallKit.CallMediaType.CALL_MEDIA_TYPE_AUDIO);
+//        RongCallKit.setGroupMemberProvider(new RongCallKit.GroupMembersProvider() {
+//            @Override
+//
+//            public ArrayList<String> getMemberList(String groupId, final RongCallKit.OnGroupMembersResult result) {
+//                //返回群组成员userId的集合
+//                return null;
+//            }
+//        });
     }
 }

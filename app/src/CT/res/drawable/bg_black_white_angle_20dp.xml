@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--无背景，只有边线-->
+    <!--<corners android:radius="0dp"/>为圆角度多少-->
+    <corners android:radius="120dp"/>
+    <!--内部背景颜色 此颜色为透明-->
+    <solid android:color="#88ffffff"/>
+    <stroke
+        android:width="1dp"
+        android:color="@color/white"
+        />
+</shape>

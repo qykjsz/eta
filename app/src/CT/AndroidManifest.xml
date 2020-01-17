@@ -232,6 +232,7 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupChatActivity"/>
         <service android:name="com.qingyun.mvpretrofitrx.mvp.service.WebSocketService"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AdvertisementActivity"/>
 
         <!--融云音视频-->
         <activity
