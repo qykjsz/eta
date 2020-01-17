@@ -1,11 +1,11 @@
-include ':app','gallery','lib_ios_dialog',
-        'pager-bottom-tab-strip','xbanner','orcameralib','progress','library_progress','marqueelibrary',
+include ':app', 'gallery', 'lib_ios_dialog',
+        'pager-bottom-tab-strip', 'xbanner', 'orcameralib', 'progress', 'library_progress', 'marqueelibrary',
         'library_imgWatcher',
         'magicindicator',
         'indicatorseekbar',
         'wallet-eth',
-   ':mutilanguagelibrary',
-':swipe-reveal-layout',
-'IMKit',
+        ':mutilanguagelibrary',
+        ':swipe-reveal-layout',
+        'IMKit',
         'IMLib',
-'library_circle_menu'
+        'library_circle_menu', ':CallKit', ':CallLib'

@@ -28,7 +28,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 新消息震动提醒 -->
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application>
 
         <activity
@@ -146,6 +151,8 @@
         <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
         <!--android:resource="@xml/rc_file_path"/>-->
         <!--</provider>-->
+
+
     </application>
 
 </manifest>
