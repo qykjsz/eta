@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <EditText
+        android:id="@+id/et"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dp_177"
+        android:paddingTop="@dimen/dp_padding_x_min"
+        android:paddingStart="@dimen/dp_padding_x_min"
+        android:paddingEnd="@dimen/dp_padding_x_min"
+        android:paddingBottom="@dimen/dp_30"
+        android:maxLength="300"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/et"
+        style="@style/line"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintTop_toTopOf="@+id/textView181"
+        app:layout_constraintBottom_toBottomOf="@+id/textView181"
+        app:layout_constraintEnd_toStartOf="@+id/textView181"
+        android:textColor="@color/color_999999"
+        tools:layout_editor_absoluteX="220dp"
+        tools:layout_editor_absoluteY="153dp" />
+
+    <TextView
+        android:id="@+id/textView181"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:textColor="@color/color_999999"
+        app:layout_constraintTop_toTopOf="@+id/textView185"
+        app:layout_constraintBottom_toBottomOf="@+id/textView185"
+        app:layout_constraintEnd_toStartOf="@+id/textView185"
+        tools:layout_editor_absoluteX="299dp"
+        tools:layout_editor_absoluteY="153dp" />
+
+    <TextView
+        android:id="@+id/textView185"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="300"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/main_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/et"
+        android:layout_marginBottom="@dimen/dp_padding_x_min"
+        tools:layout_editor_absoluteX="370dp"
+        tools:layout_editor_absoluteY="153dp" />
+
+
+</android.support.constraint.ConstraintLayout>

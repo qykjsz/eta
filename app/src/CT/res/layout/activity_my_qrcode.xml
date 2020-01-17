@@ -9,12 +9,12 @@
     <com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout
         android:id="@+id/constraintLayout8"
         android:layout_width="@dimen/dp_0"
-        android:layout_height="@dimen/dp_350"
-        android:layout_marginStart="@dimen/dp_40"
-        android:layout_marginEnd="@dimen/dp_40"
+        android:layout_height="@dimen/dp_400"
+        android:layout_marginStart="@dimen/dp_padding_x_min"
+        android:layout_marginEnd="@dimen/dp_padding_x_min"
         app:fp_round_corner="fp_corner_all"
         app:fp_shadowColor="@color/shadow_color"
-        android:layout_marginTop="@dimen/dp_94"
+        android:layout_marginTop="@dimen/dp_39"
         app:fp_shadowRadius="@dimen/shadow_radius"
         app:fp_shadowRoundRadius="@dimen/dp_5"
         app:fp_shadowShape="fp_round_rectangle"
@@ -44,6 +44,7 @@
             <TextView
                 android:id="@+id/line"
                 style="@style/line"
+                android:visibility="invisible"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="@dimen/dp_1"
                 android:layout_marginTop="@dimen/dp_80"
@@ -69,7 +70,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_marginBottom="@dimen/dp_4"
-                android:text="@string/scan_to_be_my_friends"
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
@@ -78,17 +78,39 @@
 
             <ImageView
                 android:id="@+id/iv_code"
-                android:layout_width="@dimen/dp_178"
-                android:layout_height="@dimen/dp_178"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="@dimen/dp_255"
+                android:layout_height="@dimen/dp_255"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/line" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:textColor="@color/color_999999"
+                android:text="@string/scan_to_be_my_friends_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
         </android.support.constraint.ConstraintLayout>
 
 
     </com.qingyun.mvpretrofitrx.mvp.weight.FpShadowLayout>
+
+
+
+    <TextView
+        android:id="@+id/btn_save_code"
+        style="@style/main_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/dp_50"
+        android:text="@string/save_qrcode"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
+        />
 
 </android.support.constraint.ConstraintLayout>

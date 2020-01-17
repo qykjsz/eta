@@ -230,7 +230,7 @@ public class MyChatActivity extends BaseActivity<ChatContact.View, ChatContact.P
     @Override
     protected void setHeaderData() {
         super.setHeaderData();
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE  | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
     }
 
@@ -294,6 +294,41 @@ public class MyChatActivity extends BaseActivity<ChatContact.View, ChatContact.P
 
     @Override
     public void deleteFriendsSuccess(String s) {
+
+    }
+
+    @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
 
     }
 

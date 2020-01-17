@@ -41,8 +41,7 @@ public class ChatAcrivity extends BaseActivity {
 
     @Override
     public boolean haveHeader() {
-        return
-                true;
+        return true;
     }
 
     @Override

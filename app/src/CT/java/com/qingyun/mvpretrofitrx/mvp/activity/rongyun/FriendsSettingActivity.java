@@ -1,8 +1,11 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.rongyun;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.qingyun.mvpretrofitrx.mvp.activity.MakeCopyWalletActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
@@ -72,7 +75,7 @@ public class FriendsSettingActivity extends BaseActivity<ChatContact.View,ChatCo
 
     @Override
     public void init() {
-
+        getPresenter().getBlacklist(ApplicationUtil.getChatPersonalInfo().getId()+"");
         groupMember = (GroupMember) getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
 
     }
@@ -90,7 +93,11 @@ public class FriendsSettingActivity extends BaseActivity<ChatContact.View,ChatCo
             case R.id.btn_set_beizhu:
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(IntentUtils.GROUP_MEMBER,groupMember);
-                startActivity(SetBeizhuActivity.class,bundle);
+//                startActivity(SetBeizhuActivity.class,bundle);
+                Intent intent = new Intent(getContext(),SetBeizhuActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent,0);
+
                 break;
             case R.id.btn_delete_friends:
                 DialogUtils.showConfirmDialog(getActivity(), 0, R.string.sure_to_delete_friends, R.string.cancel, R.string.confirm, new View.OnClickListener() {
@@ -145,6 +152,23 @@ public class FriendsSettingActivity extends BaseActivity<ChatContact.View,ChatCo
 
     @Override
     public void getGroupMemberListSuccess(List<GroupMember> groupMemberList) {
+
+        for (int i=0;i<groupMemberList.size();i++){
+            if (groupMemberList.get(i).getId()==groupMember.getId()){
+                cbRemovefriends.setChecked(true);
+            }
+        }
+        cbRemovefriends.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    getPresenter().addBlacklist(ApplicationUtil.getChatPersonalInfo().getId()+"",groupMember.getId()+"");
+                }else {
+                    getPresenter().removeBlacklist(ApplicationUtil.getChatPersonalInfo().getId()+"",groupMember.getId()+"");
+
+                }
+            }
+        });
 
     }
 
@@ -243,13 +267,56 @@ public class FriendsSettingActivity extends BaseActivity<ChatContact.View,ChatCo
 
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==1){
+            setResult(1);
+            finish();
+        }
+    }
 
     @Override
     public void deleteFriendsSuccess(String s) {
         ToastUtil.showShortToast(s);
+        setResult(1);
         finish();
 
+    }
+
+    @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
+        ToastUtil.showShortToast(s);
     }
 
     @Override

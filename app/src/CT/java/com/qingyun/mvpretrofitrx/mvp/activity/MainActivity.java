@@ -215,6 +215,8 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         refreashUser();
+        fragments.get(index).onMyResume();
+
 //        if (index==3){
 //            chatFragment.refreashData();
 //        }

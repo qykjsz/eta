@@ -11,6 +11,36 @@ public class Group  implements Serializable {
     private int verification;
 //    本人是否是群主 1是 2不是
     private int owner;
+    private int qzid;
+    private int id;
+    private String photo;
+
+
+
+
+    public int getQzid() {
+        return qzid;
+    }
+
+    public void setQzid(int qzid) {
+        this.qzid = qzid;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public String getName() {
         return name;

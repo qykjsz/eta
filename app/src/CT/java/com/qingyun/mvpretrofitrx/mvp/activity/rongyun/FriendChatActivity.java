@@ -7,15 +7,20 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
 
 import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationFragment;
 import io.rong.imlib.model.Conversation;
+
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN;
 
 public class FriendChatActivity extends BaseActivity {
     private String mTargetId="FriendChatActivity";
@@ -28,6 +33,11 @@ public class FriendChatActivity extends BaseActivity {
     @Override
     protected String getTitleLeftText() {
         return null;
+    }
+
+    @Override
+    public boolean haveHeader() {
+        return true;
     }
 
     @Override
@@ -45,6 +55,13 @@ public class FriendChatActivity extends BaseActivity {
         return null;
     }
 
+
+    @Override
+    protected void setHeaderData() {
+        super.setHeaderData();
+//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |SOFT_INPUT_STATE_HIDDEN );
+
+    }
     @Override
     public BaseView createView() {
         return null;
@@ -55,9 +72,10 @@ public class FriendChatActivity extends BaseActivity {
 //        String targetId = "67";
 //        Conversation.ConversationType conversationType = Conversation.ConversationType.PRIVATE;
         Uri dd = getIntent().getData();
-        String targetId = getIntent().getData().getQueryParameter("targetId");  //传递的融云的id
+        final String targetId = getIntent().getData().getQueryParameter("targetId");  //传递的融云的id
         String targetIds = getIntent().getData().getQueryParameter("targetIds");  //传递的融云的id
         String title = getIntent().getData().getQueryParameter("title"); //传递的融云名称/用户昵称
+        setTitle(title);
 //        Conversation.ConversationType conversationType = Conversation.ConversationType.valueOf( getIntent().getData().getLastPathSegment());
         ConversationFragment mConversationFragment=new ConversationFragment();
         Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
@@ -68,6 +86,16 @@ public class FriendChatActivity extends BaseActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fly_friends_chat,mConversationFragment );
         transaction.commit(); // 提交创建Fragment请求
-        
+        setIvTitleRight(R.mipmap.lt_zlsz_icon, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                if (getIntent().getData().getLastPathSegment().equals(Conversation.ConversationType.GROUP.getName())){
+                    bundle.putString(IntentUtils.ID,targetId);
+                    startActivity(GroupChatInfoActivity.class,bundle);
+                }
+
+            }
+        });
     }
 }

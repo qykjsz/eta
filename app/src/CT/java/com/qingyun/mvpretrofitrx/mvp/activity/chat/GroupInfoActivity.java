@@ -268,6 +268,7 @@ public class GroupInfoActivity extends BaseActivity<ChatContact.View, ChatContac
         tvQcode.setText(group.getCode());
         tvGroupNum.setText(group.getNumber());
         tvGroupAvatar.setText(group.getName().substring(0,1));
+
         if (group.getVerification() == 1) {
             cbVerti.setChecked(true);
         }
@@ -303,6 +304,41 @@ public class GroupInfoActivity extends BaseActivity<ChatContact.View, ChatContac
 
     @Override
     public void deleteFriendsSuccess(String s) {
+
+    }
+
+    @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
 
     }
 

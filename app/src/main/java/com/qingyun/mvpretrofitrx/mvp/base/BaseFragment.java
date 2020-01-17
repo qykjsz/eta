@@ -133,6 +133,8 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
     }
 
 
+    public void onMyResume() {
+    }
 
     protected void initRefreshLayout(SmartRefreshLayout refreshLayout) {
         if (refreshLayout == null)

@@ -79,9 +79,9 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
     public void init() {
        groupMember =  (GroupMember)getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
        address = groupMember.getAddress();
-       tvAddress.setText(address);
+       tvAddress.setText(groupMember.getId()+"");
        tvName.setText(groupMember.getName());
-        Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getAvaterOptions()).into(ivAvatar);
+        Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(ivAvatar);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,6 +238,41 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
 
     @Override
     public void deleteFriendsSuccess(String s) {
+
+    }
+
+    @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
 
     }
 

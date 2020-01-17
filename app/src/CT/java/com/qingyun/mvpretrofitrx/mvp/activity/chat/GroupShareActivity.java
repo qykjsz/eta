@@ -13,6 +13,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatCode;
 import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.utils.DensityUtil;
+import com.qingyun.mvpretrofitrx.mvp.utils.GlideUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZXingUtils;
 import com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView;
 import com.senon.mvpretrofitrx.R;
@@ -72,14 +73,12 @@ public class GroupShareActivity extends BaseActivity {
         if (group != null) {
             Gson gson = new Gson();
             ChatCode chatCode = new ChatCode();
-            chatCode.setChatCode(group.getCode());
+            chatCode.setChatCode(group.getId()+"");
             bitmap = ZXingUtils.createQRImage(gson.toJson(chatCode), DensityUtil.dip2px(getContext(), 178), DensityUtil.dip2px(getContext(), 178));
             Glide.with(getActivity()).load(bitmap).into(ivCode);
             tvName.setText(group.getName());
             tvAvatar.setText(group.getName().substring(0,1));
-
         }
-
 
     }
 

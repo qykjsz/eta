@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment.ryunchat;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MainViewPagerAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
@@ -19,6 +21,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
+import com.qingyun.mvpretrofitrx.mvp.entity.SystemNotice;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IndicatorUtils;
@@ -26,6 +29,10 @@ import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +44,7 @@ import io.reactivex.ObservableTransformer;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Message;
+import io.rong.imlib.model.UserInfo;
 
 public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.magic_indicator3)
@@ -46,6 +54,8 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
     Unbinder unbinder;
     private List<BaseFragment> fragments;
     private List<String> titles;
+    private int index;
+    private RyunToken token;
 
     @Override
     public int getLayoutId() {
@@ -97,13 +107,14 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
     public void refreashData() {
         super.refreashData();
         getPresenter().getChatToken(ApplicationUtil.getCurrentWallet().getAddress());
-
     }
 
     @Override
     public void init() {
-        getPresenter().getChatToken(ApplicationUtil.getCurrentWallet().getAddress());
+//        getPresenter().getChatToken(ApplicationUtil.getCurrentWallet().getAddress());
 //        getPresenter().registerChat(ApplicationUtil.getCurrentWallet().getAddress());
+
+        EventBus.getDefault().register(this);
         titles = new ArrayList<>();
         titles.add(getResources().getString(R.string.chat));
         titles.add(getResources().getString(R.string.address_book));
@@ -116,6 +127,7 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
         fragments.add(new RyunChatChatListFragment());
         fragments.add(new RyunAddressbookFragment());
         fragments.add(new RyunPersonalFragment());
+        index = 0;
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getChildFragmentManager());
         viewPager.setAdapter(mainViewPagerAdapter);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -126,6 +138,7 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 
             @Override
             public void onPageSelected(int i) {
+                index = i;
                 fragments.get(i).refreashData();
             }
 
@@ -168,6 +181,12 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
     }
 
     @Override
+    public void onMyResume() {
+        super.onMyResume();
+        fragments.get(index).onMyResume();
+    }
+
+    @Override
     public void exitGroupSuccess(String s) {
 
     }
@@ -183,7 +202,51 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
     }
 
     @Override
-    public void getNicknameByAdressSuccess(GroupMember groupMember) {
+    public void getNicknameByAdressSuccess(final GroupMember groupMember) {
+//        final UserInfo userInfo = new UserInfo(groupMember.getId()+"",groupMember.getName(), Uri.parse(groupMember.getPhoto()));
+//        RongIM.getInstance().setCurrentUserInfo(userInfo);
+//        RongIM.getInstance().setMessageAttachedUserInfo(true);
+//        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+//
+//            @Override
+//            public UserInfo getUserInfo(String userId) {
+//
+//                return userInfo;//根据 userId 去你的用户系统里查询对应的用户信息返回给融云 SDK。
+//            }
+//
+//        }, true);
+
+        ApplicationUtil.setChatPersonalInfo(groupMember);
+
+        RongIM.connect(token.getToken(), new RongIMClient.ConnectCallback() {
+            @Override
+            public void onTokenIncorrect() {
+
+            }
+            @Override
+            public void onSuccess(String userid) {
+                Log.d("TAG", "--onSuccess" + userid);
+
+            }
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                Log.d("TAG", "--onSuccess" + errorCode);
+            }
+        });
+
+/**
+ * 设置接收消息的监听器。
+ *
+ * 所有接收到的消息、通知、状态都经由此处设置的监听器处理。包括私聊消息、群组消息、聊天室消息以及各种状态。
+ */
+        RongIM.getInstance().setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
+            @Override
+            public boolean onReceived(Message message, int left) {
+                Log.e("push>>message",message.toString());
+                EventBus.getDefault().post(new SystemNotice(message.getContent().getJSONDestructInfo().toString()));
+                return false;
+            }
+        });
 
     }
 
@@ -269,40 +332,8 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 
     @Override
     public void getChatTokenSuccess(RyunToken token) {
-        GroupMember groupmenber = new GroupMember();
-        groupmenber.setId(Integer.parseInt(token.getUserId()));
-        ApplicationUtil.setChatPersonalInfo(groupmenber);
-        RongIM.connect(token.getToken(), new RongIMClient.ConnectCallback() {
-            @Override
-            public void onTokenIncorrect() {
-                Log.e("------------->","onTokenIncorrect");
-            }
-            @Override
-            public void onSuccess(String userid) {
-                Log.d("TAG", "--onSuccess" + userid);
-                Log.e("------------->","onSuccess");
-
-            }
-            @Override
-            public void onError(RongIMClient.ErrorCode errorCode) {
-                Log.d("TAG", "--onSuccess" + errorCode);
-                Log.e("------------->","onError");
-            }
-        });
-
-/**
- * 设置接收消息的监听器。
- *
- * 所有接收到的消息、通知、状态都经由此处设置的监听器处理。包括私聊消息、群组消息、聊天室消息以及各种状态。
- */
-        RongIM.getInstance().setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
-            @Override
-            public boolean onReceived(Message message, int left) {
-                Log.e("push>>message",message.toString());
-                return false;
-            }
-        });
-
+        this.token = token;
+        getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
     }
 
     @Override
@@ -311,7 +342,49 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
     }
 
     @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindUntilEvent(FragmentEvent.PAUSE);
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onWalletChange(Wallet wallet) {
+        RongIM.getInstance().disconnect();
+      refreashData();
+    }
+
 }

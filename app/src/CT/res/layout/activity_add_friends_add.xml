@@ -8,15 +8,16 @@
 
 
     <android.support.constraint.ConstraintLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginEnd="@dimen/dp_10"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="@mipmap/bg_6"
+        android:id="@+id/constraintLayout5"
         android:layout_width="@dimen/dp_0"
-        android:layout_height="@dimen/dp_93">
+        android:layout_height="@dimen/dp_93"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:background="@mipmap/bg_6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <ImageView
@@ -32,11 +33,11 @@
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-            android:layout_marginStart="@dimen/dp_20"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_marginStart="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_4"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/iv_avatar"
             app:layout_constraintTop_toTopOf="@+id/iv_avatar"
             tools:layout_editor_absoluteX="100dp"
             tools:layout_editor_absoluteY="24dp" />
@@ -45,26 +46,26 @@
             android:id="@+id/textView179"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/account_"
-            app:layout_constraintStart_toStartOf="@+id/tv_name"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
             android:layout_marginBottom="@dimen/dp_4"
+            android:text="@string/id_"
             android:textColor="@color/color_999999"
             android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
             tools:layout_editor_absoluteX="98dp"
             tools:layout_editor_absoluteY="64dp" />
 
         <TextView
             android:id="@+id/tv_address"
             android:layout_width="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/dp_padding_x_min"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_padding_x_min"
             android:text="TextView"
-            app:layout_constraintTop_toTopOf="@+id/textView179"
-            app:layout_constraintStart_toEndOf="@+id/textView179"
             android:textColor="@color/color_999999"
             android:textSize="@dimen/sp_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView179"
+            app:layout_constraintTop_toTopOf="@+id/textView179"
             tools:layout_editor_absoluteX="171dp"
             tools:layout_editor_absoluteY="64dp" />
 
@@ -73,13 +74,11 @@
 
     <TextView
         android:id="@+id/btn_add_friends"
-        android:text="@string/add_friends"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         style="@style/main_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/dp_85"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="591dp" />
+        android:layout_marginTop="@dimen/dp_40"
+        android:text="@string/add_to_addressbook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
 </android.support.constraint.ConstraintLayout>

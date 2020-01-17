@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:src="@mipmap/avater_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
+        android:layout_marginTop="@dimen/dp_3"
+        android:layout_width="@dimen/dp_48"
+        android:singleLine="true"
+        android:textSize="@dimen/sp_12"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
+        app:layout_constraintStart_toStartOf="@+id/iv_avatar"
+        tools:layout_editor_absoluteY="76dp" />
+
+
+</android.support.constraint.ConstraintLayout>

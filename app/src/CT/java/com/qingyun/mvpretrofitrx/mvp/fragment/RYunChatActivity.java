@@ -255,6 +255,41 @@ public class RYunChatActivity extends BaseFragment<ChatContact.View,ChatContact.
     }
 
     @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindUntilEvent(FragmentEvent.PAUSE);
 

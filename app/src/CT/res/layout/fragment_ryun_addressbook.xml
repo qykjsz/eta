@@ -37,6 +37,19 @@
             />
 
 
+        <TextView
+            android:id="@+id/iv_new_message"
+            app:layout_constraintTop_toTopOf="@+id/btn_new_friends"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_new_friends"
+            android:background="@drawable/bg_e04159_round"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_10" />
+
+
+
 
         <com.qingyun.mvpretrofitrx.mvp.weight.BoldTextView
             android:id="@+id/btn_group"

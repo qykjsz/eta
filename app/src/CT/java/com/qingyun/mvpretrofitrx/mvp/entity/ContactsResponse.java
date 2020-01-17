@@ -173,7 +173,7 @@ public class ContactsResponse {
     }
 
     public List<GroupMember> getG() {
-        if (e==null) {
+        if (g==null) {
             return new ArrayList<GroupMember>();
         }else {
             if (g.size()>0){

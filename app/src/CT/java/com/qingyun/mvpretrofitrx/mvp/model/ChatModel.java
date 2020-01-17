@@ -14,13 +14,13 @@ public class ChatModel<T> extends BaseModel {
 
 
     public void applyToFriendsRefuse(Context context,String fromwho,int fid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().applyToFriendsRefuse( fromwho, fid), observerListener,transformer);
+        subscribe(context, Api.getApiService().applyToFriendsRefuse( fromwho, fid,2), observerListener,transformer);
 
     }
 
 
     public void applyToFriendsPass(Context context,String fromwho,int fid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().applyToFriendsPass( fromwho, fid), observerListener,transformer);
+        subscribe(context, Api.getApiService().applyToFriendsPass( fromwho, fid,1), observerListener,transformer);
 
     }
 
@@ -63,8 +63,14 @@ public class ChatModel<T> extends BaseModel {
     }
 
 
-    public void createGroup(Context context,String address,String name,String introduce, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().createGroup(address,name,introduce), observerListener,transformer);
+    public void createGroup(Context context,String uid,String name,String introduce,String ids,MultipartBody.Part photo, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        if (photo!=null){
+            subscribe(context, Api.getApiService().createGroup(uid,name,introduce,ids,photo), observerListener,transformer);
+
+        }else {
+            subscribe(context, Api.getApiService().createGroupNotAvatar(uid,name,introduce,ids), observerListener,transformer);
+
+        }
 
     }
 
@@ -106,11 +112,6 @@ public class ChatModel<T> extends BaseModel {
 
     }
 
-    public void exitGroup(Context context,String address,String qcode, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().exitGroup(address,qcode), observerListener,transformer);
-
-    }
-
 
     public void sendMessageToGroup(Context context,String fromwho,String togroup,String text, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
         subscribe(context, Api.getApiService().sendMessageToGroup(fromwho,togroup,text), observerListener,transformer,false,false);
@@ -143,8 +144,8 @@ public class ChatModel<T> extends BaseModel {
     }
 
 
-    public void applyToFriends(Context context,String fromwho,String towho, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().applyToFriends(fromwho,towho), observerListener,transformer);
+    public void applyToFriends(Context context,String fromwho,String towho,String remarks, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().applyToFriends(fromwho,towho,remarks), observerListener,transformer);
 
     }
 
@@ -159,14 +160,86 @@ public class ChatModel<T> extends BaseModel {
     }
 
 
+    public void upDataGroupAvatar(Context context, String uid,String qid,MultipartBody.Part  photo, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().upDataGroupAvatar( uid, qid, photo), observerListener,transformer);
+
+    }
+
+
     public void getChatToken(Context context, String address, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
         subscribe(context, Api.getApiService().getChatToken(address), observerListener,transformer);
 
     }
 
-
     public void deleteFriends(Context context, String uid,String tid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
         subscribe(context, Api.getApiService().deleteFriends(uid,tid), observerListener,transformer);
 
     }
+
+
+    public void setRemark(Context context,String uid, String tid, String name, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().setRemark( uid,  tid,  name), observerListener,transformer);
+
+    }
+
+
+    public void getNicknameByAdd(Context context,String address, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getNicknameByAdd(address), observerListener,transformer);
+
+    }
+
+    public void addGroupMember(Context context,String uid,String tid,String qid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().addGroupMember(uid,tid,qid), observerListener,transformer);
+
+    }
+
+
+    public void removeGroupMenber(Context context,String uid,String tid,String qid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().removeGroupMenber(uid,tid,qid), observerListener,transformer);
+
+    }
+
+    public void upDataGroupName(Context context,String uid,String qid, String name, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().upDataGroupName(uid,qid,name), observerListener,transformer);
+
+    }
+
+    public void upDataGroupExplain(Context context,String uid,String qid, String introduce, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().upDataGroupExplain(uid,qid,introduce), observerListener,transformer);
+
+    }
+
+    public void addGroupAddressBook(Context context,String uid,String qid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().addGroupAddressBook(uid,qid), observerListener,transformer);
+
+    }
+
+
+    public void exitGroup(Context context,String address,String qcode, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().exitGroup(address,qcode), observerListener,transformer);
+
+    }
+
+    public void deleteGroupAddressBook(Context context,String address,String qcode, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().deleteGroupAddressBook(address,qcode), observerListener,transformer);
+
+    }
+
+    public void addBlacklist(Context context,String uid,String tid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().addBlacklist(uid,tid), observerListener,transformer);
+
+    }
+    public void removeBlacklist(Context context,String uid,String tid, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().removeBlacklist(uid,tid), observerListener,transformer);
+
+    }
+
+
+    public void getBlacklist(Context context,String uid , ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getBlacklist(uid), observerListener,transformer);
+
+    }
+
+
+
 }

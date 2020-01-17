@@ -51,6 +51,9 @@ public class IntentUtils {
     public static final String CONVESATIONTYPE_VALUE = "convesation_type_value";
 
     public static final String TARGETID = "targetid";
+    public static final String IDS = "ids";
+    public static final String ACTION_TYPE = "action_type";
+    public static final String IS_GROUP_OWNER = "is_group_owner";
 
     public static String NEW_ID="news_id";
 }

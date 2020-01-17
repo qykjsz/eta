@@ -85,8 +85,8 @@ public class RyunChatChatListFragment extends BaseFragment {
 
     private void initTopSectorMenuButton() {
         final List<ButtonData> buttonDatas = new ArrayList<>();
-        int[] drawable = {R.mipmap.lt_gn_icon, R.mipmap.lt_sys_icon,
-                R.mipmap.lt_tjhy_icon, R.mipmap.lt_cjql_icon};
+        int[] drawable = {R.mipmap.lt_gn_icon, R.mipmap.lt_cjql_icon,
+                R.mipmap.lt_tjhy_icon, R.mipmap.lt_sys_icon};
         for (int i = 0; i < 4; i++) {
             ButtonData buttonData = ButtonData.buildIconButton(getContext(), drawable[i], 0);
             buttonDatas.add(buttonData);
@@ -102,13 +102,15 @@ public class RyunChatChatListFragment extends BaseFragment {
             public void onButtonClicked(int index) {
                 switch (index){
                     case 1:
-                        ScanUtil.start(getActivity());
+                        startActivity(ChooseContactActivity.class);
+
                         break;
                     case 2:
                         startActivity(AddFriendsActivity.class);
                         break;
                     case 3:
-                        startActivity(ChooseContactActivity.class);
+                        ScanUtil.start(getActivity());
+
                         break;
                 }
 

@@ -25,5 +25,6 @@
         android:theme="@style/TranslucentTheme"
         tools:replace="android:theme,android:icon">
         <service android:name="com.qingyun.mvpretrofitrx.mvp.service.PushService"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupChatActivity" />
     </application>
 </manifest>

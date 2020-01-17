@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.rongyun;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.qingyun.mvpretrofitrx.mvp.activity.ContactActivity;
+import com.qingyun.mvpretrofitrx.mvp.adapter.ChooseContactAdapter;
 import com.qingyun.mvpretrofitrx.mvp.adapter.RyunContactAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
@@ -22,6 +24,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.qingyun.mvpretrofitrx.mvp.view.lettercontact.PinnedHeaderDecoration;
 import com.qingyun.mvpretrofitrx.mvp.view.lettercontact.WaveSideBarView;
 import com.senon.mvpretrofitrx.R;
@@ -40,7 +43,7 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
     RecyclerView rcyContact;
     @BindView(R.id.side_view)
     WaveSideBarView sideView;
-    RyunContactAdapter adapter;
+    ChooseContactAdapter adapter;
     private List<GroupMember> list;
     @Override
     protected String getTitleRightText() {
@@ -75,18 +78,26 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
 
     @Override
     public void init() {
-        getPresenter().getFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"","");
+        final int actionType = getIntent().getIntExtra(IntentUtils.ACTION_TYPE,0);
+        final int id = getIntent().getIntExtra(IntentUtils.ID,0);
+
+        switch (actionType){
+            case 0:
+                getPresenter().getFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"","");
+                break;
+            case 1:
+                getPresenter().getFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"","");
+                break;
+            case 2:
+                getPresenter().getGroupMemberList(ApplicationUtil.getChatPersonalInfo().getId()+"",id+"");
+                break;
+        }
 
         getTvTitleRight().setText(getResources().getString(R.string.complete));
         getTvTitleRight().setTextColor(getResources().getColor(R.color.color_FFFFFF));
-        getTvTitleRight().setBackground(getResources().getDrawable(R.drawable.bg_mainblue_round_3));
-        setTitleRightClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(CreateRyunGroupActivity.class);
-            }
-        });
+        getTvTitleRight().setBackground(getResources().getDrawable(R.drawable.btn_title_right));
 
+        getTvTitleRight().setEnabled(false);
 
         rcyContact.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -118,7 +129,7 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
 //            }
 //        }).start();
         list = new ArrayList<>();
-        adapter = new RyunContactAdapter(getActivity(), list);
+        adapter = new ChooseContactAdapter(getActivity(), list,actionType,rcyContact);
         adapter.setItemClickListener(new RyunContactAdapter.OnMyItemClickListener() {
             @Override
             public void onItemClick(GroupMember groupMember) {
@@ -140,8 +151,54 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
                 }
             }
         });
+        adapter.setSelectListener(new ChooseContactAdapter.SelectListener() {
+            @Override
+            public void selectList(List<GroupMember> groupMemberList, int actionType) {
+                switch (actionType){
+                    case 0:
+                        if (groupMemberList!=null&&groupMemberList.size()>=2){
+                            getTvTitleRight().setEnabled(true);
+                        }else {
+                            getTvTitleRight().setEnabled(false);
+
+                        }
+                        break;
+                    case 1:
+                    case 2:
+                        if (groupMemberList!=null&&groupMemberList.size()>0){
+                            getTvTitleRight().setEnabled(true);
+                        }else {
+                            getTvTitleRight().setEnabled(false);
+
+                        }
+                        break;
+                }
 
 
+            }
+        });
+
+        setTitleRightClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                switch (actionType){
+                    case 0:
+                        Bundle bundle = new Bundle();
+                        bundle.putString(IntentUtils.IDS,adapter.getSelectListStr());
+                        startActivity(CreateRyunGroupActivity.class,bundle);
+                        finish();
+                        break;
+                    case 1:
+                        getPresenter().addGroupMember(ApplicationUtil.getChatPersonalInfo().getId()+"",adapter.getSelectList().get(0).getId()+"",id+"");
+                        break;
+                    case 2:
+                        getPresenter().removeGroupMenber(ApplicationUtil.getChatPersonalInfo().getId()+"",adapter.getSelectList().get(0).getId()+"",id+"");
+                        break;
+                }
+
+            }
+        });
 
     }
 
@@ -194,7 +251,9 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
 
     @Override
     public void getGroupMemberListSuccess(List<GroupMember> groupMemberList) {
-
+        list = groupMemberList;
+//        Collections.sort(list, new LetterComparator());
+        adapter.notifyDataSetChanged(groupMemberList);
     }
 
     @Override
@@ -297,6 +356,44 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
 
     @Override
     public void deleteFriendsSuccess(String s) {
+
+    }
+
+    @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+        ToastUtil.showShortToast(s);
+        finish();
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+        ToastUtil.showShortToast(s);
+        finish();
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
 
     }
 

@@ -2,6 +2,7 @@ package com.qingyun.mvpretrofitrx.mvp.adapter;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -51,7 +52,7 @@ public class RyunContactAdapter extends BaseTurboAdapter<GroupMember, BaseViewHo
 
 
         if (holder instanceof CityHolder) {
-            ((CityHolder) holder).city_name.setText(item.getName());
+            ((CityHolder) holder).city_name.setText(TextUtils.isEmpty(item.getRemarks())?item.getName():item.getRemarks());
             Glide.with(mContext).load(item.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(((CityHolder) holder).imageView29);
             ((CityHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,7 +67,7 @@ public class RyunContactAdapter extends BaseTurboAdapter<GroupMember, BaseViewHo
 
     public int getLetterPosition(String letter){
         for (int i = 0 ; i < getData().size(); i++){
-            if(getData().get(i).getType() ==1 && getData().get(i).getPinyin().equals(letter)){
+            if(getData().get(i).getType()==1&& getData().get(i).getPinyin().equals(letter)){
                 return i;
             }
         }

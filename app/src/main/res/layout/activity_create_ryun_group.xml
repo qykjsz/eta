@@ -55,6 +55,7 @@
         android:id="@+id/et_group_name"
         app:layout_constraintStart_toEndOf="@+id/textView177"
         android:background="@color/color_FFFFFF"
+        android:maxLength="20"
         android:hint="@string/input_group_name"
         app:layout_constraintTop_toTopOf="@+id/textView177"
         app:layout_constraintBottom_toBottomOf="@+id/textView177"
@@ -82,6 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="@dimen/dp_0"
         android:paddingBottom="@dimen/dp_30"
+        android:maxLength="300"
         android:background="@color/color_FFFFFF"
         android:paddingStart="@dimen/dp_padding_x_min"
         android:paddingEnd="@dimen/dp_padding_x_min"
@@ -95,12 +97,12 @@
         android:id="@+id/btn_create_group"
         style="@style/main_btn"
         android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
         android:layout_marginEnd="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_90"
         android:text="@string/create_chat_group"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView173" />
     <TextView
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_1"
@@ -147,16 +149,15 @@
         tools:layout_editor_absoluteY="455dp" />
 
 
-
     <TextView
+        android:id="@+id/textView173"
+        style="@style/line"
         android:layout_width="@dimen/dp_0"
         android:layout_height="@dimen/dp_1"
-        style="@style/line"
-        app:layout_constraintTop_toBottomOf="@+id/et_group_explain"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-        />
+        app:layout_constraintTop_toBottomOf="@+id/et_group_explain" />
 
 
     <TextView

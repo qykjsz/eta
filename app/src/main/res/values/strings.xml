@@ -386,13 +386,13 @@
     <string name="send">发送</string>
     <string name="msg_not_null">发送内容不能为空</string>
     <string name="check_code">请检查二维码</string>
-    <string name="search_friends_hint">请输入要搜索的用户地址 或 群ID</string>
+    <string name="search_friends_hint">请输入用户ID或地址</string>
 
     <string name="not_permissions">没有权限</string>
     <string name="re_connect">重连中...</string>
     <string name="scan_to_add_group">扫一扫二维码，添加群组</string>
     <string name="start_chat">开始验证</string>
-    <string name="search_friends_or_group">请输入要搜索的用户地址 或 群ID</string>
+    <string name="search_friends_or_group">请输入要搜索的用户地址或用户ID/群ID</string>
     <string name="group_id_">群ID:</string>
     <string name="deal_name_">处理人:</string>
     <string name="apply_into_group">申请加入群组</string>
@@ -430,5 +430,20 @@
     <string name="tips_clear_chat_log_on_time">设置定时清理后，系统会定时清理规定时间前的群消息，清 理后的消息无法恢复，请谨慎设置</string>
     <string name="clear_chat_log">清空聊天记录</string>
     <string name="out_exit_group">解散并退出</string>
+    <string name="create_chat_group_success">创建群聊成功</string>
+    <string name="beizhu_">备注：</string>
+    <string name="id_">ID:</string>
+    <string name="group_nickname">群昵称</string>
+    <string name="tips_change_gropu_nickname">在这里可以设置你在这个群里的昵称。这个昵称只会在此群 内显示。</string>
+    <string name="my_group_nickname">我在本群昵称</string>
+    <string name="change_group_name">修改群名</string>
+    <string name="add_to_group_addressbook">保存到通讯录</string>
+    <string name="delete_add_exit">删除并退出</string>
+    <string name="change_name">修改名字</string>
+    <string name="save_qrcode">保存二维码</string>
+    <string name="edit">编辑</string>
+    <string name="scan_to_be_my_friends_1">扫描上方二维码加我为好友</string>
+    <string name="add_to_addressbook">添加到通讯录</string>
+    <string name="beizhu">备注</string>
 
 </resources>

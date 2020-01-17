@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.fragment.ryunchat;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.MyQrcodeActivity;
+import com.qingyun.mvpretrofitrx.mvp.activity.rongyun.GroupInfoSettingActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
@@ -42,6 +44,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.ObservableTransformer;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -76,7 +80,7 @@ public class RyunPersonalFragment extends BaseFragment<ChatContact.View, ChatCon
     @Override
     public void init() {
         EventBus.getDefault().register(this);
-        getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
+//        getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
     }
 
     @Override
@@ -140,12 +144,37 @@ public class RyunPersonalFragment extends BaseFragment<ChatContact.View, ChatCon
     }
 
     @Override
-    public void getNicknameByAdressSuccess(GroupMember groupMember) {
+    public void getNicknameByAdressSuccess(final GroupMember groupMember) {
+//        /**
+//         * 设置用户信息的提供者，供 RongIM 调用获取用户名称和头像信息。
+//         *
+//         * @param userInfoProvider 用户信息提供者。
+//         * @param isCacheUserInfo  设置是否由 IMKit 来缓存用户信息。<br>
+//         *                         如果 App 提供的 UserInfoProvider
+//         *                         每次都需要通过网络请求用户数据，而不是将用户数据缓存到本地内存，会影响用户信息的加载速度；<br>
+//         *                         此时最好将本参数设置为 true，由 IMKit 将用户信息缓存到本地内存中。
+//         * @see UserInfoProvider
+//         */
         personal = groupMember;
         tvName.setText(groupMember.getName());
-        Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getAvaterOptions()).into(ivAvatar);
-        tvAccount.setText(groupMember.getAddress());
+        Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(ivAvatar);
+        tvAccount.setText(groupMember.getId()+"");
         ApplicationUtil.setChatPersonalInfo(groupMember);
+    }
+
+
+    @Override
+    public void onMyResume() {
+        super.onMyResume();
+        getPresenter().getNicknameByAdress(ApplicationUtil.getChatPersonalInfo().getId()+"");
+
+    }
+
+    @Override
+    public void refreashData() {
+        super.refreashData();
+        getPresenter().getNicknameByAdress(ApplicationUtil.getChatPersonalInfo().getId()+"");
+
     }
 
     @Override
@@ -241,6 +270,41 @@ public class RyunPersonalFragment extends BaseFragment<ChatContact.View, ChatCon
     }
 
     @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindUntilEvent(FragmentEvent.PAUSE);
 
@@ -269,16 +333,20 @@ public class RyunPersonalFragment extends BaseFragment<ChatContact.View, ChatCon
                 startActivity(MyQrcodeActivity.class, bundle);
                 break;
             case R.id.iv_avatar:
-                DialogUtils.showPictureChooseDialogAvatar(getActivity(), true);
+                DialogUtils.showPictureChooseDialogAvatar(getActivity(), false);
                 break;
             case R.id.tv_name:
-                DialogUtils.shoEditDialog(personal.getName(),getContext(), new DialogUtils.SureListener() {
-                    @Override
-                    public void onSure(Object o) {
-                        tvName.setText(o.toString());
-                        getPresenter().changeNickname(ApplicationUtil.getChatPersonalInfo().getId()+"",o.toString());
-                    }
-                });
+                Bundle bundle2 = new Bundle();
+                bundle2.putInt(IntentUtils.TYPE,6);
+                bundle2.putString(IntentUtils.ID,personal.getId()+"");
+                startActivity(GroupInfoSettingActivity.class,bundle2);
+//                DialogUtils.shoEditDialog(personal.getName(),getContext(), new DialogUtils.SureListener() {
+//                    @Override
+//                    public void onSure(Object o) {
+//                        tvName.setText(o.toString());
+//                        getPresenter().changeNickname(ApplicationUtil.getChatPersonalInfo().getId()+"",o.toString());
+//                    }
+//                });
                 break;
         }
     }
@@ -289,7 +357,7 @@ public class RyunPersonalFragment extends BaseFragment<ChatContact.View, ChatCon
         String picturePath = imageSelectPath.getPath();
         RequestBody imageBody_head = RequestBody.create(MediaType.parse("image/jpeg"), new File(picturePath));
         img_area = MultipartBody.Part.createFormData("photo", new File(picturePath).getName(), imageBody_head);
-        Glide.with(getActivity()).load(new File(picturePath)).apply(GlideUtils.getAvaterOptions()).into(ivAvatar);
+        Glide.with(getActivity()).load(new File(picturePath)).apply(GlideUtils.getChatAvaterOptions()).into(ivAvatar);
         getPresenter().upDataAvatar(ApplicationUtil.getChatPersonalInfo().getId()+"",img_area);
     }
 

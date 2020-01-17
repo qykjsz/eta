@@ -102,7 +102,9 @@ public class CreateGroupChatActivity extends BaseActivity<ChatContact.View, Chat
 
     @OnClick(R.id.btn_create_group)
     public void onViewClicked() {
-        getPresenter().createGroup(ApplicationUtil.getCurrentWallet().getAddress(),etGroupName.getText().toString(),etExplain.getText().toString());
+          startActivity(GroupInfoActivity.class);
+
+//        getPresenter().createGroup(ApplicationUtil.getCurrentWallet().getAddress(),etGroupName.getText().toString(),etExplain.getText().toString());
 
     }
 
@@ -247,6 +249,41 @@ public class CreateGroupChatActivity extends BaseActivity<ChatContact.View, Chat
 
     @Override
     public void deleteFriendsSuccess(String s) {
+
+    }
+
+    @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
 
     }
 

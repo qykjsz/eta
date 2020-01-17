@@ -10,6 +10,15 @@ public class ApplyGroup {
     private String time;
     private String phone;
     private String photo;
+    private String remarks;
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public String getPhoto() {
         return photo;

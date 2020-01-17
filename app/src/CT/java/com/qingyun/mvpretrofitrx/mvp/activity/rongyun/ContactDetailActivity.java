@@ -1,6 +1,8 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.rongyun;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -75,12 +77,24 @@ public class ContactDetailActivity extends BaseActivity {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(IntentUtils.GROUP_MEMBER,groupMember);
-                startActivity(FriendsSettingActivity.class,bundle);
+                Intent intent = new Intent(getContext(),FriendsSettingActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent,0);
+//                startActivity(FriendsSettingActivity.class,bundle);
             }
         });
         Glide.with(getActivity()).load(groupMember.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(ivName);
         tvname.setText(groupMember.getName());
-        tvId.setText(groupMember.getId()+"");
+        tvId.setText(getResources().getString(R.string.id_)+groupMember.getId()+"");
+        tvBeizu.setText(getResources().getString(R.string.beizhu_)+groupMember.getRemarks());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==0&&resultCode==1){
+            finish();
+        }
     }
 
     @Override
