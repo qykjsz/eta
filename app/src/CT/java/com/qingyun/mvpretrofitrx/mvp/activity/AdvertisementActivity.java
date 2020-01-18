@@ -73,22 +73,7 @@ public class AdvertisementActivity extends BaseActivity {
     private Runnable runnable;
     private boolean state;
 
-    TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            runOnUiThread(new Runnable() { // UI thread
-                @Override
-                public void run() {
-                    recLen--;
-                    tv_skip.setText("跳过" /*+ recLen*/);
-                    if (recLen < 0) {
-                        timer.cancel();
-                        tv_skip.setVisibility(View.GONE);//倒计时到0隐藏字体
-                    }
-                }
-            });
-        }
-    };
+
 
     TextView tv_skip;
 
@@ -106,6 +91,8 @@ public class AdvertisementActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 state = true;
+//                timer.purge();
+//                task.cancel();
                 if (runnable != null) {
                     handler.removeCallbacks(runnable);
                 }
@@ -116,35 +103,52 @@ public class AdvertisementActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-
+//        task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                runOnUiThread(new Runnable() { // UI thread
+//                    @Override
+//                    public void run() {
+//                        recLen--;
+//                        if (recLen < 0) {
+//                            timer.cancel();
+//                            startActivity();
+////                            tv_skip.setVisibility(View.GONE);//倒计时到0隐藏字体
+//                        }
+//                    }
+//                });
+//            }
+//        };
+        tv_skip.setText("跳过" /*+ recLen*/);
         /**
          * 正常情况下不点击跳过
          */
-        timer.schedule(task, 1000, 1000);//等待时间一秒，停顿时间一秒
+//        timer.schedule(task, 1000, 1000);//等待时间一秒，停顿时间一秒
+
         handler = new Handler();
         //防止时间刚好到时，点击了
-        if (!state) {
             handler.postDelayed(runnable = new Runnable() {
                 @Override
                 public void run() {
                     startActivity();
                 }
             }, 3000);//延迟3S后发送handler信息
-        }
 
         /**点击情况下跳转*/
-        tv_skip.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.rl_skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                timer.purge();
+//                task.cancel();
+                handler.removeCallbacks(runnable);
                 state = true;
                 startActivity();
-                if (runnable != null) {
-                    handler.removeCallbacks(runnable);
-                }
+
             }
         });
-    }
 
+    }
+    TimerTask task;
     private void startActivity() {
         final Wallet wallet = ApplicationUtil.getCurrentWallet();
         if (wallet == null) {

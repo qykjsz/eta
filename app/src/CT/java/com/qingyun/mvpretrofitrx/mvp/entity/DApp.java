@@ -10,6 +10,9 @@ public class DApp {
     public String name;//名称
     public String img;//图片
     public String url;//跳转连接
+    public String android;//android包名
+    public String appdown;//下载链接
+    public int types;//1.跳转Web页面 2.跳转app
     public void setName(String name) {
         this.name = name;
     }

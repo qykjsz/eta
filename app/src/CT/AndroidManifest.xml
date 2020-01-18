@@ -235,7 +235,7 @@
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AdvertisementActivity"/>
 
         <!--融云音视频-->
-        <activity
+       <!-- <activity
             android:name="io.rong.callkit.MultiVideoCallActivity"
             android:exported="true"
             android:launchMode="singleTop"
@@ -276,7 +276,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="io.rong.callkit.CallSelectMemberActivity"></activity>
+        <activity android:name="io.rong.callkit.CallSelectMemberActivity"></activity>-->
         <!--融云音视频END-->
 
         <!--解决融云打开相机闪退问题-->

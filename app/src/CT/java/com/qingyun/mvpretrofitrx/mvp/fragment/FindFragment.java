@@ -63,9 +63,11 @@ import com.qingyun.mvpretrofitrx.mvp.entity.MessageEvent;
 import com.qingyun.mvpretrofitrx.mvp.entity.RecentlyAppData;
 import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
 import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
+import com.qingyun.mvpretrofitrx.mvp.utils.ChePackUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.GlideRoundTransform;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 
+import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.qingyun.mvpretrofitrx.mvp.view.TabScrollView;
 import com.qingyun.mvpretrofitrx.mvp.weight.GridSpacingItemDecoration;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -138,21 +140,6 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
     }
 
 
-    /**
-     * 检查包是否存在
-     *
-     * @param packname
-     * @return
-     */
-    private boolean checkPackInfo(String packname) {
-        PackageInfo packageInfo = null;
-        try {
-            packageInfo = mContext.getPackageManager().getPackageInfo(packname, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return packageInfo != null;
-    }
 
     @Override
     public void onDestroyView() {
@@ -231,15 +218,41 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
+
                 lastClickTimes = 0;
                 long now = System.currentTimeMillis();
                 if(now - lastClickTimes >3000){
-                    lastClickTimes = now;
-                    requestGetUUid(mAdapter.getData().get(position).id);
-                    Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra("url", mAdapter.getData().get(position).getUrl());
-                    intent.putExtra("title",mAdapter.getData().get(position).getName());
-                    mContext.startActivity(intent);
+                    switch (mAdapter.getData().get(position).types){//1.跳转Web页面 2.跳转app
+                        case 1:
+                            intent = new Intent(mContext, WebActivity.class);
+                            intent.putExtra("url",mAdapter.getData().get(position).getUrl());
+                            intent.putExtra("title",mAdapter.getData().get(position).getName());
+                            mContext.startActivity(intent);
+                            break;
+                        case 2:
+                            if (ChePackUtil.checkPackInfo(mAdapter.getData().get(position).android,mContext)) {//程序已安装
+                                intent = mContext.getPackageManager().getLaunchIntentForPackage(mAdapter.getData().get(position).android);
+                                if (intent != null) {
+                                    //            intent.putExtra("data", "");//传递数据
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    mContext.startActivity(intent);
+                                }
+                            } else {//未安装 跳转下载地址
+                                intent = new Intent();
+                                intent.setAction("android.intent.action.VIEW");
+                                Uri content_url = Uri.parse(mAdapter.getData().get(position).appdown);
+                                intent.setData(content_url);
+                                mContext.startActivity(intent);
+                            }
+                            break;
+                    }
+//                    lastClickTimes = now;
+//                    requestGetUUid(mAdapter.getData().get(position).id);
+//                    Intent intent = new Intent(mContext, WebActivity.class);
+//                    intent.putExtra("url", mAdapter.getData().get(position).getUrl());
+//                    intent.putExtra("title",mAdapter.getData().get(position).getName());
+//                    mContext.startActivity(intent);
                 }
             }
         });
@@ -424,10 +437,10 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                         tabs[i] = tab;
                         position++;
                         JSONArray apps = obj.getJSONArray("apps");
-                        if (apps.size() > 0) {
+                        if (apps != null  && apps.size() > 0) {
                             list.add(apps);
                         } else {
-                            list.add(null);
+//                            list.add(null);
                         }
                     }
                 }
@@ -507,7 +520,10 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                 data.setImg(res.getString("img"));
                 data.setName(res.getString("name"));
                 data.setText(res.getString("text"));
+                data.setAndroid(res.getString("android"));
                 data.setUrl(res.getString("url"));
+                data.setAppdown(res.getString("appdown"));
+                data.setTypes(res.getIntValue("types"));
                 recentlyAppDataList.add(data);
             }
         } else {
@@ -536,38 +552,59 @@ public class FindFragment extends BaseFragment implements EasyPermissions.Permis
                     image.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            long now = System.currentTimeMillis();
-                            if(now - lastClickTime >3000) {
-                                lastClickTime = now;
-                                if (data.getId().equals("1")) {//跳转ETAPP
-                                    if (checkPackInfo("com.example.et")) {//程序已安装
-                                        Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
-                                        if (intent != null) {
-                                            //            intent.putExtra("data", "");//传递数据
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Intent intent;
+                                switch (data.getTypes()){//1.跳转Web页面 2.跳转app
+                                    case 1:
+                                        intent = new Intent(mContext, WebActivity.class);
+                                        intent.putExtra("url",data.getUrl());
+                                        intent.putExtra("title",data.getName());
+                                        mContext.startActivity(intent);
+                                        break;
+                                    case 2:
+                                        if (ChePackUtil.checkPackInfo(data.getAndroid(),mContext)) {//程序已安装
+                                            intent = mContext.getPackageManager().getLaunchIntentForPackage(data.getAndroid());
+                                            if (intent != null) {
+                                                //            intent.putExtra("data", "");//传递数据
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                mContext.startActivity(intent);
+                                            }
+                                        } else {//未安装 跳转下载地址
+                                            intent = new Intent();
+                                            intent.setAction("android.intent.action.VIEW");
+                                            Uri content_url = Uri.parse(data.getAppdown());
+                                            intent.setData(content_url);
                                             mContext.startActivity(intent);
                                         }
-                                    } else {//未安装 跳转下载地址
-                                        Intent intent = new Intent();
-                                        intent.setAction("android.intent.action.VIEW");
-                                        Uri content_url = Uri.parse(data.getUrl());
-                                        intent.setData(content_url);
-                                        mContext.startActivity(intent);
-                                    }
-                                } else if (data.getId().equals("2")) {//跳转指定H5
-                                    Intent intent = new Intent(mContext, WebActivity.class);
-                                    intent.putExtra("url", data.getUrl()+"?" + uuId);
-                                    intent.putExtra("title",data.getName());
-                                    mContext.startActivity(intent);
-                                } else {
-                                    Intent intent = new Intent(mContext, WebActivity.class);
-                                    intent.putExtra("url", data.getUrl());
-                                    intent.putExtra("title",data.getName());
-                                    mContext.startActivity(intent);
+                                        break;
                                 }
+//                                if (data.getId().equals("1")) {//跳转ETAPP
+//                                    if (ChePackUtil.checkPackInfo("com.example.et",mContext)) {//程序已安装
+//                                        Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.example.et");
+//                                        if (intent != null) {
+//                                            //            intent.putExtra("data", "");//传递数据
+//                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                            mContext.startActivity(intent);
+//                                        }
+//                                    } else {//未安装 跳转下载地址
+//                                        Intent intent = new Intent();
+//                                        intent.setAction("android.intent.action.VIEW");
+//                                        Uri content_url = Uri.parse(data.getUrl());
+//                                        intent.setData(content_url);
+//                                        mContext.startActivity(intent);
+//                                    }
+//                                } else if (data.getId().equals("2")) {//跳转指定H5
+//                                    Intent intent = new Intent(mContext, WebActivity.class);
+//                                    intent.putExtra("url", data.getUrl()+"?" + uuId);
+//                                    intent.putExtra("title",data.getName());
+//                                    mContext.startActivity(intent);
+//                                } else {
+//                                    Intent intent = new Intent(mContext, WebActivity.class);
+//                                    intent.putExtra("url", data.getUrl());
+//                                    intent.putExtra("title",data.getName());
+//                                    mContext.startActivity(intent);
+//                                }
                             }
 
-                        }
                     });
                     ll_products.addView(view);
                 }

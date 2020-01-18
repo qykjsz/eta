@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +33,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.GameData;
 import com.qingyun.mvpretrofitrx.mvp.entity.MessageEvent;
 import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
 import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
+import com.qingyun.mvpretrofitrx.mvp.utils.ChePackUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SystemUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ZLog;
 import com.qingyun.mvpretrofitrx.mvp.view.ListViewForScrollView;
@@ -141,10 +143,32 @@ public class FindViewPageFragment extends BaseFragment {
                 if(now - lastClickTime > 3000) {
                     lastClickTime = now;
                     getUuid(mAdapter.getData().get(position).id);
-                    Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra("url",mAdapter.getData().get(position).url);
-                    intent.putExtra("title",mAdapter.getData().get(position).name);
-                    mContext.startActivity(intent);
+                    Intent intent;
+                    switch (mAdapter.getData().get(position).types){//1.跳转Web页面 2.跳转app
+                        case 1:
+                            intent = new Intent(mContext, WebActivity.class);
+                            intent.putExtra("url",mAdapter.getData().get(position).url);
+                            intent.putExtra("title",mAdapter.getData().get(position).name);
+                            mContext.startActivity(intent);
+                            break;
+                        case 2:
+                            if (ChePackUtil.checkPackInfo(mAdapter.getData().get(position).android,mContext)) {//程序已安装
+                                intent = mContext.getPackageManager().getLaunchIntentForPackage(mAdapter.getData().get(position).android);
+                                if (intent != null) {
+                                    //            intent.putExtra("data", "");//传递数据
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    mContext.startActivity(intent);
+                                }
+                            } else {//未安装 跳转下载地址
+                                intent = new Intent();
+                                intent.setAction("android.intent.action.VIEW");
+                                Uri content_url = Uri.parse(mAdapter.getData().get(position).appdown);
+                                intent.setData(content_url);
+                                mContext.startActivity(intent);
+                            }
+                            break;
+                    }
+
                 }
             }
         });

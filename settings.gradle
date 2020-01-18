@@ -8,4 +8,4 @@ include ':app', 'gallery', 'lib_ios_dialog',
         ':swipe-reveal-layout',
         'IMKit',
         'IMLib',
-        'library_circle_menu', ':CallKit', ':CallLib'
+        'library_circle_menu'/*, ':CallKit', ':CallLib'*/

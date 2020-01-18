@@ -259,16 +259,16 @@ dependencies {
     implementation 'cc.solart:turbo-recyclerview-helper:1.0.3-beta'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     implementation project(path: ':library_circle_menu')
-    implementation(project(path: ':CallKit')) {
-        exclude group: 'com.android.support'
-        exclude group: 'com.github.bumptech.glide'
-        exclude group: 'com.android.support:exifinterface'
-        exclude module: 'appcompat-v7'
-    }
-    implementation(project(path: ':CallLib')) {
-        exclude group: 'com.android.support'
-        exclude group: 'com.github.bumptech.glide'
-        exclude group: 'com.android.support:exifinterface'
-        exclude module: 'appcompat-v7'
-    }
+//    implementation(project(path: ':CallKit')) {
+//        exclude group: 'com.android.support'
+//        exclude group: 'com.github.bumptech.glide'
+//        exclude group: 'com.android.support:exifinterface'
+//        exclude module: 'appcompat-v7'
+//    }
+//    implementation(project(path: ':CallLib')) {
+//        exclude group: 'com.android.support'
+//        exclude group: 'com.github.bumptech.glide'
+//        exclude group: 'com.android.support:exifinterface'
+//        exclude module: 'appcompat-v7'
+//    }
 }
