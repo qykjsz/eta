@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -69,7 +70,7 @@ public class ChooseContactAdapter extends BaseTurboAdapter<GroupMember, BaseView
 
         if (holder instanceof CityHolder) {
             Glide.with(mContext).load(item.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(((CityHolder) holder).imageView29);
-            ((CityHolder) holder).city_name.setText(item.getName());
+            ((CityHolder) holder).city_name.setText(TextUtils.isEmpty(item.getRemarks())?item.getName():item.getRemarks());
             if (actionType==0){
                 ((CityHolder) holder).cb_select.setVisibility(View.VISIBLE);
                 ((CityHolder) holder).iv_select.setVisibility(View.GONE);

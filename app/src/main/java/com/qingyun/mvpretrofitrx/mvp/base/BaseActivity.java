@@ -77,10 +77,13 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if (setSoftInput()){
+                   getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        }
         ApplicationUtil.activityList.add(this);
         ApplicationUtil.setCurrentContext(this);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         View rootView = LayoutInflater.from(this).inflate(R.layout.activity_base,null);
         ivBack = (ImageView) rootView.findViewById(R.id.iv_back);
         lyHeader = rootView.findViewById(R.id.ly_header);
@@ -101,13 +104,35 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
         setHeaderData();
         setContentView(rootView);
         ButterKnife.bind(this);
-        hideBar();
+        if (setHideBar())
+        {
+            hideBar();
+        }
+
+        if(presenter == null){
+            presenter = createPresenter();
+        }
+        if(view == null){
+            view = createView();
+        }
+        if(presenter != null && view != null){
+            presenter.attachView(view);
+        }
+
         refreash = rootView.findViewById(R.id.refreash);
         nodata = rootView.findViewById(R.id.nodata);
         freash_loading = rootView.findViewById(R.id.refreash_loading);
         initRefreshLayout(refreash);
         requestList();
         init();
+    }
+
+    public boolean setHideBar() {
+        return true;
+    }
+
+    protected boolean setSoftInput() {
+        return true;
     }
 
     protected void requestList() {
@@ -278,15 +303,7 @@ public abstract class BaseActivity<V extends BaseView,P extends BasePresenter<V>
 //                StatusBarUtil.setStatusBarColor(this,0x55000000);
             }
         }
-        if(presenter == null){
-            presenter = createPresenter();
-        }
-        if(view == null){
-            view = createView();
-        }
-        if(presenter != null && view != null){
-            presenter.attachView(view);
-        }
+
 
     }
 

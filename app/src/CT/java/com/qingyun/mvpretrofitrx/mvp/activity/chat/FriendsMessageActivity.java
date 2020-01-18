@@ -50,7 +50,7 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.friends_message);
+        return getResources().getString(R.string.new_friends);
     }
 
     @Override
@@ -72,6 +72,7 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
     @Override
     public void init() {
         list = new ArrayList<>();
+        getRefreash().setEnableLoadMore(false);
         groupMessageAdapter = new FriendsMessageAdapter(getContext(),list);
         groupMessageAdapter.setAgreeListener(new BaseAdapter.OnItemClickListener() {
             @Override
@@ -98,14 +99,14 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
     @Override
     protected void refresh() {
         super.refresh();
-        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
+//        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
 
     }
 
     @Override
     protected void loadMore() {
         super.loadMore();
-        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
+//        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
 
     }
 
@@ -201,11 +202,13 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
         if (applyGroupList==null){
             applyGroupList = new ArrayList<>();
         }
-        if (isLoadMore){
-            list.addAll(applyGroupList);
-        }else {
-            list = applyGroupList;
-        }
+                    list = applyGroupList;
+
+//        if (isLoadMore){
+//            list.addAll(applyGroupList);
+//        }else {
+//            list = applyGroupList;
+//        }
         groupMessageAdapter.notifyDataSetChanged(list);
         refreashView(list,rcy);
 

@@ -1,6 +1,8 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -84,7 +86,6 @@ public class AddFriendsActivity extends BaseActivity<ChatContact.View, ChatConta
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -151,10 +152,21 @@ public class AddFriendsActivity extends BaseActivity<ChatContact.View, ChatConta
 
     @Override
     public void getNicknameByAdressSuccess(GroupMember groupMember) {
-
         Bundle bundle = new Bundle();
         bundle.putSerializable(IntentUtils.GROUP_MEMBER, groupMember);
-        startActivity(AddFriendsAddActivity.class, bundle);
+        Intent intent = new Intent(getContext(),AddFriendsAddActivity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent,0);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==0&&resultCode==1){
+            setResult(1);
+            finish();
+        }
     }
 
     @Override
@@ -230,9 +242,8 @@ public class AddFriendsActivity extends BaseActivity<ChatContact.View, ChatConta
     @Override
     public void getGroupInfoSuccess(Group group) {
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(IntentUtils.GROUP, group);
-        startActivity(AddGroupAddActivity.class, bundle);
+
+//        startActivity(AddGroupAddActivity.class, bundle);
     }
 
     @Override

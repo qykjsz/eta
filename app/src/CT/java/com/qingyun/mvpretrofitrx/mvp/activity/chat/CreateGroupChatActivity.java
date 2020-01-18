@@ -1,5 +1,6 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.chat;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
+import io.rong.imkit.RongIM;
 
 public class CreateGroupChatActivity extends BaseActivity<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.et_group_name)
@@ -181,8 +183,8 @@ public class CreateGroupChatActivity extends BaseActivity<ChatContact.View, Chat
     @Override
     public void createGroupSuccess(String s) {
         ToastUtil.showShortToast(s);
+        getPresenter().getGroupInfo(ApplicationUtil.getChatPersonalInfo().getId()+"",s);
 //        startActivity(GroupInfoActivity.class);
-        finish();
     }
 
     @Override
@@ -232,7 +234,8 @@ public class CreateGroupChatActivity extends BaseActivity<ChatContact.View, Chat
 
     @Override
     public void getGroupInfoSuccess(Group group) {
-
+        RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(group.getId()+"",group.getName(),Uri.parse(group.getPhoto())));
+        finish();
     }
 
     @Override

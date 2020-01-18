@@ -49,8 +49,6 @@ public class RyunContactAdapter extends BaseTurboAdapter<GroupMember, BaseViewHo
 
     @Override
     protected void convert(BaseViewHolder holder, final GroupMember item) {
-
-
         if (holder instanceof CityHolder) {
             ((CityHolder) holder).city_name.setText(TextUtils.isEmpty(item.getRemarks())?item.getName():item.getRemarks());
             Glide.with(mContext).load(item.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(((CityHolder) holder).imageView29);
@@ -61,7 +59,7 @@ public class RyunContactAdapter extends BaseTurboAdapter<GroupMember, BaseViewHo
                 }
             });
         }else {
-            ((PinnedHolder) holder).city_tip.setText(item.getPinyin());
+            ((PinnedHolder) holder).city_tip.setText(item.getPinyin().toUpperCase());
         }
     }
 

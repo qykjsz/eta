@@ -329,7 +329,7 @@ public interface ApiService {
     Observable  <BaseResponse<String>>addGroupAddressBook(@Query("uid")String uid,@Query("qid")String qid);
 
 
-    @POST("rongyun_addmygroups")
+    @POST("rongyun_delmygroups")
     Observable  <BaseResponse<String>>deleteGroupAddressBook(@Query("uid")String uid,@Query("qid")String qid);
 
     @POST("rongyun_mygroups")
@@ -343,4 +343,10 @@ public interface ApiService {
 
     @POST("rongyun_blacklist")
     Observable  <BaseResponse<List<GroupMember>>>getBlacklist(@Query("uid")String uid);
+
+
+    @POST("rongyun_dismissgroup")
+    Observable  <BaseResponse<String>>dismissgroup(@Query("uid")String uid,@Query("qid")String qid);
+
+
 }

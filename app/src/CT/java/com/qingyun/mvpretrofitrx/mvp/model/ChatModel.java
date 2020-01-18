@@ -242,4 +242,11 @@ public class ChatModel<T> extends BaseModel {
 
 
 
+    public void dismissgroup(Context context,String uid,String qid , ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().dismissgroup(uid,qid), observerListener,transformer);
+
+    }
+
+
+
 }

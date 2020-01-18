@@ -246,11 +246,9 @@
                 android:layout_height="@dimen/dp_49"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/dp_10"
-
+                android:layout_marginTop="@dimen/dp_1"
                 android:text="@string/add_to_group_addressbook"
                 android:paddingEnd="@dimen/dp_padding_x_min"
-                android:drawableEnd="@mipmap/wd_gd_icon"
                 app:layout_constraintTop_toBottomOf="@+id/textView192"
                 tools:layout_editor_absoluteX="78dp" />
 
@@ -278,6 +276,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView194"
                 android:layout_width="@dimen/dp_0"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/color_FFFFFF"
                 android:layout_height="wrap_content">
 
@@ -433,8 +432,17 @@
                 android:button="@drawable/skin_btn_check_box_1"
                 app:layout_constraintBottom_toBottomOf="@+id/textView192"
                 app:layout_constraintEnd_toEndOf="@+id/textView192"
-
                 app:layout_constraintTop_toTopOf="@+id/textView192" />
+
+            <CheckBox
+                android:id="@+id/cb_save_addressbool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_24"
+                android:button="@drawable/skin_btn_check_box_1"
+                app:layout_constraintBottom_toBottomOf="@+id/ly_clear_log"
+                app:layout_constraintEnd_toEndOf="@+id/ly_clear_log"
+                app:layout_constraintTop_toTopOf="@+id/ly_clear_log" />
 
             <TextView
                 android:id="@+id/tv_nickname"

@@ -1,5 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.entity;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
@@ -100,13 +102,15 @@ public class ContactsResponse {
     }
 
     public List<GroupMember> getC() {
+        Log.e(">>>>>>>>>","1");
         if (c==null) {
             return new ArrayList<GroupMember>();
         }else {
+            if (c.size()>0){
+                c.add(0,new GroupMember("C",1));
+            }
             for (int i=0;i<c.size();i++){
-                if (c.size()>0){
-                    c.add(0,new GroupMember("C",1));
-                }
+                Log.e(">>>>>>>>>","2");
                 c.get(i).setPinyin("C");
             }
         }
@@ -121,10 +125,10 @@ public class ContactsResponse {
         if (d==null) {
             return new ArrayList<GroupMember>();
         }else {
+            if (d.size()>0){
+                d.add(0,new GroupMember("D",1));
+            }
             for (int i=0;i<d.size();i++){
-                if (d.size()>0){
-                    d.add(0,new GroupMember("D",1));
-                }
                 d.get(i).setPinyin("D");
             }
         }
@@ -149,6 +153,7 @@ public class ContactsResponse {
         }
         return e;
     }
+
 
     public void setE(List<GroupMember> e) {
         this.e = e;

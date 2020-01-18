@@ -16,6 +16,7 @@ import com.qingyun.mvpretrofitrx.mvp.entity.Group;
 import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
 import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
+import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
@@ -62,12 +63,12 @@ public class GroupExplainSettingActivity extends BaseActivity<ChatContact.View, 
 
     @Override
     public ChatContact.Presenter createPresenter() {
-        return null;
+        return new ChatPresenter(this);
     }
 
     @Override
     public ChatContact.View createView() {
-        return null;
+        return this;
     }
 
     @Override
@@ -77,6 +78,7 @@ public class GroupExplainSettingActivity extends BaseActivity<ChatContact.View, 
         getTvTitleRight().setBackground(getResources().getDrawable(R.drawable.btn_title_right));
         getTvTitleRight().setEnabled(false);
         et.setText(group.getIntroduce());
+        tvNum.setText(group.getIntroduce().length()+"");
         et.setSelection(group.getIntroduce().length());
         getTvTitleRight().setOnClickListener(new View.OnClickListener() {
             @Override

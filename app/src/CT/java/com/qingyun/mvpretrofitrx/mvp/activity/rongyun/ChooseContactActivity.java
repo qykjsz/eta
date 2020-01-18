@@ -45,6 +45,8 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
     WaveSideBarView sideView;
     ChooseContactAdapter adapter;
     private List<GroupMember> list;
+    private List<GroupMember> mGroupMemberList;
+
     @Override
     protected String getTitleRightText() {
         return null;
@@ -152,16 +154,18 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
             }
         });
         adapter.setSelectListener(new ChooseContactAdapter.SelectListener() {
+
             @Override
             public void selectList(List<GroupMember> groupMemberList, int actionType) {
+                mGroupMemberList = groupMemberList;
                 switch (actionType){
                     case 0:
-                        if (groupMemberList!=null&&groupMemberList.size()>=2){
-                            getTvTitleRight().setEnabled(true);
-                        }else {
-                            getTvTitleRight().setEnabled(false);
-
-                        }
+//                        if (groupMemberList!=null&&groupMemberList.size()>=2){
+//                            getTvTitleRight().setEnabled(true);
+//                        }else {
+//                            getTvTitleRight().setEnabled(false);
+//
+//                        }
                         break;
                     case 1:
                     case 2:
@@ -181,13 +185,18 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
         setTitleRightClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 switch (actionType){
                     case 0:
-                        Bundle bundle = new Bundle();
-                        bundle.putString(IntentUtils.IDS,adapter.getSelectListStr());
-                        startActivity(CreateRyunGroupActivity.class,bundle);
-                        finish();
+                        if (mGroupMemberList!=null&&mGroupMemberList.size()>=2){
+                            Bundle bundle = new Bundle();
+                            bundle.putString(IntentUtils.IDS,adapter.getSelectListStr());
+                            startActivity(CreateRyunGroupActivity.class,bundle);
+                            finish();
+                        }else {
+                            ToastUtil.showShortToast(R.string.must_more_3_people);
+
+                        }
+
                         break;
                     case 1:
                         getPresenter().addGroupMember(ApplicationUtil.getChatPersonalInfo().getId()+"",adapter.getSelectList().get(0).getId()+"",id+"");
@@ -200,6 +209,9 @@ public class ChooseContactActivity extends BaseActivity<ChatContact.View,ChatCon
             }
         });
 
+        if (actionType==0){
+            getTvTitleRight().setEnabled(true);
+        }
     }
 
     @Override

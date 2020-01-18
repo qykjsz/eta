@@ -1,15 +1,14 @@
-package com.qingyun.mvpretrofitrx.mvp.activity.chat;
+package com.qingyun.mvpretrofitrx.mvp.activity.rongyun;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 
-import com.bumptech.glide.Glide;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
@@ -19,27 +18,18 @@ import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
 import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
 import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
-import com.qingyun.mvpretrofitrx.mvp.utils.GlideUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
-import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
+import io.rong.imkit.fragment.ConversationFragment;
+import io.rong.imlib.model.Conversation;
 
-public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
-    @BindView(R.id.iv_avatar)
-    ImageView ivAvatar;
-    @BindView(R.id.tv_name)
-    TextView tvName;
-    @BindView(R.id.tv_address)
-    TextView tvAddress;
-    private GroupMember groupMember;
-    private String address;
+public class FriendChatActivity2 extends BaseActivity<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
+    private String mTargetId="FriendChatActivity";
+    private String targetId;
 
     @Override
     protected String getTitleRightText() {
@@ -58,12 +48,12 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.add_friends);
+        return null;
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_add_friends_add;
+        return R.layout.activity_chat_friends;
     }
 
     @Override
@@ -78,34 +68,56 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
 
 
     @Override
-    public void init() {
-       groupMember =  (GroupMember)getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
-       address = groupMember.getAddress();
-       tvAddress.setText(groupMember.getId()+"");
-       tvName.setText(groupMember.getName());
-        Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(ivAvatar);
-    }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    protected void setHeaderData() {
+        super.setHeaderData();
+//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |SOFT_INPUT_STATE_HIDDEN );
+
     }
 
-    @OnClick(R.id.btn_add_friends)
-    public void onViewClicked() {
-        Intent intent  = new Intent(getContext(),AddFriendsApplyActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(IntentUtils.GROUP_MEMBER,groupMember);
-        intent.putExtras(bundle);
-        startActivityForResult(intent,0);
-//        startActivity(AddFriendsApplyActivity.class,bundle);
-//        getPresenter().applyToFriends(ApplicationUtil.getCurrentWallet().getAddress(),tvAddress.getText().toString());
+    @Override
+    public void init() {
+//        String targetId = "67";
+//        Conversation.ConversationType conversationType = Conversation.ConversationType.PRIVATE;
+        Uri dd = getIntent().getData();
+        targetId = getIntent().getData().getQueryParameter("targetId");  //传递的融云的id
+        String targetIds = getIntent().getData().getQueryParameter("targetIds");  //传递的融云的id
+        String title = getIntent().getData().getQueryParameter("title"); //传递的融云名称/用户昵称
+        setTitle(title);
+//        Conversation.ConversationType conversationType = Conversation.ConversationType.valueOf( getIntent().getData().getLastPathSegment());
+        ConversationFragment mConversationFragment=new ConversationFragment();
+        Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
+                .appendPath("subconversationlist").appendPath(getIntent().getData().getLastPathSegment())
+                .appendQueryParameter("targetId", targetId).build();
+        mConversationFragment.setUri(uri);
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fly_friends_chat,mConversationFragment );
+        transaction.commit(); // 提交创建Fragment请求
+        if (getIntent().getData().getLastPathSegment().equals(Conversation.ConversationType.GROUP.getName())) {
+            setIvTitleRight(R.mipmap.lt_zlsz_icon, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    if (getIntent().getData().getLastPathSegment().equals(Conversation.ConversationType.GROUP.getName())){
+                        bundle.putString(IntentUtils.ID,targetId);
+                        Intent intent = new Intent(getContext(),GroupChatInfoActivity.class);
+                        intent.putExtras(bundle);
+                        startActivityForResult(intent,0);
+//                        startActivity(GroupChatInfoActivity.class,bundle);
+                    }
+
+                }
+            });
+
+        }
+        getIvTitleRight().setVisibility(View.GONE);
+        if (getIntent().getData().getLastPathSegment().equals(Conversation.ConversationType.GROUP.getName())){
+            getPresenter().getGroupMemberList(ApplicationUtil.getChatPersonalInfo().getId()+"",targetId);
+        }
     }
 
     @Override
     public void applyToFriendsSuccess(String s) {
-        ToastUtil.showShortToast(s);
 
     }
 
@@ -141,19 +153,15 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
 
     @Override
     public void getGroupMemberListSuccess(List<GroupMember> groupMemberList) {
+        for ( int i = 0; i<groupMemberList.size(); i++){
+            int finalI = i;
+            if (groupMemberList.get(i).getId()== ApplicationUtil.getChatPersonalInfo().getId()){
+                getIvTitleRight().setVisibility(View.VISIBLE);
 
-    }
+            }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==0&&resultCode==1){
-            setResult(1);
-            finish();
         }
     }
-
-
 
     @Override
     public void transferGroupSuccess(String s) {
@@ -180,8 +188,9 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
 
     }
 
+
     @Override
-    public void getGroupListSuccess(List<Group> groupList) {
+    public void getGroupListSuccess(final List<Group> groupList) {
 
     }
 
@@ -250,8 +259,6 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
 
     }
 
-
-
     @Override
     public void deleteFriendsSuccess(String s) {
 
@@ -290,6 +297,15 @@ public class AddFriendsAddActivity extends BaseActivity<ChatContact.View,ChatCon
     @Override
     public void addBlacklistSuccess(String s) {
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==0&&resultCode==1){
+            finish();
+        }
     }
 
     @Override

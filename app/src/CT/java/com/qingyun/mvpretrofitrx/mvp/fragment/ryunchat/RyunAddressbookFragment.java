@@ -69,7 +69,6 @@ public class RyunAddressbookFragment extends BaseFragment<ChatContact.View, Chat
         return this;
     }
 
-
     @Override
     public void init() {
         EventBus.getDefault().register(this);
@@ -372,7 +371,7 @@ public class RyunAddressbookFragment extends BaseFragment<ChatContact.View, Chat
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSystemNoticeReceiver(SystemNotice systemNotice) {
-//        if (systemNotice.getType().equals("1"))
+        if (systemNotice.getType().equals("1"))
         ivNewMessage.setVisibility(View.VISIBLE);
     }
 

@@ -1,6 +1,7 @@
 package com.qingyun.mvpretrofitrx.mvp.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.qingyun.mvpretrofitrx.mvp.contract.AboutUsContact;
 import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
@@ -80,33 +81,92 @@ public class ChatPresenter extends ChatContact.Presenter {
 
             @Override
             public void onNext(ContactsResponse contactsResponse) {
-                groupMemberList.addAll(contactsResponse.getA());
-                groupMemberList.addAll(contactsResponse.getB());
-                groupMemberList.addAll(contactsResponse.getC());
-                groupMemberList.addAll(contactsResponse.getD());
-                groupMemberList.addAll(contactsResponse.getE());
-                groupMemberList.addAll(contactsResponse.getF());
-                groupMemberList.addAll(contactsResponse.getG());
-                groupMemberList.addAll(contactsResponse.getH());
-                groupMemberList.addAll(contactsResponse.getI());
-                groupMemberList.addAll(contactsResponse.getJ());
-                groupMemberList.addAll(contactsResponse.getK());
-                groupMemberList.addAll(contactsResponse.getL());
-                groupMemberList.addAll(contactsResponse.getM());
-                groupMemberList.addAll(contactsResponse.getN());
-                groupMemberList.addAll(contactsResponse.getO());
-                groupMemberList.addAll(contactsResponse.getP());
-                groupMemberList.addAll(contactsResponse.getQ());
-                groupMemberList.addAll(contactsResponse.getR());
-                groupMemberList.addAll(contactsResponse.getS());
-                groupMemberList.addAll(contactsResponse.getT());
-                groupMemberList.addAll(contactsResponse.getU());
-                groupMemberList.addAll(contactsResponse.getV());
-                groupMemberList.addAll(contactsResponse.getW());
-                groupMemberList.addAll(contactsResponse.getX());
-                groupMemberList.addAll(contactsResponse.getY());
-                groupMemberList.addAll(contactsResponse.getZ());
+
+
                 groupMemberList.addAll(contactsResponse.getXx());
+                Log.e("---------------","2");
+
+
+                Log.e("---------------","1");
+                groupMemberList.addAll(contactsResponse.getA());
+
+                Log.e("---------------","2");
+
+                groupMemberList.addAll(contactsResponse.getB());
+                Log.e("---------------","3");
+
+                groupMemberList.addAll(contactsResponse.getC());
+                Log.e("---------------","4");
+
+                groupMemberList.addAll(contactsResponse.getD());
+                Log.e("---------------","5");
+
+                groupMemberList.addAll(contactsResponse.getE());
+                Log.e("---------------","6");
+
+                groupMemberList.addAll(contactsResponse.getF());
+                Log.e("---------------","7");
+
+                groupMemberList.addAll(contactsResponse.getG());
+                Log.e("---------------","8");
+
+                groupMemberList.addAll(contactsResponse.getH());
+                Log.e("---------------","9");
+
+                groupMemberList.addAll(contactsResponse.getI());
+                Log.e("---------------","10");
+
+                groupMemberList.addAll(contactsResponse.getJ());
+                Log.e("---------------","11");
+
+                groupMemberList.addAll(contactsResponse.getK());
+                Log.e("---------------","12");
+
+                groupMemberList.addAll(contactsResponse.getL());
+                Log.e("---------------","13");
+
+                groupMemberList.addAll(contactsResponse.getM());
+                Log.e("---------------","14");
+
+                groupMemberList.addAll(contactsResponse.getN());
+                Log.e("---------------","15");
+
+                groupMemberList.addAll(contactsResponse.getO());
+                Log.e("---------------","16");
+
+                groupMemberList.addAll(contactsResponse.getP());
+                Log.e("---------------","17");
+
+                groupMemberList.addAll(contactsResponse.getQ());
+                Log.e("---------------","18");
+
+                groupMemberList.addAll(contactsResponse.getR());
+                Log.e("---------------","19");
+
+                groupMemberList.addAll(contactsResponse.getS());
+                Log.e("---------------","20");
+
+                groupMemberList.addAll(contactsResponse.getT());
+                Log.e("---------------","21");
+
+                groupMemberList.addAll(contactsResponse.getU());
+                Log.e("---------------","22");
+
+                groupMemberList.addAll(contactsResponse.getV());
+                Log.e("---------------","23");
+
+                groupMemberList.addAll(contactsResponse.getW());
+                Log.e("---------------","24");
+
+                groupMemberList.addAll(contactsResponse.getX());
+                Log.e("---------------","25");
+
+                groupMemberList.addAll(contactsResponse.getY());
+                Log.e("---------------","26");
+
+                groupMemberList.addAll(contactsResponse.getZ());
+                Log.e("---------------","27");
+
 
                 if(getView() != null){
                     getView().getFriendsListSuccess(groupMemberList);
@@ -404,7 +464,7 @@ public class ChatPresenter extends ChatContact.Presenter {
             @Override
             public void onNext(String s) {
                 if(getView() != null){
-                    getView().exitGroupSuccess(s);
+                    getView().addGroupAddressBookSuccess(s);
                 }
             }
 
@@ -462,6 +522,24 @@ public class ChatPresenter extends ChatContact.Presenter {
             public void onNext(List<GroupMember> groupMemberList) {
                 if(getView() != null){
                     getView().getGroupMemberListSuccess(groupMemberList);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
+    public void dismissgroup(String uid, String qid) {
+        model.dismissgroup(context,uid,qid,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String s) {
+                if(getView() != null){
+                    getView().exitGroupSuccess(s);
                 }
             }
 

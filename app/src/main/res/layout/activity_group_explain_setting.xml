@@ -10,8 +10,10 @@
     <EditText
         android:id="@+id/et"
         android:layout_width="@dimen/dp_0"
+        android:background="@color/color_FFFFFF"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/dp_177"
+        android:gravity="left"
         android:paddingTop="@dimen/dp_padding_x_min"
         android:paddingStart="@dimen/dp_padding_x_min"
         android:paddingEnd="@dimen/dp_padding_x_min"
