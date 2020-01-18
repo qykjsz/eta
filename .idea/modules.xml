@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CallKit/CallKit.iml" filepath="$PROJECT_DIR$/CallKit/CallKit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CallLib/CallLib.iml" filepath="$PROJECT_DIR$/CallLib/CallLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IMKit/IMKit.iml" filepath="$PROJECT_DIR$/IMKit/IMKit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IMLib/IMLib.iml" filepath="$PROJECT_DIR$/IMLib/IMLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/eta.iml" filepath="$PROJECT_DIR$/eta.iml" />
       <module fileurl="file://$PROJECT_DIR$/gallery/gallery.iml" filepath="$PROJECT_DIR$/gallery/gallery.iml" />
       <module fileurl="file://$PROJECT_DIR$/indicatorseekbar/indicatorseekbar.iml" filepath="$PROJECT_DIR$/indicatorseekbar/indicatorseekbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_ios_dialog/lib_ios_dialog.iml" filepath="$PROJECT_DIR$/lib_ios_dialog/lib_ios_dialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library_circle_menu/library_circle_menu.iml" filepath="$PROJECT_DIR$/library_circle_menu/library_circle_menu.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_imgWatcher/library_imgWatcher.iml" filepath="$PROJECT_DIR$/library_imgWatcher/library_imgWatcher.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_progress/library_progress.iml" filepath="$PROJECT_DIR$/library_progress/library_progress.iml" />
       <module fileurl="file://$PROJECT_DIR$/magicindicator/magicindicator.iml" filepath="$PROJECT_DIR$/magicindicator/magicindicator.iml" />

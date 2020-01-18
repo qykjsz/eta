@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -15,15 +16,21 @@ import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.develop.wallet.eth.Wallet;
+import com.qingyun.mvpretrofitrx.mvp.api.Api;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.fragment.AssetFragment;
+import com.qingyun.mvpretrofitrx.mvp.net.HttpParamsUtils;
+import com.qingyun.mvpretrofitrx.mvp.net.XCallBack;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.LocalManageUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.SpUtils;
 import com.qingyun.mvpretrofitrx.mvp.utils.StatsConfig;
 import com.senon.mvpretrofitrx.R;
+
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -79,7 +86,9 @@ public class SplashActivity extends BaseActivity {
         }
         LocalManageUtil.saveLocal(getActivity(), choose);
 
-        final Wallet wallet =  ApplicationUtil.getCurrentWallet();
+//        final Wallet wallet =  ApplicationUtil.getCurrentWallet();
+
+
 //        loadOneTimeGif(getContext(), R.mipmap.et, iv, new GifListener() {
 //            @Override
 //            public void gifPlayComplete() {
@@ -122,20 +131,21 @@ public class SplashActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (wallet ==null){
-                    Intent intent = new Intent(SplashActivity.this,ChooseBottomLevelActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
-                    finish();
-                }else {
-                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
-                    finish();
-                }
+                requestAdvertisement();
+//                if (wallet ==null){
+//                    Intent intent = new Intent(SplashActivity.this,ChooseBottomLevelActivity.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+//                    finish();
+//                }else {
+//                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+//                    startActivity(intent);
+//                    overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+//                    finish();
+//                }
 
             }
-        },1000);
+        },500);
     }
 
 
@@ -218,5 +228,34 @@ public class SplashActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         StatsConfig.getInstance().onPageEnd(this,"com.qingyun.mvpretrofitrx.mvp.activity.SplashActivity");
+    }
+
+    private void requestAdvertisement(){
+        RequestParams params = HttpParamsUtils.getX3Params(Api.returnEtUrl()+"start_up");
+        x.http().post(params, new XCallBack() {
+            @Override
+            public void onAfterFinished() {
+
+            }
+
+            @Override
+            public void onAfterSuccessOk(JSONObject object) {
+
+                JSONObject data = object.getJSONObject("data");
+                String photo = data.getString("photo");
+                String url = data.getString("url");
+                Intent intent = new Intent(SplashActivity.this,AdvertisementActivity.class);
+                intent.putExtra("photo",photo);
+                intent.putExtra("url",url);
+                startActivity(intent);
+                finish();
+
+            }
+
+            @Override
+            public void onAfterSuccessErr(JSONObject object, String msg) {
+
+            }
+        });
     }
 }

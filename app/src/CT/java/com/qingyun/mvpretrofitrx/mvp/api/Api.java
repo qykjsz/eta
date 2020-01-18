@@ -13,6 +13,7 @@ public class Api {
 
     //    private String baseUrl = "https://application.us.zone/api/";
     private static String baseUrl = "https://et2.etac.io/api/";
+    private static String baseUrls = "https://etoken.etac.io/api/";
     private volatile static ApiService apiService;
 
     public static ApiService getApiService() {
@@ -65,7 +66,7 @@ public class Api {
         }
     }
     public static String returnEtUrl(){
-        return baseUrl;
+        return baseUrls;
     }
 
 }

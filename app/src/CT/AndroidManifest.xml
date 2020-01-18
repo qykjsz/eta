@@ -55,7 +55,12 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!--用于申请获取蓝牙信息进行室内定位-->
     <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
@@ -87,7 +92,7 @@
         <!-- 高德地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="19700e5838a0272a492ec03806a6fac9" />
+            android:value="5ee3cc409ca258883078913180b39a07" />
         <!--<service android:name="com.amap.api.location.APSService"></service>-->
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.TheArticleDetailsActivity"></activity>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.ExpressTheDetailsActivity" />
@@ -227,6 +232,52 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.chat.GroupChatActivity"/>
         <service android:name="com.qingyun.mvpretrofitrx.mvp.service.WebSocketService"/>
+        <activity android:name="com.qingyun.mvpretrofitrx.mvp.activity.AdvertisementActivity"/>
+
+        <!--融云音视频-->
+        <activity
+            android:name="io.rong.callkit.MultiVideoCallActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="io.rong.intent.action.voip.MULTIVIDEO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="io.rong.callkit.SingleCallActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="io.rong.intent.action.voip.SINGLEVIDEO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="io.rong.intent.action.voip.SINGLEAUDIO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="io.rong.callkit.MultiAudioCallActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="io.rong.intent.action.voip.MULTIAUDIO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="io.rong.callkit.CallSelectMemberActivity"></activity>
+        <!--融云音视频END-->
 
         <!--解决融云打开相机闪退问题-->
         <provider

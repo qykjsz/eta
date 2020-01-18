@@ -14,8 +14,10 @@ android {
         flavorDimensions "default"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         ndk {
-            abiFilters "armeabi"
+            abiFilters "armeabi-v7a", 'x86'
         }
+        // 若集成过多第三方库时可能导致方法超过65536时需要开启
+        multiDexEnabled true
 
         packagingOptions {
             //解决编译时com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'META-INF/rxjava.properties'这个错误
@@ -212,6 +214,7 @@ dependencies {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
+
     implementation(project(path: ':IMKit')) {
         exclude group: 'com.android.support'
         exclude group: 'com.github.bumptech.glide'
@@ -253,10 +256,19 @@ dependencies {
     implementation files('libs/AMap_Search_V6.9.3_20190722.jar')
     implementation files('libs/Android_Map3D_SDK_V6.9.3_20191018.jar')
     implementation files('libs/MapApiLocationMini.jar')
-
     implementation 'cc.solart:turbo-recyclerview-helper:1.0.3-beta'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     implementation project(path: ':library_circle_menu')
-
-    
+    implementation(project(path: ':CallKit')) {
+        exclude group: 'com.android.support'
+        exclude group: 'com.github.bumptech.glide'
+        exclude group: 'com.android.support:exifinterface'
+        exclude module: 'appcompat-v7'
+    }
+    implementation(project(path: ':CallLib')) {
+        exclude group: 'com.android.support'
+        exclude group: 'com.github.bumptech.glide'
+        exclude group: 'com.android.support:exifinterface'
+        exclude module: 'appcompat-v7'
+    }
 }
