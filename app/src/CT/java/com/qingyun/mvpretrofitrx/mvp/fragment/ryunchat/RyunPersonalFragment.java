@@ -255,6 +255,7 @@ public class RyunPersonalFragment extends BaseFragment<ChatContact.View, ChatCon
     @Override
     public void upDataAvatarSuccess(String s) {
         ToastUtil.showShortToast(s);
+        getPresenter().getNicknameByAdress(ApplicationUtil.getChatPersonalInfo().getId()+"");
     }
 
     @Override

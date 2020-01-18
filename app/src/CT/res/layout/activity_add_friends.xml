@@ -9,7 +9,6 @@
         android:id="@+id/et_search"
         android:layout_width="@dimen/dp_0"
         app:layout_constraintTop_toTopOf="parent"
-
         android:singleLine="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
@@ -69,6 +68,7 @@
         android:id="@+id/btn_search_it"
         android:layout_width="0dp"
         android:paddingStart="@dimen/dp_5"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:textColor="@color/main_blue"
         android:layout_marginEnd="@dimen/dp_padding_x_min"

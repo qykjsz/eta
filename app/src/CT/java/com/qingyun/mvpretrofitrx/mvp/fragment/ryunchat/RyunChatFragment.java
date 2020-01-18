@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.develop.wallet.eth.Wallet;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MainViewPagerAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
@@ -33,6 +35,7 @@ import net.lucode.hackware.magicindicator.MagicIndicator;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +45,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.ObservableTransformer;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.model.GroupUserInfo;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
 import io.rong.imlib.model.UserInfo;
 
@@ -218,6 +223,50 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 
         ApplicationUtil.setChatPersonalInfo(groupMember);
 
+        getPresenter().getGroupList(ApplicationUtil.getChatPersonalInfo().getId()+"");
+
+
+
+    }
+
+    @Override
+    public void dealApplyIntoGroupApplySuccess(String s) {
+
+    }
+
+    @Override
+    public void applyIntoGroupSuccess(String s) {
+
+    }
+
+    @Override
+    public void setIfGroupReviewSuccess(String s) {
+
+    }
+
+    @Override
+    public void getGroupListSuccess(List<Group> groupList) {
+//        for (int i=0;i<groupList.size();i++){
+//            final io.rong.imlib.model.Group group = new io.rong.imlib.model.Group(groupList.get(i).getId()+"",groupList.get(i).getName(),Uri.parse(groupList.get(i).getPhoto()));
+//            RongIM.setGroupInfoProvider(new RongIM.GroupInfoProvider() {
+//                @Override
+//                public io.rong.imlib.model.Group getGroupInfo(String s) {
+//                    return group;
+//                }
+//            },true);
+//        }
+//        RongIM.setGroupUserInfoProvider(new RongIM.GroupUserInfoProvider() {
+//            @Override
+//            public GroupUserInfo getGroupUserInfo(String s, String s1) {
+//                return null;
+//            }
+//        },true);
+//        final List<io.rong.imlib.model.Group > group = new ArrayList<>();
+//        for (int i=0;i<groupList.size();i++){
+//            RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(groupList.get(i).getId()+"",groupList.get(i).getName(),Uri.parse(groupList.get(i).get)));
+////            group.add(new io.rong.imlib.model.Group(groupList.get(i).getId()+"",groupList.get(i).getName(),Uri.parse(groupList.get(i).getPhoto())));
+//        }
+//
         RongIM.connect(token.getToken(), new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {
@@ -243,31 +292,31 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
             @Override
             public boolean onReceived(Message message, int left) {
                 Log.e("push>>message",message.toString());
-                EventBus.getDefault().post(new SystemNotice(message.getContent().getJSONDestructInfo().toString()));
+                try {
+                    if (message.getConversationType().getValue()== Conversation.ConversationType.SYSTEM.getValue()){
+                        String ss = message.getContent().toString();
+                        Log.e("------------------>",ss);
+//                        JSONObject jsonObject= message.getContent().getJSONUserInfo();
+//                        if (jsonObject.has("extra")){
+//                            String str = jsonObject.getString("extra");
+//                            SystemNotice systemNotice = new Gson().fromJson(str,SystemNotice.class);
+//                            EventBus.getDefault().post(systemNotice);
+//
+//                        }
+                        if (ss.contains("{\"type\":1}")){
+                                 EventBus.getDefault().post(new SystemNotice("1"));
+
+                        }
+                    }else if (message.getConversationType().getValue()== Conversation.ConversationType.GROUP.getValue()){
+                        getPresenter().getGroupInfo(ApplicationUtil.getChatPersonalInfo().getId()+"",message.getTargetId());
+                    }
+                    return false;
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 return false;
             }
         });
-
-    }
-
-    @Override
-    public void dealApplyIntoGroupApplySuccess(String s) {
-
-    }
-
-    @Override
-    public void applyIntoGroupSuccess(String s) {
-
-    }
-
-    @Override
-    public void setIfGroupReviewSuccess(String s) {
-
-    }
-
-    @Override
-    public void getGroupListSuccess(List<Group> groupList) {
-
     }
 
     @Override
@@ -322,7 +371,7 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 
     @Override
     public void getGroupInfoSuccess(Group group) {
-
+        RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(group.getId()+"",group.getName(),Uri.parse(group.getPhoto())));
     }
 
     @Override

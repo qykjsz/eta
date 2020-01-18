@@ -95,6 +95,7 @@
         android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_36"
+        android:enabled="false"
         android:drawableStart="@mipmap/lt_ss_icon"
         android:drawablePadding="@dimen/dp_12"
         android:hint="@string/search"

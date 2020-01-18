@@ -69,7 +69,7 @@ public class AddFriendsApplyActivity extends BaseActivity<ChatContact.View, Chat
     @Override
     public void init() {
         groupMember = (GroupMember) getIntent().getSerializableExtra(IntentUtils.GROUP_MEMBER);
-        tvRemark.setText(groupMember.getName());
+        tvRemark.setText("我是"+ApplicationUtil.getChatPersonalInfo().getName());
         getTvTitleRight().setText(R.string.send);
         getTvTitleRight().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,9 +79,12 @@ public class AddFriendsApplyActivity extends BaseActivity<ChatContact.View, Chat
         });
     }
 
+
     @Override
     public void applyToFriendsSuccess(String s) {
         ToastUtil.showShortToast(s);
+        setResult(1);
+        finish();
     }
 
     @Override
@@ -192,6 +195,7 @@ public class AddFriendsApplyActivity extends BaseActivity<ChatContact.View, Chat
     @Override
     public void applyToFriendsPassSuccess(String s) {
         ToastUtil.showShortToast(s);
+
     }
 
     @Override

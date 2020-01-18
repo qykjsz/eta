@@ -445,5 +445,9 @@
     <string name="scan_to_be_my_friends_1">扫描上方二维码加我为好友</string>
     <string name="add_to_addressbook">添加到通讯录</string>
     <string name="beizhu">备注</string>
+    <string name="my_group_chat">我的群组</string>
+    <string name="not_setting">未设置</string>
+    <string name="have_setting">已设置</string>
+    <string name="must_more_3_people">群组至少选择3人</string>
 
 </resources>

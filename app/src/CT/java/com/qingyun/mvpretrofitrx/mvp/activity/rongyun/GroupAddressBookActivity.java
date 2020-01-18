@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity.rongyun;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.qingyun.mvpretrofitrx.mvp.adapter.GroupAddressBookAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
@@ -25,6 +26,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.ObservableTransformer;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
 public class GroupAddressBookActivity extends BaseActivity<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.rcy)
@@ -49,7 +52,7 @@ public class GroupAddressBookActivity extends BaseActivity<ChatContact.View, Cha
 
     @Override
     protected String getTitleText() {
-        return getResources().getString(R.string.group_chat);
+        return getResources().getString(R.string.my_group_chat);
     }
 
     @Override
@@ -75,9 +78,13 @@ public class GroupAddressBookActivity extends BaseActivity<ChatContact.View, Cha
         groupAddressBookAdapter.setItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString(IntentUtils.ID,((Group)list.get(position)).getId()+"");
-                startActivity(GroupChatInfoActivity.class,bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(IntentUtils.ID,((Group)list.get(position)).getId()+"");
+//                startActivity(GroupChatInfoActivity.class,bundle);
+                /**
+                 * 启动会话界面。
+                 */
+                RongIM.getInstance().startConversation(getActivity(), Conversation.ConversationType.GROUP , ((Group)list.get(position)).getId()+"", ((Group)list.get(position)).getName());
             }
         });
         rcy.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -160,6 +167,11 @@ public class GroupAddressBookActivity extends BaseActivity<ChatContact.View, Cha
     @Override
     public void getGroupListSuccess(List<Group> groupList) {
         list = groupList;
+        for (int i=0;i<groupList.size();i++){
+            if (groupList.get(i).getNumber().equals("0")){
+                getPresenter().deleteGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId()+"",groupList.get(i).getId()+"");
+            }
+        }
         groupAddressBookAdapter.notifyDataSetChanged(list);
         refreashView(list,rcy);
     }
@@ -261,7 +273,7 @@ public class GroupAddressBookActivity extends BaseActivity<ChatContact.View, Cha
 
     @Override
     public void addGroupAddressBookSuccess(String s) {
-
+        getPresenter().getGroupList(ApplicationUtil.getChatPersonalInfo().getId()+"");
     }
 
     @Override

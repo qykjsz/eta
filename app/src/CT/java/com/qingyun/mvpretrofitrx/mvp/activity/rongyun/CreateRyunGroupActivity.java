@@ -130,7 +130,6 @@ public class CreateRyunGroupActivity extends BaseActivity<ChatContact.View,ChatC
                 break;
             case R.id.btn_create_group:
               getPresenter().createGroup(ApplicationUtil.getChatPersonalInfo().getId()+"",etGroupName.getText().toString(),etGroupExplain.getText().toString(),ids,img_area);
-
                 break;
         }
     }
@@ -234,7 +233,7 @@ public class CreateRyunGroupActivity extends BaseActivity<ChatContact.View,ChatC
     public void createGroupSuccess(String s) {
         ToastUtil.showShortToast(R.string.create_chat_group_success);
         finish();
-//        getPresenter().addGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId()+"",s);
+        getPresenter().addGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId()+"",s);
 //        Bundle bundle = new Bundle();
 //        bundle.putString(IntentUtils.ID,s);
 //        startActivity(GroupChatInfoActivity.class,bundle);

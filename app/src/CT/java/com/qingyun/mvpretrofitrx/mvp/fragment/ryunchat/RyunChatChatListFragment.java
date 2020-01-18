@@ -11,23 +11,35 @@ import com.qingyun.mvpretrofitrx.mvp.activity.rongyun.ChooseContactActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
+import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
+import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
+import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
+import com.qingyun.mvpretrofitrx.mvp.entity.Group;
+import com.qingyun.mvpretrofitrx.mvp.entity.GroupMember;
+import com.qingyun.mvpretrofitrx.mvp.entity.NewChat;
+import com.qingyun.mvpretrofitrx.mvp.entity.RyunToken;
+import com.qingyun.mvpretrofitrx.mvp.presenter.ChatPresenter;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.ScanUtil;
 import com.rance.library.ButtonData;
 import com.rance.library.ButtonEventListener;
 import com.rance.library.SectorMenuButton;
 import com.senon.mvpretrofitrx.R;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.ObservableTransformer;
+import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationListFragment;
+import io.rong.imkit.fragment.IHistoryDataResultCallback;
 import io.rong.imlib.model.Conversation;
 import per.goweii.anylayer.AnyLayer;
 import per.goweii.anylayer.LayerManager;
 
-public class RyunChatChatListFragment extends BaseFragment {
+public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.top_sector_menu)
     SectorMenuButton topSectorMenu;
     @Override
@@ -36,14 +48,15 @@ public class RyunChatChatListFragment extends BaseFragment {
     }
 
     @Override
-    public BasePresenter createPresenter() {
-        return null;
+    public ChatContact.Presenter createPresenter() {
+        return new ChatPresenter(getContext());
     }
 
     @Override
-    public BaseView createView() {
-        return null;
+    public ChatContact.View createView() {
+        return this;
     }
+
 
     @Override
     public void init() {
@@ -64,6 +77,21 @@ public class RyunChatChatListFragment extends BaseFragment {
         transaction.replace(R.id.conversationlist, mConversationListFragment);
         transaction.commit();
 
+        Conversation.ConversationType []conversationType = new Conversation.ConversationType[1];
+        conversationType[0] = Conversation.ConversationType.GROUP;
+        mConversationListFragment.getConversationList(conversationType, new IHistoryDataResultCallback<List<Conversation>>() {
+            @Override
+            public void onResult(List<Conversation> conversations) {
+                for (int i=0;i<conversations.size();i++){
+                    getPresenter().getGroupInfo(ApplicationUtil.getChatPersonalInfo().getId()+"",conversations.get(i).getTargetId());
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        },false);
 //        //初始化聊天界面底部的自定义按钮  具体在下面会详细介绍
 //        RongExtensionManager.getInstance().registerExtensionModule(RecognizeExtensionModule2.getInstence());
 //        getPresenter().getNicknameByAdress(ApplicationUtil.getCurrentWallet().getAddress());
@@ -141,5 +169,188 @@ public class RyunChatChatListFragment extends BaseFragment {
     @Override
     protected String getTitleText() {
         return null;
+    }
+
+    @Override
+    public void applyToFriendsSuccess(String s) {
+
+    }
+
+    @Override
+    public void changeNicknameSuccess(String s) {
+
+    }
+
+    @Override
+    public void setMessageReadGroupSuccess(String s) {
+
+    }
+
+    @Override
+    public void getGroupChatLogSuccess(List<ChatMessage> chatMessageList) {
+
+    }
+
+    @Override
+    public void registerChatSuccess(String s) {
+
+    }
+
+    @Override
+    public void sendMessageToGroupSuccess(String s) {
+
+    }
+
+    @Override
+    public void exitGroupSuccess(String s) {
+
+    }
+
+    @Override
+    public void getGroupMemberListSuccess(List<GroupMember> groupMemberList) {
+
+    }
+
+    @Override
+    public void transferGroupSuccess(String s) {
+
+    }
+
+    @Override
+    public void getNicknameByAdressSuccess(GroupMember groupMember) {
+
+    }
+
+    @Override
+    public void dealApplyIntoGroupApplySuccess(String s) {
+
+    }
+
+    @Override
+    public void applyIntoGroupSuccess(String s) {
+
+    }
+
+    @Override
+    public void setIfGroupReviewSuccess(String s) {
+
+    }
+
+    @Override
+    public void getGroupListSuccess(List<Group> groupList) {
+
+    }
+
+    @Override
+    public void createGroupSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupListSuccess(List<ApplyGroup> applyGroupList) {
+
+    }
+
+    @Override
+    public void addFriendsListSuccess(List<ApplyGroup> applyGroupList) {
+
+    }
+
+    @Override
+    public void newChaListSuccess(NewChat newChat) {
+
+    }
+
+    @Override
+    public void seeChatMessageLogSuccess(List<ChatMessage> chatMessageList) {
+
+    }
+
+    @Override
+    public void viewMessageSuccess(String s) {
+
+    }
+
+    @Override
+    public void sendMessageSuccess(String s) {
+
+    }
+
+    @Override
+    public void getFriendsListSuccess(List<GroupMember> groupMemberList) {
+
+    }
+
+    @Override
+    public void applyToFriendsPassSuccess(String s) {
+
+    }
+
+    @Override
+    public void applyToFriendsRefuseSuccess(String s) {
+
+    }
+
+    @Override
+    public void getGroupInfoSuccess(Group group) {
+
+        RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(group.getId()+"",group.getName(),Uri.parse(group.getPhoto())));
+
+    }
+
+    @Override
+    public void upDataAvatarSuccess(String s) {
+
+    }
+
+    @Override
+    public void getChatTokenSuccess(RyunToken ryunToken) {
+
+    }
+
+    @Override
+    public void deleteFriendsSuccess(String s) {
+
+    }
+
+    @Override
+    public void setRemarkSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupMemberSuccess(String s) {
+
+    }
+
+    @Override
+    public void removeGroupMenberSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupNameSuccess(String s) {
+
+    }
+
+    @Override
+    public void upDataGroupExplainSuccess(String s) {
+
+    }
+
+    @Override
+    public void addGroupAddressBookSuccess(String s) {
+
+    }
+
+    @Override
+    public void addBlacklistSuccess(String s) {
+
+    }
+
+    @Override
+    public <T> ObservableTransformer<T, T> bindLifecycle() {
+        return this.bindUntilEvent(FragmentEvent.PAUSE);
+
     }
 }

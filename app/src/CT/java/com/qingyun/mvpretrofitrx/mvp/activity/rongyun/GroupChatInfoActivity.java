@@ -1,11 +1,14 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.rongyun;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
+import io.rong.imkit.RongIM;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -70,13 +74,15 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
     TextView tvNickname;
     @BindView(R.id.btn_exit)
     BoldTextView btnExit;
+    @BindView(R.id.cb_save_addressbool)
+    CheckBox cbSaveAddressbool;
     private String id;
     private RyunGroupMemberAdapter groupMemberAdapter;
     private List<GroupMember> list;
     private Group group;
     private MultipartBody.Part img_area;
     private Boolean qz = false;
-
+    boolean onResum = false;
     @Override
     protected String getTitleRightText() {
         return null;
@@ -141,6 +147,7 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
     @Override
     protected void onResume() {
         super.onResume();
+        onResum = true;
         getPresenter().getGroupInfo(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
 
     }
@@ -178,13 +185,21 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
     @Override
     public void exitGroupSuccess(String s) {
         ToastUtil.showShortToast(s);
+        setResult(1);
         finish();
     }
 
     @Override
     public void getGroupMemberListSuccess(List<GroupMember> groupMemberList) {
         groupMemberAdapter.notifyDataSetChanged(groupMemberList, qz);
-        setTitle(getResources().getString(R.string.group_info) + "  " + "(" + groupMemberList.size() + ")");
+        int groupNum;
+        if (qz) {
+            groupNum = groupMemberList.size() - 2;
+        } else {
+            groupNum = groupMemberList.size() - 1;
+
+        }
+        setTitle(getResources().getString(R.string.group_info) + "  " + "(" + groupNum + ")");
     }
 
     @Override
@@ -214,7 +229,22 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
 
     @Override
     public void getGroupListSuccess(List<Group> groupList) {
+        for (int i=0;i<groupList.size();i++){
+            if (groupList.get(i).getId()==Integer.parseInt(id)){
+                cbSaveAddressbool.setChecked(true);
+            }
+        }
+        cbSaveAddressbool.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    getPresenter().addGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
+                }else {
+                    getPresenter().deleteGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
 
+                }
+            }
+        });
     }
 
     @Override
@@ -268,7 +298,10 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
     }
 
     @Override
-    public void getGroupInfoSuccess(Group group) {
+    public void getGroupInfoSuccess(final Group group) {
+        RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(group.getId()+"",group.getName(),Uri.parse(group.getPhoto())));
+
+
         this.group = group;
 //        @BindView(R.id.rcy_group_member)
 //        RecyclerView rcyGroupMember;
@@ -296,21 +329,26 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
 
         qz = group.getQzid() == ApplicationUtil.getChatPersonalInfo().getId();
         if (!qz) {
-
             btnExit.setText(R.string.delete_add_exit);
-
         }
         tvGroupId.setText(group.getId() + "");
         tvGroupName.setText(group.getName());
         Glide.with(getContext()).load(group.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(ivAvatar);
-        tvGroupExplain.setText(group.getIntroduce());
-        getPresenter().getGroupMemberList(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
+        if (TextUtils.isEmpty(group.getIntroduce())) {
+            tvGroupExplain.setText(R.string.not_setting);
 
+        } else {
+            tvGroupExplain.setText(R.string.have_setting);
+
+        }
+        getPresenter().getGroupMemberList(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
+        getPresenter().getGroupList(ApplicationUtil.getChatPersonalInfo().getId()+"");
     }
 
     @Override
     public void upDataAvatarSuccess(String s) {
         ToastUtil.showShortToast(s);
+        getPresenter().getGroupInfo(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
     }
 
     @Override
@@ -330,7 +368,7 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
 
     @Override
     public void addGroupMemberSuccess(String s) {
-
+        ToastUtil.showShortToast(s);
     }
 
     @Override
@@ -358,11 +396,11 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
 
     }
 
+
     @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindToLifecycle();
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -371,7 +409,7 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.ly_group_manager, R.id.btn_see_more_menber, R.id.ly_group_name, R.id.ly_share, R.id.ly_froup_explain, R.id.ly_nick_name, R.id.ly_clear_log, R.id.btn_exit})
+    @OnClick({R.id.iv_avatar,R.id.ly_group_manager, R.id.btn_see_more_menber, R.id.ly_group_name, R.id.ly_share, R.id.ly_froup_explain, R.id.ly_nick_name,  R.id.btn_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ly_group_manager:
@@ -380,8 +418,7 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
             case R.id.iv_avatar:
                 if (group.getQzid() == ApplicationUtil.getChatPersonalInfo().getId()) {
                     DialogUtils.showPictureChooseDialogAvatar(getActivity(), false);
-                }
-                else {
+                } else {
                     ToastUtil.showShortToast(R.string.not_permissions);
                 }
                 break;
@@ -420,9 +457,6 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
                 bundle4.putInt(IntentUtils.TYPE, 1);
                 startActivity(GroupInfoSettingActivity.class, bundle4);
                 break;
-            case R.id.ly_clear_log:
-                getPresenter().addGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
-                break;
             case R.id.btn_exit:
                 DialogUtils.showConfirmDialog(getActivity(), 0, R.string.exit_group, R.string.cancel, R.string.confirm, new View.OnClickListener() {
                     @Override
@@ -433,8 +467,8 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
                     @Override
                     public void onClick(View v) {
                         if (group.getQzid() == ApplicationUtil.getChatPersonalInfo().getId()) {
-                            getPresenter().deleteGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
-
+//                            getPresenter().deleteGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
+                            getPresenter().dismissgroup(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
                         } else {
                             getPresenter().exitGroup(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
                         }
