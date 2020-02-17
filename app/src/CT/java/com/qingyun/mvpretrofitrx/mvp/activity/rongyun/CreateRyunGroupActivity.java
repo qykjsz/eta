@@ -1,7 +1,12 @@
 package com.qingyun.mvpretrofitrx.mvp.activity.rongyun;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -32,12 +37,15 @@ import com.qingyun.mvpretrofitrx.mvp.utils.ToastUtil;
 import com.senon.mvpretrofitrx.R;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.ObservableTransformer;
+import io.rong.imkit.RongIM;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -93,6 +101,7 @@ public class CreateRyunGroupActivity extends BaseActivity<ChatContact.View,ChatC
     @Override
     public void init() {
         ids = getIntent().getStringExtra(IntentUtils.IDS);
+
         etGroupExplain.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -115,6 +124,75 @@ public class CreateRyunGroupActivity extends BaseActivity<ChatContact.View,ChatC
         });
     }
 
+    public File decodeToFile(int resId){
+        InputStream is = getResources().openRawResource(resId);
+        Bitmap bitmap = BitmapFactory.decodeStream(is);
+        String defaultPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/defaultAvatar";
+        File file = new File(defaultPath);
+        String defaultImgPath = defaultPath + "/messageImg.jpg";
+
+        if (!file.exists()) {
+            file.mkdirs();
+        } else {
+            return  file;
+        }
+        file = new File(defaultImgPath);
+        try {
+            file.createNewFile();
+            FileOutputStream fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 20, fOut);
+            is.close();
+            fOut.flush();
+            fOut.close();
+            return file;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+    /**
+     * drawable转为file
+     * @param mContext
+     * @param drawableId  drawable的ID
+     * @param fileName   转换后的文件名
+     * @return
+     */
+    public File drawableToFile(Context mContext, int drawableId, File fileName){
+//        InputStream is = view.getContext().getResources().openRawResource(R.drawable.logo);
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), drawableId);
+//        Bitmap bitmap = BitmapFactory.decodeStream(is);
+
+        String defaultPath = mContext.getFilesDir()
+                .getAbsolutePath() + "/defaultGoodInfo";
+        File file = new File(defaultPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        } else {
+            return null;
+        }
+        String defaultImgPath = defaultPath + "/"+fileName;
+        file = new File(defaultImgPath);
+        try {
+            file.createNewFile();
+
+            FileOutputStream fOut = new FileOutputStream(file);
+
+            bitmap.compress(Bitmap.CompressFormat.PNG, 20, fOut);
+//            is.close();
+            fOut.flush();
+            fOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +207,11 @@ public class CreateRyunGroupActivity extends BaseActivity<ChatContact.View,ChatC
                 DialogUtils.showPictureChooseDialogAvatar(getActivity(),false);
                 break;
             case R.id.btn_create_group:
+                if (img_area==null){
+                    File file =  decodeToFile(R.mipmap.lt_szqtx);
+                    RequestBody imageBody_head = RequestBody.create(MediaType.parse("image/jpeg"), file);
+                    img_area = MultipartBody.Part.createFormData("photo", file.getName(), imageBody_head);
+                }
               getPresenter().createGroup(ApplicationUtil.getChatPersonalInfo().getId()+"",etGroupName.getText().toString(),etGroupExplain.getText().toString(),ids,img_area);
                 break;
         }
@@ -232,8 +315,7 @@ public class CreateRyunGroupActivity extends BaseActivity<ChatContact.View,ChatC
     @Override
     public void createGroupSuccess(String s) {
         ToastUtil.showShortToast(R.string.create_chat_group_success);
-        finish();
-        getPresenter().addGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId()+"",s);
+        getPresenter().getGroupInfo(ApplicationUtil.getChatPersonalInfo().getId() + "", s);
 //        Bundle bundle = new Bundle();
 //        bundle.putString(IntentUtils.ID,s);
 //        startActivity(GroupChatInfoActivity.class,bundle);
@@ -286,7 +368,9 @@ public class CreateRyunGroupActivity extends BaseActivity<ChatContact.View,ChatC
 
     @Override
     public void getGroupInfoSuccess(Group group) {
-
+        getPresenter().addGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId()+"",group.getId()+"");
+        RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(group.getId()+"",group.getName(), Uri.parse(group.getPhoto())));
+        finish();
     }
 
     @Override
@@ -311,6 +395,8 @@ public class CreateRyunGroupActivity extends BaseActivity<ChatContact.View,ChatC
 
     @Override
     public void addGroupMemberSuccess(String s) {
+
+
 
     }
 

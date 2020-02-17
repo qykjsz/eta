@@ -3,19 +3,18 @@ package com.qingyun.mvpretrofitrx.mvp.fragment.ryunchat;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.develop.wallet.eth.Wallet;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MainViewPagerAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
-import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
-import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.contract.ChatContact;
 import com.qingyun.mvpretrofitrx.mvp.entity.ApplyGroup;
 import com.qingyun.mvpretrofitrx.mvp.entity.ChatMessage;
@@ -35,7 +34,6 @@ import net.lucode.hackware.magicindicator.MagicIndicator;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,22 +43,24 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.ObservableTransformer;
 import io.rong.imkit.RongIM;
-import io.rong.imkit.model.GroupUserInfo;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.Message;
-import io.rong.imlib.model.UserInfo;
 
-public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
+public class RyunChatFragment extends BaseFragment<ChatContact.View, ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.magic_indicator3)
     MagicIndicator magicIndicator3;
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     Unbinder unbinder;
+    @BindView(R.id.tv_switch_account)
+    TextView tvSwitchAccount;
     private List<BaseFragment> fragments;
     private List<String> titles;
     private int index;
     private RyunToken token;
+    private MainViewPagerAdapter mainViewPagerAdapter;
+    boolean accountChange;
 
     @Override
     public int getLayoutId() {
@@ -111,14 +111,26 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
     @Override
     public void refreashData() {
         super.refreashData();
+
         getPresenter().getChatToken(ApplicationUtil.getCurrentWallet().getAddress());
+        if (accountChange) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            for (Fragment fragment : fragments) {
+                ft.remove(fragment);
+            }
+            ft.commitNow();
+            fragments.clear();
+            mainViewPagerAdapter.notifyDataSetChanged();
+        }
+
+
     }
 
     @Override
     public void init() {
 //        getPresenter().getChatToken(ApplicationUtil.getCurrentWallet().getAddress());
 //        getPresenter().registerChat(ApplicationUtil.getCurrentWallet().getAddress());
-
+        accountChange = false;
         EventBus.getDefault().register(this);
         titles = new ArrayList<>();
         titles.add(getResources().getString(R.string.chat));
@@ -133,8 +145,11 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
         fragments.add(new RyunAddressbookFragment());
         fragments.add(new RyunPersonalFragment());
         index = 0;
-        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getChildFragmentManager());
+        mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getChildFragmentManager());
+
         viewPager.setAdapter(mainViewPagerAdapter);
+        viewPager.setOffscreenPageLimit(3);
+
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -152,7 +167,7 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 
             }
         });
-        IndicatorUtils.initMagicIndicator3M(viewPager, titles,  getActivity(),magicIndicator3,0,10);
+        IndicatorUtils.initMagicIndicator3MMM(viewPager, titles, getActivity(), magicIndicator3, 0, 10);
     }
 
     @Override
@@ -223,8 +238,7 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 
         ApplicationUtil.setChatPersonalInfo(groupMember);
 
-        getPresenter().getGroupList(ApplicationUtil.getChatPersonalInfo().getId()+"");
-
+        getPresenter().getGroupList(ApplicationUtil.getChatPersonalInfo().getId() + "");
 
 
     }
@@ -267,16 +281,49 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 ////            group.add(new io.rong.imlib.model.Group(groupList.get(i).getId()+"",groupList.get(i).getName(),Uri.parse(groupList.get(i).getPhoto())));
 //        }
 //
+
         RongIM.connect(token.getToken(), new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {
 
             }
+
             @Override
             public void onSuccess(String userid) {
                 Log.d("TAG", "--onSuccess" + userid);
+                tvSwitchAccount.setVisibility(View.GONE);
+
+                if (accountChange) {
+                    accountChange = false;
+                    fragments.add(new RyunChatChatListFragment());
+                    fragments.add(new RyunAddressbookFragment());
+                    fragments.add(new RyunPersonalFragment());
+                    index = 0;
+                    mainViewPagerAdapter = new MainViewPagerAdapter(getContext(), fragments, getChildFragmentManager());
+                    viewPager.setAdapter(mainViewPagerAdapter);
+                    viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int i, float v, int i1) {
+
+                        }
+
+                        @Override
+                        public void onPageSelected(int i) {
+                            index = i;
+                            fragments.get(i).refreashData();
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int i) {
+
+                        }
+                    });
+                    IndicatorUtils.initMagicIndicator3MMM(viewPager, titles, getActivity(), magicIndicator3, 0, 10);
+
+                }
 
             }
+
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {
                 Log.d("TAG", "--onSuccess" + errorCode);
@@ -291,11 +338,11 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
         RongIM.getInstance().setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
             @Override
             public boolean onReceived(Message message, int left) {
-                Log.e("push>>message",message.toString());
+                Log.e("push>>message", message.toString());
                 try {
-                    if (message.getConversationType().getValue()== Conversation.ConversationType.SYSTEM.getValue()){
+                    if (message.getConversationType().getValue() == Conversation.ConversationType.SYSTEM.getValue()) {
                         String ss = message.getContent().toString();
-                        Log.e("------------------>",ss);
+                        Log.e("------------------>", ss);
 //                        JSONObject jsonObject= message.getContent().getJSONUserInfo();
 //                        if (jsonObject.has("extra")){
 //                            String str = jsonObject.getString("extra");
@@ -303,15 +350,15 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 //                            EventBus.getDefault().post(systemNotice);
 //
 //                        }
-                        if (ss.contains("{\"type\":1}")){
-                                 EventBus.getDefault().post(new SystemNotice("1"));
+                        if (ss.contains("{\"type\":1}")) {
+                            EventBus.getDefault().post(new SystemNotice("1"));
 
                         }
-                    }else if (message.getConversationType().getValue()== Conversation.ConversationType.GROUP.getValue()){
-                        getPresenter().getGroupInfo(ApplicationUtil.getChatPersonalInfo().getId()+"",message.getTargetId());
+                    } else if (message.getConversationType().getValue() == Conversation.ConversationType.GROUP.getValue()) {
+                        getPresenter().getGroupInfo(ApplicationUtil.getChatPersonalInfo().getId() + "", message.getTargetId());
                     }
                     return false;
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return false;
@@ -371,7 +418,7 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
 
     @Override
     public void getGroupInfoSuccess(Group group) {
-        RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(group.getId()+"",group.getName(),Uri.parse(group.getPhoto())));
+        RongIM.getInstance().refreshGroupInfoCache(new io.rong.imlib.model.Group(group.getId() + "", group.getName(), Uri.parse(group.getPhoto())));
     }
 
     @Override
@@ -430,10 +477,14 @@ public class RyunChatFragment extends BaseFragment<ChatContact.View,ChatContact.
         return this.bindUntilEvent(FragmentEvent.PAUSE);
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onWalletChange(Wallet wallet) {
-        RongIM.getInstance().disconnect();
-      refreashData();
+//        RongIM.getInstance().clearEncryptedConversations();
+//        RongIM.getInstance().disconnect();
+////        refreashData();
+        accountChange = true;
+        tvSwitchAccount.setVisibility(View.VISIBLE);
     }
 
 }

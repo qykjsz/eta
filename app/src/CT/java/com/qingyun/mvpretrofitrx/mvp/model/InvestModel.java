@@ -7,6 +7,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseModel;
 import com.qingyun.mvpretrofitrx.mvp.progress.ObserverResponseListener;
 
 import io.reactivex.ObservableTransformer;
+import retrofit2.http.Query;
 
 
 public class InvestModel<T> extends BaseModel {
@@ -14,8 +15,8 @@ public class InvestModel<T> extends BaseModel {
     public static String gamePlatformBaseUrl;
 //    http://www.amz23.com/?ct=new_recharge&ac=notice
 
-    public void getCoinTypeRate(Context context, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().getCoinTypeRate(), observerListener,transformer);
+    public void getCoinTypeRate(Context context,String gameid ,ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().getCoinTypeRate(gameid), observerListener,transformer);
 
     }
 
@@ -80,6 +81,11 @@ public class InvestModel<T> extends BaseModel {
 
     public void getCurrencyRate(Context context, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
         subscribe(context, Api.getApiService().getCurrencyRate(), observerListener,transformer);
+
+    }
+
+    public void checkAccount(Context context, String gameid, String gameuser, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().checkAccount(  gameid,  gameuser), observerListener,transformer);
 
     }
 

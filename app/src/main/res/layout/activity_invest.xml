@@ -497,11 +497,11 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView154"
                         android:layout_marginTop="@dimen/dp_12"
                         android:paddingStart="@dimen/dp_padding_x_min"
+                        android:hint="@string/choose_coin_type"
                         android:paddingEnd="@dimen/dp_40"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_height="@dimen/dp_44"
                         android:background="@drawable/bg_line_round_6_sto"
-                        android:text="@string/eth"
                         tools:layout_editor_absoluteX="44dp"
                         tools:layout_editor_absoluteY="458dp" />
 

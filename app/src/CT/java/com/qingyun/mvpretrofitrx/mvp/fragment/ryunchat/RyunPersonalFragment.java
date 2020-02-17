@@ -159,7 +159,7 @@ public class RyunPersonalFragment extends BaseFragment<ChatContact.View, ChatCon
         tvName.setText(groupMember.getName());
         Glide.with(getContext()).load(groupMember.getPhoto()).apply(GlideUtils.getChatAvaterOptions()).into(ivAvatar);
         tvAccount.setText(groupMember.getId()+"");
-        ApplicationUtil.setChatPersonalInfo(groupMember);
+        ApplicationUtil.refreashPersonalInfo(groupMember);
     }
 
 

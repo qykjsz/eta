@@ -449,5 +449,6 @@
     <string name="not_setting">未设置</string>
     <string name="have_setting">已设置</string>
     <string name="must_more_3_people">群组至少选择3人</string>
+    <string name="account_swith">账号切换中...</string>
 
 </resources>

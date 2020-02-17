@@ -133,7 +133,6 @@ public class AdvertisementActivity extends BaseActivity {
                     startActivity();
                 }
             }, 3000);//延迟3S后发送handler信息
-
         /**点击情况下跳转*/
         findViewById(R.id.rl_skip).setOnClickListener(new View.OnClickListener() {
             @Override

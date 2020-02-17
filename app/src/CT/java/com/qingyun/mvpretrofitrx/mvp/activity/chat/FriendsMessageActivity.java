@@ -81,7 +81,6 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
             }
         });
 
-
         groupMessageAdapter.setRefuseListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(List list, int position) {
@@ -99,9 +98,9 @@ public class FriendsMessageActivity extends BaseActivity<ChatContact.View,ChatCo
     @Override
     protected void refresh() {
         super.refresh();
-//        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
-
+        getPresenter().addFriendsList(ApplicationUtil.getChatPersonalInfo().getId()+"",page);
     }
+
 
     @Override
     protected void loadMore() {

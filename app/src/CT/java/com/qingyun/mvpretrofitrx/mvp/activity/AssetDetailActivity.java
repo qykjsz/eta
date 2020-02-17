@@ -231,8 +231,11 @@ public class AssetDetailActivity extends BaseActivity<WalletAssetContact.View,Wa
                         ProgressDialogUtils.getInstances().showDialog();
                         WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
                             @Override
-                            public void onSuccess() {
-                                startActivity(ExportPrivateKeyActivity.class);
+                            public void onSuccess(Wallet wallet) {
+
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable(IntentUtils.WALLET,wallet);
+                                startActivity(ExportPrivateKeyActivity.class,bundle);
                                 ProgressDialogUtils.getInstances().cancel();
                             }
 
@@ -256,7 +259,7 @@ public class AssetDetailActivity extends BaseActivity<WalletAssetContact.View,Wa
                         ProgressDialogUtils.getInstances().showDialog();
                         WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
                             @Override
-                            public void onSuccess() {
+                            public void onSuccess(Wallet wallet) {
                                 ProgressDialogUtils.getInstances().cancel();
 
                                 startActivity(ExportKeystoreActivity.class);
@@ -305,7 +308,7 @@ public class AssetDetailActivity extends BaseActivity<WalletAssetContact.View,Wa
                                 ProgressDialogUtils.getInstances().showDialog();
                                 WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
                                     @Override
-                                    public void onSuccess() {
+                                    public void onSuccess(Wallet wallet) {
                                         boolean haveWallet = false;
                                         ApplicationUtil.deleteWallet(ApplicationUtil.getCurrentWallet());
                                         if (ApplicationUtil.getWallet().entrySet() != null && ApplicationUtil.getWallet().entrySet().size() > 0) {

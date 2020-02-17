@@ -156,7 +156,7 @@ public interface ApiService {
     Observable<BaseResponse<List<CurrencyRate>>> getCurrencyRate();
 
     @POST("give_et_fimoney")
-    Observable<BaseResponse<List<CoinTypeRate>>>  getCoinTypeRate();
+    Observable<BaseResponse<List<CoinTypeRate>>>  getCoinTypeRate(@Query("gameid") String gameid);
 
     @POST("api_shoporder")
     Observable <BaseResponse<BusinessPayLogResponse>> getBusinessPayLog(@Query("address")String address, @Query("page")int page);
@@ -348,5 +348,12 @@ public interface ApiService {
     @POST("rongyun_dismissgroup")
     Observable  <BaseResponse<String>>dismissgroup(@Query("uid")String uid,@Query("qid")String qid);
 
+
+    @POST("rongyun_isinqroup")
+    Observable  <BaseResponse<String>>checkIsInGroup(@Query("tid")String tid,@Query("qid")String qid);
+
+
+    @POST("give_et_gamenser")
+    Observable  <BaseResponse<String>>checkAccount(@Query("gameid")String gameid,@Query("gameuser")String gameuser);
 
 }

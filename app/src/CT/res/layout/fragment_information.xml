@@ -9,11 +9,22 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <net.lucode.hackware.magicindicator.MagicIndicator
-            android:id="@+id/magic_indicator3"
+
+
+        <TextView
+            android:id="@+id/bg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_173"
             android:background="@mipmap/icon_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/magic_indicator3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_50"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -32,9 +43,40 @@
 
 
         </android.support.v4.view.ViewPager>
+
+        <TextView
+            android:background="@drawable/bg_ffffff_top_round_25"
+            android:id="@+id/tv_switch_account"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/account_swith"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textColor="@color/color_999999"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/magic_indicator3"
+            android:layout_marginTop="101dp"
+            >
+
+
+        </TextView>
+
+
     </RelativeLayout>
 
 
-
+    <!--<TextView-->
+        <!--android:id="@+id/tv_switch_account"-->
+        <!--android:visibility="gone"-->
+        <!--android:textColor="@color/color_999999"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--android:text="@string/account_swith"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
 
 </android.support.constraint.ConstraintLayout>

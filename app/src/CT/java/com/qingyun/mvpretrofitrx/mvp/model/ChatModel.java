@@ -248,5 +248,9 @@ public class ChatModel<T> extends BaseModel {
     }
 
 
+    public void checkIsInGroup(Context context,String uid,String qid , ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
+        subscribe(context, Api.getApiService().checkIsInGroup(uid,qid), observerListener,transformer);
+
+    }
 
 }

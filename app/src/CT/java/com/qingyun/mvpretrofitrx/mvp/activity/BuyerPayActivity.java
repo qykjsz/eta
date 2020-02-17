@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.develop.wallet.eth.Wallet;
 import com.develop.wallet.eth.WalletManager;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
@@ -344,20 +345,20 @@ public class BuyerPayActivity extends BaseActivity<BusinessPayContact.View, Busi
                 ProgressDialogUtils.getInstances().showDialog();
                 WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
                     @Override
-                    public void onSuccess() {
+                    public void onSuccess(Wallet wallet) {
                         String hash;
                         if (TextUtils.isEmpty(businessPayEntity.getAmount())) {
                             WalletManager.config(node, coinTypeRate.getAddress(), false);
                             Log.e("Hyaddress>>>>",coinTypeRate.getAddress()== null ? "----" :coinTypeRate.getAddress());
 
                             hash = WalletManager.sendTransactionByPrivateKey(ApplicationUtil.getCurrentWallet().getAddress(),
-                                    ApplicationUtil.getCurrentWallet().getPrivateKey(), businessPayEntity.getAdddress(), tvAmount.getText().toString(), new BigDecimal(coinTypeRate.getGasprice()).floatValue(), coinTypeRate.getGaslimit(), Integer.parseInt(coinTypeRate.getDecimal()));
+                                    wallet.getPrivateKey(), businessPayEntity.getAdddress(), tvAmount.getText().toString(), new BigDecimal(coinTypeRate.getGasprice()).floatValue(), coinTypeRate.getGaslimit(), Integer.parseInt(coinTypeRate.getDecimal()));
                         } else {
                             WalletManager.config(node, businessPayEntity.getToken(), false);
                             Log.e("Hyaddress>>>>", businessPayEntity.getToken() == null ? "----" : businessPayEntity.getToken());
 
                             hash = WalletManager.sendTransactionByPrivateKey(ApplicationUtil.getCurrentWallet().getAddress(),
-                                    ApplicationUtil.getCurrentWallet().getPrivateKey(), businessPayEntity.getAdddress(), tvAmount.getText().toString(), new BigDecimal(businessPayEntity.getGasprice()).floatValue(), businessPayEntity.getGaslimit(), Integer.parseInt(businessPayEntity.getDecimal()));
+                                    wallet.getPrivateKey(), businessPayEntity.getAdddress(), tvAmount.getText().toString(), new BigDecimal(businessPayEntity.getGasprice()).floatValue(), businessPayEntity.getGaslimit(), Integer.parseInt(businessPayEntity.getDecimal()));
                         }
 
                         if (!TextUtils.isEmpty(hash)) {

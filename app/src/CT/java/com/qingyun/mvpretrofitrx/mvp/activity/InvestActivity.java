@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
+import com.develop.wallet.eth.Wallet;
 import com.develop.wallet.eth.WalletManager;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
@@ -119,7 +120,6 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     @Override
     public void init() {
         getPresenter().getCurrencyRate();
-        getPresenter().getCoinTypeRate();
         getPresenter().getSuprtPlatform();
         getPresenter().getInvestAmountList();
 
@@ -286,6 +286,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     public void getSuprtPlatformSuccess(List<Platform> platformList) {
         if (currentPlatform == null && platformList != null && platformList.size() > 0) {
             currentPlatform = platformList.get(0);
+            getPresenter().getCoinTypeRate(currentPlatform.getId());
+
             tvPlatform.setText(currentPlatform.getName());
             InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
             return;
@@ -297,10 +299,11 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
             public void onItemClick(List list, int position) {
                 platform = (Platform) list.get(position);
                 currentPlatform = platform;
+//                getPresenter().getCoinTypeRate(currentPlatform.getId());
                 tvPlatform.setText(platform.getName());
-                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
+//                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
 
-
+                tvCoinType.setText("");
                 if (TextUtils.isEmpty(etAmount.getText().toString())) {
                     amount = new BigDecimal("0");
 
@@ -350,9 +353,9 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 ProgressDialogUtils.getInstances().showDialog();
                 WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
                     @Override
-                    public void onSuccess() {
+                    public void onSuccess(Wallet wallet) {
                         String hash = WalletManager.sendTransactionByPrivateKey(ApplicationUtil.getCurrentWallet().getAddress(),
-                                ApplicationUtil.getCurrentWallet().getPrivateKey(), currentPlatform.getAddress(), tvPrice.getText().toString(), new BigDecimal(currentCoin.getGasprice()).floatValue(), currentCoin.getGaslimit(), Integer.parseInt(currentCoin.getDecimal()));
+                                wallet.getPrivateKey(), currentPlatform.getAddress(), tvPrice.getText().toString(), new BigDecimal(currentCoin.getGasprice()).floatValue(), currentCoin.getGaslimit(), Integer.parseInt(currentCoin.getDecimal()));
                         if (!TextUtils.isEmpty(hash)) {
                             ToastUtil.showShortToast(R.string.transfer_success);
                             getPresenter().invest(ApplicationUtil.getCurrentWallet().getAddress(),
@@ -419,32 +422,32 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url()+tvAccount.getText().toString();
 
 //                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
-//                getPresenter().checkAccount(tvAccount.getText().toString());
-                RequestParams params = HttpParamsUtils.getX3Params(currentPlatform.getIs_user_url()+tvAccount.getText().toString());
-                x.http().get(params, new XCallBack() {
-                    @Override
-                    public void onAfterFinished() {
-
-                    }
-
-                    @Override
-                    public void onAfterSuccessOk(JSONObject object) {
-
-                        ivAccountTrue.setVisibility(View.VISIBLE);
-                        btnAccount.setVisibility(View.GONE);
-                        checkAccountSuccess = true;
-                        Glide.with(getContext()).load(R.mipmap.yz_cg_icon).into(ivAccountTrue);
-                    }
-
-                    @Override
-                    public void onAfterSuccessErr(JSONObject object, String msg) {
-                        ivAccountTrue.setVisibility(View.VISIBLE);
-                        btnAccount.setVisibility(View.GONE);
-                        checkAccountSuccess = false;
-                        Glide.with(getContext()).load(R.mipmap.yz_sb_icon).into(ivAccountTrue);
-                    }
-                });
-
+                getPresenter().checkAccount(currentPlatform.getId(),tvAccount.getText().toString());
+//                RequestParams params = HttpParamsUtils.getX3Params(currentPlatform.getIs_user_url()+tvAccount.getText().toString());
+//                x.http().get(params, new XCallBack() {
+//                    @Override
+//                    public void onAfterFinished() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onAfterSuccessOk(JSONObject object) {
+//
+//                        ivAccountTrue.setVisibility(View.VISIBLE);
+//                        btnAccount.setVisibility(View.GONE);
+//                        checkAccountSuccess = true;
+//                        Glide.with(getContext()).load(R.mipmap.yz_cg_icon).into(ivAccountTrue);
+//                    }
+//
+//                    @Override
+//                    public void onAfterSuccessErr(JSONObject object, String msg) {
+//                        ivAccountTrue.setVisibility(View.VISIBLE);
+//                        btnAccount.setVisibility(View.GONE);
+//                        checkAccountSuccess = false;
+//                        Glide.with(getContext()).load(R.mipmap.yz_sb_icon).into(ivAccountTrue);
+//                    }
+//                });
+//
 
 
             break;
@@ -453,7 +456,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 getPresenter().getInvestAmountList();
                 break;
             case R.id.btn_coin_type:
-                getPresenter().getCoinTypeRate();
+                getPresenter().getCoinTypeRate(currentPlatform.getId());
+
                 break;
             case R.id.btn_sure_invest:
                 if (TextUtils.isEmpty(tvAccount.getText().toString())) {

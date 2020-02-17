@@ -237,6 +237,7 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
         cbSaveAddressbool.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (group==null) return;
                 if (isChecked){
                     getPresenter().addGroupAddressBook(ApplicationUtil.getChatPersonalInfo().getId() + "", id);
                 }else {
@@ -411,6 +412,7 @@ public class GroupChatInfoActivity extends BaseActivity<ChatContact.View, ChatCo
 
     @OnClick({R.id.iv_avatar,R.id.ly_group_manager, R.id.btn_see_more_menber, R.id.ly_group_name, R.id.ly_share, R.id.ly_froup_explain, R.id.ly_nick_name,  R.id.btn_exit})
     public void onViewClicked(View view) {
+        if (group==null) return;
         switch (view.getId()) {
             case R.id.ly_group_manager:
                 ToastUtil.showShortToast(R.string.not_open);

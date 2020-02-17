@@ -108,6 +108,7 @@ public interface ChatContact {
         public abstract void removeBlacklist(String uid,String tid);
         public abstract void getBlacklist(String uid);
         public abstract void dismissgroup(String uid,String qid);
+        public abstract void checkIsInGroup(String uid,String qid);
 
     }
 }

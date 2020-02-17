@@ -207,7 +207,7 @@ public class ChatFragment extends BaseFragment<ChatContact.View, ChatContact.Pre
                         ProgressDialogUtils.getInstances().showDialog();
                         WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
                             @Override
-                            public void onSuccess() {
+                            public void onSuccess(Wallet wallet) {
                                 getPresenter().registerChat(ApplicationUtil.getCurrentWallet().getAddress());
                                 ProgressDialogUtils.getInstances().cancel();
                             }

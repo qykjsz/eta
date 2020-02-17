@@ -88,6 +88,7 @@ public class WalletManager {
     private static ExecutorService mExecutorService;
     private static ImportWalletListener mImportWalletListener;
     private static CheckPasswordListener mCheckPasswordListener;
+    private static Wallet mWallet;
 
     public static Web3j getWeb3j() {
         if (web3j == null) {
@@ -134,7 +135,7 @@ public class WalletManager {
                     mImportWalletListener.importFailure((Exception) msg.obj);
                     break;
                 case 3:
-                    mCheckPasswordListener.onSuccess();
+                    mCheckPasswordListener.onSuccess((Wallet) msg.obj);
                     break;
                 case 4:
                     mCheckPasswordListener.onFailure((Exception) msg.obj);
@@ -268,13 +269,13 @@ public class WalletManager {
      * @param walletFile
      * @return
      */
-    public String exportKeystore(String password, WalletFile walletFile) {
-        if (decrypt(password, walletFile)) {
-            return new Gson().toJson(walletFile);
-        } else {
-            return "decrypt failed";
-        }
-    }
+//    public String exportKeystore(String password, WalletFile walletFile) {
+//        if (decrypt(password, walletFile)) {
+//            return new Gson().toJson(walletFile);
+//        } else {
+//            return "decrypt failed";
+//        }
+//    }
 
     /**
      * 解密
@@ -284,20 +285,27 @@ public class WalletManager {
      * @param walletFile
      * @return
      */
-    public static  boolean decrypt(String password, WalletFile walletFile) {
+    public static  void decrypt(String password, WalletFile walletFile,DecryptListener decryptListener) {
         try {
             ECKeyPair ecKeyPair = org.web3j.crypto.Wallet.decrypt(password, walletFile); //可能出现OOM
 //            ECKeyPair ecKeyPair = LWallet.decrypt(password, walletFile);
-            return true;
+            String address = EthUtils.getAddress(ecKeyPair);
+            String privateKey = EthUtils.getPrivateKey(ecKeyPair);
+            String publicKey = EthUtils.getPublicKey(ecKeyPair);
+            mWallet.setAddress(address);
+            mWallet.setPrivateKey(privateKey);
+            mWallet.setPublicKey(publicKey);
+            decryptListener.onSuccess(true,mWallet);
         } catch (CipherException e) {
             e.printStackTrace();
-            return false;
+            decryptListener.onSuccess(false,null);
+
         }
     }
 
 
     public interface CheckPasswordListener{
-        void onSuccess();
+        void onSuccess(Wallet wallet);
         void onFailure(Exception e);
     }
 
@@ -308,6 +316,7 @@ public class WalletManager {
      */
     public static  void decrypt(final String password, final Wallet wallet, CheckPasswordListener checkPasswordListener) {
         mCheckPasswordListener = checkPasswordListener;
+        mWallet = wallet;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -318,16 +327,24 @@ public class WalletManager {
 //                   解决用keystore导入苹果创建账号时候无法验证bug
                     objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
                     walletFile = objectMapper.readValue(wallet.getKeystore(), WalletFile.class);
-                    boolean success = decrypt(password, walletFile);
-                    if (success){
-                        Message message = new Message();
-                        message.what = 3;
-                        handler.sendMessage(message);
-                    }else {
-                        Message message = new Message();
-                        message.what = 4;
-                        handler.sendMessage(message);
-                    }
+
+                     decrypt(password, walletFile, new DecryptListener() {
+                        @Override
+                        public void onSuccess(Boolean success, Wallet wallet) {
+                            if (success){
+                                Message message = new Message();
+                                message.what = 3;
+                                message.obj = wallet;
+                                handler.sendMessage(message);
+                            }else {
+                                Message message = new Message();
+                                message.what = 4;
+                                handler.sendMessage(message);
+                            }
+
+                        }
+                    });
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     Message message = new Message();
@@ -344,14 +361,17 @@ public class WalletManager {
 
 
 
+    public  interface  DecryptListener{
+        void onSuccess(Boolean success,Wallet wallet);
+    }
 
 
     public static void changePassword(final Context context, String oldPassword, final String newPassword, final Wallet wallet, final ImportWalletListener importWalletListener) {
         mImportWalletListener = importWalletListener;
         mCheckPasswordListener =  new CheckPasswordListener() {
             @Override
-            public void onSuccess() {
-                importWalletByPrivateKey(wallet.getPrivateKey(), wallet.getWalletName(), newPassword, new ImportWalletListener() {
+            public void onSuccess(Wallet wallet1) {
+                importWalletByPrivateKey(wallet1.getPrivateKey(), wallet1.getWalletName(), newPassword, new ImportWalletListener() {
                     @Override
                     public void importSuccess(Wallet wallet) {
 //                        Message message = new Message();

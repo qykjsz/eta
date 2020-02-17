@@ -31,8 +31,8 @@ public class InvestPresenter extends InvestContact.Presenter {
 
 
     @Override
-    public void getCoinTypeRate() {
-        model.getCoinTypeRate(context,getView().bindLifecycle(), new ObserverResponseListener<List<CoinTypeRate>>() {
+    public void getCoinTypeRate(String gameid) {
+        model.getCoinTypeRate(context,gameid,getView().bindLifecycle(), new ObserverResponseListener<List<CoinTypeRate>>() {
 
             @Override
             public void onNext(List<CoinTypeRate> coinTypeRateList) {
@@ -47,6 +47,7 @@ public class InvestPresenter extends InvestContact.Presenter {
             }
         });
     }
+
 
 
 
@@ -210,6 +211,26 @@ public class InvestPresenter extends InvestContact.Presenter {
             @Override
             public void onError(String e) {
 
+            }
+        });
+    }
+
+    @Override
+    public void checkAccount(String gameid, String gameuser) {
+        model.checkAccount(context, gameid,  gameuser,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String  string) {
+                if(getView() != null){
+                    getView().checkAccountSuccess(null);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+                if(getView() != null){
+                    getView().checkAccountFailure();
+                }
             }
         });
     }

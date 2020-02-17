@@ -3,6 +3,7 @@ package com.qingyun.mvpretrofitrx.mvp.activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
+import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.adapter.MainViewPagerAdapter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseActivity;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
@@ -11,6 +12,7 @@ import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.fragment.ExportPriviteKeyKeyFragment;
 import com.qingyun.mvpretrofitrx.mvp.fragment.ExportPriviteKeyQrcodeFragment;
 import com.qingyun.mvpretrofitrx.mvp.utils.IndicatorUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -28,6 +30,7 @@ public class ExportPrivateKeyActivity extends BaseActivity {
     ViewPager viewPager;
     private List<BaseFragment> fragments;
     private List<String> titles;
+    private Wallet wallet;
 
     @Override
     protected String getTitleRightText() {
@@ -67,11 +70,20 @@ public class ExportPrivateKeyActivity extends BaseActivity {
     @Override
     public void init() {
         titles = new ArrayList<>();
+        wallet = (Wallet) getIntent().getSerializableExtra(IntentUtils.WALLET);
         titles.add(getResources().getString(R.string.private_key));
         titles.add(getResources().getString(R.string.qr_code));
         fragments = new ArrayList<>();
-        fragments.add(new ExportPriviteKeyKeyFragment());
-        fragments.add(new ExportPriviteKeyQrcodeFragment());
+        ExportPriviteKeyKeyFragment exportPriviteKeyKeyFragment =  new ExportPriviteKeyKeyFragment();
+        ExportPriviteKeyQrcodeFragment exportPriviteKeyQrcodeFragment =  new ExportPriviteKeyQrcodeFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(IntentUtils.WALLET,wallet);
+        exportPriviteKeyKeyFragment.setArguments(bundle);
+        exportPriviteKeyQrcodeFragment.setArguments(bundle);
+
+        fragments.add(exportPriviteKeyKeyFragment);
+        fragments.add(exportPriviteKeyQrcodeFragment);
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getContext(),fragments,getSupportFragmentManager());
         viewPager.setAdapter(mainViewPagerAdapter);
 //        IndicatorUtils.initMagicIndicator3(magicIndicator3,viewPager,titles,getActivity());

@@ -28,14 +28,11 @@ public class IndicatorUtils {
 
     public static void initMagicIndicator3(MagicIndicator magicIndicator, final ViewPager vp, final List<String> titles, final Activity activity) {
         CommonNavigator commonNavigator = new CommonNavigator(activity);
-
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-
             @Override
             public int getCount() {
                 return titles.size();
             }
-
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
 
@@ -151,6 +148,92 @@ public class IndicatorUtils {
         magicIndicator.onPageSelected(defaultPosition);
         ViewPagerHelper.bind(magicIndicator, vp);
     }
+
+
+
+
+
+    /**
+     * @param vp
+     * @param titles
+     * @param activity
+     * @param magicIndicator
+     * @param defaultPosition 默认选中index
+     * @param indiW           下标长度
+     */
+
+    public static void initMagicIndicator3MMM(final ViewPager vp, final List<String> titles, final Activity activity, MagicIndicator magicIndicator, int defaultPosition, final int indiW) {
+        CommonNavigator commonNavigator = new CommonNavigator(activity);
+        commonNavigator.setAdjustMode(true);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+
+            @Override
+            public int getCount() {
+                return titles.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                CommonPagerTitleView commonPagerTitleView = new CommonPagerTitleView(activity);
+                commonPagerTitleView.setContentView(R.layout.simple_pager_title_layout2);
+
+                final TextView titleText = (TextView) commonPagerTitleView.findViewById(R.id.tv);
+                titleText.setText(titles.get(index));
+
+                commonPagerTitleView.setOnPagerTitleChangeListener(new CommonPagerTitleView.OnPagerTitleChangeListener() {
+
+                    @Override
+                    public void onSelected(int index, int totalCount) {
+                        titleText.setTextSize(17);
+                        titleText.setTextColor(activity.getResources().getColor(R.color.color_FFFFFF));
+                    }
+
+                    @Override
+                    public void onDeselected(int index, int totalCount) {
+                        titleText.setTextSize(14);
+                        titleText.setTextColor(activity.getResources().getColor(R.color.color_CDD6FD));
+
+                    }
+
+                    @Override
+                    public void onLeave(int index, int totalCount, float leavePercent, boolean leftToRight) {
+
+                    }
+
+                    @Override
+                    public void onEnter(int index, int totalCount, float enterPercent, boolean leftToRight) {
+
+                    }
+
+
+                });
+
+                commonPagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        vp.setCurrentItem(index);
+                    }
+                });
+
+                return commonPagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
+                linePagerIndicator.setMode(LinePagerIndicator.MODE_EXACTLY);
+                linePagerIndicator.setLineWidth(UIUtil.dip2px(context, indiW));
+                linePagerIndicator.setYOffset(context.getResources().getDimension(R.dimen.dp_10));
+                linePagerIndicator.setLineHeight(activity.getResources().getDimensionPixelSize(R.dimen.dp_2));
+                linePagerIndicator.setColors(activity.getResources().getColor(R.color.color_FFFFFF));
+                return linePagerIndicator;
+            }
+        });
+        magicIndicator.setNavigator(commonNavigator);
+        magicIndicator.onPageSelected(defaultPosition);
+        ViewPagerHelper.bind(magicIndicator, vp);
+    }
+
 
 
 

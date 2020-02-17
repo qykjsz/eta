@@ -117,6 +117,8 @@ public class ProgressObserver<T> implements Observer<BaseResponse<T>>, ProgressC
 //            ToastUtil.showShortToast(bad.getMsg());
 //        }
         if (e instanceof BaseResponseException){
+            listener.onError(e.getMessage());
+
             ToastUtil.showShortToast(((BaseResponseException) e).getMsg());
             return;
         }

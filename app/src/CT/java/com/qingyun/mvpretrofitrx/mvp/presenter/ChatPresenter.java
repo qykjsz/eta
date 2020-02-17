@@ -551,6 +551,24 @@ public class ChatPresenter extends ChatContact.Presenter {
     }
 
     @Override
+    public void checkIsInGroup(String uid, String qid) {
+        model.checkIsInGroup(context,uid,  qid,getView().bindLifecycle(), new ObserverResponseListener<String>() {
+
+            @Override
+            public void onNext(String string) {
+                if(getView() != null){
+                    getView().getGroupInfoSuccess(null);
+                }
+            }
+
+            @Override
+            public void onError(String e) {
+
+            }
+        });
+    }
+
+    @Override
     public void sendMessageToGroup(String fromwho, String togroup, String text) {
         model.sendMessageToGroup(context,fromwho,togroup,text,getView().bindLifecycle(), new ObserverResponseListener<String>() {
 

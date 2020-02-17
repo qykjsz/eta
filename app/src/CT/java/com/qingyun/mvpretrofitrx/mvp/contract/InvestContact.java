@@ -33,7 +33,7 @@ public interface InvestContact {
     }
 
     abstract class Presenter extends BasePresenter<View> {
-        public abstract void getCoinTypeRate();
+        public abstract void getCoinTypeRate(String gameid);
         public abstract void getNode();
         public abstract void checkAccount(String account);
         public abstract void addInvestInfo(String account,String num,String order_sn,String sign);
@@ -51,6 +51,7 @@ public interface InvestContact {
         public abstract void getInvestLog(String address,int page);
         public abstract void checkInvestInfo(String gameid,String gamenumber,String moneystate,String money);
         public abstract void getCurrencyRate();
+        public abstract void checkAccount( String gameid, String gameuser);
 
     }
 }

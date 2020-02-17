@@ -17,7 +17,7 @@ public class BusinessPayModel<T> extends BaseModel {
     }
 
     public void getCoinTypeRate(Context context, ObservableTransformer<T,T> transformer, ObserverResponseListener observerListener){
-        subscribe(context, Api.getApiService().getCoinTypeRate(), observerListener,transformer);
+        subscribe(context, Api.getApiService().getCoinTypeRate(null), observerListener,transformer);
 
     }
 

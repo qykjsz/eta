@@ -122,10 +122,7 @@ public class FriendChatActivity extends BaseActivity<ChatContact.View, ChatConta
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     if (getIntent().getData().getLastPathSegment().equals(Conversation.ConversationType.GROUP.getName())) {
-                        bundle.putString(IntentUtils.ID, targetId);
-                        Intent intent = new Intent(getContext(), GroupChatInfoActivity.class);
-                        intent.putExtras(bundle);
-                        startActivityForResult(intent, 0);
+                        getPresenter().checkIsInGroup(ApplicationUtil.getChatPersonalInfo().getId()+"",targetId);
 //                        startActivity(GroupChatInfoActivity.class,bundle);
                     }
 
@@ -287,6 +284,13 @@ public class FriendChatActivity extends BaseActivity<ChatContact.View, ChatConta
 
     @Override
     public void getGroupInfoSuccess(Group group) {
+        if (group==null){
+            Bundle bundle = new Bundle();
+            bundle.putString(IntentUtils.ID, targetId);
+            Intent intent = new Intent(getContext(), GroupChatInfoActivity.class);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 0);
+        }
 
     }
 

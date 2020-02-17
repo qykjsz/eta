@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseFragment;
 import com.qingyun.mvpretrofitrx.mvp.base.BasePresenter;
 import com.qingyun.mvpretrofitrx.mvp.base.BaseView;
 import com.qingyun.mvpretrofitrx.mvp.utils.ApplicationUtil;
 import com.qingyun.mvpretrofitrx.mvp.utils.CopyUtils;
+import com.qingyun.mvpretrofitrx.mvp.utils.IntentUtils;
 import com.senon.mvpretrofitrx.R;
 
 import butterknife.BindView;
@@ -40,7 +42,8 @@ public class ExportPriviteKeyKeyFragment extends BaseFragment {
 
     @Override
     public void init() {
-        String  privateKey = ApplicationUtil.getCurrentWallet().getPrivateKey();
+       Wallet wallet = (Wallet) getArguments().getSerializable(IntentUtils.WALLET);
+        String privateKey = wallet.getPrivateKey();
         if (privateKey.startsWith("0x")) {
             privateKey = privateKey.substring(2,privateKey.length());
         }

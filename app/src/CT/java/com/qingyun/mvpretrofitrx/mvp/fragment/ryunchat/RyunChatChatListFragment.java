@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-
+import com.develop.wallet.eth.Wallet;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.AddFriendsActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.chat.CreateGroupChatActivity;
 import com.qingyun.mvpretrofitrx.mvp.activity.rongyun.ChooseContactActivity;
@@ -27,6 +27,10 @@ import com.rance.library.SectorMenuButton;
 import com.senon.mvpretrofitrx.R;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +39,7 @@ import io.reactivex.ObservableTransformer;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationListFragment;
 import io.rong.imkit.fragment.IHistoryDataResultCallback;
+import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
 import per.goweii.anylayer.AnyLayer;
 import per.goweii.anylayer.LayerManager;
@@ -42,6 +47,11 @@ import per.goweii.anylayer.LayerManager;
 public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,ChatContact.Presenter> implements ChatContact.View {
     @BindView(R.id.top_sector_menu)
     SectorMenuButton topSectorMenu;
+    MyRyunChatList mConversationListFragment;
+
+    private FragmentTransaction transaction;
+    private int index;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_ryun_chat_chat_list;
@@ -60,9 +70,12 @@ public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,Chat
 
     @Override
     public void init() {
+        index = 0;
+//        EventBus.getDefault().register(this);
         initTopSectorMenuButton();
 //        getPresenter().getChatToken(ApplicationUtil.getCurrentWallet().getAddress());
-        MyRyunChatList mConversationListFragment=new MyRyunChatList();
+        mConversationListFragment=new MyRyunChatList();
+
         Uri uri = Uri.parse("rong://" + getActivity().getApplicationInfo().packageName).buildUpon()
                 .appendPath("conversationlist")
                 .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false")
@@ -71,9 +84,10 @@ public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,Chat
                 .appendQueryParameter(Conversation.ConversationType.APP_PUBLIC_SERVICE.getName(), "false")
 //                .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "true")
                 .build();
+
         mConversationListFragment.setUri(uri);
         FragmentManager manager = getChildFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
+        transaction = manager.beginTransaction();
         transaction.replace(R.id.conversationlist, mConversationListFragment);
         transaction.commit();
 
@@ -112,6 +126,7 @@ public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,Chat
 
 
     private void initTopSectorMenuButton() {
+
         final List<ButtonData> buttonDatas = new ArrayList<>();
         int[] drawable = {R.mipmap.lt_gn_icon, R.mipmap.lt_cjql_icon,
                 R.mipmap.lt_tjhy_icon, R.mipmap.lt_sys_icon};
@@ -123,7 +138,6 @@ public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,Chat
         setListener(topSectorMenu);
     }
 
-
     private void setListener(final SectorMenuButton button) {
         button.setButtonEventListener(new ButtonEventListener() {
             @Override
@@ -131,14 +145,12 @@ public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,Chat
                 switch (index){
                     case 1:
                         startActivity(ChooseContactActivity.class);
-
                         break;
                     case 2:
                         startActivity(AddFriendsActivity.class);
                         break;
                     case 3:
                         ScanUtil.start(getActivity());
-
                         break;
                 }
 
@@ -155,6 +167,8 @@ public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,Chat
             }
         });
     }
+
+
 
     @Override
     protected String getTitleRightText() {
@@ -349,8 +363,40 @@ public class RyunChatChatListFragment extends BaseFragment<ChatContact.View,Chat
     }
 
     @Override
+    public void onMyResume() {
+        super.onMyResume();
+//                RongIM.getInstance().clearEncryptedConversations();
+
+
+    }
+
+    @Override
+    public void refreashData() {
+        super.refreashData();
+
+        if (index!=0){
+            index=1;
+            FragmentManager manager = getChildFragmentManager();
+            transaction = manager.beginTransaction();
+            transaction.remove(mConversationListFragment);
+            transaction.commit();
+            mConversationListFragment = new MyRyunChatList();
+            transaction = manager.beginTransaction();
+            transaction.replace(R.id.conversationlist, mConversationListFragment);
+            transaction.commit();
+        }
+
+
+
+
+    }
+
+    @Override
     public <T> ObservableTransformer<T, T> bindLifecycle() {
         return this.bindUntilEvent(FragmentEvent.PAUSE);
 
     }
+
+
+
 }

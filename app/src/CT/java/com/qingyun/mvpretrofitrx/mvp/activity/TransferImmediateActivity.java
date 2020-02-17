@@ -349,9 +349,9 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                 ProgressDialogUtils.getInstances().showDialog();
                 WalletManager.decrypt(o.toString(), ApplicationUtil.getCurrentWallet(), new WalletManager.CheckPasswordListener() {
                     @Override
-                    public void onSuccess() {
+                    public void onSuccess(com.develop.wallet.eth.Wallet wallet) {
                         String hash = WalletManager.sendTransactionByPrivateKey(ApplicationUtil.getCurrentWallet().getAddress(),
-                                ApplicationUtil.getCurrentWallet().getPrivateKey(), tvAssdrss.getText().toString(), tvAmount.getText().toString(),mGasPrice,gasLitmit,currentCoin.getDecimal());
+                                wallet.getPrivateKey(), tvAssdrss.getText().toString(), tvAmount.getText().toString(),mGasPrice,gasLitmit,currentCoin.getDecimal());
                         if (!TextUtils.isEmpty(hash)) {
                             ToastUtil.showShortToast(R.string.transfer_success);
                         } else {
@@ -361,6 +361,8 @@ public class TransferImmediateActivity extends BaseActivity<WalletAssetContact.V
                         ProgressDialogUtils.getInstances().cancel();
 
                     }
+
+
 
                     @Override
                     public void onFailure(Exception e) {

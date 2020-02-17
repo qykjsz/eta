@@ -93,7 +93,6 @@ public class ApplicationUtil extends Application implements Application.Activity
     private static Wallet currentWallet;
     private static final String TAG = WebSocketService.class.getSimpleName();
     private static GroupMember chatPersonalInfo;
-
     private static ApplicationUtil applicationUtil;
 
     public static ApplicationUtil getInstance(){
@@ -122,6 +121,7 @@ public class ApplicationUtil extends Application implements Application.Activity
 
 
     public static void setCurrentWallet(Wallet wallet) {
+        wallet.setPrivateKey(null);
         currentWallet = wallet;
         SpUtils.setObjectToShare(getContext(),wallet,"current_wallet");
     }
@@ -157,6 +157,19 @@ public class ApplicationUtil extends Application implements Application.Activity
         }, true);
     }
 
+
+
+    public static void refreashPersonalInfo(GroupMember chatPersonalInfo) {
+        ApplicationUtil.chatPersonalInfo = chatPersonalInfo;
+
+        final UserInfo userInfo = new UserInfo(chatPersonalInfo.getId()+"",chatPersonalInfo.getName(), Uri.parse(chatPersonalInfo.getPhoto()));
+        RongIM.getInstance().refreshUserInfoCache(userInfo);
+        RongIM.getInstance().setCurrentUserInfo(userInfo);
+
+    }
+
+
+
     public static Map<String,List<Wallet>> getWallet(){
        return (Map<String, List<Wallet>>) SpUtils.getObjectFromShare(getContext(),"wallet");
     }
@@ -172,6 +185,7 @@ public class ApplicationUtil extends Application implements Application.Activity
 
 
     public static void addWallet(Wallet wallet) {
+        wallet.setPrivateKey(null);
         deleteWallet(wallet);
         Map<String,List<Wallet>> walletMap = null;
         List<Wallet> wallets = null;
@@ -249,7 +263,7 @@ public class ApplicationUtil extends Application implements Application.Activity
 
     private void initRongIm() {
 
-        RongIM.init(this,"pwe86ga5p9hm6");
+        RongIM.init(this,"y745wfm8yh1dv");
 
     }
 
