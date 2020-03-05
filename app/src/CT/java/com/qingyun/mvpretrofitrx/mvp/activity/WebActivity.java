@@ -94,7 +94,7 @@ public class WebActivity extends Activity {
         webView.getSettings().setGeolocationDatabasePath(dir);
         webView.getSettings().setDomStorageEnabled(true);
         // 开启 Application Caches 功能
-        webView.getSettings().setAppCacheEnabled(true);
+//        webView.getSettings().setAppCacheEnabled(true);
         // webView.addJavascriptInterface(new JsOperation(WebActivity.this, webView), "client");//设置js调用的java类
 
 //        webView.setWebChromeClient(new MyWebChromeClient());

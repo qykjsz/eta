@@ -50,7 +50,7 @@ public class TransferLogAdapter extends BaseAdapter<TransferLog, TransferLogAdap
 //            holder.tvCoinName.setText(getContext().getResources().getString(R.string.transfer_out));
 //
 //        }
-        holder.tvAmount.setText(getList().get(position).getAmount());
+        holder.tvAmount.setText(getList().get(position).getAmount()+" "+getList().get(position).getName());
         if (getList().get(position).getStatus().equals("1")){
             holder.tvStatus.setText(getContext().getResources().getString(R.string.status_success));
         }else {

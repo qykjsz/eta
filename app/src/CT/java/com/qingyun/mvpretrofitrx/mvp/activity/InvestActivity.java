@@ -181,6 +181,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                         Observable<String> just = Observable.just(charSequence.toString());
                         return just;
 
+
                     }
                 })
 
@@ -203,8 +204,14 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                             return;
                         platformRatio = new BigDecimal(currentPlatform.getProportion());
                         coinRatio = new BigDecimal(currentCoin.getRate());
+
                         price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
                         tvPrice.setText(price.toString());
+
+                        if (currentPlatform.getId().equals("8")){
+                            tvPrice.setText(s.toString());
+
+                        }
                         tvCoinName.setText(currentCoin.getName());
                     }
 
@@ -235,7 +242,14 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
             currentCoin = coinTypeRateList.get(0);
             tvCoinType.setText(currentCoin.getName());
             tvCoinName.setText(currentCoin.getName());
+            coinRatio = new BigDecimal(currentCoin.getRate());
 
+
+                price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
+                tvPrice.setText(price.toString());
+            if (currentPlatform.getId().equals("8")){
+              tvPrice.setText(amount.toString());
+            }
             return;
         }
         DialogUtils.showCoinRateChooseDialog(getActivity(), coinTypeRateList, new BaseAdapter.OnItemClickListener() {
@@ -252,8 +266,13 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 }
                 platformRatio = new BigDecimal(currentPlatform.getProportion());
                 coinRatio = new BigDecimal(currentCoin.getRate());
+
                 price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
                 tvPrice.setText(price.toString());
+                if (currentPlatform.getId().equals("8")){
+                    tvPrice.setText(amount.toString());
+
+                }
 
             }
         });
@@ -286,10 +305,16 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
     public void getSuprtPlatformSuccess(List<Platform> platformList) {
         if (currentPlatform == null && platformList != null && platformList.size() > 0) {
             currentPlatform = platformList.get(0);
+            if (TextUtils.isEmpty(etAmount.getText().toString())) {
+                amount = new BigDecimal("0");
+            } else {
+                amount = new BigDecimal(etAmount.getText().toString());
+            }
+            platformRatio = new BigDecimal(currentPlatform.getProportion());
             getPresenter().getCoinTypeRate(currentPlatform.getId());
 
             tvPlatform.setText(currentPlatform.getName());
-            InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
+//            InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
             return;
         }
         DialogUtils.showPlatformChooseDialog(getActivity(), platformList, new BaseAdapter.OnItemClickListener() {
@@ -299,10 +324,11 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
             public void onItemClick(List list, int position) {
                 platform = (Platform) list.get(position);
                 currentPlatform = platform;
-//                getPresenter().getCoinTypeRate(currentPlatform.getId());
+                currentCoin = null;
+                getPresenter().getCoinTypeRate(currentPlatform.getId());
                 tvPlatform.setText(platform.getName());
 //                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
-
+                tvAccount.setText("");
                 tvCoinType.setText("");
                 if (TextUtils.isEmpty(etAmount.getText().toString())) {
                     amount = new BigDecimal("0");
@@ -311,9 +337,9 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                     amount = new BigDecimal(etAmount.getText().toString());
                 }
                 platformRatio = new BigDecimal(currentPlatform.getProportion());
-                coinRatio = new BigDecimal(currentCoin.getRate());
-                price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
-                tvPrice.setText(price.toString());
+//                coinRatio = new BigDecimal(currentCoin.getRate());
+//                price = amount.multiply(new BigDecimal(currentRatio)).multiply(platformRatio).divide(coinRatio, 4, RoundingMode.UP);
+//                tvPrice.setText(price.toString());
 
             }
         });
@@ -336,8 +362,8 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
 
     @Override
     public void investSuccess() {
-        ToastUtil.showShortToast(R.string.subbmit_success);
-//        finish();
+        ToastUtil.showLongToast(R.string.subbmit_success);
+        finish();
     }
 
     @Override
@@ -419,7 +445,7 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                 getPresenter().getSuprtPlatform();
                 break;
             case R.id.btn_account:
-                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url()+tvAccount.getText().toString();
+//                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url()+tvAccount.getText().toString();
 
 //                InvestModel.gamePlatformBaseUrl = currentPlatform.getIs_user_url().substring(0,currentPlatform.getIs_user_url().indexOf(".com")+5);
                 getPresenter().checkAccount(currentPlatform.getId(),tvAccount.getText().toString());
@@ -449,7 +475,6 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
 //                });
 //
 
-
             break;
             case R.id.btn_amount:
 
@@ -477,12 +502,16 @@ public class InvestActivity extends BaseActivity<InvestContact.View, InvestConta
                     ToastUtil.showShortToast(R.string.must_check_account);
                     return;
                 }
+                if (TextUtils.isEmpty(tvCoinType.getText().toString())){
+                    ToastUtil.showShortToast(R.string.choose_coin_type);
+
+                    return;
+                }
 
                 if (!cb.isChecked()) {
                     ToastUtil.showShortToast(R.string.sure_have_read_agree);
                     return;
                 }
-
 
                 getPresenter().getNode();
                 break;

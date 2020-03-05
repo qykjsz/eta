@@ -254,8 +254,23 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAfterSuccessErr(JSONObject object, String msg) {
-
+                startActivity();
             }
         });
+    }
+
+    private void startActivity() {
+        final Wallet wallet = ApplicationUtil.getCurrentWallet();
+        if (wallet == null) {
+            Intent intent = new Intent(SplashActivity.this, ChooseBottomLevelActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
+            finish();
+        } else {
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
+            finish();
+        }
     }
 }
